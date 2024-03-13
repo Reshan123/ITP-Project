@@ -1,6 +1,11 @@
+require('dotenv').config()
+
 const express =  require('express');
-const mongoose = require("mongoose")
-const cors = require("cors");
+const mongoose = require('mongoose')
+const cors = require('cors');
+
+
+const petOwnerRoutes = require('./routes/petOwnerRoutes')
 
 const app = express()
 
@@ -12,13 +17,22 @@ const corsOptions ={
 
 app.use(cors(corsOptions))
 
+
 app.use(express.json())
 
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
 
-mongoose.connect("mongodb+srv://reshangomis:dSq14MkjCGA5mxz3@itp-project.4h3vlxi.mongodb.net/?retryWrites=true&w=majority&appName=ITP-Project")
+app.use("/petOwner", petOwnerRoutes)
+
+
+
+mongoose.connect(process.env.MONGOOSE_URI)
     .then(() => {
-        const PORT = app.listen(4000, () => {
-            console.log("Connected to db listening on 4000");
+        const PORT = app.listen(process.env.PORT, () => {
+            console.log("Connected to db listening on ",process.env.PORT);
         }) 
     })
     .catch((error) => {
