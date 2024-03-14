@@ -1,9 +1,16 @@
 import './App.css'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import PetOwner from './views/PetOwner'
 
 function App() {
 
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/pet/*' element={<PetOwner />} />
+        </Routes>
+      </BrowserRouter>
       
     </>
   )
