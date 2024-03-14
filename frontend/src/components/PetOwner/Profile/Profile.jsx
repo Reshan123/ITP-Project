@@ -27,7 +27,7 @@ const Profile = () => {
             }
 
             try{
-                const response = await fetch("http://localhost:4000/petOwner/getUserDetails", config)
+                const response = await fetch("http://localhost:4000/api/petOwner/getUserDetails", config)
 
                 if(!response.ok){
                     setError("Invalid Token")

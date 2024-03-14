@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 })
 
 //Routes
-app.use("/petOwner", petOwnerRoutes)
+app.use("/api/petOwner", petOwnerRoutes)
 app.use('/api/invetoryItems', inventoryItemRoutes)
 
 
