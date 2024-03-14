@@ -6,6 +6,8 @@ const cors = require('cors');
 
 
 const petOwnerRoutes = require('./routes/petOwnerRoutes')
+const inventoryItemRoutes = require('./routes/inventoryitemsRoutes')
+
 
 const app = express()
 
@@ -25,7 +27,9 @@ app.use((req, res, next) => {
     next()
 })
 
+//Routes
 app.use("/petOwner", petOwnerRoutes)
+app.use('/api/invetoryItems', inventoryItemRoutes)
 
 
 
