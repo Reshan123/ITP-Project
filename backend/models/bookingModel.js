@@ -4,19 +4,39 @@ const Schema = mongoose.Schema
 
 const bookingSchema = new Schema({
 
-    pet: { 
+    owner_name: { 
         type: String, 
         required: true 
     },
 
-    owner: { 
+    owner_email: { 
         type: String, 
         required: true 
-    }, 
+    },
+
+    owner_contact: { 
+        type: String, 
+        required: true 
+    },
+
+    pet_name:{
+        type: String, 
+        required: true 
+    },
+
+    pet_species:{
+        type: String, 
+        required: true 
+    },
+
+    pet_breed:{
+        type: String
+    },
 
     doctor: { 
         type: String, // type: mongoose.Schema.Types.ObjectId
-        ref: 'Doctor', required: true 
+        ref: 'Doctor', 
+        required: true 
     },
 
     start_time: { 
@@ -29,7 +49,8 @@ const bookingSchema = new Schema({
     },
 
     status: { 
-        type: String, enum: ['pending', 'confirmed', 'completed'], 
+        type: String, 
+        enum: ['pending', 'confirmed', 'completed'], 
         default: 'pending' 
     }, 
 
