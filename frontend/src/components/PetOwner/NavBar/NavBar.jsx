@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../../hooks/userContextHook';
 import './styles.css';
 
@@ -9,7 +8,7 @@ const NavBar = () => {
     const {dispatch} = useUserContext()
 
     const logOutUser = () => {
-        navigate('/home')
+        navigate('/pet/home')
         localStorage.removeItem('user')
         dispatch({type:"LOGOUT"})
     }

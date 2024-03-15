@@ -15,6 +15,8 @@ const LogIn = () => {
     useEffect(() => {
         if(email.length != 0 && password.length >= 8){
             setInputValidity(true)
+        } else {
+            setInputValidity(false)
         }
     }, [email, password])
 
@@ -22,7 +24,7 @@ const LogIn = () => {
         e.preventDefault()
         const dataToSend = { email, password }
         const submitData = async () => {
-            const response = await fetch('http://localhost:4000/petOwner/login', {
+            const response = await fetch('http://localhost:4000/api/petOwner/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(dataToSend)
@@ -30,7 +32,7 @@ const LogIn = () => {
             const json = await response.json()
         
             if (!response.ok) {
-                setError(json.msg)
+                setError(json.error)
             }
             if (response.ok) {
                 // save the user to local storage
@@ -38,7 +40,7 @@ const LogIn = () => {
 
                 dispatch({type: "LOGIN", payload: json})
 
-                navigate('/home')
+                navigate('/pet/home')
                 
             }
         }
@@ -58,8 +60,8 @@ const LogIn = () => {
                     <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="signinFormSubmitButtonWrapper">
-                    {inputValidity && (<button type="submit">Sign In</button>)}
-                    {!inputValidity && (<button type="submit" disabled>Sign In</button>)}
+                    {inputValidity && (<button type="submit">Log In</button>)}
+                    {!inputValidity && (<button type="submit" disabled>Log In</button>)}
                 </div>
             </form>
         </>

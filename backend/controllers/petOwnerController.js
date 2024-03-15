@@ -1,5 +1,8 @@
 const petOwner = require('../models/petOwnerModel')
+const validator = require('validator')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const petOwnerModel = require('../models/petOwnerModel')
 
 
 const createToken = (_id) => {
@@ -37,17 +40,17 @@ const signin = async (req, res) => {
         res.status(200).json({username: user.name, userToken: token})
 
     } catch (error){
-        res.status(400).json({msg: error.message})
+        res.status(400).json({message: error.message})
     }
 
 }
 
-const getUserDetails = async (req, res) => {
+const getUserDetailsFromToken = async (req, res) => {
     const userID = req.user._id
     try{
         const user = await petOwner.findById(userID)
         if (!user){
-            res.status(400).json({msg: "Invalid Token"})
+            res.status(400).json({message: "Invalid Token"})
         }
 
         res.status(200).json({
@@ -56,8 +59,68 @@ const getUserDetails = async (req, res) => {
         })
 
     } catch (error){
-        res.status(400).json({msg: "Invalid Credentials"})
+        res.status(400).json({message: "Invalid Credentials"})
     }
 }
 
-module.exports = { login, signin, getUserDetails }
+
+const updateUserDetailsFromToken = async (req, res) => {
+    const {name, email, password} = req.body;
+    const userID = req.user._id
+
+    try{
+        if (!name || !email) {
+            throw Error('Name and Email fields must be filled')
+        }
+        if(!validator.isAlpha(name, ['en-US'], {ignore: '-s'})){
+            throw Error('Name can only have letters')
+        }
+        if (!validator.isEmail(email)) {
+          throw Error('Email not valid')
+        }
+        if (password) {
+            if (!validator.isStrongPassword(password)) {
+                throw Error('Password not strong enough')
+            }
+
+            const salt = await bcrypt.genSalt(10)
+            const hash = await bcrypt.hash(password, salt)
+
+            const response = await petOwnerModel.findByIdAndUpdate(userID, {
+                name,
+                email,
+                password: hash
+            })
+
+            res.status(200).json({message: `updated all fields. name: ${response.name}, email: ${response.email}, password: ${response.password}`})
+            return
+        }
+        const response = await petOwnerModel.findByIdAndUpdate(userID, {
+            name,
+            email
+        })
+        
+        res.status(200).json({message: `upated name: ${response.name} updated email: ${response.email}`})
+
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+
+}
+const deleteUserDetailsFromToken = async (req, res) => {
+    const userID = req.user._id
+    try{
+        const userExist = await petOwnerModel.findById(userID)
+        if (!userExist){
+            throw Error("User doesnt exist")
+        }
+
+        const response = await petOwnerModel.findByIdAndDelete(userID)
+        
+        res.status(200).json({message: "User removed"})
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+module.exports = { login, signin, getUserDetailsFromToken, updateUserDetailsFromToken, deleteUserDetailsFromToken }
