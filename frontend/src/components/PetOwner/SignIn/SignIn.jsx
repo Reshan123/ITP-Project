@@ -24,7 +24,7 @@ const SignIn = () => {
         e.preventDefault()
         const dataToSend = { name, email, password }
         const submitData = async () => {
-            const response = await fetch('http://localhost:4000/petOwner/signin', {
+            const response = await fetch('http://localhost:4000/api/petOwner/signin', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(dataToSend)
@@ -32,7 +32,7 @@ const SignIn = () => {
             const json = await response.json()
         
             if (!response.ok) {
-                setError(json.msg)
+                setError(json.error)
             }
             if (response.ok) {
                 // save the user to local storage
@@ -40,7 +40,7 @@ const SignIn = () => {
                 
                 dispatch({type: "LOGIN", payload: json})
 
-                navigate('/home')
+                navigate('/pet/home')
             }
         }
         submitData()
