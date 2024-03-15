@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const petOwnerRoutes = require('./routes/petOwnerRoutes')
 const inventoryItemRoutes = require('./routes/inventoryitemsRoutes')
-
+const lostPetNoticeRoutes = require('./routes/lostPetNoticeRoutes')
 
 const app = express()
 
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 //Routes
 app.use("/petOwner", petOwnerRoutes)
 app.use('/api/invetoryItems', inventoryItemRoutes)
-
+app.use('/api/lostPetNotice',lostPetNoticeRoutes)
 
 
 mongoose.connect(process.env.MONGOOSE_URI)
