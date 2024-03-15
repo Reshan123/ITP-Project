@@ -40,7 +40,7 @@ const signin = async (req, res) => {
         res.status(200).json({username: user.name, userToken: token})
 
     } catch (error){
-        res.status(400).json({msg: error.message})
+        res.status(400).json({message: error.message})
     }
 
 }
@@ -50,7 +50,7 @@ const getUserDetailsFromToken = async (req, res) => {
     try{
         const user = await petOwner.findById(userID)
         if (!user){
-            res.status(400).json({msg: "Invalid Token"})
+            res.status(400).json({message: "Invalid Token"})
         }
 
         res.status(200).json({
@@ -59,7 +59,7 @@ const getUserDetailsFromToken = async (req, res) => {
         })
 
     } catch (error){
-        res.status(400).json({msg: "Invalid Credentials"})
+        res.status(400).json({message: "Invalid Credentials"})
     }
 }
 
@@ -92,7 +92,7 @@ const updateUserDetailsFromToken = async (req, res) => {
                 password: hash
             })
 
-            res.status(200).json({msg: `updated all fields. name: ${response.name}, email: ${response.email}, password: ${response.password}`})
+            res.status(200).json({message: `updated all fields. name: ${response.name}, email: ${response.email}, password: ${response.password}`})
             return
         }
         const response = await petOwnerModel.findByIdAndUpdate(userID, {
@@ -100,10 +100,10 @@ const updateUserDetailsFromToken = async (req, res) => {
             email
         })
         
-        res.status(200).json({msg: `upated name: ${response.name} updated email: ${response.email}`})
+        res.status(200).json({message: `upated name: ${response.name} updated email: ${response.email}`})
 
     } catch (error){
-        res.status(400).json({msg: error.message})
+        res.status(400).json({message: error.message})
     }
 
 }
@@ -117,9 +117,9 @@ const deleteUserDetailsFromToken = async (req, res) => {
 
         const response = await petOwnerModel.findByIdAndDelete(userID)
         
-        res.status(200).json({msg: "User removed"})
+        res.status(200).json({message: "User removed"})
     } catch (error){
-        res.status(400).json({msg: error.message})
+        res.status(400).json({message: error.message})
     }
 }
 
