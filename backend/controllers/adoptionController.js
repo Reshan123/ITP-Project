@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose')
-const PetAdoptionForm = require('../models/models')
+const PetAdoptionForm = require('../models/petAdoptionmodel')
 
 
 //Get all adoption Forms
