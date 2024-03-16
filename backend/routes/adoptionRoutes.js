@@ -6,7 +6,7 @@ const{
     createAdoptionForm,
     deleteAdoptionForm,
     updateAdoptionForm
-} = require('../controllers/controllers')
+} = require('../controllers/adoptionController')
 
 const router = express.Router()
 
