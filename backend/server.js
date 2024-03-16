@@ -1,8 +1,9 @@
 require('dotenv').config()
 
-const express =  require('express');
-const mongoose = require('mongoose')
-const cors = require('cors');
+const express =  require('express')
+const mongoose = require("mongoose")
+const cors = require("cors")
+const adoptionFormRoutes = require('./routes/routes.js')
 
 
 const petOwnerRoutes = require('./routes/petOwnerRoutes')
@@ -20,7 +21,7 @@ const corsOptions ={
 
 app.use(cors(corsOptions))
 
-
+//middleware
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -33,6 +34,7 @@ app.use("/api/petOwner", petOwnerRoutes)
 app.use('/api/invetoryItems', inventoryItemRoutes)
 app.use('/api/lostPetNotice',lostPetNoticeRoutes)
 app.use('/api/bookings', bookingRoutes)
+app.use('/api/routes', adoptionFormRoutes)
 
 
 
