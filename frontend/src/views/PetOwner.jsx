@@ -4,16 +4,22 @@ import LogIn from '../components/PetOwner/LogIn/LogIn';
 import SignIn from '../components/PetOwner/SignIn/SignIn';
 import NavBar from '../components/PetOwner/NavBar/NavBar';
 import Profile from '../components/PetOwner/Profile/Profile';
+import ProfileUpdate from '../components/PetOwner/Profile/ProfileUpdate';
+import { useState } from 'react';
 
 const PetOwner = () => {
+
+    const [navBarColor, setNavBarColor] = useState("#E2929D")
+
     return ( 
         <>
-            <NavBar />
+            <NavBar navBarColor={navBarColor} />
             <Routes>
-                <Route path='/home' element={<Home />} />
-                <Route path='/login' element={<LogIn />} />
-                <Route path='/signin' element={<SignIn />} />
-                <Route path='/profile' element={<Profile />} />
+                <Route path='/home' element={<Home setNavBarColor={setNavBarColor} />} />
+                <Route path='/login' element={<LogIn setNavBarColor={setNavBarColor} />} />
+                <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} />} />
+                <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} />} />
+                <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} />} />
             </Routes>
         </>
      );

@@ -1,3 +1,8 @@
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/grinched-2');
+@import url('https://fonts.cdnfonts.com/css/good-pawoo');
+
 :root{
   --primaryColor: #123456;
   --secondartColor: #123456;
@@ -8,4 +13,32 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a{
+  text-decoration: none;
+}
+
+.errorMessage{
+  color: red;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+button{
+  background-color: rgba(0, 0, 0, 0.203);
+  cursor: pointer;
+  box-shadow: black 3px 3px 3px;
+}
+
+button:active{
+  box-shadow: black 1px 1px 1px;
+}
+
+button.disabled{
+  background-color: rgba(0, 0, 0, 0.107);
+  cursor: none;
+  box-shadow: none;
 }
