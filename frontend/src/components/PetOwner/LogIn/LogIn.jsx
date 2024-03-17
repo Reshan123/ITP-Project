@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../hooks/userContextHook";
+import './styles.css'
 
-const LogIn = () => {
+const LogIn = ({ setNavBarColor }) => {
+
+    setNavBarColor("#E2929D")
     const navigate = useNavigate()
     
     const { dispatch } = useUserContext();
@@ -48,23 +51,32 @@ const LogIn = () => {
     }
 
     return ( 
-        <>
-            <div className="errorMessage">{error}</div>
-            <form className="loginForm" onSubmit={onLoginFormSubmit}>
-                <div className="siginFormInputWrapper">
-                    <label htmlFor="email">Email </label>
-                    <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="loginPage">
+            <div className="loginPageContent">
+                <div className="loginHeader">
+                    <div className="loginHeading">Sign In</div>
+                    <div className="loginNoAccount">
+                        <p>No Account?</p>
+                        <NavLink to="/pet/signin">Sign Up</NavLink>
+                    </div>
                 </div>
-                <div className="siginFormInputWrapper">
-                    <label htmlFor="password">Password </label>
-                    <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="signinFormSubmitButtonWrapper">
-                    {inputValidity && (<button type="submit">Log In</button>)}
-                    {!inputValidity && (<button type="submit" disabled>Log In</button>)}
-                </div>
-            </form>
-        </>
+                <div className="errorMessage">{error}</div>
+                <form className="loginForm" onSubmit={onLoginFormSubmit}>
+                    <div className="siginFormInputWrapper">
+                        <label htmlFor="email">Email </label>
+                        <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div className="siginFormInputWrapper">
+                        <label htmlFor="password">Password </label>
+                        <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className="signinFormSubmitButtonWrapper">
+                        {inputValidity && (<button type="submit">Sign In</button>)}
+                        {!inputValidity && (<button type="submit" className="disabled" disabled>Sign In</button>)}
+                    </div>
+                </form>
+            </div>
+        </div>
      );
 }
  

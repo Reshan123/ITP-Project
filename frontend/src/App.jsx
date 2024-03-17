@@ -8,6 +8,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Navigate to="/pet/home" />} />
           <Route path='/pet/*' element={<PetOwner />} />
         </Routes>
       </BrowserRouter>
