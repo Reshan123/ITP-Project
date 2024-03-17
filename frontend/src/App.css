@@ -28,13 +28,18 @@ a{
 }
 
 button{
-  background-color: rgba(0, 0, 0, 0.203);
+  /* background-color: rgba(0, 0, 0, 0.203); */
   cursor: pointer;
-  box-shadow: black 3px 3px 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover{
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
 }
 
 button:active{
-  box-shadow: black 1px 1px 1px;
+  box-shadow: rgb(90, 90, 90) 1px 1px 1px;
 }
 
 button.disabled{

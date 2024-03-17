@@ -1,7 +1,7 @@
 .homeHero{
     min-height: 130vh;
     background: url(./Images/background1.png) no-repeat, #E2929D;
-    background-size: contain;
+    background-size: cover;
     display: flex;
     justify-content: center;
 }
@@ -16,6 +16,7 @@
 .homeWhoAreWe{
     background: #E2929D;
     display: flex;
+    padding: 100px 0;
     align-items: center;
     justify-content: center;
 }
@@ -27,6 +28,10 @@
     flex-direction: column;
     gap: 25px;
 }
+.homeWhoAreWeTextBody{
+    font-family: 'Calibri';
+    font-size: 20px;
+}
 
 .homeWhoAreWe .homeWhoAreWeText .homeWhoAreWeTextHeading{
     font-size: 3rem;
@@ -36,9 +41,10 @@
 }
 
 .homeWhoAreWe .homeWhoAreWeText .homeWhoAreWeTextButton button{
-    border-radius: 10px;
+    border-radius: 11px;
     border: none;
     color: #fff;
+    background-color: #E2929D;
     padding: 10px 25px;
 }
 
@@ -47,6 +53,8 @@
     background: #B799D1;
     color: white;
     display: flex;
+    font-size: 20px;
+    font-family: 'Calibri';
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -100,6 +108,7 @@
 .homeOurServices .homeOurServicesContainer .homeOurServicesElement .homeOurServicesElementSeeMore button{
     border-radius: 10px;
     border: none;
+    background-color: #B799D1;
     color: #fff;
     padding: 10px 25px;
 }

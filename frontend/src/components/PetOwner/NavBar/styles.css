@@ -1,3 +1,4 @@
+
 nav{
     position: sticky;
     top: 0;
@@ -17,7 +18,7 @@ nav .navLogo img{
 nav .navMidContainer{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 100px;
 }
 
 nav .navMidContainer a{

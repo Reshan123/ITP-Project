@@ -11,7 +11,7 @@ const Home = ({ setNavBarColor }) => {
     return ( 
         <>
             <div className="homeHero">
-                <div className="homeHeroHeading">Paw Pulze</div>    
+                <div className="homeHeroHeading">PawPulz</div>    
             </div> 
             <div className="homeWhoAreWe">
                 <div className="homeWhoAreWeImage">

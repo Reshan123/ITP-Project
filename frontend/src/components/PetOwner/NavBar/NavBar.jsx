@@ -30,6 +30,7 @@ const NavBar = ({ navBarColor }) => {
                     </div>          
                     <div className="navMidContainer">
                         <NavLink to="">About Us</NavLink>
+                        
                         <HashLink to="/pet/Home#bookAppointments">Book an Appointment</HashLink>
                         <NavLink to="">Store</NavLink>
                         <NavLink to="">Adobt a pet</NavLink>
