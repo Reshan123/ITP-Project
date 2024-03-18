@@ -12,8 +12,8 @@ nav{
     text-transform:uppercase;
 }
 
-nav .navLogo img{
-    width: 75%;
+nav .navLogo svg{
+    font-size: 3.8rem;
 }
 
 nav .navMidContainer{

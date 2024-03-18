@@ -2,10 +2,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import { NavHashLink } from 'react-router-hash-link';
 import { useUserContext } from '../../../hooks/userContextHook';
+import { IoPaw } from "react-icons/io5";
 import './styles.css';
 import navLogo from './Images/logo.png'
 
-const NavBar = ({ navBarColor }) => {
+const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
 
     const { hash } = useLocation();
     const isActive = (iHash) => {
@@ -32,19 +33,19 @@ const NavBar = ({ navBarColor }) => {
     return ( 
         <>
             {!user && (
-                <nav style={{background: navBarColor}}>
+                <nav style={{background: navBarBackgroundColor}}>
                     <div className="navLogo">
-                        <img src={navLogo} alt="" onClick={() => {scrollToTop(); navigate('/pet/home')}} />
+                        <IoPaw onClick={() => {scrollToTop(); navigate('/pet/home')}} style={{color:navBarColor}} />
                     </div>          
                     <div className="navMidContainer">
-                        <NavLink to="/pet/aboutus" className="NavLink" end>About Us</NavLink>
+                        <NavHashLink to="/pet/home#whoarewe" className={isActive("#whoarewe")? "" : ""}  style={{color: navBarColor}} end>About Us</NavHashLink>
                         
                         <NavHashLink to="/pet/home#bookAppointments" className={isActive("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
                         <NavLink to="/pet/store" className="NavLink" end>Store</NavLink>
                         <NavLink to="/pet/adopt" className="NavLink" end>Adopt a pet</NavLink>
                     </div>
                     <div className="navLogin">
-                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' end>Login</NavLink>
+                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' style={{color: navBarColor}} end>Login</NavLink>
                     </div>
                 </nav>
             )}

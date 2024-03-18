@@ -3,9 +3,10 @@ import WhoAreWeImage from './Images/whoarewe.png'
 import ourServices from './Images/ourservices.png'
 import { useState } from 'react'
 
-const Home = ({ setNavBarColor }) => {
+const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
 
-    setNavBarColor("#E2929D")
+    setNavBarBackgroundColor("#E2929D")
+    setNavBarColor("#FFF")
     const [inputValidity, setInputValidity] = useState(false)
 
     return ( 
@@ -13,7 +14,7 @@ const Home = ({ setNavBarColor }) => {
             <div className="homeHero">
                 <div className="homeHeroHeading">PawPulz</div>    
             </div> 
-            <div className="homeWhoAreWe">
+            <div className="homeWhoAreWe" id='whoarewe'>
                 <div className="homeWhoAreWeImage">
                     <img src={WhoAreWeImage} alt="" />
                 </div>

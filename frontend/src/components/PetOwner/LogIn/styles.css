@@ -80,6 +80,10 @@
     font-size: 20px;
 }
 
+.loginPage .loginPageContent .loginForm .siginFormInputWrapper input:focus{
+    border: none;
+}
+
 .loginPage .loginPageContent .loginForm .signinFormSubmitButtonWrapper{
     justify-self: center;
     align-self: center;
