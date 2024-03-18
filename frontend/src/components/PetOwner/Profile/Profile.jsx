@@ -5,8 +5,6 @@ const Profile = () => {
 
     const navigate = useNavigate()
 
-    
-
     const [profileData, setProfileData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
@@ -27,7 +25,7 @@ const Profile = () => {
             }
 
             try{
-                const response = await fetch("http://localhost:4000/api/petOwner/getUserDetails", config)
+                const response = await fetch("http://localhost:4000/api/petOwner/getUserDetailsFromToken", config)
 
                 if(!response.ok){
                     setError("Invalid Token")
@@ -51,6 +49,9 @@ const Profile = () => {
             Username : {!loading && profileData.username}
             <br />
             Email : {!loading && profileData.email}
+            <br />
+            <button onClick={() => navigate('/pet/profile/update')}>Update</button>
+            <button>Delete</button>
         </>
      );
 }
