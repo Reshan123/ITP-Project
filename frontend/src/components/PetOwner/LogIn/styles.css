@@ -14,7 +14,6 @@
     width: 65%;
     background-color: var(--primaryPink);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
     backdrop-filter: blur(50px);
     border-radius: 20px;
     padding: 50px 50px;
@@ -96,4 +95,8 @@
     font-weight: 600;
     border-radius: 10px;
     border: none;
+}
+
+.signinPage .signinPageContent .signinForm .signinFormSubmitButtonWrapper button.disable{
+    border: solid 2px #fff;
 }
