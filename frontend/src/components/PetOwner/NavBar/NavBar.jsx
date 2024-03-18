@@ -9,9 +9,7 @@ import navLogo from './Images/logo.png'
 const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
 
     const { hash } = useLocation();
-    const isActive = (iHash) => {
-        console.log(hash)
-        console.log(iHash)
+    const isActiveID = (iHash) => {
         return hash === iHash
     };
 
@@ -38,11 +36,11 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
                         <IoPaw onClick={() => {scrollToTop(); navigate('/pet/home')}} style={{color:navBarColor}} />
                     </div>          
                     <div className="navMidContainer">
-                        <NavHashLink to="/pet/home#whoarewe" className={isActive("#whoarewe")? "" : ""}  style={{color: navBarColor}} end>About Us</NavHashLink>
+                        <NavHashLink to="/pet/home#whoarewe" className={isActiveID("#whoarewe")? "" : ""}  style={{color: navBarColor}} end>About Us</NavHashLink>
                         
-                        <NavHashLink to="/pet/home#bookAppointments" className={isActive("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
-                        <NavLink to="/pet/store" className="NavLink" end>Store</NavLink>
-                        <NavLink to="/pet/adopt" className="NavLink" end>Adopt a pet</NavLink>
+                        <NavHashLink to="/pet/home#bookAppointments" style={{color: navBarColor}} className={isActiveID("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
+                        <NavLink to="/pet/store" className="NavLink" style={{color: navBarColor}} end>Store</NavLink>
+                        <NavLink to="/pet/adopt" className="NavLink" style={{color: navBarColor}} end>Adopt a pet</NavLink>
                     </div>
                     <div className="navLogin">
                         <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' style={{color: navBarColor }} end>Login</NavLink>

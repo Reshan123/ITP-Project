@@ -7,6 +7,7 @@ import Profile from '../components/PetOwner/Profile/Profile';
 import ProfileUpdate from '../components/PetOwner/Profile/ProfileUpdate';
 import { useState } from 'react';
 import Store from '../components/PetOwner/Store/Store';
+import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 
 const PetOwner = () => {
 
@@ -20,6 +21,7 @@ const PetOwner = () => {
                 <Route path='/home' element={<Home setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/login' element={<LogIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/store' element={<Store setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
+                <Route path='/adopt' element={<AdoptPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />

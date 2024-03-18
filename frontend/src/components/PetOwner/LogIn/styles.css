@@ -14,7 +14,7 @@
     width: 65%;
     background-color: var(--primaryPink);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
+    
     backdrop-filter: blur(50px);
     border-radius: 20px;
     padding: 50px 50px;
@@ -30,10 +30,10 @@
 }
 
 .loginPage .loginPageContent .loginHeader .loginHeading{
-    font-size: 8rem;
+    font-size: 5rem;
     color: #fff;
     font-weight: 900;
-    font-family: 'Grinched 2.0', sans-serif;
+    font-family: 'Grinched2.0', sans-serif;
     letter-spacing: 2px;
 }
 
