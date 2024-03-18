@@ -1,6 +1,6 @@
 .loginPage{
     z-index: 999;
-    background: url(./Images/background.png) no-repeat, #E2929D;
+    background: url(./Images/background.png) no-repeat, var(--primaryPink);
     background-position: 700px center;
     background-size: 600px;
     min-height: 85vh;
@@ -12,10 +12,12 @@
 
 .loginPage .loginPageContent{
     width: 65%;
-    background-color: rgba(255, 255, 255, 0.338);
+    background-color: var(--primaryPink);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
     backdrop-filter: blur(50px);
     border-radius: 20px;
-    padding: 100px 50px;
+    padding: 50px 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -28,9 +30,10 @@
 }
 
 .loginPage .loginPageContent .loginHeader .loginHeading{
-    font-size: 3rem;
+    font-size: 8rem;
+    color: #fff;
     font-weight: 900;
-    /* font-family: 'Grinched', sans-serif; */
+    font-family: 'Grinched 2.0', sans-serif;
     letter-spacing: 2px;
 }
 
@@ -65,6 +68,7 @@
 .loginPage .loginPageContent .loginForm .siginFormInputWrapper label{
     font-size: 1.3rem;
     font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
     font-weight: 500;
 }
 

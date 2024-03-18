@@ -5,6 +5,8 @@
 
 :root{
   --primaryColor: #123456;
+  --primaryPink: #E78F9B;
+  --primaryPuple: #B799D1;
   --secondartColor: #123456;
   --accentColor: #123456;
 }
@@ -14,6 +16,7 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: 'Calibri';
 }
 
 a{
@@ -29,6 +32,7 @@ a{
 
 button{
   /* background-color: rgba(0, 0, 0, 0.203); */
+  font-size: 20px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
