@@ -1,10 +1,17 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { useLocation } from "react-router-dom";
+import { NavHashLink } from 'react-router-hash-link';
 import { useUserContext } from '../../../hooks/userContextHook';
+import { IoPaw } from "react-icons/io5";
 import './styles.css';
 import navLogo from './Images/logo.png'
 
-const NavBar = ({ navBarColor }) => {
+const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
+
+    const { hash } = useLocation();
+    const isActiveID = (iHash) => {
+        return hash === iHash
+    };
 
     const navigate = useNavigate()
     const {dispatch} = useUserContext()
@@ -24,19 +31,19 @@ const NavBar = ({ navBarColor }) => {
     return ( 
         <>
             {!user && (
-                <nav style={{background: navBarColor}}>
+                <nav style={{background: navBarBackgroundColor}}>
                     <div className="navLogo">
-                        <img src={navLogo} alt="" onClick={() => {scrollToTop(); navigate('/pet/home')}} />
+                        <IoPaw onClick={() => {scrollToTop(); navigate('/pet/home')}} style={{color:navBarColor}} />
                     </div>          
                     <div className="navMidContainer">
-                        <NavLink to="">About Us</NavLink>
+                        <NavHashLink to="/pet/home#whoarewe" className={isActiveID("#whoarewe")? "" : ""}  style={{color: navBarColor}} end>About Us</NavHashLink>
                         
-                        <HashLink to="/pet/Home#bookAppointments">Book an Appointment</HashLink>
-                        <NavLink to="">Store</NavLink>
-                        <NavLink to="">Adobt a pet</NavLink>
+                        <NavHashLink to="/pet/home#bookAppointments" style={{color: navBarColor}} className={isActiveID("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
+                        <NavLink to="/pet/store" className="NavLink" style={{color: navBarColor}} end>Store</NavLink>
+                        <NavLink to="/pet/adopt" className="NavLink" style={{color: navBarColor}} end>Adopt a pet</NavLink>
                     </div>
                     <div className="navLogin">
-                        <NavLink to="/pet/login">Login</NavLink>
+                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' style={{color: navBarColor }} end>Login</NavLink>
                     </div>
                 </nav>
             )}

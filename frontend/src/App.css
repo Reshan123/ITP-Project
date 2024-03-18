@@ -2,9 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/grinched-2');
 @import url('https://fonts.cdnfonts.com/css/good-pawoo');
+@import url('https://fonts.cdnfonts.com/css/grinched-2');
+@import url(https://db.onlinewebfonts.com/c/fe33a56dba677d78ff3d4cc5bdcbc286?family=Grinched2.0);
+@import url('https://fonts.cdnfonts.com/css/good-pawoo'); 
 
 :root{
   --primaryColor: #123456;
+  --primaryPink: #E78F9B;
+  --primaryPuple: #B799D1;
   --secondartColor: #123456;
   --accentColor: #123456;
 }
@@ -14,6 +19,7 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: 'Calibri';
 }
 
 a{
@@ -29,6 +35,7 @@ a{
 
 button{
   /* background-color: rgba(0, 0, 0, 0.203); */
+  font-size: 20px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -39,7 +46,7 @@ button:hover{
 }
 
 button:active{
-  box-shadow: rgb(90, 90, 90) 1px 1px 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 button.disabled{

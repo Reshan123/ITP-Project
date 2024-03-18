@@ -3,9 +3,11 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useUserContext } from "../../../hooks/userContextHook";
 import './styles.css'
 
-const SignIn = ({ setNavBarColor }) => {
+const SignIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
 
-    setNavBarColor("#B597CF")
+    setNavBarBackgroundColor("#B597CF")
+    setNavBarColor("#FFF")
+
     const navigate = useNavigate()
     const {dispatch} = useUserContext()
     
