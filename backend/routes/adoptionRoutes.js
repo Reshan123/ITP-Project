@@ -14,7 +14,7 @@ const router = express.Router()
 router.get('/', getAdoptionForms)
 
 //Get Specific adoption forms
-router.get('/', getAdoptionForm)
+router.get('/:id', getAdoptionForm)
 
 //Create an adoption form
 router.post('/', createAdoptionForm)
