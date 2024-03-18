@@ -56,7 +56,7 @@ const LogIn = ({ setNavBarColor }) => {
                 <div className="loginHeader">
                     <div className="loginHeading">Sign In</div>
                     <div className="loginNoAccount">
-                        <p>No Account?</p>
+                        <p>Don't have an account?</p>
                         <NavLink to="/pet/signin">Sign Up</NavLink>
                     </div>
                 </div>

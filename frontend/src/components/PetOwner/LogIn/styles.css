@@ -75,7 +75,9 @@
 .loginPage .loginPageContent .loginForm .siginFormInputWrapper input{
     border: none;
     border-radius: 5px;
+    padding: 20px 10px;
     height: 30px;
+    font-size: 20px;
 }
 
 .loginPage .loginPageContent .loginForm .signinFormSubmitButtonWrapper{
@@ -85,6 +87,7 @@
 
 .loginPage .loginPageContent .loginForm .signinFormSubmitButtonWrapper button{
     padding: 10px 35px;
+    background-color: var(--primaryPink);
     color: #ffffff;
     font-weight: 600;
     border-radius: 10px;

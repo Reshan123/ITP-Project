@@ -8,6 +8,7 @@
     grid-template-columns: 1fr 1fr;
     align-content: center;
     justify-items: center;
+    color: #fff;
 }
 
 .signinPage .signinPageContent{
@@ -16,7 +17,7 @@
     background-color: rgba(255, 255, 255, 0.338);
     backdrop-filter: blur(50px);
     border-radius: 20px;
-    padding: 75px 50px;
+    padding: 50px 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -29,9 +30,9 @@
 }
 
 .signinPage .signinPageContent .signinHeader .signinHeading{
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 900;
-    /* font-family: 'Grinched', sans-serif; */
+    font-family: 'Grinched 2.0', sans-serif;
     letter-spacing: 2px;
 }
 

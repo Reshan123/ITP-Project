@@ -45,11 +45,11 @@ nav .navMidContainer a.active.NavLink{
 }
 
 nav .navLogin a.active.NavLink{
-    background-color: pink;
+    background-color: var(--primaryPink)
 }
   
 nav .navMidContainer a.activeHaslink{
-    background-color: pink;
+    background-color: var(--primaryPink);
     /* color: #123456; */
 }
 
