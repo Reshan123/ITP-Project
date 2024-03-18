@@ -60,7 +60,7 @@ nav .navMidContainer a:nth-child(2){
 }
 
 nav .navLogin a{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
     font-family: "League Spartan", sans-serif;
     color: #fff;   
@@ -71,5 +71,5 @@ nav .navLogin a{
 
 nav div .buttonHoverAnimation:hover{
     background: white;
-    color: #E2929D;
+    color: var(--primaryPink);
 }
