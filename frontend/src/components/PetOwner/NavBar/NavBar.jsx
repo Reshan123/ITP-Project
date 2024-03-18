@@ -1,10 +1,18 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { useLocation } from "react-router-dom";
+import { NavHashLink } from 'react-router-hash-link';
 import { useUserContext } from '../../../hooks/userContextHook';
 import './styles.css';
 import navLogo from './Images/logo.png'
 
 const NavBar = ({ navBarColor }) => {
+
+    const { hash } = useLocation();
+    const isActive = (iHash) => {
+        console.log(hash)
+        console.log(iHash)
+        return hash === iHash
+    };
 
     const navigate = useNavigate()
     const {dispatch} = useUserContext()
@@ -29,14 +37,14 @@ const NavBar = ({ navBarColor }) => {
                         <img src={navLogo} alt="" onClick={() => {scrollToTop(); navigate('/pet/home')}} />
                     </div>          
                     <div className="navMidContainer">
-                        <NavLink to="">About Us</NavLink>
+                        <NavLink to="/pet/aboutus" className="NavLink" end>About Us</NavLink>
                         
-                        <HashLink to="/pet/Home#bookAppointments">Book an Appointment</HashLink>
-                        <NavLink to="">Store</NavLink>
-                        <NavLink to="">Adobt a pet</NavLink>
+                        <NavHashLink to="/pet/home#bookAppointments" className={isActive("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
+                        <NavLink to="/pet/store" className="NavLink" end>Store</NavLink>
+                        <NavLink to="/pet/adopt" className="NavLink" end>Adobt a pet</NavLink>
                     </div>
                     <div className="navLogin">
-                        <NavLink to="/pet/login">Login</NavLink>
+                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' end>Login</NavLink>
                     </div>
                 </nav>
             )}
