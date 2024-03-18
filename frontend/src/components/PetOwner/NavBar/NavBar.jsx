@@ -41,7 +41,7 @@ const NavBar = ({ navBarColor }) => {
                         
                         <NavHashLink to="/pet/home#bookAppointments" className={isActive("#bookAppointments") ? "buttonHoverAnimation activeHaslink": "buttonHoverAnimation"} end>Book an Appointment</NavHashLink>
                         <NavLink to="/pet/store" className="NavLink" end>Store</NavLink>
-                        <NavLink to="/pet/adopt" className="NavLink" end>Adobt a pet</NavLink>
+                        <NavLink to="/pet/adopt" className="NavLink" end>Adopt a pet</NavLink>
                     </div>
                     <div className="navLogin">
                         <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' end>Login</NavLink>

@@ -9,6 +9,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    text-transform:uppercase;
 }
 
 nav .navLogo img{
@@ -20,16 +21,24 @@ nav .navMidContainer{
     align-items: center;
     gap: 100px;
 }
+nav .navMidContainer a.NavLink:hover{
+    opacity: 0.8;
+
+   
+}
 
 nav .navMidContainer a{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
     font-family: "League Spartan", sans-serif;
     color: #fff;
 }
 
 nav .navMidContainer a.active.NavLink{
-    border: #B597CF 4px solid;
+    /* border: #B597CF 4px solid; */
+    /* text-decoration: underline; */
+    background-color: #fff;
+    color: #E2929D;
     border-radius: 15px;
     padding: 10px 15px;
     /* color: #B597CF; */
