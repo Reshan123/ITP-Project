@@ -45,7 +45,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
                         <NavLink to="/pet/adopt" className="NavLink" end>Adopt a pet</NavLink>
                     </div>
                     <div className="navLogin">
-                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' style={{color: navBarColor}} end>Login</NavLink>
+                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' style={{color: navBarColor }} end>Login</NavLink>
                     </div>
                 </nav>
             )}
