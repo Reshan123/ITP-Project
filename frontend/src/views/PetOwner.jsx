@@ -11,6 +11,7 @@ import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionForm';
 import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
+import LostPet from '../components/PetOwner/LostPet/LostPet';
 
 const PetOwner = () => {
 
@@ -59,6 +60,7 @@ const PetOwner = () => {
                 <Route path='/adopt' element={<AdoptPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
+                <Route path='/lostpetnotices' element={<LostPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
                 <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
             </Routes>
