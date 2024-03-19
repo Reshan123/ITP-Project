@@ -43,7 +43,7 @@ const AdoptPet = ({ setNavBarBackgroundColor, setNavBarColor }) => {
             </div>
 
             <div>
-                <button onClick={handleUpdateClick}>Find A New Home for Your Pet</button>
+                <button className="adoptPetButton" onClick={handleUpdateClick}>Find A New Home for Your Pet</button>
             </div>
         </div>
 
