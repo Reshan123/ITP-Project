@@ -201,7 +201,7 @@ const CreateAdoptionForm = () => {
                 value={specialNeeds}
             />
 
-            <button onClick={handleSubmit} >Submit Form</button>
+            <button className='adoptPetButton' onClick={handleSubmit} >Submit Form</button>
             {error && <div className="error">{error}</div>}
         </form>
     );

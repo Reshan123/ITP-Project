@@ -1,3 +1,4 @@
+import { useUserContext } from '../../../hooks/userContextHook';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -9,18 +10,17 @@ const Profile = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
+    const {user ,dispatch} = useUserContext()
+
     useEffect(() => {
-        if(!localStorage.user){
-            navigate('/login')
+        if(!localStorage.getItem('user')){
+            navigate('/pet/login')
         }
-        const token = JSON.parse(localStorage.getItem('user'))
-
-
         const fetchProfileData = async () => {
             
             const config = {
                 headers: {
-                    "authorization": `Bearer ${token.userToken}`
+                    "authorization": `Bearer ${user.userToken}`
                 }
             }
 
@@ -39,9 +39,18 @@ const Profile = () => {
             }
         }
         
-        fetchProfileData()
+        if (user){
+            fetchProfileData()
+        }
 
-    }, [])
+    }, [user])
+
+
+    const logOutUser = () => {
+        navigate('/pet/home')
+        localStorage.removeItem('user')
+        dispatch({type:"LOGOUT"})
+    }
 
     return ( 
         <>
@@ -52,6 +61,10 @@ const Profile = () => {
             <br />
             <button onClick={() => navigate('/pet/profile/update')}>Update</button>
             <button>Delete</button>
+            <br />
+            <br />
+            <br />
+            <button className='logOutButton' onClick={logOutUser}>Log Out</button>
         </>
      );
 }

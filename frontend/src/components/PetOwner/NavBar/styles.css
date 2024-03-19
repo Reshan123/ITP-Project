@@ -23,8 +23,6 @@ nav .navMidContainer{
 }
 nav .navMidContainer a.NavLink:hover{
     opacity: 0.8;
-
-   
 }
 
 nav .navMidContainer a{
@@ -45,11 +43,11 @@ nav .navMidContainer a.active.NavLink{
 }
 
 nav .navLogin a.active.NavLink{
-    background-color: var(--primaryPink)
+    /* background-color: var(--primaryPink) */
 }
   
 nav .navMidContainer a.activeHaslink{
-    background-color: var(--primaryPink);
+    /* background-color: var(--primaryPink); */
     /* color: #123456; */
 }
 
