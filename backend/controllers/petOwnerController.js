@@ -2,7 +2,6 @@ const petOwner = require('../models/petOwnerModel')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const petOwnerModel = require('../models/petOwnerModel')
 
 
 const createToken = (_id) => {
@@ -86,7 +85,7 @@ const updateUserDetailsFromToken = async (req, res) => {
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
 
-            const response = await petOwnerModel.findByIdAndUpdate(userID, {
+            const response = await petOwner.findByIdAndUpdate(userID, {
                 name,
                 email,
                 password: hash
@@ -95,7 +94,7 @@ const updateUserDetailsFromToken = async (req, res) => {
             res.status(200).json({message: `updated all fields. name: ${response.name}, email: ${response.email}, password: ${response.password}`})
             return
         }
-        const response = await petOwnerModel.findByIdAndUpdate(userID, {
+        const response = await petOwner.findByIdAndUpdate(userID, {
             name,
             email
         })
@@ -110,12 +109,12 @@ const updateUserDetailsFromToken = async (req, res) => {
 const deleteUserDetailsFromToken = async (req, res) => {
     const userID = req.user._id
     try{
-        const userExist = await petOwnerModel.findById(userID)
+        const userExist = await petOwner.findById(userID)
         if (!userExist){
             throw Error("User doesnt exist")
         }
 
-        const response = await petOwnerModel.findByIdAndDelete(userID)
+        const response = await petOwner.findByIdAndDelete(userID)
         
         res.status(200).json({message: "User removed"})
     } catch (error){

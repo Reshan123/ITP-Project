@@ -5,15 +5,49 @@ import SignIn from '../components/PetOwner/SignIn/SignIn';
 import NavBar from '../components/PetOwner/NavBar/NavBar';
 import Profile from '../components/PetOwner/Profile/Profile';
 import ProfileUpdate from '../components/PetOwner/Profile/ProfileUpdate';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Store from '../components/PetOwner/Store/Store';
 import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionForm';
+import { usePetContext } from '../hooks/usePetContext'
+import { useUserContext } from '../hooks/userContextHook'
 
 const PetOwner = () => {
 
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
+
+    const {pets, dispatch: petDispatch} = usePetContext()
+    const {user, dispatch: userDispatch} = useUserContext()
+
+    useEffect(()=> {
+        const fetchProfileData = async () => {
+            
+            const config = {
+                headers: {
+                    "authorization": `Bearer ${user.userToken}`
+                }
+            }
+
+            try{
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
+
+                if (!petDetailsResponse.ok){
+                    setError("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+                petDispatch({type:"LOAD", payload:petDetailsJson.message})
+
+            } catch (error){
+                console.log("profile page error", error)
+            }
+        }
+        
+        if (user){
+            fetchProfileData()
+        }
+
+    },[user])
 
     return (
         <>

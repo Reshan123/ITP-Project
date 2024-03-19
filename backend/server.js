@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express =  require('express')
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -10,6 +9,7 @@ const inventoryItemRoutes = require('./routes/inventoryitemsRoutes')
 const lostPetNoticeRoutes = require('./routes/lostPetNoticeRoutes')
 const bookingRoutes = require('./routes/bookingRoutes')
 const adoptionFormRoutes = require('./routes/adoptionRoutes')
+const petRoutes = require('./routes/petRoutes')
 
 const app = express()
 
@@ -35,6 +35,7 @@ app.use('/api/invetoryItems', inventoryItemRoutes)
 app.use('/api/lostPetNotice',lostPetNoticeRoutes)
 app.use('/api/bookings', bookingRoutes)
 app.use('/api/adoption', adoptionFormRoutes)
+app.use('/api/pet', petRoutes)
 
 
 
