@@ -2,9 +2,14 @@ import { useUserContext } from '../../../hooks/userContextHook';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePetContext } from '../../../hooks/usePetContext';
+import PetComponent from './PetComponent';
 
-const Profile = () => {
+import './styles.css'
 
+const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
+
+    setNavBarBackgroundColor("#E2929D")
+    setNavBarColor("#FFF")
     const navigate = useNavigate()
 
     const [profileData, setProfileData] = useState([])
@@ -57,35 +62,28 @@ const Profile = () => {
 
     return ( 
         <>
-            {error}
-            Username : {!loading && profileData.username}
-            <br />
-            Email : {!loading && profileData.email}
-            <br />
-            <button onClick={() => navigate('/pet/profile/update')}>Update</button>
-            <button>Delete</button>
-            <br />
-            <br />
-            <br />
-            {!loading && pets.map( pet => (
-                <>
-                    {pet.petName}
-                    <br />
-                    {pet.petGender}
-                    <br />
-                    {pet.petAge}
-                    <br />
-                    {pet.petSpecies}
-                    <br />
-                    {pet.petBreed}
-                    <br /><br />
-                </>
-            ))}
-            <br />
-            <br />
-            <br />
-            <br />
-            <button className='logOutButton' onClick={logOutUser}>Log Out</button>
+            <div className="profilePage">
+                <div className="userDetails">
+                    <p className='username'>Welcome <span>{!loading && profileData.username}</span></p>
+                    <p className='email'><span>{!loading && profileData.email}</span></p>
+                    <div className="actionButtons">
+                        <button onClick={() => navigate('/pet/profile/update')}>Update</button>
+                        <button className='delete'>Delete</button>
+                    </div>
+                </div>
+                <div className="logOutButton">
+                    <button onClick={logOutUser}>Log Out</button>
+                </div>
+                <div className="petDetails">
+                    <div className="petDetailsTitle">Pet Details</div>
+                    <hr />
+                    <div className="petDetailsCards">
+                        {!loading && pets.map( pet => (
+                                <PetComponent pet={pet} />
+                        ))}
+                    </div>
+                </div>
+            </div>
         </>
      );
 }
