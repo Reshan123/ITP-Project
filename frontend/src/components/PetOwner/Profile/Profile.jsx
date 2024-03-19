@@ -1,6 +1,7 @@
 import { useUserContext } from '../../../hooks/userContextHook';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { usePetContext } from '../../../hooks/usePetContext';
 
 const Profile = () => {
 
@@ -10,10 +11,11 @@ const Profile = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
-    const {user ,dispatch} = useUserContext()
+    const {user, dispatch: userDispatch} = useUserContext()
+    const {pets, dispatch: petDispatch} = usePetContext()
 
     useEffect(() => {
-        if(!localStorage.getItem('user')){
+        if(!user){
             navigate('/pet/login')
         }
         const fetchProfileData = async () => {
@@ -25,13 +27,14 @@ const Profile = () => {
             }
 
             try{
-                const response = await fetch("http://localhost:4000/api/petOwner/getUserDetailsFromToken", config)
+                const userDetailsResponse = await fetch("http://localhost:4000/api/petOwner/getUserDetailsFromToken", config)
 
-                if(!response.ok){
+                if(!userDetailsResponse.ok){
                     setError("Invalid Token")
                 }
-                const json = await response.json()
-                setProfileData(json)
+
+                const userDetailsJson = await userDetailsResponse.json()
+                setProfileData(userDetailsJson)
                 setLoading(false)
 
             } catch (error){
@@ -49,7 +52,7 @@ const Profile = () => {
     const logOutUser = () => {
         navigate('/pet/home')
         localStorage.removeItem('user')
-        dispatch({type:"LOGOUT"})
+        userDispatch({type:"LOGOUT"})
     }
 
     return ( 
@@ -61,6 +64,24 @@ const Profile = () => {
             <br />
             <button onClick={() => navigate('/pet/profile/update')}>Update</button>
             <button>Delete</button>
+            <br />
+            <br />
+            <br />
+            {!loading && pets.map( pet => (
+                <>
+                    {pet.petName}
+                    <br />
+                    {pet.petGender}
+                    <br />
+                    {pet.petAge}
+                    <br />
+                    {pet.petSpecies}
+                    <br />
+                    {pet.petBreed}
+                    <br /><br />
+                </>
+            ))}
+            <br />
             <br />
             <br />
             <br />
