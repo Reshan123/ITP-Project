@@ -46,6 +46,7 @@
     color: #fff;
     background-color: #E2929D;
     padding: 10px 25px;
+    transition: 0.3s;
 }
 
 
@@ -112,6 +113,7 @@
     background-color: #B799D1;
     color: #fff;
     padding: 10px 25px;
+    transition: 0.3s;
 }
 
 #bookAppointments{
