@@ -1,10 +1,8 @@
 import './styles.css'
 
-const Store = ({ setNavBarBackgroundColor, setNavBarColor }) => {
+const Store = ({ navBarProps }) => {
 
-    setNavBarBackgroundColor("#FFF")
-    setNavBarColor("#B799D1")
-
+    navBarProps("#FFF", "#B799D1")
 
     return ( 
         <div className="store">

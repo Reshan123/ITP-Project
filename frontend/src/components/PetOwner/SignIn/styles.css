@@ -26,10 +26,10 @@
     transition: 0.3s;
 }
 
-.signinPage .signinPageContent:hover{
+/* .signinPage .signinPageContent:hover{
     transform: scale(1.03);
     box-shadow: 0 10px 15px rgba(0,0,0,.3);
-}
+} */
 
 .signinPage .signinPageContent .signinHeader{
     display: flex;
@@ -80,9 +80,9 @@
 
 .signinPage .signinPageContent .signinForm .siginFormInputWrapper input{
     border: none;
+    font-size: 20px;
     border-radius: 5px;
     padding: 20px 10px;
-
     height: 30px;
 }
 

@@ -5,6 +5,7 @@ import { useUserContext } from "../../../hooks/userContextHook";
 const ProfileUpdate = () => {
     
     const { user, dispatch: userDispatch} = useUserContext()
+    const navigate = useNavigate()
     
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -53,6 +54,7 @@ const ProfileUpdate = () => {
                 userDispatch({type:"UPDATE", payload:{username:name,email}})
                 const userLS = {username:name, email, userToken:user.userToken}
                 localStorage.setItem('user',JSON.stringify(userLS))
+                navigate('/pet/profile')
                 setError("")
                 // console.log(json)
 
@@ -79,6 +81,7 @@ const ProfileUpdate = () => {
                 userDispatch({type:"UPDATE", payload:{username:name,email}})
                 const userLS = {username:name, email, userToken:user.userToken}
                 localStorage.setItem('user',JSON.stringify(userLS))
+                navigate('/pet/profile')
                 setError("")
                 // console.log(json)
 

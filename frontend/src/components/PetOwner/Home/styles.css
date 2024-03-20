@@ -152,7 +152,7 @@
     align-content: stretch;
 }
 .homeBookAppointments .homeBookAppointmentsForm .homeBookAppointmentsFormInputWrapper input,
-.homeBookAppointments .homeBookAppointmentsForm .homeBookAppointmentsFormInputWrapper textarea{
+.homeBookAppointments .homeBookAppointmentsForm .homeBookAppointmentsFormInputWrapper textarea, .homeBookAppointmentsFormInputWrapper select{
     padding: 10px 8px;
     width: 100%;
 }
@@ -172,4 +172,11 @@
     border: none;
     color: #fff;
     padding: 15px 25px;
+    transition: 0.3s;
+}
+
+.homeBookAppointments .homeBookAppointmentsForm .homeBookAppointmentsFormButton button:hover{
+    background-color:#b6757e;
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
 }

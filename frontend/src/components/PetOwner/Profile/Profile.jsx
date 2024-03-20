@@ -6,10 +6,10 @@ import PetComponent from './PetComponent';
 
 import './styles.css'
 
-const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
+const Profile = ({ navBarProps }) => {
 
-    setNavBarBackgroundColor("#E2929D")
-    setNavBarColor("#FFF")
+    navBarProps("#E2929D", "#FFF")
+    
     const navigate = useNavigate()
 
     const {user, dispatch: userDispatch} = useUserContext()
