@@ -1,0 +1,125 @@
+.profilePage{
+    background-color: #EEE;
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.profilePage .userDetails{
+    margin-top: 50px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
+}
+
+.profilePage .userDetails .username{
+    font-size: 2.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profilePage .userDetails .username span{
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.profilePage .userDetails .email{
+    margin-bottom: 25px;
+}
+
+.profilePage .userDetails .email span{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.profilePage .userDetails .actionButtons{
+    display: flex;
+    gap: 15px;
+}
+
+.profilePage .userDetails .actionButtons button{
+    border-radius: 11px;
+    border: none;
+    color: #fff;
+    background-color: var(--secondartColor);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.profilePage .userDetails .actionButtons button.delete{
+    background-color: rgb(238, 36, 36);
+}
+
+.profilePage .logOutButton{
+    margin-top: 20px;
+    margin-right: 50px;
+    justify-self: self-end;
+}
+
+.profilePage .logOutButton button{
+    border-radius: 11px;
+    border: none;
+    color: #fff;
+    background-color: var(--secondartColor);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.profilePage .petDetails{
+    margin: 0 50px;
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.profilePage .petDetails .petDetailsTitle{
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.profilePage .petDetails hr{
+    height: 2px;
+    background-color: black;
+    margin-bottom: 25px;
+}
+
+.profilePage .petDetails .petDetailsCards{
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 25px;
+}
+
+.petCard{
+    width: 25%;
+    color: #EEE;
+    background-color: var(--primaryColor);
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.petCard .majorDetails{
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.petCard .majorDetails .petName{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.petCard .otherDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-around;
+}

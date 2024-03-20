@@ -35,7 +35,7 @@ a{
 
 button{
   /* background-color: rgba(0, 0, 0, 0.203); */
-  font-size: 20px;
+  /* font-size: 20px; */
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -51,6 +51,6 @@ button:active{
 
 button.disabled{
   background-color: rgba(0, 0, 0, 0.107);
-  cursor: none;
+  cursor:not-allowed;
   box-shadow: none;
 }

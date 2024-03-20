@@ -20,6 +20,12 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: 0.3s;
+}
+
+.loginPage .loginPageContent:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
 }
 
 .loginPage .loginPageContent .loginHeader{
@@ -47,9 +53,10 @@
 
 .loginPage .loginPageContent .loginHeader .loginNoAccount a{
     color: #fff;
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600;
+    transition: 0.3s;
 }
 
 .loginPage .loginPageContent .loginForm{
@@ -95,6 +102,7 @@
     font-weight: 600;
     border-radius: 10px;
     border: none;
+    transition: 0.3s;
 }
 
 .signinPage .signinPageContent .signinForm .signinFormSubmitButtonWrapper button.disable{
