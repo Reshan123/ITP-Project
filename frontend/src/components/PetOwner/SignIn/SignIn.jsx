@@ -4,9 +4,7 @@ import { useUserContext } from "../../../hooks/userContextHook";
 import './styles.css'
 
 const SignIn = ({ navBarProps }) => {
-
-    setNavBarBackgroundColor("#B597CF")
-    setNavBarColor("#FFF")
+    
     navBarProps("#B597CF", "#FFF")
 
     const navigate = useNavigate()
@@ -62,7 +60,7 @@ const SignIn = ({ navBarProps }) => {
                         <NavLink to="/pet/login">Sign In</NavLink>
                     </div>
                 </div>
-                <div className="errorMessage">{error}</div>
+                {error && (<div className="error">{error}</div>)}
                 <form className="signinForm" onSubmit={onSigninFormSubmit}>
                     <div className="siginFormInputWrapper">
                         <label htmlFor="name">Username </label>

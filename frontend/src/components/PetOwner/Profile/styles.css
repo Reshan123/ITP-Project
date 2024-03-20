@@ -44,7 +44,7 @@
     border-radius: 11px;
     border: none;
     color: #fff;
-    background-color: var(--secondartColor);
+    background-color: var(--primaryPink);
     font-weight: 600;
     padding: 10px 25px;
     transition: 0.3s;
@@ -78,9 +78,25 @@
     flex-wrap: wrap;
 }
 
-.profilePage .petDetails .petDetailsTitle{
+.profilePage .petDetails .petDetailsTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 10px 15px;
+}
+
+.profilePage .petDetails .petDetailsTitleContainer .petDetailsTitle{
     font-size: 2.2rem;
     font-weight: 600;
+}
+
+.profilePage .petDetails .petDetailsTitleContainer button{
+    border-radius: 11px;
+    border: none;
+    color: #fff;
+    background-color: var(--primaryPink);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
 }
 
 .profilePage .petDetails hr{
@@ -122,4 +138,62 @@
     flex-direction: column;
     gap: 20px;
     justify-content: space-around;
+}
+
+
+.updateProfilePage{
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.updateProfilePage .profileUpdateForm{
+    background-color: var(--primaryColor);
+    padding: 65px 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.updateProfilePage .profileUpdateForm .updateFormTitle{
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper label{
+    font-size: 1.3rem;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper input{
+    padding: 8px 10px;
+    border-radius: 8px;     
+    font-size: 1.1rem;   
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton{
+    align-self: center;
+    margin-top: 25px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: white;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
 }

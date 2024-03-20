@@ -59,7 +59,10 @@ const Profile = ({ navBarProps }) => {
                     <button onClick={logOutUser}>Log Out</button>
                 </div>
                 <div className="petDetails">
-                    <div className="petDetailsTitle">Pet Details</div>
+                    <div className="petDetailsTitleContainer">
+                        <div className="petDetailsTitle">My Pet Details</div>
+                        <button className='addPetsButton'>Add Pets</button>
+                    </div>
                     <hr />
                     <div className="petDetailsCards">
                         {pets && pets.map( pet => (

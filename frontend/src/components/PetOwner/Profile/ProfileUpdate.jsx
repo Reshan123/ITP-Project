@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { useUserContext } from "../../../hooks/userContextHook";
+import './styles.css'
 
 const ProfileUpdate = () => {
     
@@ -94,25 +95,28 @@ const ProfileUpdate = () => {
 
     return ( 
         <>
-            <form className="profileUpdateForm">
-                {error}
-                <div className="profileUpdateInputWrapper">
-                    <label htmlFor="name">Username : </label>
-                    <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} name="name" id="name" />
-                </div>
-                <div className="profileUpdateInputWrapper">
-                    <label htmlFor="email">Email : </label>
-                    <input type="email" value={email} onChange={(e) => {setEmail(e.target.value)}} name="email" id="email" />
-                </div>
-                <div className="profileUpdateInputWrapper">
-                    <label htmlFor="password">Password : </label>
-                    <input type="password" value={password} placeholder="Leave empty if password doesn't need to be changed" onChange={(e) => {setPassword(e.target.value)}} name="password" id="password" />
-                </div>
-                <div className="profileUpdateSubmitButton">
-                    {inputsValid && (<button type="submit" onClick={updateProfile}>Update Profile</button>)}
-                    {!inputsValid && (<button disabled>Update Profile</button>)}
-                </div>
-            </form>
+            <div className="updateProfilePage">
+                <form className="profileUpdateForm">
+                    <div className="updateFormTitle">Update Profile</div>
+                    {error && (<div className="error">{error}</div>)}
+                    <div className="profileUpdateInputWrapper">
+                        <label htmlFor="name">Username : </label>
+                        <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} name="name" id="name" />
+                    </div>
+                    <div className="profileUpdateInputWrapper">
+                        <label htmlFor="email">Email : </label>
+                        <input type="email" value={email} onChange={(e) => {setEmail(e.target.value)}} name="email" id="email" />
+                    </div>
+                    <div className="profileUpdateInputWrapper">
+                        <label htmlFor="password">Password : </label>
+                        <input type="password" value={password} placeholder="Leave empty if password doesn't need to be changed" onChange={(e) => {setPassword(e.target.value)}} name="password" id="password" />
+                    </div>
+                    <div className="profileUpdateSubmitButton">
+                        {inputsValid && (<button type="submit" onClick={updateProfile}>Update Profile</button>)}
+                        {!inputsValid && (<button className="disabled">Update Profile</button>)}
+                    </div>
+                </form>
+            </div>
         </>
      );
 }

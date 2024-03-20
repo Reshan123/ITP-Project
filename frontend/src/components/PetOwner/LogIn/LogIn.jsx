@@ -60,7 +60,7 @@ const LogIn = ({ navBarProps }) => {
                         <NavLink to="/pet/signin">Sign Up</NavLink>
                     </div>
                 </div>
-                <div className="errorMessage">{error}</div>
+                {error && (<div className="error">{error}</div>)}
                 <form className="loginForm" onSubmit={onLoginFormSubmit}>
                     <div className="siginFormInputWrapper">
                         <label htmlFor="email">Email </label>
