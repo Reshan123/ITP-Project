@@ -19,7 +19,7 @@ nav .navLogo svg{
 nav .navMidContainer{
     display: flex;
     align-items: center;
-    gap: 100px;
+    gap: 75px;
 }
 
 nav .navMidContainer a.NavLink:hover,

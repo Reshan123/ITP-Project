@@ -18,11 +18,16 @@ const PetOwner = () => {
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
 
+    const navBarProps = (backgroundColor,textColor) => {
+        setNavBarBackgroundColor(backgroundColor)
+        setNavBarColor(textColor)
+    }
+
     const {pets, dispatch: petDispatch} = usePetContext()
     const {user, dispatch: userDispatch} = useUserContext()
 
     useEffect(()=> {
-        const fetchProfileData = async () => {
+        const fetchPetData = async () => {
             
             const config = {
                 headers: {
@@ -45,24 +50,24 @@ const PetOwner = () => {
         }
         
         if (user){
-            fetchProfileData()
+            fetchPetData()
         }
 
     },[user])
 
     return (
         <>
-            <NavBar navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
+            <NavBar  navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
             <Routes>
-                <Route path='/home' element={<Home setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/login' element={<LogIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/store' element={<Store setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt' element={<AdoptPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/lostpetnotices' element={<LostPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
+                <Route path='/home' element={<Home navBarProps={navBarProps} />} />
+                <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
+                <Route path='/store' element={<Store navBarProps={navBarProps} />} />
+                <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
+                <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
+                <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
+                <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
             </Routes>
         </>
     );

@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 
 
-const CreateAdoptionForm = () => {
+const CreateAdoptionForm = ({ navBarProps }) => {
+
+    navBarProps("#FFF", "#E2929D")
 
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
