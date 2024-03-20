@@ -44,25 +44,6 @@ const signin = async (req, res) => {
 
 }
 
-const getUserDetailsFromToken = async (req, res) => {
-    const userID = req.user._id
-    try{
-        const user = await petOwner.findById(userID)
-        if (!user){
-            res.status(400).json({message: "Invalid Token"})
-        }
-
-        res.status(200).json({
-            username: user.name,
-            email: user.email
-        })
-
-    } catch (error){
-        res.status(400).json({message: "Invalid Credentials"})
-    }
-}
-
-
 const updateUserDetailsFromToken = async (req, res) => {
     const {name, email, password} = req.body;
     const userID = req.user._id
@@ -93,13 +74,17 @@ const updateUserDetailsFromToken = async (req, res) => {
 
             res.status(200).json({username: response.name, email: response.email})
             return
+        } else {
+            const response = await petOwner.findByIdAndUpdate(userID, {
+                name,
+                email
+            })
+
+            console.log(response)
+            
+            res.status(200).json({username: response.name, email: response.email})
         }
-        const response = await petOwner.findByIdAndUpdate(userID, {
-            name,
-            email
-        })
         
-        res.status(200).json({username: response.name, email: response.email})
 
     } catch (error){
         res.status(400).json({message: error.message})
@@ -122,4 +107,4 @@ const deleteUserDetailsFromToken = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, getUserDetailsFromToken, updateUserDetailsFromToken, deleteUserDetailsFromToken }
+module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken }

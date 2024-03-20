@@ -51,6 +51,8 @@ const ProfileUpdate = () => {
                 }
 
                 userDispatch({type:"UPDATE", payload:{username:name,email}})
+                const userLS = {username:name, email, userToken:user.userToken}
+                localStorage.setItem('user',JSON.stringify(userLS))
                 setError("")
                 // console.log(json)
 
@@ -75,6 +77,8 @@ const ProfileUpdate = () => {
                 }
 
                 userDispatch({type:"UPDATE", payload:{username:name,email}})
+                const userLS = {username:name, email, userToken:user.userToken}
+                localStorage.setItem('user',JSON.stringify(userLS))
                 setError("")
                 // console.log(json)
 

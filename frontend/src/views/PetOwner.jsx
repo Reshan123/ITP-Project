@@ -34,13 +34,13 @@ const PetOwner = () => {
                 const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
 
                 if (!petDetailsResponse.ok){
-                    setError("Invalid Token")
+                    throw Error("Invalid Token")
                 }
                 const petDetailsJson = await petDetailsResponse.json()
                 petDispatch({type:"LOAD", payload:petDetailsJson.message})
 
             } catch (error){
-                console.log("profile page error", error)
+                console.log("pet owner page error", error)
             }
         }
         

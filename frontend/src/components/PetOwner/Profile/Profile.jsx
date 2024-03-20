@@ -12,47 +12,8 @@ const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
     setNavBarColor("#FFF")
     const navigate = useNavigate()
 
-    const [profileData, setProfileData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState("")
-
     const {user, dispatch: userDispatch} = useUserContext()
     const {pets, dispatch: petDispatch} = usePetContext()
-
-    useEffect(() => {
-        if(!user){
-            navigate('/pet/login')
-        }
-        const fetchProfileData = async () => {
-            
-            const config = {
-                headers: {
-                    "authorization": `Bearer ${user.userToken}`
-                }
-            }
-
-            try{
-                const userDetailsResponse = await fetch("http://localhost:4000/api/petOwner/getUserDetailsFromToken", config)
-
-                if(!userDetailsResponse.ok){
-                    setError("Invalid Token")
-                }
-
-                const userDetailsJson = await userDetailsResponse.json()
-                setProfileData(userDetailsJson)
-                setLoading(false)
-
-            } catch (error){
-                console.log("profile page error", error)
-            }
-        }
-        
-        if (user){
-            fetchProfileData()
-        }
-
-    }, [user])
-
 
     const logOutUser = () => {
         navigate('/pet/home')
@@ -60,15 +21,38 @@ const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
         userDispatch({type:"LOGOUT"})
     }
 
+    const deleteProfile = async () => {
+        try{
+            const config = {
+                method: 'DELETE',
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+            const userDeleteResponse = await fetch("http://localhost:4000/api/petOwner/deleteUserDetailsFromToken", config)
+            const userJson = await userDeleteResponse.json()
+            if(!userDeleteResponse.ok){
+                throw Error(userJson.message)
+            }
+
+            navigate('/pet/home')
+            localStorage.removeItem('user')
+            userDispatch({type:"LOGOUT"})
+
+        } catch (error){
+            console.log(error.message)
+        }
+    }
+
     return ( 
         <>
             <div className="profilePage">
                 <div className="userDetails">
-                    <p className='username'>Welcome <span>{!loading && profileData.username}</span></p>
-                    <p className='email'><span>{!loading && profileData.email}</span></p>
+                    <p className='username'>Welcome <span>{user && user.username}</span></p>
+                    <p className='email'><span>{user && user.email}</span></p>
                     <div className="actionButtons">
                         <button onClick={() => navigate('/pet/profile/update')}>Update</button>
-                        <button className='delete'>Delete</button>
+                        <button className='delete' onClick={deleteProfile}>Delete</button>
                     </div>
                 </div>
                 <div className="logOutButton">
@@ -78,7 +62,7 @@ const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
                     <div className="petDetailsTitle">Pet Details</div>
                     <hr />
                     <div className="petDetailsCards">
-                        {!loading && pets.map( pet => (
+                        {pets && pets.map( pet => (
                                 <PetComponent pet={pet} />
                         ))}
                     </div>
