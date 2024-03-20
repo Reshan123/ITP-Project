@@ -44,6 +44,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
                         <NavHashLink to="/pet/home#bookAppointments" style={{color: navBarColor, border: `${navBarColor} 4px solid`}} className="buttonHoverAnimation" end>Book an Appointment</NavHashLink>
                         <NavLink to="/pet/store" className="NavLink" style={{color: navBarColor}} end>Store</NavLink>
                         <NavLink to="/pet/adopt" className="NavLink" style={{color: navBarColor}} end>Adopt a pet</NavLink>
+                        <NavLink to="/pet/lostpetnotices" className="NavLink" style={{color: navBarColor}} end>Lost Pet Notices</NavLink>
                     </div>
                     <div className="navLogin">
                         <NavLink to="/pet/profile" className='NavLink buttonHoverAnimation' style={{color: navBarColor, border: `${navBarColor} 4px solid` }} end> {user.username}</NavLink>
