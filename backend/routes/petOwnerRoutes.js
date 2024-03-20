@@ -11,8 +11,6 @@ petOwnerRouter.post('/login', petOwnerController.login)
 
 petOwnerRouter.post('/signin', petOwnerController.signin)
 
-petOwnerRouter.get('/getUserDetailsFromToken', authorize, petOwnerController.getUserDetailsFromToken)
-
 petOwnerRouter.put('/updateUserDetailsFromToken', authorize, petOwnerController.updateUserDetailsFromToken)
 
 petOwnerRouter.delete('/deleteUserDetailsFromToken', authorize, petOwnerController.deleteUserDetailsFromToken)

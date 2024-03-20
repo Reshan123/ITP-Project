@@ -113,7 +113,7 @@ div.error {
     gap: 5px;
 }
 
-button {
+.adoptPetButton {
     padding: 10px 20px;
     border: none;
     background-color: #007bff;
@@ -123,6 +123,6 @@ button {
     margin-top: 20px;
 }
 
-button:hover {
+.adoptPetButton:hover {
     background-color: #0056b3;
 }

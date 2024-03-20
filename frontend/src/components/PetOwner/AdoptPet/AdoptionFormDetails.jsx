@@ -37,8 +37,8 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
             <p><strong>Activity Level: </strong>{adoptionForm.description?.activityLevel}</p>
             <p><strong>Special Needs: </strong>{adoptionForm.description?.specialNeeds}</p>
 
-            <button onClick={handleClick}>delete</button>
-            <button onClick={handleUpdateClick}>Update</button>
+            <button className="adoptPetButton" onClick={handleClick}>delete</button>
+            <button className="adoptPetButton" onClick={handleUpdateClick}>Update</button>
         </div>
     )
 }
