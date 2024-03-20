@@ -21,6 +21,7 @@ nav .navMidContainer{
     align-items: center;
     gap: 100px;
 }
+
 nav .navMidContainer a.NavLink:hover,
 nav .navMidContainer a.aboutUsLink:hover{
     opacity: 0.8;

@@ -2,12 +2,15 @@ import './styles.css'
 import WhoAreWeImage from './Images/whoarewe.png'
 import ourServices from './Images/ourservices.png'
 import { useState } from 'react'
+import { useUserContext } from '../../../hooks/userContextHook'
 
 const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
 
     setNavBarBackgroundColor("#E2929D")
     setNavBarColor("#FFF")
     const [inputValidity, setInputValidity] = useState(false)
+
+    const { user, dispatch: userDispatch} = useUserContext()
 
     return ( 
         <>
@@ -80,39 +83,75 @@ const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
             <div className="homeBookAppointments" id='bookAppointments'>
                 <div className="homeBookAppointmentsHeading">Book Appointments</div>
                 <div className="homeBookAppointmentsText">Take the first step towards your pet's well-being with Pawpulz Appointment Booking. Fill out the form below to schedule vet visits and manage medical records seamlessly, ensuring your furry friend receives top-notch care with ease and convenience.</div>
-                <form className="homeBookAppointmentsForm">
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Owner Name' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="email" placeholder='Owner Email' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="number" placeholder='Owner Contact' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Pet Name' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Pet Species' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Pet Breed' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Doctor' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <input type="text" placeholder='Start Time' />
-                    </div>
-                    <div className="homeBookAppointmentsFormInputWrapper">
-                        <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional) '></textarea>
-                    </div>
-                    <div className="homeBookAppointmentsFormButton">
-                        {inputValidity && (<button type="submit">Book Appointment</button>)}
-                        {!inputValidity && (<button type="submit" className="disabled" disabled>Book Appointment</button>)}
-                    </div>
-                </form>
+                {user ? (
+                    <form className="homeBookAppointmentsForm">
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Owner Name' value={user.username} />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="email" placeholder='Owner Email' value={user.email} />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="number" placeholder='Owner Contact' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Name' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Species' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Breed' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Doctor' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Start Time' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional) '></textarea>
+                        </div>
+                        <div className="homeBookAppointmentsFormButton">
+                            {inputValidity && (<button type="submit">Book Appointment</button>)}
+                            {!inputValidity && (<button type="submit" className="disabled" disabled>Book Appointment</button>)}
+                        </div>
+                    </form>
+                ) : (
+                    <form className="homeBookAppointmentsForm">
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Owner Name' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="email" placeholder='Owner Email' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="number" placeholder='Owner Contact' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Name' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Species' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Pet Breed' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Doctor' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Start Time' />
+                        </div>
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional) '></textarea>
+                        </div>
+                        <div className="homeBookAppointmentsFormButton">
+                            {inputValidity && (<button type="submit">Book Appointment</button>)}
+                            {!inputValidity && (<button type="submit" className="disabled" disabled>Book Appointment</button>)}
+                        </div>
+                    </form>
+                )}
             </div>
         </>
      );
