@@ -6,9 +6,9 @@ nav{
     height: 15vh;
     /* background-color: #E2929D; */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    /* gap: 100px; */
     align-items: center;
-    padding: 0 50px;
     text-transform:uppercase;
 }
 
