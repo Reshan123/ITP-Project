@@ -70,6 +70,7 @@ nav .navLogin a{
 }
 
 nav div .buttonHoverAnimation:hover{
-    background: white;
     color: var(--primaryPink);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+    transition: 0.3s;
 }

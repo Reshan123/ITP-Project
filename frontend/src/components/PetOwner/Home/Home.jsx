@@ -98,7 +98,12 @@ const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                             <input type="text" placeholder='Pet Name' />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Species' />
+                            <select name="pet_species" required>
+                                <option value="">Pet Species</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
+                            </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' />
@@ -132,7 +137,12 @@ const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                             <input type="text" placeholder='Pet Name' />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Species' />
+                            <select name="pet_species" required>
+                                <option value="">Pet Species</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
+                            </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' />
