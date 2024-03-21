@@ -12,6 +12,7 @@ import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionFo
 import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
+import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 
 const PetOwner = () => {
 
@@ -23,8 +24,8 @@ const PetOwner = () => {
         setNavBarColor(textColor)
     }
 
-    const {pets, dispatch: petDispatch} = usePetContext()
     const {user, dispatch: userDispatch} = useUserContext()
+    const {pets, dispatch: petDispatch} = usePetContext()
 
     useEffect(()=> {
         const fetchPetData = async () => {
@@ -68,6 +69,7 @@ const PetOwner = () => {
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
                 <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
+                <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
             </Routes>
         </>
     );

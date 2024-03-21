@@ -30,6 +30,13 @@ const ProfileUpdate = ({navBarProps}) => {
         } else {
             setInputsValid(false)
         }
+        if(password.length > 0){
+            if(password.length >= 8){
+                setInputsValid(true)
+            } else {
+                setInputsValid(false)
+            }
+        }
     }, [name, email, password])
 
     const updateProfile = async (e) => {
