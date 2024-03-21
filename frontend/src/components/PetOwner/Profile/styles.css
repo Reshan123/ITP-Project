@@ -143,13 +143,27 @@
 
 .updateProfilePage{
     min-height: 85vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     justify-content: center;
 }
 
+.updateProfilePage .backArrow{
+    margin: 25px 50px;
+    align-self: self-start;
+}
+
+.updateProfilePage .backArrow svg{
+    font-size: 1.5rem;
+}
+
+.updateProfilePage .backArrow svg:hover{
+    cursor: pointer;
+}
+
 .updateProfilePage .profileUpdateForm{
-    background-color: var(--primaryColor);
+    background-color: var(--primaryPurple);
     padding: 65px 40px;
     border-radius: 15px;
     display: flex;
@@ -193,6 +207,7 @@
     border: none;
     color: var(--primaryPurple);
     background-color: white;
+    font-size: 1.1rem;
     font-weight: 600;
     padding: 10px 25px;
     transition: 0.3s;

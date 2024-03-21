@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useUserContext } from "../../../hooks/userContextHook";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import './styles.css'
 
-const ProfileUpdate = () => {
+const ProfileUpdate = ({navBarProps}) => {
+
+    navBarProps("#B799D1", "#FFF")
     
     const { user, dispatch: userDispatch} = useUserContext()
     const navigate = useNavigate()
@@ -96,6 +99,9 @@ const ProfileUpdate = () => {
     return ( 
         <>
             <div className="updateProfilePage">
+                <div className="backArrow">
+                    <IoMdArrowRoundBack onClick={() => {navigate('/pet/profile')}} />
+                </div>
                 <form className="profileUpdateForm">
                     <div className="updateFormTitle">Update Profile</div>
                     {error && (<div className="error">{error}</div>)}
