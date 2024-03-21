@@ -9,7 +9,7 @@
 :root{
   --primaryColor: #123456;
   --primaryPink: #E78F9B;
-  --primaryPuple: #B799D1;
+  --primaryPurple: #B799D1;
   --secondartColor: #123456;
   --accentColor: #123456;
 }
@@ -26,16 +26,18 @@ a{
   text-decoration: none;
 }
 
-.errorMessage{
-  color: red;
-  text-transform: uppercase;
-  font-weight: 900;
-  font-size: 1.3rem;
+div.error {
+  background-color: #ffdada;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-left: 5px solid #ff0000;
+  color: #d8000c;
+  border-radius: 4px;
 }
 
 button{
   /* background-color: rgba(0, 0, 0, 0.203); */
-  font-size: 20px;
+  /* font-size: 20px; */
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -51,6 +53,6 @@ button:active{
 
 button.disabled{
   background-color: rgba(0, 0, 0, 0.107);
-  cursor: none;
+  cursor:not-allowed;
   box-shadow: none;
 }

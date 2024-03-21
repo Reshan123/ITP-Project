@@ -5,28 +5,71 @@ import SignIn from '../components/PetOwner/SignIn/SignIn';
 import NavBar from '../components/PetOwner/NavBar/NavBar';
 import Profile from '../components/PetOwner/Profile/Profile';
 import ProfileUpdate from '../components/PetOwner/Profile/ProfileUpdate';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Store from '../components/PetOwner/Store/Store';
 import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionForm';
+import { usePetContext } from '../hooks/usePetContext'
+import { useUserContext } from '../hooks/userContextHook'
+import LostPet from '../components/PetOwner/LostPet/LostPet';
+import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 
 const PetOwner = () => {
 
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
 
+    const navBarProps = (backgroundColor,textColor) => {
+        setNavBarBackgroundColor(backgroundColor)
+        setNavBarColor(textColor)
+    }
+
+    const {user, dispatch: userDispatch} = useUserContext()
+    const {pets, dispatch: petDispatch} = usePetContext()
+
+    useEffect(()=> {
+        const fetchPetData = async () => {
+            
+            const config = {
+                headers: {
+                    "authorization": `Bearer ${user.userToken}`
+                }
+            }
+
+            try{
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
+
+                if (!petDetailsResponse.ok){
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+                petDispatch({type:"LOAD", payload:petDetailsJson.message})
+
+            } catch (error){
+                console.log("pet owner page error", error)
+            }
+        }
+        
+        if (user){
+            fetchPetData()
+        }
+
+    },[user])
+
     return (
         <>
-            <NavBar navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
+            <NavBar  navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
             <Routes>
-                <Route path='/home' element={<Home setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/login' element={<LogIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/store' element={<Store setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt' element={<AdoptPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
+                <Route path='/home' element={<Home navBarProps={navBarProps} />} />
+                <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
+                <Route path='/store' element={<Store navBarProps={navBarProps} />} />
+                <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
+                <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
+                <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
+                <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
+                <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
             </Routes>
         </>
     );

@@ -9,6 +9,8 @@ export const userReducer = (state, action) => {
             return { user: action.payload }
         case "LOGOUT":
             return { user: null }
+        case "UPDATE":
+            return { user: {...action.payload, userToken: state.user.userToken}}
         default:
             return state
     }
@@ -29,7 +31,7 @@ export const UserContextProvider = ({ children }) =>{
         }
     }, [])
 
-    console.log('AuthContext state:', state)
+    console.log('UserContext state:', state)
       
     return(
         <UserContext.Provider value={{ ...state, dispatch }}>

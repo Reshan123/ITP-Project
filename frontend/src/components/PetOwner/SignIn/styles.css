@@ -18,11 +18,18 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(50px);
     border-radius: 20px;
-    padding: 50px 50px;
+    padding: 35px 35px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: 0.3s;
 }
+
+/* .signinPage .signinPageContent:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+} */
 
 .signinPage .signinPageContent .signinHeader{
     display: flex;
@@ -48,7 +55,7 @@
 
 .signinPage .signinPageContent .signinHeader .signinNoAccount a{
     color: #fff;
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600;
 }
@@ -73,9 +80,9 @@
 
 .signinPage .signinPageContent .signinForm .siginFormInputWrapper input{
     border: none;
+    font-size: 20px;
     border-radius: 5px;
     padding: 20px 10px;
-
     height: 30px;
 }
 
@@ -92,6 +99,7 @@
     border-radius: 10px;
     border: 2px solid #fff;
     border: none;
+    transition: 0.3s;
 }
 
 .signinPage .signinPageContent .signinForm .signinFormSubmitButtonWrapper button.disable{
