@@ -21,7 +21,7 @@ export const petReducer = (state, action) => {
 export const PetContextProvider = ({ children }) =>{
     
     const [state, dispatch] = useReducer(petReducer, {
-        user: null
+        pets: null
     })
 
     console.log('PetContext state:', state)

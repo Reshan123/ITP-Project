@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { AdoptionContextProvider } from './context/AdoptionContext.jsx'
 import firebase from "firebase/compat/app"
 import { PetContextProvider } from './context/petContext.jsx'
+import { AllDoctorContextProvider } from './context/allDoctorContext.jsx'
+import { DoctorContextProvider } from './context/doctorContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -22,7 +24,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
     <AdoptionContextProvider>
       <PetContextProvider>
-        <App />
+        <DoctorContextProvider>
+          <AllDoctorContextProvider>
+            <App />
+          </AllDoctorContextProvider>
+        </DoctorContextProvider>
       </PetContextProvider>
     </AdoptionContextProvider>
   </UserContextProvider>
