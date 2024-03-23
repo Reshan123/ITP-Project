@@ -107,4 +107,16 @@ const deleteUserDetailsFromToken = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken }
+const getAllUsers = async (req, res) => {
+    try{
+        const response = await petOwner.find()
+        if (!response){
+            throw Error("Couldnt Fetch Data")
+        }
+        res.status(200).json(response)
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers }

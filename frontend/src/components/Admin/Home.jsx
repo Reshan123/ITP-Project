@@ -4,8 +4,10 @@ import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
 import SideBar from './components/SideBar/SideBar'
 import Doctor from './components/Doctor/Doctor';
+import PetOwners from './components/PetOwners/PetOwners';
 
 import { useAllDocContext } from '../../hooks/useAllDoctorContext'
+import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 
 import './styles.css'
 
@@ -14,27 +16,40 @@ const Home = () => {
     const navigate = useNavigate()
 
     const {doctors, dispatch:allDocDispatch} = useAllDocContext()
+    const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
 
     useEffect(() => {
         if(!localStorage.getItem('adminUser')){
             navigate('/admin/login')
         }
-    }, [localStorage.getItem('adminUser')])
+    }, [])
 
     useEffect(() => {
-        const fetchDocData = async () => {
+        const fetchAllData = async () => {
             try{
-                const response = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
-                if (!response.ok){
-                    throw Error(response.message)
+                //allDocData
+                const allDocResponse = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
+                const allDocJson = await allDocResponse.json()
+                
+                if (!allDocResponse.ok){
+                    throw Error(allDocResponse.message)
                 }
-                const json = await response.json()
-                allDocDispatch({type:"LOAD", payload:json})
+                allDocDispatch({type:"LOAD", payload:allDocJson})
+
+                //allPetOwnerData
+                const allPetOwners = await fetch("http://localhost:4000/api/petOwner/getAllUsers/")
+                const allPetOwnerJson = await allPetOwners.json()
+
+                if (!allPetOwners.ok){
+                    throw Error(allPetOwners.message)
+                }
+                petOwnerDispatch({type:"LOAD", payload: allPetOwnerJson})
+
             } catch (error){
                 console.log(error.message)
             }
         }
-        fetchDocData()
+        fetchAllData()
     }, [])
 
     return ( 
@@ -46,6 +61,7 @@ const Home = () => {
                     <Routes>
                         <Route path='/' element={<LandingPage />} />
                         <Route path='/doctor' element={<Doctor />} />
+                        <Route path='/petowners' element={<PetOwners />} />
                     </Routes>
                 </div>
             </div>

@@ -2,4 +2,6 @@
     display: flex;
     min-height: 88vh;
     align-items: stretch;
+    /* background-image: linear-gradient(195deg, #e9e9e9,  #dadada,  #bcbcbc); */
+    color: #393939;
 }
