@@ -11,6 +11,7 @@ const bookingRoutes = require('./routes/bookingRoutes')
 const adoptionFormRoutes = require('./routes/adoptionRoutes')
 const petRoutes = require('./routes/petRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
+const medicalRecordRoute = require('./routes/medicalRecordRoute')
 
 const app = express()
 
@@ -38,6 +39,8 @@ app.use('/api/bookings', bookingRoutes)
 app.use('/api/adoption', adoptionFormRoutes)
 app.use('/api/pet', petRoutes)
 app.use('/api/doctor', doctorRoutes)
+app.use('/medical-records', medicalRecordRoute);
+
 app.use('/api/admin/login', (req, res) => {
     const {email, password} = req.body
 
