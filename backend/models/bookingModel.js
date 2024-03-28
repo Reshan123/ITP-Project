@@ -4,6 +4,11 @@ const Schema = mongoose.Schema
 
 const bookingSchema = new Schema({
 
+    owner_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+
     owner_name: { 
         type: String, 
         required: true 
@@ -35,7 +40,6 @@ const bookingSchema = new Schema({
 
     doctor: { 
         type: String, // type: mongoose.Schema.Types.ObjectId
-        ref: 'Doctor', 
         required: true 
     },
 
