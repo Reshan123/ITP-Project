@@ -3,10 +3,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../hooks/userContextHook";
 import './styles.css'
 
-const LogIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
+const LogIn = ({ navBarProps }) => {
 
-    setNavBarBackgroundColor("#E2929D")
-    setNavBarColor("#FFF")
+    navBarProps("#E2929D", "#FFF")
     const navigate = useNavigate()
     
     const { dispatch } = useUserContext();
@@ -61,7 +60,7 @@ const LogIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                         <NavLink to="/pet/signin">Sign Up</NavLink>
                     </div>
                 </div>
-                <div className="errorMessage">{error}</div>
+                {error && (<div className="error">{error}</div>)}
                 <form className="loginForm" onSubmit={onLoginFormSubmit}>
                     <div className="siginFormInputWrapper">
                         <label htmlFor="email">Email </label>

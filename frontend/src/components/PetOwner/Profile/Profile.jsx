@@ -1,19 +1,26 @@
 import { useUserContext } from '../../../hooks/userContextHook';
+import { HashLink } from 'react-router-hash-link';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { usePetContext } from '../../../hooks/usePetContext';
 import PetComponent from './PetComponent';
 
 import './styles.css'
+import { useEffect } from 'react';
 
-const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
+const Profile = ({ navBarProps }) => {
 
-    setNavBarBackgroundColor("#E2929D")
-    setNavBarColor("#FFF")
+    navBarProps("#B799D1", "#FFF")
+    
     const navigate = useNavigate()
 
     const {user, dispatch: userDispatch} = useUserContext()
     const {pets, dispatch: petDispatch} = usePetContext()
+
+    useEffect(() => {
+        if(!user){
+            navigate('/pet/login')
+        }
+    }, [user])
 
     const logOutUser = () => {
         navigate('/pet/home')
@@ -22,25 +29,28 @@ const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
     }
 
     const deleteProfile = async () => {
-        try{
-            const config = {
-                method: 'DELETE',
-                headers: {
-                    'authorization': `Bearer ${user.userToken}`
+        const deleteApproval = confirm("Are you sure you want to delete profile?")
+        if (deleteApproval){
+            try{
+                const config = {
+                    method: 'DELETE',
+                    headers: {
+                        'authorization': `Bearer ${user.userToken}`
+                    }
                 }
+                const userDeleteResponse = await fetch("http://localhost:4000/api/petOwner/deleteUserDetailsFromToken", config)
+                const userJson = await userDeleteResponse.json()
+                if(!userDeleteResponse.ok){
+                    throw Error(userJson.message)
+                }
+    
+                navigate('/pet/home')
+                localStorage.removeItem('user')
+                userDispatch({type:"LOGOUT"})
+    
+            } catch (error){
+                console.log(error.message)
             }
-            const userDeleteResponse = await fetch("http://localhost:4000/api/petOwner/deleteUserDetailsFromToken", config)
-            const userJson = await userDeleteResponse.json()
-            if(!userDeleteResponse.ok){
-                throw Error(userJson.message)
-            }
-
-            navigate('/pet/home')
-            localStorage.removeItem('user')
-            userDispatch({type:"LOGOUT"})
-
-        } catch (error){
-            console.log(error.message)
         }
     }
 
@@ -58,13 +68,51 @@ const Profile = ({ setNavBarBackgroundColor, setNavBarColor}) => {
                 <div className="logOutButton">
                     <button onClick={logOutUser}>Log Out</button>
                 </div>
-                <div className="petDetails">
-                    <div className="petDetailsTitle">Pet Details</div>
+                
+                {/* pet details */}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Pet Details</div>
+                        <button className='detailsSectionAddButton' onClick={() => navigate('/pet/profile/addpet')}>Add Pets</button>
+                    </div>
                     <hr />
-                    <div className="petDetailsCards">
+                    <div className="detailsSectionCardContainer">
                         {pets && pets.map( pet => (
-                                <PetComponent pet={pet} />
+                                <PetComponent pet={pet} key={pet._id} />
                         ))}
+                    </div>
+                </div>
+                {/* appointments */}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Appointment Details</div>
+                        <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
+                    </div>
+                    <hr />
+                    <div className="detailsSectionCardContainer">
+                        {/* add the map to show appointments */}
+                    </div>
+                </div>
+                {/* adoption listings */}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Adoption Listings</div>
+                        <button className='detailsSectionAddButton' onClick={() => {window.scrollTo(0, 0);navigate('/pet/adopt/adoptionForm')}}>Add Listing</button>
+                    </div>
+                    <hr />
+                    <div className="detailsSectionCardContainer">
+                        {/* add the map to show listings */}
+                    </div>
+                </div>
+                {/* lost pet */}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Lost Pet Notices</div>
+                        <button className='detailsSectionAddButton' onClick={() => navigate('')}>Add Notice</button>
+                    </div>
+                    <hr />
+                    <div className="detailsSectionCardContainer">
+                        {/* add the map to show listings */}
                     </div>
                 </div>
             </div>

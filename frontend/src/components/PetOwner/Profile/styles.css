@@ -1,5 +1,5 @@
 .profilePage{
-    background-color: #EEE;
+    background-color: #fff0ff;
     min-height: 85vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -44,14 +44,14 @@
     border-radius: 11px;
     border: none;
     color: #fff;
-    background-color: var(--secondartColor);
+    background-color: var(--primaryPurple);
     font-weight: 600;
     padding: 10px 25px;
     transition: 0.3s;
 }
 
 .profilePage .userDetails .actionButtons button.delete{
-    background-color: rgb(238, 36, 36);
+    background-color: rgb(234, 53, 53);
 }
 
 .profilePage .logOutButton{
@@ -63,42 +63,70 @@
 .profilePage .logOutButton button{
     border-radius: 11px;
     border: none;
-    color: #fff;
-    background-color: var(--secondartColor);
+    color: var(--primaryPurple);
+    background-color: white;
     font-weight: 600;
     padding: 10px 25px;
     transition: 0.3s;
+    font-size: 1.1rem;
 }
 
-.profilePage .petDetails{
-    margin: 0 50px;
+
+
+
+
+
+
+
+.profilePage .detailsSection{
+    margin: 50px;
     grid-column: 1/3;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-.profilePage .petDetails .petDetailsTitle{
+.profilePage .detailsSection .detailsSectionTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 10px 15px;
+}
+
+.profilePage .detailsSection .detailsSectionTitleContainer .detailsSectionTitle{
     font-size: 2.2rem;
     font-weight: 600;
 }
 
-.profilePage .petDetails hr{
+.profilePage .detailsSection .detailsSectionTitleContainer button{
+    border-radius: 11px;
+    border: none;
+    color: #fff;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.profilePage .detailsSection hr{
     height: 2px;
     background-color: black;
     margin-bottom: 25px;
 }
 
-.profilePage .petDetails .petDetailsCards{
+.profilePage .detailsSection .detailsSectionCardContainer{
     display: flex;
     /* flex-wrap: wrap; */
     gap: 25px;
 }
 
+
+
+
+
 .petCard{
     width: 25%;
-    color: #EEE;
-    background-color: var(--primaryColor);
+    color: #FFF;
+    background-color: var(--primaryPurple);
     padding: 15px 25px;
     display: flex;
     flex-direction: column;
@@ -122,4 +150,180 @@
     flex-direction: column;
     gap: 20px;
     justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.updateProfilePage{
+    background-color: #fff0ff;
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.updateProfilePage .backArrow{
+    margin: 25px 50px;
+    align-self: self-start;
+}
+
+.updateProfilePage .backArrow svg{
+    font-size: 1.5rem;
+}
+
+.updateProfilePage .backArrow svg:hover{
+    cursor: pointer;
+}
+
+.updateProfilePage .profileUpdateForm{
+    background-color: var(--primaryPurple);
+    padding: 65px 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.updateProfilePage .profileUpdateForm .updateFormTitle{
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper label{
+    font-size: 1.3rem;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper input{
+    padding: 8px 10px;
+    border-radius: 8px;     
+    font-size: 1.1rem;   
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton{
+    align-self: center;
+    margin-top: 25px;
+}
+
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.addPetPage{
+    background-color: #fff0ff;
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.addPetPage .backArrow{
+    margin: 25px 50px;
+    align-self: self-start;
+}
+
+.addPetPage .backArrow svg{
+    font-size: 1.5rem;
+}
+
+.addPetPage .backArrow svg:hover{
+    cursor: pointer;
+}
+
+.addPetPage .addPetForm{
+    background-color: var(--primaryPurple);
+    padding: 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.addPetPage .addPetForm .addPetFormTitle{
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.addPetPage .addPetForm .addPetFormInputWrapper{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.addPetPage .addPetForm .addPetFormInputWrapper label{
+    font-size: 1.3rem;
+}
+
+.addPetPage .addPetForm .addPetFormInputWrapper input{
+    padding: 8px 10px;
+    border-radius: 8px;     
+    font-size: 1.1rem;   
+}
+
+.addPetPage .addPetForm .addPetFormSubmitButtonWrapper{
+    align-self: center;
+    margin-top: 25px;
+}
+
+.addPetPage .addPetForm .addPetFormSubmitButtonWrapper button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
 }

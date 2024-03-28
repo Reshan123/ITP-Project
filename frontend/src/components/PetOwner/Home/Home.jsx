@@ -4,10 +4,10 @@ import ourServices from './Images/ourservices.png'
 import { useState } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
 
-const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
+const Home = ({ navBarProps }) => {
 
-    setNavBarBackgroundColor("#E2929D")
-    setNavBarColor("#FFF")
+    navBarProps("#E2929D", "#FFF")
+
     const [inputValidity, setInputValidity] = useState(false)
 
     const { user, dispatch: userDispatch} = useUserContext()
@@ -99,7 +99,7 @@ const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <select name="pet_species" required>
-                                <option value="">Pet Species</option>
+                                <option value="" disabled selected hidden>Pet Species</option>
                                 <option value="Dog">Dog</option>
                                 <option value="Cat">Cat</option>
                                 <option value="Bird">Bird</option>
@@ -138,7 +138,7 @@ const Home = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <select name="pet_species" required>
-                                <option value="">Pet Species</option>
+                                <option value="" disabled selected hidden>Pet Species</option>  
                                 <option value="Dog">Dog</option>
                                 <option value="Cat">Cat</option>
                                 <option value="Bird">Bird</option>

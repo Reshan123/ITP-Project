@@ -3,11 +3,10 @@ import { useAdoptionContext } from "../../../hooks/useAdoptionContext"
 import { useNavigate } from "react-router-dom"
 import './styles.css'
 
-const AdoptPet = ({ setNavBarBackgroundColor, setNavBarColor }) => {
+const AdoptPet = ({ navBarProps }) => {
     const navigate = useNavigate();
 
-    setNavBarBackgroundColor("#FFF")
-    setNavBarColor("#E2929D")
+    navBarProps("#FFF", "#E2929D")
 
     const { adoptionForms, dispatch } = useAdoptionContext();
 
