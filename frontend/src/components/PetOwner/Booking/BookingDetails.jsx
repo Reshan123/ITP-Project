@@ -23,7 +23,6 @@ const BookingDetails = ({booking}) => {
     <div className="booking-details">
         <p><strong>Doctor :</strong> {booking.doctor}</p>
         <p><strong>Pet Name :</strong> {booking.pet_name}</p>
-        <p><strong>Pet Species :</strong> {booking.pet_species}</p>
         <p><strong>Date and Time :</strong> {new Date(booking.start_time).toLocaleString()}</p>
         <p><strong>Status :</strong> {booking.status}</p>
         <span onClick={handleClick}>Delete</span>
