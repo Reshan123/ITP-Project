@@ -5,7 +5,7 @@ const Booking = require('../models/bookingModel')
 
 const router = express.Router()
 
-const {createBooking, getBookings, getBooking, updateBooking, deleteBooking} = require('../controllers/bookingController')
+const {createBooking, getBookings, getBooking, updateBooking, deleteBooking, getOwnerBookings} = require('../controllers/bookingController')
 
 //GET all
 router.get('/', getBookings )
@@ -21,5 +21,8 @@ router.delete('/:id', deleteBooking)
 
 //PATCH
 router.patch('/:id', updateBooking)
+
+//GET all owner bookings
+router.get('/', authorize, getOwnerBookings)
 
 module.exports = router

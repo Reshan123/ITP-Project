@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 //POST new booking
 const createBooking = async(req,res) => {
-    const userID = req.user._id
+    const userID = req.user._id //getting user ID from token
     const {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status} = req.body
 
     try{
@@ -92,10 +92,31 @@ const deleteBooking = async(req,res) => {
     }
 }
 
+
+//GET all owner bookings
+const getOwnerBookings = async(req,res) => {
+    const userID = req.user.id
+
+    try{
+
+        if(!userID){
+            throw Error("Invalid User ID")
+        }
+
+        const booking = await Booking.find({ownerID : userID})
+
+        res.status(200).json({message: booking})
+
+    }catch(error){
+        res.status(404).json({message:error.message})
+    }
+}
+
 module.exports = {
     createBooking,
     getBookings,
     getBooking,
     updateBooking,
-    deleteBooking
+    deleteBooking,
+    getOwnerBookings
 }
