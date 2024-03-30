@@ -35,7 +35,8 @@ const Home = ({ navBarProps }) => {
             method: 'POST',
             body: JSON.stringify(booking),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                "authorization": `Bearer ${user.userToken}`
             }
         })
 
