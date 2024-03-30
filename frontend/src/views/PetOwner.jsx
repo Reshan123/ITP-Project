@@ -13,7 +13,6 @@ import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
-import BookedAppointments from '../components/PetOwner/Booking/BookedAppointments';
 
 const PetOwner = () => {
 
@@ -68,7 +67,6 @@ const PetOwner = () => {
                 <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
-                <Route path='/bookings/bookedappointments' element={<BookedAppointments navBarProps={navBarProps}/>} />
                 <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />

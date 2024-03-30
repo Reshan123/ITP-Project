@@ -13,7 +13,6 @@ const Home = ({ navBarProps }) => {
     const { user, dispatch: userDispatch} = useUserContext()
 
     //booking use states
-    const [owner_id, setOwnerID] = useState('')
     const [owner_name, setOwnerName] = useState('')
     const [owner_email, setOwnerEmail] = useState('')
     const [owner_contact, setOwnerContact] = useState('')
@@ -29,7 +28,7 @@ const Home = ({ navBarProps }) => {
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        const booking = {owner_id,owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description}
+        const booking = {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description}
 
         const response = await fetch('http://localhost:4000/api/bookings', {
             method: 'POST',
@@ -62,7 +61,6 @@ const Home = ({ navBarProps }) => {
     useEffect(() => {
         //setting values
         if (user){
-            setOwnerID('65fd92a998dbcafed72c1a3e') //need to get the acutal user ID
             setOwnerName(user.username)
             setOwnerEmail(user.email)
         }

@@ -103,7 +103,7 @@ const getOwnerBookings = async(req,res) => {
             throw Error("Invalid User ID")
         }
 
-        const booking = await Booking.find({ownerID : userID})
+        const booking = await Booking.find({owner_id : userID})
 
         res.status(200).json({message: booking})
 
