@@ -18,23 +18,12 @@ const Profile = ({ navBarProps }) => {
 
     const {user, dispatch: userDispatch} = useUserContext()
     const {pets, dispatch: petDispatch} = usePetContext()
-    const {bookings, dispatch} = useBookingContext()
+    const {bookings, dispatch: bookingDispatch } = useBookingContext()
 
     useEffect(() => {
         if(!user){
             navigate('/pet/login')
         }
-
-        const fetchBookings = async() => {
-            const response = await fetch('http://localhost:4000/api/bookings')
-            const json = await response.json()
-
-            if(response.ok){
-                dispatch({type: 'SET_BOOKINGS', payload: json})
-            }
-        }
-
-        fetchBookings()
     }, [user])
 
     const logOutUser = () => {
@@ -107,7 +96,7 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionCardContainer">
                         <div className='bookings'>
                             <div className='booked-appointments'>
-                                {bookings && bookings.map((booking) => (
+                                {bookings && bookings.map(booking => (
                                     <BookingDetails key={booking._id} booking = {booking}/>
                                 ))}
                             </div>

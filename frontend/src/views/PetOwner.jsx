@@ -13,6 +13,7 @@ import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
+import { useBookingContext } from '../hooks/useBookingContext';
 
 const PetOwner = () => {
 
@@ -26,6 +27,7 @@ const PetOwner = () => {
 
     const {user, dispatch: userDispatch} = useUserContext()
     const {pets, dispatch: petDispatch} = usePetContext()
+    const {bookings, dispatch: bookingDispatch } = useBookingContext()
 
     useEffect(()=> {
         const fetchPetData = async () => {
@@ -49,9 +51,34 @@ const PetOwner = () => {
                 console.log("pet owner page error", error)
             }
         }
+
+        const fetchBookings = async() => {
+
+            const config = {
+                headers: {
+                    "authorization": `Bearer ${user.userToken}`
+                }
+            }
+
+            try{
+                const response = await fetch("http://localhost:4000/api/bookings", config)
+
+                if (!response.ok){
+                    throw Error("Invalid Token")
+                }
+
+                const json = await response.json()
+
+                bookingDispatch({type:'SET_BOOKINGS', payload:json})
+                
+            } catch (error){
+                console.log("pet owner page error", error)
+            }
+        }
         
         if (user){
             fetchPetData()
+            fetchBookings()
         }
 
     },[user])

@@ -23,6 +23,6 @@ router.delete('/:id', deleteBooking)
 router.patch('/:id', updateBooking)
 
 //GET all owner bookings
-router.get('/', authorize, getOwnerBookings)
+router.get('/ownerBookings', authorize, getOwnerBookings)
 
 module.exports = router
