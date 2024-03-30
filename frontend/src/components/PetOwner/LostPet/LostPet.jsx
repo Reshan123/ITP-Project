@@ -1,7 +1,6 @@
-const LostPet = ({ setNavBarColor, setNavBarBackgroundColor}) => {
-
-    setNavBarBackgroundColor("#FFF")
-    setNavBarColor("#B799D1")
+const LostPet = ({ navBarProps }) => {
+    
+    navBarProps("#FFF", "#B799D1")
 
     return ( 
         <>Lost Pet</>

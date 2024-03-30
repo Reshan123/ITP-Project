@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import firebase from "firebase/compat/app"
 import "firebase/compat/storage"
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
+import { useUserContext } from '../../../hooks/userContextHook';
 
+const CreateAdoptionForm = ({ navBarProps }) => {
 
-const CreateAdoptionForm = () => {
+    navBarProps("#FFF", "#E2929D")
 
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
+    const {user, dispatch: userDispatch} = useUserContext()
+
+    useEffect(()=> {
+        if (!user){
+            navigate('/pet/login')
+        }
+    }, [user])
 
     const [petChoice, setPetChoice] = useState('');
     const [name, setName] = useState('');

@@ -3,10 +3,9 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { useUserContext } from "../../../hooks/userContextHook";
 import './styles.css'
 
-const SignIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
-
-    setNavBarBackgroundColor("#B597CF")
-    setNavBarColor("#FFF")
+const SignIn = ({ navBarProps }) => {
+    
+    navBarProps("#B597CF", "#FFF")
 
     const navigate = useNavigate()
     const {dispatch} = useUserContext()
@@ -37,7 +36,7 @@ const SignIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
             const json = await response.json()
         
             if (!response.ok) {
-                setError(json.error)
+                setError(json.message)
             }
             if (response.ok) {
                 // save the user to local storage
@@ -61,7 +60,7 @@ const SignIn = ({ setNavBarBackgroundColor, setNavBarColor }) => {
                         <NavLink to="/pet/login">Sign In</NavLink>
                     </div>
                 </div>
-                <div className="errorMessage">{error}</div>
+                {error && (<div className="error">{error}</div>)}
                 <form className="signinForm" onSubmit={onSigninFormSubmit}>
                     <div className="siginFormInputWrapper">
                         <label htmlFor="name">Username </label>

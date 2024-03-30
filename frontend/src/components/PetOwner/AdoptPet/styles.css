@@ -63,16 +63,6 @@
     border-radius: 4px;
 }
 
-/* Additional styling for error messages */
-div.error {
-    background-color: #ffdada;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-left: 5px solid #ff0000;
-    color: #d8000c;
-    border-radius: 4px;
-}
-
 /* AdoptionFormPage.css */
 .AdoptionFormPage {
     display: flex;

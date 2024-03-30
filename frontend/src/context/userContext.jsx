@@ -9,6 +9,8 @@ export const userReducer = (state, action) => {
             return { user: action.payload }
         case "LOGOUT":
             return { user: null }
+        case "UPDATE":
+            return { user: {...action.payload, userToken: state.user.userToken}}
         default:
             return state
     }

@@ -12,17 +12,24 @@ import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionFo
 import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
+import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
+import BookedAppointments from '../components/PetOwner/Booking/BookedAppointments';
 
 const PetOwner = () => {
 
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
 
-    const {pets, dispatch: petDispatch} = usePetContext()
+    const navBarProps = (backgroundColor,textColor) => {
+        setNavBarBackgroundColor(backgroundColor)
+        setNavBarColor(textColor)
+    }
+
     const {user, dispatch: userDispatch} = useUserContext()
+    const {pets, dispatch: petDispatch} = usePetContext()
 
     useEffect(()=> {
-        const fetchProfileData = async () => {
+        const fetchPetData = async () => {
             
             const config = {
                 headers: {
@@ -34,35 +41,38 @@ const PetOwner = () => {
                 const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
 
                 if (!petDetailsResponse.ok){
-                    setError("Invalid Token")
+                    throw Error("Invalid Token")
                 }
                 const petDetailsJson = await petDetailsResponse.json()
                 petDispatch({type:"LOAD", payload:petDetailsJson.message})
 
             } catch (error){
-                console.log("profile page error", error)
+                console.log("pet owner page error", error)
             }
         }
         
         if (user){
-            fetchProfileData()
+            fetchPetData()
         }
 
     },[user])
 
     return (
         <>
-            <NavBar navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
+            <NavBar  navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
             <Routes>
-                <Route path='/home' element={<Home setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/login' element={<LogIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/store' element={<Store setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt' element={<AdoptPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/signin' element={<SignIn setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/lostpetnotices' element={<LostPet setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile' element={<Profile setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
-                <Route path='/profile/update' element={<ProfileUpdate setNavBarColor={setNavBarColor} setNavBarBackgroundColor={setNavBarBackgroundColor} />} />
+                <Route path='/home' element={<Home navBarProps={navBarProps} />} />
+                <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
+                <Route path='/store' element={<Store navBarProps={navBarProps} />} />
+                <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
+                <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
+                <Route path='/bookings/bookedappointments' element={<BookedAppointments navBarProps={navBarProps}/>} />
+                <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
+                <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
+                <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
+
             </Routes>
         </>
     );
