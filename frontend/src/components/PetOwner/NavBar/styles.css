@@ -10,6 +10,7 @@ nav{
     /* gap: 100px; */
     align-items: center;
     text-transform:uppercase;
+    z-index: 1;
 }
 
 nav .navLogo svg{
