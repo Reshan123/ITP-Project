@@ -24,6 +24,35 @@ const Profile = ({ navBarProps }) => {
         if(!user){
             navigate('/pet/login')
         }
+
+        const fetchBookings = async() => {
+
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+
+            try{
+                const response = await fetch("http://localhost:4000/api/bookings/getOwner", config)
+
+                if (!response.ok){
+                    throw Error(response.message)
+                }
+
+                const json = await response.json()
+
+                bookingDispatch({type:'SET_BOOKINGS', payload:json.message})
+                
+            } catch (error){
+                
+                console.log("pet owner page error", error)
+            }
+        }
+
+        if (user){
+            fetchBookings()
+        }
     }, [user])
 
     const logOutUser = () => {

@@ -24,18 +24,18 @@ firebase.initializeApp(firebaseConfig)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
-    <BookingContextProvider>
       <AdoptionContextProvider>
         <PetContextProvider>
-          <DoctorContextProvider>
-            <AllDoctorContextProvider>
-              <AllPetOwnerContextProvider>
-                <App />
-              </AllPetOwnerContextProvider>
-            </AllDoctorContextProvider>
-          </DoctorContextProvider>
+          <BookingContextProvider>
+            <DoctorContextProvider>
+              <AllDoctorContextProvider>
+                <AllPetOwnerContextProvider>
+                  <App />
+                </AllPetOwnerContextProvider>
+              </AllDoctorContextProvider>
+            </DoctorContextProvider>
+          </BookingContextProvider>
         </PetContextProvider>
       </AdoptionContextProvider>
-    </BookingContextProvider>
   </UserContextProvider>
 )

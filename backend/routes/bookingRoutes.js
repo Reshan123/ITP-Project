@@ -7,22 +7,22 @@ const router = express.Router()
 
 const {createBooking, getBookings, getBooking, updateBooking, deleteBooking, getOwnerBookings} = require('../controllers/bookingController')
 
-//GET all
+// //GET all
 router.get('/', getBookings )
 
-//GET a single
-router.get('/:id', getBooking)
+// //GET a single
+router.get('/getBooking/:id', getBooking)
 
-//POST
+// //POST
 router.post('/', authorize, createBooking)
 
-//DELETE
+// //DELETE
 router.delete('/:id', deleteBooking)
 
-//PATCH
+// //PATCH
 router.patch('/:id', updateBooking)
 
-//GET all owner bookings
-router.get('/ownerBookings', authorize, getOwnerBookings)
+router.get("/getOwner", authorize, getOwnerBookings)
+
 
 module.exports = router
