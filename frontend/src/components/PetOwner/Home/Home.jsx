@@ -24,6 +24,10 @@ const Home = ({ navBarProps }) => {
     const [description, setDescription] = useState('')
     const [error, setError] = useState(null)
 
+    //doctor use states
+    const [doctors, setDoctors] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     //booking submit function
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -69,6 +73,20 @@ const Home = ({ navBarProps }) => {
         const isValid = owner_name && owner_email && owner_contact && pet_name && pet_species && doctor && start_time;
 
         setInputValidity(isValid);
+
+        //fetching all available doctors
+        const fetchDoctors = async () => {
+            try {
+              const response = await fetch('http://localhost:4000/api/doctor/availableDoctors');
+              const data = await response.json();
+              setDoctors(data);
+              setLoading(false);
+            } catch (error) {
+              console.error(error);
+            }
+          };
+      
+        fetchDoctors();
 
       }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time]);
 
@@ -169,8 +187,18 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Pet Breed' onChange={(e) => setPetBreed(e.target.value)} value ={pet_breed} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Doctor' onChange={(e) => setDoctor(e.target.value)} value ={doctor} required />
+                            {loading ? (
+                                <p>Loading...</p>
+                            ) : (
+                                <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
+                                <option value="">Select a Doctor</option>
+                                {doctors.map(doctor => (
+                                    <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
+                                ))}
+                                </select>
+                            )}
                         </div>
+
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value ={start_time} required />
                         </div>
