@@ -3,10 +3,11 @@ const mongoose = require('mongoose')
 
 //POST new booking
 const createBooking = async(req,res) => {
+    const userID = req.user._id
     const {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status} = req.body
 
     try{
-        const booking = await Booking.create({owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status})
+        const booking = await Booking.create({owner_id: userID,owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status})
         res.status(200).json(booking)
     }catch(error){
         res.status(404).json({error:error.message})

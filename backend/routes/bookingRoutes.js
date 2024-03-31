@@ -1,3 +1,4 @@
+const authorize = require('../middlewear/validateToken')
 const express = require('express')
 
 const Booking = require('../models/bookingModel')
@@ -13,7 +14,7 @@ router.get('/', getBookings )
 router.get('/:id', getBooking)
 
 //POST
-router.post('/', createBooking)
+router.post('/', authorize, createBooking)
 
 //DELETE
 router.delete('/:id', deleteBooking)

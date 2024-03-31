@@ -15,4 +15,6 @@ petOwnerRouter.put('/updateUserDetailsFromToken', authorize, petOwnerController.
 
 petOwnerRouter.delete('/deleteUserDetailsFromToken', authorize, petOwnerController.deleteUserDetailsFromToken)
 
+petOwnerRouter.get('/getAllUsers', petOwnerController.getAllUsers)
+
 module.exports = petOwnerRouter

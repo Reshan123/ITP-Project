@@ -5,6 +5,10 @@ import App from './App.jsx'
 import { AdoptionContextProvider } from './context/AdoptionContext.jsx'
 import firebase from "firebase/compat/app"
 import { PetContextProvider } from './context/petContext.jsx'
+import { AllDoctorContextProvider } from './context/allDoctorContext.jsx'
+import { DoctorContextProvider } from './context/doctorContext.jsx'
+import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
+import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -20,10 +24,18 @@ firebase.initializeApp(firebaseConfig)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
-    <AdoptionContextProvider>
-      <PetContextProvider>
-        <App />
-      </PetContextProvider>
-    </AdoptionContextProvider>
+    <BookingContextProvider>
+      <AdoptionContextProvider>
+        <PetContextProvider>
+          <DoctorContextProvider>
+            <AllDoctorContextProvider>
+              <AllPetOwnerContextProvider>
+                <App />
+              </AllPetOwnerContextProvider>
+            </AllDoctorContextProvider>
+          </DoctorContextProvider>
+        </PetContextProvider>
+      </AdoptionContextProvider>
+    </BookingContextProvider>
   </UserContextProvider>
 )

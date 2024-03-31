@@ -1,0 +1,5 @@
+.doctorPageMainContainer{
+    display: flex;
+    min-height: 88vh;
+    align-items: stretch;
+}
