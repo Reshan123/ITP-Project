@@ -1,4 +1,4 @@
-const petOwner = require('../models/petOwnerModel')
+const doctor = require('../models/doctorModel')
 const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -13,12 +13,12 @@ const login = async (req, res) => {
     const {email, password} = req.body
 
     try {
-        const user = await petOwner.login(email, password)
+        const user = await doctor.login(email, password)
 
         // create a token
         const token = createToken(user._id)
 
-        res.status(200).json({username: user.name, email: user.email, userToken: token})
+        res.status(200).json({username: user.name, email: user.email,contactNo: user.contactNo, availability: user.availability, userToken: token})
 
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -26,17 +26,14 @@ const login = async (req, res) => {
 
 }
 
-const signin = async (req, res) => {
+const createDoctor = async (req, res) => {
 
-    const {name, email, password} = req.body
+    const {name, email, password, contactNo, availability} = req.body
 
     try{
-        const user = await petOwner.signup(name, email, password)
+        const user = await doctor.createDoctorStatic(name, email, password, contactNo, availability)
 
-        // create a token
-        const token = createToken(user._id)
-
-        res.status(200).json({username: user.name, email: user.email, userToken: token})
+        res.status(200).json(user)
 
     } catch (error){
         res.status(400).json({message: error.message})
@@ -44,12 +41,12 @@ const signin = async (req, res) => {
 
 }
 
-const updateUserDetailsFromToken = async (req, res) => {
-    const {name, email, password} = req.body;
+const updateDoctorDetailsFromToken = async (req, res) => {
+    const {name, email, password, contactNo, availability} = req.body;
     const userID = req.user._id
 
     try{
-        if (!name || !email) {
+        if (!name || !email || !contactNo || availability) {
             throw Error('Name and Email fields must be filled')
         }
         if(!validator.isAlpha(name, ['en-US'], {ignore: '-s'})){
@@ -66,23 +63,27 @@ const updateUserDetailsFromToken = async (req, res) => {
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hash(password, salt)
 
-            const response = await petOwner.findByIdAndUpdate(userID, {
+            const response = await doctor.findByIdAndUpdate(userID, {
                 name,
                 email,
-                password: hash
+                password: hash,
+                contactNo,
+                availability
             })
 
-            res.status(200).json({username: response.name, email: response.email})
-            return
+            res.status(200).json({username: user.name, email: user.email,contactNo: user.contactNo, availability: user.availability, userToken: token})
+            return;
         } else {
-            const response = await petOwner.findByIdAndUpdate(userID, {
+            const response = await doctor.findByIdAndUpdate(userID, {
                 name,
-                email
+                email,
+                contactNo,
+                availability
             })
 
             console.log(response)
             
-            res.status(200).json({username: response.name, email: response.email})
+            res.status(200).json({username: user.name, email: user.email,contactNo: user.contactNo, availability: user.availability, userToken: token})
         }
         
 
@@ -91,15 +92,15 @@ const updateUserDetailsFromToken = async (req, res) => {
     }
 
 }
-const deleteUserDetailsFromToken = async (req, res) => {
+const deleteDoctorDetailsFromToken = async (req, res) => {
     const userID = req.user._id
     try{
-        const userExist = await petOwner.findById(userID)
+        const userExist = await doctor.findById(userID)
         if (!userExist){
             throw Error("User doesnt exist")
         }
 
-        const response = await petOwner.findByIdAndDelete(userID)
+        const response = await doctor.findByIdAndDelete(userID)
         
         res.status(200).json({message: "User removed"})
     } catch (error){
@@ -107,9 +108,10 @@ const deleteUserDetailsFromToken = async (req, res) => {
     }
 }
 
-const getAllUsers = async (req, res) => {
+
+const getAllDocs = async (req, res) => {
     try{
-        const response = await petOwner.find()
+        const response = await doctor.find()
         if (!response){
             throw Error("Couldnt Fetch Data")
         }
@@ -119,4 +121,4 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers }
+module.exports = { login, createDoctor, updateDoctorDetailsFromToken, deleteDoctorDetailsFromToken, getAllDocs }

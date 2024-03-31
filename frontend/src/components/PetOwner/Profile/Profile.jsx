@@ -5,6 +5,7 @@ import { usePetContext } from '../../../hooks/usePetContext';
 import PetComponent from './PetComponent';
 
 import './styles.css'
+import { useEffect } from 'react';
 
 const Profile = ({ navBarProps }) => {
 
@@ -14,6 +15,12 @@ const Profile = ({ navBarProps }) => {
 
     const {user, dispatch: userDispatch} = useUserContext()
     const {pets, dispatch: petDispatch} = usePetContext()
+
+    useEffect(() => {
+        if(!user){
+            navigate('/pet/login')
+        }
+    }, [user])
 
     const logOutUser = () => {
         navigate('/pet/home')
@@ -80,6 +87,7 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Appointment Details</div>
                         <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
+                        <button className='detailsSectionAddButton' onClick={() => {window.scrollTo(0, 0);navigate('/pet/bookings/bookedappointments')}}>Booked Appointments</button>
                     </div>
                     <hr />
                     <div className="detailsSectionCardContainer">

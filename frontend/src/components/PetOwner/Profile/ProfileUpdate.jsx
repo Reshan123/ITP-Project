@@ -10,6 +10,10 @@ const ProfileUpdate = ({navBarProps}) => {
     
     const { user, dispatch: userDispatch} = useUserContext()
     const navigate = useNavigate()
+
+    if(!user){
+        navigate('/pet/login')
+    }
     
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
