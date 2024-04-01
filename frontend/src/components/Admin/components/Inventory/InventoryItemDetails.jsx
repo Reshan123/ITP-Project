@@ -40,7 +40,9 @@ const InventoryItemDetails = () => {
 
 
     <div className="inventoryiems">
-      <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add Item</button>
+      <div className="addItem">
+        <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
+      </div>
 
       {inventoryitems && inventoryitems.map(inventoryitem => (
         <div key={inventoryitem._id} className="inventory-body">

@@ -11,6 +11,7 @@
 .inventoryItems-details {
   font-family: system-ui;
   width: 80%;
+  font-size: 1.25rem;
   background: #234;
   border-radius: 4px;
   margin: 20px auto;
@@ -52,15 +53,33 @@
   transform: scale(1.01);
 
 }
+.update{
+  display: flex;
+  flex-flow: column;
+  margin-left: 20px;
+  padding: 30px;
+}
+
+.update input{
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 .update img{
   width: 200px;
   height: 200px;
 }
 
 /* new inventoryItems form */
-.create label,
-input {
+.create label {
   display: block;
+  font-size: 1.25rem;
+
 }
 
 .create input {
@@ -101,8 +120,11 @@ input {
   transition: background-color 0.3s ease, transform 0.3s ease;
   background: var(--primary);
 }
-
-.update-btn{
+.addItem{
+  display: flex;
+  justify-content: center;
+}
+.add-btn, .update-btn{
   border: 0;
   background-color: var(--primary);
   color: #fff;
@@ -117,6 +139,7 @@ input {
   transition: background-color 0.3s ease, transform 0.3s ease;
 
 }
+
 
 .create {
   max-width: 400px;
