@@ -2,3 +2,8 @@
     background-color: #FFF0FF;
     width: 17vw;
 }
+
+.adminSideBar .adminSideBarLinksContainer{
+    position: sticky;
+    top: 100px;
+}

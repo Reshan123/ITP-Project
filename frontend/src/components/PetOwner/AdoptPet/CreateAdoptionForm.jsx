@@ -5,6 +5,7 @@ import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import { useUserContext } from '../../../hooks/userContextHook';
+import { usePetContext } from '../../../hooks/usePetContext';
 
 const CreateAdoptionForm = ({ navBarProps }) => {
 
@@ -12,14 +13,18 @@ const CreateAdoptionForm = ({ navBarProps }) => {
 
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
-    const {user, dispatch: userDispatch} = useUserContext()
+    const { user, dispatch: userDispatch } = useUserContext()
+    const { pets, dispatch: petDispatch } = usePetContext()
 
-    useEffect(()=> {
-        if (!user){
+
+    useEffect(() => {
+        if (!user) {
             navigate('/pet/login')
         }
     }, [user])
 
+
+    const [selectedPet, setSelectedPet] = useState(null);
     const [petChoice, setPetChoice] = useState('');
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -33,6 +38,51 @@ const CreateAdoptionForm = ({ navBarProps }) => {
     const [error, setError] = useState(null);
     const [errors, setErrors] = useState('');
 
+    const config = {
+        headers: {
+            "authorization": `Bearer ${user.userToken}`
+        }
+    }
+    useEffect(() => {
+        const fetchPetData = async () => {
+            try {
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
+
+                if (!petDetailsResponse.ok) {
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+
+                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
+
+                console.log(pets)
+
+            } catch (error) {
+                console.log("pet owner page error", error)
+            }
+        }
+
+        if (user) {
+            fetchPetData()
+        }
+
+    }, [user])
+
+
+    const handlePetSelect = async (petId) => {
+        const selectedPet = pets.find(pet => pet._id === petId);
+        setSelectedPet(selectedPet);
+        // Auto-fill other sections of the form
+        setPetChoice(selectedPet.petName)
+        setName(selectedPet.petName);
+        setAge(selectedPet.petAge);
+        setSpecies(selectedPet.petSpecies);
+        setBreed(selectedPet.petBreed);
+        setGender(selectedPet.petGender);
+        // You can continue to set other fields accordingly
+    };
+
+
     const validationSchema = yup.object({
         name: yup.string().required("Enter name"),
         species: yup.string().required("errrorrr")
@@ -40,9 +90,11 @@ const CreateAdoptionForm = ({ navBarProps }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const uid = JSON.parse(localStorage.getItem('user'))["uid"]
 
         navigate('/pet/adopt')
         const adoptionForm = {
+            ownerID: uid,
             petChoice,
             name,
             age,
@@ -73,6 +125,7 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             if (response.ok) {
                 setError(null);
                 console.log('New adoption form added:', json);
+                console.log(ownerID)
                 // Reset form fields
                 setPetChoice('');
                 setName('');
@@ -129,11 +182,15 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             <h3>Submit a Pet Adoption Form</h3>
 
             <label>Pet Choice:</label>
-            <input
-                type="text"
-                onChange={(e) => setPetChoice(e.target.value)}
-                value={petChoice}
-            />
+            <select
+                value={selectedPet ? selectedPet._id : ''}
+                onChange={(e) => handlePetSelect(e.target.value)}
+            >
+                <option value="">Select Pet</option>
+                {pets.map(pet => (
+                    <option key={pet._id} value={pet._id}>{pet.petName}</option>
+                ))}
+            </select>
 
             <label>Name:</label>
             <input

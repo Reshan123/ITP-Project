@@ -17,6 +17,10 @@ nav .navLogo svg{
     font-size: 3.8rem;
 }
 
+nav .navLogo svg:hover{
+    cursor: pointer;
+}
+
 nav .navMidContainer{
     display: flex;
     align-items: center;
