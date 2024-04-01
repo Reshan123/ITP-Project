@@ -30,6 +30,8 @@ export const BookingContextProvider = ({children}) => {
         bookings: null
     })
 
+    console.log('BookingContext state:', state)
+
     return(
         <BookingContext.Provider value={{...state, dispatch}}>
             {children}

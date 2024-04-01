@@ -22,7 +22,7 @@ const AdoptPet = ({ navBarProps }) => {
         fetchForms()
     }, [dispatch])
 
-    const handleUpdateClick = () => {
+    const handleNewAdoptionClick = () => {
         navigate('/pet/adopt/adoptionForm');
     };
 
@@ -42,7 +42,7 @@ const AdoptPet = ({ navBarProps }) => {
             </div>
 
             <div>
-                <button className="adoptPetButton" onClick={handleUpdateClick}>Find A New Home for Your Pet</button>
+                <button className="adoptPetButton" onClick={handleNewAdoptionClick}>Find A New Home for Your Pet</button>
             </div>
         </div>
 
