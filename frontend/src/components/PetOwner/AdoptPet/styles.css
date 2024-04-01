@@ -116,3 +116,61 @@
 .adoptPetButton:hover {
     background-color: #0056b3;
 }
+
+
+/*update form */
+.adoption-form-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.adoption-form-details h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.adoption-form-details form {
+    display: grid;
+    grid-gap: 10px;
+}
+
+.adoption-form-details label {
+    display: block;
+}
+
+.adoption-form-details input[type="text"],
+.adoption-form-details select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.adoption-form-details input[type="file"] {
+    margin-top: 10px;
+}
+
+.adoption-form-details button[type="submit"],
+.adoption-form-details button.adoptPetButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.adoption-form-details button[type="submit"]:hover,
+.adoption-form-details button.adoptPetButton:hover {
+    background-color: #0056b3;
+}
+
+.adoption-form-details img {
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
+    margin-top: 10px;
+}
