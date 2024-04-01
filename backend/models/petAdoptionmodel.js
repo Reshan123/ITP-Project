@@ -4,9 +4,12 @@ const Schema = mongoose.Schema
 
 const adoptionFormSchema = new Schema({
 
-
+  ownerID:{
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
   petChoice: {
-    type: String, // Assuming it's an ID or a string that references a pet from user management
+    type: String, 
     required: true
   },
   name: {

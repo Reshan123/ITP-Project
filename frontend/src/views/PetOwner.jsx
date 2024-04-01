@@ -14,61 +14,63 @@ import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 import BookedAppointments from '../components/PetOwner/Booking/BookedAppointments';
+import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
 
 const PetOwner = () => {
 
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
 
-    const navBarProps = (backgroundColor,textColor) => {
+    const navBarProps = (backgroundColor, textColor) => {
         setNavBarBackgroundColor(backgroundColor)
         setNavBarColor(textColor)
     }
 
-    const {user, dispatch: userDispatch} = useUserContext()
-    const {pets, dispatch: petDispatch} = usePetContext()
+    const { user, dispatch: userDispatch } = useUserContext()
+    const { pets, dispatch: petDispatch } = usePetContext()
 
-    useEffect(()=> {
+    useEffect(() => {
         const fetchPetData = async () => {
-            
+
             const config = {
                 headers: {
                     "authorization": `Bearer ${user.userToken}`
                 }
             }
 
-            try{
+            try {
                 const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
 
-                if (!petDetailsResponse.ok){
+                if (!petDetailsResponse.ok) {
                     throw Error("Invalid Token")
                 }
                 const petDetailsJson = await petDetailsResponse.json()
-                petDispatch({type:"LOAD", payload:petDetailsJson.message})
+                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
 
-            } catch (error){
+            } catch (error) {
                 console.log("pet owner page error", error)
             }
         }
-        
-        if (user){
+
+        if (user) {
             fetchPetData()
         }
 
-    },[user])
+    }, [user])
 
     return (
         <>
-            <NavBar  navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
+            <NavBar navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
             <Routes>
                 <Route path='/home' element={<Home navBarProps={navBarProps} />} />
                 <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
                 <Route path='/store' element={<Store navBarProps={navBarProps} />} />
                 <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
                 <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm/update/:id' element={<UpdateForm />} />
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
-                <Route path='/bookings/bookedappointments' element={<BookedAppointments navBarProps={navBarProps}/>} />
+                <Route path='/bookings/bookedappointments' element={<BookedAppointments navBarProps={navBarProps} />} />
                 <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
