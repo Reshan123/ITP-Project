@@ -10,6 +10,7 @@ import { DoctorContextProvider } from './context/doctorContext.jsx'
 import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
 import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
 import { LostPetsContextProvider } from './context/LostPetContext.jsx'
+import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -33,7 +34,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <DoctorContextProvider>
                 <AllDoctorContextProvider>
                   <AllPetOwnerContextProvider>
-                    <App />
+                    <AllPetsContextProvider>
+                      <App />
+                    </AllPetsContextProvider>
                   </AllPetOwnerContextProvider>
                 </AllDoctorContextProvider>
               </DoctorContextProvider>

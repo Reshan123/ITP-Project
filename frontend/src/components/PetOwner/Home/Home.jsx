@@ -167,7 +167,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Owner Name' onChange={(e) => setOwnerName(e.target.value)} value={user.username} required />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="email" placeholder='Owner Email' onChange={(e) => setOwnerEmail(e.target.value)} value={user.email} required />
+                            <input type="email" placeholder='Owner Email' readOnly defaultValue={user.email} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
@@ -176,11 +176,11 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
-                                <option value="" disabled selected hidden>Pet Species</option>
-                                <option value="Dog">Dog</option>
-                                <option value="Cat">Cat</option>
-                                <option value="Bird">Bird</option>
+                            <select name="pet_species" required>
+                                <option defaultValue="" disabled hidden>Pet Species</option>
+                                <option defaultValue="Dog">Dog</option>
+                                <option defaultValue="Cat">Cat</option>
+                                <option defaultValue="Bird">Bird</option>
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
@@ -226,10 +226,10 @@ const Home = ({ navBarProps }) => {
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <select name="pet_species" required>
-                                <option value="" disabled selected hidden>Pet Species</option>  
-                                <option value="Dog">Dog</option>
-                                <option value="Cat">Cat</option>
-                                <option value="Bird">Bird</option>
+                                {/* <option value="" disabled selected hidden>Pet Species</option>   */}
+                                <option defaultValue="Dog">Dog</option>
+                                <option defaultValue="Cat">Cat</option>
+                                <option defaultValue="Bird">Bird</option>
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
