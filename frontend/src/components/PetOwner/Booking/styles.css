@@ -5,6 +5,9 @@
     --delete: #e7195a;
   }
 
+.bookings{
+  z-index: 0;
+}
 .booked-appointments{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -19,7 +22,7 @@
     filter: drop-shadow(0 5px 10px 0 #ffffff);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
     width: 580px;
-    height: 200px;
+    height: 220px;
     background-color: #fff;
     padding: 20px;
     position:relative;
@@ -37,7 +40,7 @@
     top: -15px;
     right: -18px;
     background: #B799D1;
-    height:240px;
+    height:250px;
     width: 32px;
     border-radius: 32px;
     transform: scale(1);

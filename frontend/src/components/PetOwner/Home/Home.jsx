@@ -3,6 +3,7 @@ import WhoAreWeImage from './Images/whoarewe.png'
 import ourServices from './Images/ourservices.png'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
+import { usePetContext } from '../../../hooks/usePetContext'
 
 const Home = ({ navBarProps }) => {
 
@@ -11,6 +12,7 @@ const Home = ({ navBarProps }) => {
     const [inputValidity, setInputValidity] = useState(false)
 
     const { user, dispatch: userDispatch} = useUserContext()
+    const { pets, dispatch: petDispatch } = usePetContext()
 
     //booking use states
     const [owner_name, setOwnerName] = useState('')
@@ -88,7 +90,30 @@ const Home = ({ navBarProps }) => {
       
         fetchDoctors();
 
-      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time]);
+
+        const fetchPetData = async () => {
+            try {
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
+
+                if (!petDetailsResponse.ok) {
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+
+                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
+
+                console.log(pets)
+
+            } catch (error) {
+                console.log("pet owner page error", error)
+            }
+        }
+
+        if (user) {
+            fetchPetData()
+        }
+
+      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
 
     return ( 
         <>
@@ -172,12 +197,20 @@ const Home = ({ navBarProps }) => {
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
                         </div>
-                        <div className="homeBookAppointmentsFormInputWrapper">
+                        {/* <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
+                        </div> */}
+                        <div className="homeBookAppointmentsFormInputWrapper">
+                            <select name="petName" onChange={(e) => setPetName(e.target.value)} required>
+                                <option value="">Select a Pet</option>
+                                {pets && pets.map(pet => (
+                                    <option key={pet._id} value={pet.petName}>{pet.petName}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="pet_species" required>
-                                <option defaultValue="" disabled hidden>Pet Species</option>
+                            <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
+                                <option defaultValue="">Select a Species</option>
                                 <option defaultValue="Dog">Dog</option>
                                 <option defaultValue="Cat">Cat</option>
                                 <option defaultValue="Bird">Bird</option>
