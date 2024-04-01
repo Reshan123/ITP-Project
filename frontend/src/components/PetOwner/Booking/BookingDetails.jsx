@@ -6,7 +6,7 @@ const BookingDetails = ({booking}) => {
 
   const {dispatch} = useBookingContext()
 
-  const handleClick = async() => {
+  const handleDelete = async() => {
       const response = await fetch('http://localhost:4000/api/bookings/' + booking._id, {
         method: 'DELETE'
       })
@@ -25,7 +25,7 @@ const BookingDetails = ({booking}) => {
         <p><strong>Pet Name :</strong> {booking.pet_name}</p>
         <p><strong>Date and Time :</strong> {new Date(booking.start_time).toLocaleString()}</p>
         <p><strong>Status :</strong> {booking.status}</p>
-        <span onClick={handleClick}>Delete</span>
+        <span onClick={handleDelete}>Delete</span>
         <Link className='update-btn' to={`/update/${booking._id}`}>Update</Link>
     </div>
   )

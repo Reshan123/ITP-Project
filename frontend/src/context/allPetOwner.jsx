@@ -7,9 +7,6 @@ export const allPetOwnerReducer = (state, action) => {
     switch(action.type){
         case "LOAD":
             return { petOwners: action.payload }
-        case "ADD PET":
-            state.petOwners.push(action.payload)
-            return state
         case "LOGOUT":
             return { petOwners: null }
         default:

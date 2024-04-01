@@ -121,4 +121,14 @@ const getAllDocs = async (req, res) => {
     }
 }
 
-module.exports = { login, createDoctor, updateDoctorDetailsFromToken, deleteDoctorDetailsFromToken, getAllDocs }
+//get all avaiable doctors
+const getAvailableDoctors = async(req,res) => {
+    try{
+        const doctors = await doctor.find({ availability: true }).select('name');
+        res.status(200).json(doctors)
+    }catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+module.exports = { login, createDoctor, updateDoctorDetailsFromToken, deleteDoctorDetailsFromToken, getAllDocs, getAvailableDoctors }
