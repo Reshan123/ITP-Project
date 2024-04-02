@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect  } from 'react'
 import './styles.css'
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext'
 import firebase from 'firebase/compat/app'
@@ -21,6 +21,7 @@ const LostNoticeForm = ({navBarProps}) => {
     const [email, setEmail] = useState('')
     const [image, setImage] = useState('')
     const [error, setError] = useState(null)
+    const [submissionStatus, setSubmissionStatus] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -37,6 +38,16 @@ const LostNoticeForm = ({navBarProps}) => {
         
       }
     })
+
+      try {
+        // If submission is successful, navigate to another page
+      setSubmissionStatus(true);
+     } catch (error) {
+        console.error('Form submission failed:', error);
+        // If submission fails, set submissionStatus to false
+        setSubmissionStatus(false);
+      }
+
     const json = await response.json()
 
     if (!response.ok ) {
@@ -78,6 +89,13 @@ const handleFileUpload = (e) => {
         console.log("No files selected")
     }
 }
+
+useEffect(() => {
+  if (submissionStatus === true) {
+      window.scrollTo(0, 0);
+      navigate('/pet/lostpetnotices');
+  }
+}, [submissionStatus]);
     
 
   return (
@@ -149,7 +167,7 @@ const handleFileUpload = (e) => {
         {image=="" || image==null ? "" : <img width={100} height={100} src={image} />}
         
 
-      <button onClick={() => { window.scrollTo(0, 0);navigate('/pet/lostpetnotices')}}>Publish Post</button>
+      <button >Publish Post</button>
         {error && <div className="error">{error}</div>}
     </form>
     </div>
