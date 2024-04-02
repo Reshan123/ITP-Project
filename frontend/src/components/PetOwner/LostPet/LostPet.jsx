@@ -31,15 +31,16 @@ const LostPet = ({ navBarProps }) => {
 
     return ( 
         <>
-            <div className="noticebtn">Lost Pet
+            <div className="noticebtn">
                 <button onClick={createNotice}>Add Notice</button>
             </div>
-
-            <div className="container">
-                {/*mapping thought the notices only if ther are notices*/ }
-                {lostNotice && lostNotice.map((notice)=>(
-                    <LostPetDetails key={notice._id} notice={notice}/>
-                ))}
+            <div className="frame">
+                <div className="container">
+                    {/*mapping thought the notices only if ther are notices*/ }
+                    {lostNotice && lostNotice.map((notice)=>(
+                        <LostPetDetails key={notice._id} notice={notice}/>
+                    ))}
+                </div>
             </div>
 
         </>
