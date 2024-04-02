@@ -1,9 +1,70 @@
+
+* {
+    box-sizing: border-box;
+  }
 .adminSideBar{
-    background-color: #FFF0FF;
+    /* background-color: var(--primaryPurple); */
     width: 17vw;
+    background: var(--primaryPurple);
+    /* position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0; */
+    padding-block: 2rem;
 }
 
 .adminSideBar .adminSideBarLinksContainer{
     position: sticky;
     top: 100px;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 1rem;
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink .linkText{
+    color: black;
+    display: block;
+    text-decoration: none;
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink{
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    margin-inline: 1rem 0;
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active {
+    display: block;
+    background: white;
+    position: relative;
+    z-index: -1;
+    border-radius: 100vw 0 0 100vw;
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active::before,
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active::after {
+  --border-radius: 1rem;
+
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  right: 0rem;
+  background: var(--primaryPurple);
+}
+
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active::before {
+    border-radius: 0 5px var(--border-radius);
+    top: calc(var(--border-radius) * -1);
+    box-shadow: 5px 5px 0 0px white;
+}
+
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active::after {
+    border-radius: 0 var(--border-radius) 0 0;
+    bottom: calc(var(--border-radius) * -1);
+    box-shadow: 5px -5px 0 5px white;
 }
