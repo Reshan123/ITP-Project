@@ -14,7 +14,6 @@ import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import LostNoticeForm from '../components/PetOwner/LostPet/LostNoticeForm';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
-import { useBookingContext } from '../hooks/useBookingContext';
 import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
 
 const PetOwner = () => {
@@ -72,7 +71,6 @@ const PetOwner = () => {
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices/lostpetform' element={<LostNoticeForm navBarProps={navBarProps} />} />
-                {/* <Route path='/bookings/bookedappointments' element={<BookedAppointments navBarProps={navBarProps}/>} /> */}
                 <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
