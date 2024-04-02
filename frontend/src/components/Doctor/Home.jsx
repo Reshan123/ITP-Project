@@ -10,6 +10,7 @@ import { useAllPetsContext } from '../../hooks/useAllPetsContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext'
 
 import './styles.css'
+import CreatePet from './components/AllPets/CreatePet';
 
 const Home = () => {
 
@@ -64,6 +65,7 @@ const Home = () => {
                     <Routes>
                         <Route path='/' element={<LandingPage />} />
                         <Route path='/pets' element={<AllPets />} />
+                        <Route path='/createpet' element={<CreatePet />} />
                     </Routes>
                 </div>
             </div>

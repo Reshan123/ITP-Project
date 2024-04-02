@@ -5,22 +5,22 @@ import LandingPage from './components/LandingPage/LandingPage';
 import SideBar from './components/SideBar/SideBar'
 import Doctor from './components/Doctor/Doctor';
 import PetOwners from './components/PetOwners/PetOwners';
-
-import { useAllDocContext } from '../../hooks/useAllDoctorContext'
-import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
-
-import './styles.css'
 import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
 import InventoryItemForm from './components/Inventory/InventoryItemForm';
 import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
 import CreateDoctor from './components/Doctor/CreateDoctor';
 import UpdateDoctor from './components/Doctor/UpdateDoctor';
 
+import { useAllDocContext } from '../../hooks/useAllDoctorContext'
+import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
+
+import './styles.css'
+
 const Home = () => {
 
     const navigate = useNavigate()
 
-    const {doctors, dispatch:allDocDispatch} = useAllDocContext()
+    const { doctors, dispatch:allDocDispatch} = useAllDocContext()
     const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
 
     useEffect(() => {
@@ -62,9 +62,9 @@ const Home = () => {
             <NavBar />
             <div className="adminPageMainContainer">
                 <SideBar />
-                <div>
+                <div className='pages'>
                     <Routes>
-                        <Route path='/' element={<LandingPage />} />
+                        <Route path='/LandingPage' element={<LandingPage />} exact />
                         <Route path='/Inventoryitemdetails' element={<InventoryItemDetails />} />
                         <Route path='/InventoryItemForm' element={<InventoryItemForm />} />
                         <Route path='/InventoryItemUpdate/:id' element={<InventoryItemUpdate />} />
