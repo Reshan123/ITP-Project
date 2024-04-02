@@ -19,4 +19,8 @@ doctorRouter.delete('/deleteDoctorDetailsFromToken', authorize, doctorController
 
 doctorRouter.get('/availableDoctors', doctorController.getAvailableDoctors)
 
+doctorRouter.put('/updateDoctorFromID/:docID', doctorController.updateDoctorFromID)
+
+doctorRouter.delete('/deleteDoctorFromID/:docID', doctorController.deleteDoctorFromID)
+
 module.exports = doctorRouter

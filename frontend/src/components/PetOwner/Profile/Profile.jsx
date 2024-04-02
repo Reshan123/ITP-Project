@@ -10,6 +10,9 @@ import '../Booking/styles.css'
 import './styles.css'
 import { useEffect } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
+import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
+import LostPetDetails from '../LostPet/LostPetDetails';
+import '../LostPet/styles.css'
 
 const Profile = ({ navBarProps }) => {
 
@@ -22,7 +25,7 @@ const Profile = ({ navBarProps }) => {
     const { bookings, dispatch: bookingDispatch } = useBookingContext()
 
     const { adoptionForms, dispatch } = useAdoptionContext();
-
+    const {lostNotice,dispatch:lostDispatch} = useLostPetsContext()
 
     useEffect(() => {
         if (!user) {
@@ -58,6 +61,43 @@ const Profile = ({ navBarProps }) => {
             fetchBookings()
         }
     }, [user])
+
+   //lostPets 
+  useEffect(()=>{
+
+    if (!user) {
+        navigate('/pet/login')
+    }
+    
+    const fetchLostPetNotices = async() =>{
+        const option = {
+            
+            headers: {
+                'authorization': `Bearer ${user.userToken}`
+            }
+        }
+        
+        try{
+            const response = await fetch("http://localhost:4000/api/lostPetNotice/getUser/",option)
+
+            if (!response.ok) {
+                throw Error(response.message)
+            }
+
+            const json = await response.json()
+
+            lostDispatch({type:'SET_LOSTPETNOTICE',payload: json.message})
+            
+
+        }catch(error){
+            console.log('Coudnt find the id of the user relavant to the post',error)
+        }
+    }
+        if(user){
+            fetchLostPetNotices()
+        }
+  },[user])  
+    
 
     const logOutUser = () => {
         navigate('/pet/home')
@@ -193,6 +233,12 @@ const Profile = ({ navBarProps }) => {
                     <hr />
                     <div className="detailsSectionCardContainer">
                         {/* add the map to show listings */}
+                        <div className="container">
+                            {/*mapping thought the notices only if ther are notices*/ }
+                            {lostNotice && lostNotice.map((notice)=>(
+                                <LostPetDetails key={notice._id} notice={notice}/>
+                            ))}
+                        </div>
                     </div>
                 </div >
             </div >

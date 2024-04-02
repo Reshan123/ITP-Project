@@ -1,0 +1,173 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+  --body-bg: #123;
+  --nav-bg: #234;
+}
+
+.inventoryItems-details {
+  font-family: system-ui;
+  width: 80%;
+  font-size: 1.25rem;
+  background: #234;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.inventoryItems-details h4,
+.inventoryItems-details p {
+  margin: 0;
+  color: #ddd;
+}
+
+.inventoryItems-details h4 {
+  font-size: 1.2em;
+}
+
+.inventoryItems-details p {
+  font-size: 0.9em;
+}
+
+.inventoryItems-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+.inventoryItems-details img{
+  width: 200px;
+  height: 200px;
+}
+.inventoryItems-details:hover{
+  transform: scale(1.01);
+
+}
+.update{
+  display: flex;
+  flex-flow: column;
+  margin-left: 20px;
+  padding: 30px;
+}
+
+.update input{
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.update img{
+  width: 200px;
+  height: 200px;
+}
+
+/* new inventoryItems form */
+.create label {
+  display: block;
+  font-size: 1.25rem;
+
+}
+
+.create input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.dlt-btn {
+  border: 0;
+  background-color: var(--error);
+  color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dlt-btn:hover{
+  transform: translateY(3px);
+}
+
+.create-btn {
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  background: var(--primary);
+}
+.addItem{
+  display: flex;
+  justify-content: center;
+}
+.add-btn, .update-btn{
+  border: 0;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.create h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.create label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.create input[type="text"],
+.create input[type="number"],
+.create input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+

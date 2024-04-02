@@ -9,7 +9,7 @@ const getInventoryItems = async (req, res) => {
 }
 
 
-//get a single inventory item
+//get a single inventory itemw
 const getInventoryItem = async (req, res) => {
 
     const { id } = req.params

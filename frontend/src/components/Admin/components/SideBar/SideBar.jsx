@@ -5,11 +5,21 @@ const SideBar = () => {
     return ( 
         <div className="adminSideBar">
             <div className="adminSideBarLinksContainer">
-                <NavLink to="/admin/home/">Home</NavLink>
+                <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact>
+                    <div className='linkText'>Home</div>
+                </NavLink>
                 <br />
-                <NavLink to="/admin/home/doctor">Doctor</NavLink>
+                <NavLink to="/admin/home/doctor" className='adminSideBarLink' exact>
+                    <div className='linkText'>Doctor</div>
+                </NavLink>
                 <br />
-                <NavLink to='/admin/home/petowners'>Pet Owners</NavLink>
+                <NavLink to='/admin/home/petowners' className='adminSideBarLink' exact>
+                    <div className='linkText'>Pet Owners</div>
+                </NavLink>
+                <br />
+                <NavLink to='/admin/home/Inventoryitemdetails' className='adminSideBarLink' exact>
+                    <div className='linkText'>Inventory</div>
+                </NavLink>
             </div>
         </div>
      );

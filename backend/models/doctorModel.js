@@ -24,8 +24,8 @@ const doctorSchema = new Schema({
         require:true
     },
     availability: {
-        type: String,
-        required:true
+        type: Boolean,
+        default: false
     }
 },{timestamps: true})
 
@@ -35,7 +35,7 @@ const doctorSchema = new Schema({
 doctorSchema.statics.createDoctorStatic = async function(name, email, password, contactNo, availability) {
 
     // validation
-    if (!email || !password || !name || !contactNo || !availability) {
+    if (!email || !password || !name || !contactNo) {
       throw Error('All fields must be filled')
     }
     if(!validator.isAlpha(name, ['en-US'], {ignore: '-s'})){
@@ -46,9 +46,6 @@ doctorSchema.statics.createDoctorStatic = async function(name, email, password, 
     }
     if(!validator.isNumeric(contactNo)){
         throw Error('Contact number contains characters')
-    }
-    if (!validator.isBoolean(availability)){
-        throw Error('Availablity can only be True or False')
     }
     if (!validator.isStrongPassword(password)) {
       throw Error('Password not strong enough')
