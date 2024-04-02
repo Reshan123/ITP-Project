@@ -5,8 +5,11 @@ import { useLostPetsContext } from '../../../hooks/useLostPetsContext'
 import firebase from 'firebase/compat/app'
 import "firebase/compat/storage"
 
+
 const LostNoticeForm = ({navBarProps}) => {
     navBarProps("#FFF", "#B799D1")
+
+    
 
     const {dispatch} = useLostPetsContext()
 
@@ -22,18 +25,21 @@ const LostNoticeForm = ({navBarProps}) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const notice = {petName, ownerName, breed, description, contactNo, image, email}
+    const uid = JSON.parse(localStorage.getItem('user'))["uid"]
+    
+    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email}
     //send the data in the form tho the database
-    const response = await fetch('http://localhost:4000/api/lostPetNotice', {
+    const response = await fetch('http://localhost:4000/api/lostPetNotice',{
       method: 'POST',
       body: JSON.stringify(notice),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        
       }
     })
     const json = await response.json()
 
-    if (!response.ok) {
+    if (!response.ok ) {
       setError(json.error)
     }
     if (response.ok) {
