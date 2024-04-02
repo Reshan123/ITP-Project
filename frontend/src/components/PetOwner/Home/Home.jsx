@@ -244,12 +244,18 @@ const Home = ({ navBarProps }) => {
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
-                                <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
-                                <option value="">Select a Doctor</option>
-                                {doctors.map(doctor => (
-                                    <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
-                                ))}
-                                </select>
+                                <>
+                                    {doctors.length === 0 ? (
+                                        <input type = "text" value={"Sorry, no doctors available."} disabled/>
+                                    ) : (
+                                        <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
+                                            <option value="">Select a Doctor</option>
+                                            {doctors.map(doctor => (
+                                                <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
+                                </>
                             )}
                         </div>
 
