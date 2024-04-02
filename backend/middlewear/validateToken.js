@@ -19,7 +19,7 @@ const authorize = (req, res, next) => {
         req.user = decodedToken
         next();
     } catch (error) {
-        return res.status(401).send({msg: 'Invalid Token'});
+        return res.status(401).send({message: 'Invalid Token'});
     }
 };
 
