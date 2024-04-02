@@ -16,16 +16,3 @@ const PetComponent = ({pet}) => {
 }
  
 export default PetComponent;
-
-
-
-// {pet.petName}
-// <br />
-// {pet.petGender}
-// <br />
-// {pet.petAge}
-// <br />
-// {pet.petSpecies}
-// <br />
-// {pet.petBreed}
-// <br /><br />

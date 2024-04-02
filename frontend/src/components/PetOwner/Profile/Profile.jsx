@@ -2,7 +2,11 @@ import { useUserContext } from '../../../hooks/userContextHook';
 import { HashLink } from 'react-router-hash-link';
 import { useNavigate } from "react-router-dom";
 import { usePetContext } from '../../../hooks/usePetContext';
+import { useBookingContext } from '../../../hooks/useBookingContext';
 import PetComponent from './PetComponent';
+import BookingDetails from '../Booking/BookingDetails'
+import '../Booking/styles.css'
+
 import './styles.css'
 import { useEffect } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
@@ -15,12 +19,43 @@ const Profile = ({ navBarProps }) => {
 
     const { user, dispatch: userDispatch } = useUserContext()
     const { pets, dispatch: petDispatch } = usePetContext()
+    const { bookings, dispatch: bookingDispatch } = useBookingContext()
+
     const { adoptionForms, dispatch } = useAdoptionContext();
 
 
     useEffect(() => {
         if (!user) {
             navigate('/pet/login')
+        }
+
+        const fetchBookings = async () => {
+
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+
+            try {
+                const response = await fetch("http://localhost:4000/api/bookings/getOwner", config)
+
+                if (!response.ok) {
+                    throw Error(response.message)
+                }
+
+                const json = await response.json()
+
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: json.message })
+
+            } catch (error) {
+
+                console.log("pet owner page error", error)
+            }
+        }
+
+        if (user) {
+            fetchBookings()
         }
     }, [user])
 
@@ -108,15 +143,20 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Appointment Details</div>
                         <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
-                        <button className='detailsSectionAddButton' onClick={() => { window.scrollTo(0, 0); navigate('/pet/bookings/bookedappointments') }}>Booked Appointments</button>
-                    </div>
+                    </div >
                     <hr />
                     <div className="detailsSectionCardContainer">
-                        {/* add the map to show appointments */}
+                        <div className='bookings'>
+                            <div className='booked-appointments'>
+                                {bookings && bookings.map(booking => (
+                                    <BookingDetails key={booking._id} booking={booking} />
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div >
                 {/* adoption listings */}
-                <div className="detailsSection">
+                < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Adoption Listings</div>
                         <button className='detailsSectionAddButton' onClick={() => { window.scrollTo(0, 0); navigate('/pet/adopt/adoptionForm') }}>Add Listing</button>
@@ -143,9 +183,9 @@ const Profile = ({ navBarProps }) => {
                             <div>No forms added</div>
                         )}
                     </div>
-                </div>
+                </div >
                 {/* lost pet */}
-                <div className="detailsSection">
+                < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Lost Pet Notices</div>
                         <button className='detailsSectionAddButton' onClick={() => navigate('')}>Add Notice</button>
@@ -154,8 +194,8 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionCardContainer">
                         {/* add the map to show listings */}
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     );
 }

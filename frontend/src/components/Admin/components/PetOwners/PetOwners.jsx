@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAllPetOwnerContext } from "../../../../hooks/useAllPetOwnerContext";
+import './styles.css'
 
 const PetOwners = () => {
 
@@ -8,19 +9,17 @@ const PetOwners = () => {
     useEffect
 
     return ( 
-        <>
-            <button>Add Doctors</button> <br /><br />
+        <div className="allPetOwnerPage">
             {petOwners && petOwners.map(petOwner => (
                 <>
                     {petOwner.name}<br />
                     {petOwner.email}<br />
-                    <button>update</button>
                     <button>delete</button>
                     <br />
                     <br />
                 </>
             ))}
-        </>
+        </div>
      );
 }
  

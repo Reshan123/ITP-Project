@@ -9,6 +9,9 @@ import { AllDoctorContextProvider } from './context/allDoctorContext.jsx'
 import { DoctorContextProvider } from './context/doctorContext.jsx'
 import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
 import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
+import { LostPetsContextProvider } from './context/LostPetContext.jsx'
+import { AllPetsContextProvider } from './context/allPetsContext.jsx'
+import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -24,18 +27,26 @@ firebase.initializeApp(firebaseConfig)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
-    <BookingContextProvider>
-      <AdoptionContextProvider>
-        <PetContextProvider>
-          <DoctorContextProvider>
-            <AllDoctorContextProvider>
-              <AllPetOwnerContextProvider>
-                <App />
-              </AllPetOwnerContextProvider>
-            </AllDoctorContextProvider>
-          </DoctorContextProvider>
-        </PetContextProvider>
-      </AdoptionContextProvider>
-    </BookingContextProvider>
+    <AdoptionContextProvider>
+      <PetContextProvider>
+        <BookingContextProvider>
+          <LostPetsContextProvider>
+            <PetContextProvider>
+              <DoctorContextProvider>
+                <AllDoctorContextProvider>
+                  <AllPetOwnerContextProvider>
+                    <AllPetsContextProvider>
+                      <InventoryItemsContextProvider>
+                        <App />
+                      </InventoryItemsContextProvider>
+                    </AllPetsContextProvider>
+                  </AllPetOwnerContextProvider>
+                </AllDoctorContextProvider>
+              </DoctorContextProvider>
+            </PetContextProvider>
+          </LostPetsContextProvider>
+        </BookingContextProvider>
+      </PetContextProvider>
+    </AdoptionContextProvider>
   </UserContextProvider>
 )

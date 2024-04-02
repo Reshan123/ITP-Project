@@ -10,6 +10,11 @@ import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 
 import './styles.css'
+import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
+import InventoryItemForm from './components/Inventory/InventoryItemForm';
+import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
+import CreateDoctor from './components/Doctor/CreateDoctor';
+import UpdateDoctor from './components/Doctor/UpdateDoctor';
 
 const Home = () => {
 
@@ -51,7 +56,7 @@ const Home = () => {
         }
         fetchAllData()
     }, [])
-
+    
     return ( 
         <>
             <NavBar />
@@ -60,8 +65,13 @@ const Home = () => {
                 <div>
                     <Routes>
                         <Route path='/' element={<LandingPage />} />
+                        <Route path='/Inventoryitemdetails' element={<InventoryItemDetails />} />
+                        <Route path='/InventoryItemForm' element={<InventoryItemForm />} />
+                        <Route path='/InventoryItemUpdate/:id' element={<InventoryItemUpdate />} />
                         <Route path='/doctor' element={<Doctor />} />
                         <Route path='/petowners' element={<PetOwners />} />
+                        <Route path='/createdoctor' element={<CreateDoctor />} />
+                        <Route path='/updatedoctor/:docID' element={<UpdateDoctor />} />
                     </Routes>
                 </div>
             </div>

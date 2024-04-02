@@ -80,8 +80,6 @@ const updateDoctorDetailsFromToken = async (req, res) => {
                 contactNo,
                 availability
             })
-
-            console.log(response)
             
             res.status(200).json({username: user.name, email: user.email,contactNo: user.contactNo, availability: user.availability, userToken: token})
         }
@@ -92,6 +90,7 @@ const updateDoctorDetailsFromToken = async (req, res) => {
     }
 
 }
+
 const deleteDoctorDetailsFromToken = async (req, res) => {
     const userID = req.user._id
     try{
@@ -121,4 +120,60 @@ const getAllDocs = async (req, res) => {
     }
 }
 
-module.exports = { login, createDoctor, updateDoctorDetailsFromToken, deleteDoctorDetailsFromToken, getAllDocs }
+const updateDoctorFromID = async (req, res) => {
+
+    const { docID } = req.params;
+    const { name, email, password, contactNo } = req.body;
+
+    try{
+        if (!name || !email || !contactNo) {
+            throw Error('All fields must be filled')
+        }
+        if(!validator.isAlpha(name, ['en-US'], {ignore: '-s'})){
+            throw Error('Name can only have letters')
+        }
+        if (!validator.isEmail(email)) {
+          throw Error('Email not valid')
+        }
+        if (password) {
+            if (!validator.isStrongPassword(password)) {
+                throw Error('Password not strong enough')
+            }
+
+            const salt = await bcrypt.genSalt(10)
+            const hash = await bcrypt.hash(password, salt)
+
+            const response = await doctor.findByIdAndUpdate(docID, {
+                name,
+                email,
+                password: hash,
+                contactNo
+            })
+
+            res.status(200).json({response})
+            return;
+        } else {
+            const response = await doctor.findByIdAndUpdate(docID, {
+                name,
+                email,
+                contactNo
+            })
+            
+            res.status(200).json({response})
+        }
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+//get all avaiable doctors
+const getAvailableDoctors = async(req,res) => {
+    try{
+        const doctors = await doctor.find({ availability: true }).select('name');
+        res.status(200).json(doctors)
+    }catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+module.exports = { login, createDoctor, updateDoctorDetailsFromToken, deleteDoctorDetailsFromToken, getAllDocs, getAvailableDoctors, updateDoctorFromID }

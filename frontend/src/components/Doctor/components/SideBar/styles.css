@@ -2,3 +2,8 @@
     background-color: #ffe5e6;
     width: 17vw;
 }
+
+.doctorPageSideBar .doctorSideBarLinksContainer{
+    position: sticky;
+    top: 100px;
+}

@@ -7,9 +7,6 @@ export const allPetOwnerReducer = (state, action) => {
     switch(action.type){
         case "LOAD":
             return { petOwners: action.payload }
-        case "ADD PET":
-            state.petOwners.push(action.payload)
-            return state
         case "LOGOUT":
             return { petOwners: null }
         default:
@@ -24,7 +21,7 @@ export const AllPetOwnerContextProvider = ({ children }) =>{
         petOwners: null
     })
 
-    console.log('AllDocContext state:', state)
+    console.log('AllPetOwnerContext state:', state)
       
     return(
         <AllPetOwnerContext.Provider value={{ ...state, dispatch }}>

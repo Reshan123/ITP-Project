@@ -1,0 +1,183 @@
+*{
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+.lostForm {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .lostForm h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .lostForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .lostForm input[type="text"],
+  .lostForm input[type="file"],
+  .lostForm textarea,
+  .lostForm button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /*.lostForm input[type="file"] {
+    display: none;
+  }*/
+  
+  .lostForm input[type="file"] + label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .lostForm input[type="file"] + label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .lostForm img {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .lostForm button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .lostForm button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+
+  /*Lost pet details cards*/
+/*container wraps the whole cards*/
+ .container{
+   /* display: flex;
+    justify-content: center;
+    flex-wrap: wrap;*/
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(270px,1fr)); /* Automatically fit three items in a row */
+    gap: 60px; /* Add some spacing between items */
+    justify-content:center; /* Center items horizontally */
+    margin-left: 25%;
+    margin-right: 25%;
+    
+ }
+ /*represents a single card*/
+ .frame{
+  background-color: #f3e9df;
+  
+ /* margin-left: 15%;
+ margin-right: 15%; */
+ margin-bottom: 15%;
+ padding: 30px 0;
+ }
+ .lostpetdetails{
+    background: rgba(128, 81, 143, 0.541);
+    width: 270px;
+    height: 430px;
+    margin: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    position:relative;
+ }
+
+ .lostpetdetails img{
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+    object-fit: cover;
+ }
+ .lostpetdetails h4,p{
+    padding:2px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+ }
+ .lostpetdetails h4{
+    font-size: 25px;
+ }
+ .lostpetdetails .createdAt{
+    position: absolute; /* Position the createdAt text absolutely */
+    top: 53%; /* Position the text 10px from the top edge of the card */
+    right: 10px; /* Position the text 10px from the right edge of the card */
+    color: white; /* Set text color to white */
+    font-size: 15px; /* Adjust font size as needed */
+ }
+ .lostpetdetails button{
+    background-color: black;
+    color: white;
+    padding:12px 18px;
+    display: block;
+    text-align: center;
+    margin:10px auto;
+    border-radius: 8px;
+    border: none;
+    position:absolute;
+    bottom:0%;
+    /* right: 50%; */
+    left:50%;
+    transform: translateX(-50%);/*moves the button to 50% of its own scale*/
+ }
+ .lostpetdetails:hover{
+    background-color: rgb(62,62,62);
+    color:white;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 1s ease;
+ }
+
+ .noticebtn button {
+  background-color: rgba(128, 81, 143, 0.541); 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  position: relative;
+  left: 2%;
+  /* top: 15%; */
+}
+
+.noticebtn button:hover {
+  transition: 1s ease;
+  color: black;
+}
+
+.noticebtn button:focus {
+  outline: none;
+}
