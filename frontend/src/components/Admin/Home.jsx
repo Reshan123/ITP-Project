@@ -10,6 +10,8 @@ import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 
 import './styles.css'
+import CreateDoctor from './components/Doctor/CreateDoctor';
+import UpdateDoctor from './components/Doctor/UpdateDoctor';
 
 const Home = () => {
 
@@ -62,6 +64,8 @@ const Home = () => {
                         <Route path='/' element={<LandingPage />} />
                         <Route path='/doctor' element={<Doctor />} />
                         <Route path='/petowners' element={<PetOwners />} />
+                        <Route path='/createdoctor' element={<CreateDoctor />} />
+                        <Route path='/updatedoctor/:docID' element={<UpdateDoctor />} />
                     </Routes>
                 </div>
             </div>

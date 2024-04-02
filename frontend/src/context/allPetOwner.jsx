@@ -21,7 +21,7 @@ export const AllPetOwnerContextProvider = ({ children }) =>{
         petOwners: null
     })
 
-    console.log('AllDocContext state:', state)
+    console.log('AllPetOwnerContext state:', state)
       
     return(
         <AllPetOwnerContext.Provider value={{ ...state, dispatch }}>
