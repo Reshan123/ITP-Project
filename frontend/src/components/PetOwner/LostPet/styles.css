@@ -84,11 +84,12 @@
     flex-wrap: wrap;*/
 
     display: grid;
-    grid-template-columns: repeat(4, minmax(270px,1fr)); /* Automatically fit three items in a row */
+    grid-template-columns: repeat(3, minmax(270px,1fr)); /* Automatically fit three items in a row */
     gap: 60px; /* Add some spacing between items */
-    justify-content:center; /* Center items horizontally */
+    justify-content:center; 
     margin-left: 25%;
     margin-right: 25%;
+    
     
  }
  /*represents a single card*/
@@ -126,6 +127,7 @@
  .lostpetdetails h4{
     font-size: 25px;
  }
+ 
  .lostpetdetails .createdAt{
     position: absolute; /* Position the createdAt text absolutely */
     top: 53%; /* Position the text 10px from the top edge of the card */
@@ -182,3 +184,4 @@
 .noticebtn button:focus {
   outline: none;
 }
+

@@ -11,8 +11,9 @@ import './styles.css'
 import { useEffect } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
-import LostPetDetails from '../LostPet/LostPetDetails';
-import '../LostPet/styles.css'
+//import LostPetDetails from '../LostPet/LostPetDetails';
+import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
+//import '../LostPet/styles.css'
 
 const Profile = ({ navBarProps }) => {
 
@@ -233,10 +234,10 @@ const Profile = ({ navBarProps }) => {
                     <hr />
                     <div className="detailsSectionCardContainer">
                         {/* add the map to show listings */}
-                        <div className="container">
+                        <div className="container1">
                             {/*mapping thought the notices only if ther are notices*/ }
                             {lostNotice && lostNotice.map((notice)=>(
-                                <LostPetDetails key={notice._id} notice={notice}/>
+                                <LostPetProfileDetails key={notice._id} notice={notice} />
                             ))}
                         </div>
                     </div>
