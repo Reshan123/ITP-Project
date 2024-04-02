@@ -62,9 +62,9 @@ const Home = () => {
             <NavBar />
             <div className="adminPageMainContainer">
                 <SideBar />
-                <div>
+                <div className='pages'>
                     <Routes>
-                        <Route path='/' element={<LandingPage />} />
+                        <Route path='/LandingPage' element={<LandingPage />} exact />
                         <Route path='/Inventoryitemdetails' element={<InventoryItemDetails />} />
                         <Route path='/InventoryItemForm' element={<InventoryItemForm />} />
                         <Route path='/InventoryItemUpdate/:id' element={<InventoryItemUpdate />} />

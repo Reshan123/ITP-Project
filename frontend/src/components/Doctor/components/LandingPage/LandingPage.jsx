@@ -9,7 +9,6 @@ const LandingPage = () => {
     useEffect(() => {
         if (doctor){
             setDoctorAvailability(doctor.availability)
-            console.log(doctor.availability)
         }
     }, [doctor])
 
