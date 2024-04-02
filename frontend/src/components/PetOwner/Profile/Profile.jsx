@@ -183,7 +183,6 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Appointment Details</div>
                         <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
-                        <button className='detailsSectionAddButton' onClick={() => { window.scrollTo(0, 0); navigate('/pet/bookings/bookedappointments') }}>Booked Appointments</button>
                     </div >
                     <hr />
                     <div className="detailsSectionCardContainer">
