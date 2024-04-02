@@ -7,11 +7,15 @@ export const allDoctorReducer = (state, action) => {
     switch(action.type){
         case "LOAD":
             return { doctors: action.payload }
-        case "ADD PET":
+        case "ADD DOCTOR":
             state.doctors.push(action.payload)
             return state
-        case "LOGOUT":
-            return { doctors: null }
+        case "UPDATE DOCTOR":
+            const objIndex = state.doctors.findIndex(obj => obj._id == action.payload[0])
+            state.doctors[objIndex].name = action.payload[1].name
+            state.doctors[objIndex].email = action.payload[1].email
+            state.doctors[objIndex].contactNo = action.payload[1].contactNo
+            return state 
         default:
             return state
     }
