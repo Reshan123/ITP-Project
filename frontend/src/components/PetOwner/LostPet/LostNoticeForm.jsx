@@ -4,12 +4,12 @@ import './styles.css'
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext'
 import firebase from 'firebase/compat/app'
 import "firebase/compat/storage"
-
+import { useNavigate } from 'react-router-dom'
 
 const LostNoticeForm = ({navBarProps}) => {
     navBarProps("#FFF", "#B799D1")
 
-    
+    const navigate = useNavigate()
 
     const {dispatch} = useLostPetsContext()
 
@@ -149,7 +149,7 @@ const handleFileUpload = (e) => {
         {image=="" || image==null ? "" : <img width={100} height={100} src={image} />}
         
 
-      <button>Publish Post</button>
+      <button onClick={() => { window.scrollTo(0, 0);navigate('/pet/lostpetnotices')}}>Publish Post</button>
         {error && <div className="error">{error}</div>}
     </form>
     </div>

@@ -228,7 +228,7 @@ const Profile = ({ navBarProps }) => {
                 < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Lost Pet Notices</div>
-                        <button className='detailsSectionAddButton' onClick={() => navigate('')}>Add Notice</button>
+                        <button className='detailsSectionAddButton' onClick={() =>{ window.scrollTo(0, 0); navigate('/pet/lostpetnotices/lostpetform')}}>Add Notice</button>
                     </div>
                     <hr />
                     <div className="detailsSectionCardContainer">
