@@ -1,4 +1,4 @@
-const authorize = require('../middlewear/validateToken')
+const {authorize} = require('../middlewear/validateToken')
 const express = require('express')
 
 const Booking = require('../models/bookingModel')

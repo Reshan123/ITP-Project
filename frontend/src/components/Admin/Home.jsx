@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
 import SideBar from './components/SideBar/SideBar'
@@ -89,6 +89,7 @@ const Home = () => {
                 <SideBar />
                 <div className='pages'>
                     <Routes>
+                        <Route path='/' element={<Navigate to='LandingPage' />} />
                         <Route path='/LandingPage' element={<LandingPage />} exact />
                         <Route path='/Inventoryitemdetails' element={<InventoryItemDetails />} />
                         <Route path='/InventoryItemForm' element={<InventoryItemForm />} />
