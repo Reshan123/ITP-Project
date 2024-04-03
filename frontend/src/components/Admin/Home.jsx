@@ -11,7 +11,6 @@ import PetOwners from './components/PetOwners/PetOwners';
 import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 import { useAdoptionContext } from '../../hooks/useAdoptionContext';
-import './styles.css'
 
 import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
 import InventoryItemForm from './components/Inventory/InventoryItemForm';
@@ -21,8 +20,6 @@ import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
-import { useAllDocContext } from '../../hooks/useAllDoctorContext'
-import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 
 import './styles.css'
 
@@ -30,8 +27,6 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-
-    const { doctors, dispatch:allDocDispatch} = useAllDocContext()
 
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
 
