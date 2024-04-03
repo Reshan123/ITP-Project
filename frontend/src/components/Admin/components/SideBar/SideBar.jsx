@@ -2,7 +2,7 @@ import './styles.css'
 import { NavLink } from 'react-router-dom'
 
 const SideBar = () => {
-    return ( 
+    return (
         <div className="adminSideBar">
             <div className="adminSideBarLinksContainer">
                 <NavLink to="/admin/home/">Home</NavLink>
@@ -12,9 +12,11 @@ const SideBar = () => {
                 <NavLink to='/admin/home/petowners'>Pet Owners</NavLink>
                 <br />
                 <NavLink to='/admin/home/Inventoryitemdetails'>Inventory</NavLink>
+                <br />
+                <NavLink to='/admin/home/adoption-forms'>Adoption Forms</NavLink>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default SideBar;

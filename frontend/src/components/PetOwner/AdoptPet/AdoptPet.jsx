@@ -26,6 +26,10 @@ const AdoptPet = ({ navBarProps }) => {
         navigate('/pet/adopt/adoptionForm');
     };
 
+    const handleViewDetails = (id) => {
+        navigate(('/pet/adopt/form-details/' + id))
+    }
+
     return (
         <div className="AdoptionFormPage">
             <div className="listings">
@@ -37,8 +41,10 @@ const AdoptPet = ({ navBarProps }) => {
                             <p><strong>Gender: </strong>{adoptionForm.gender}</p>
                             <p><strong>Breed: </strong>{adoptionForm.breed}</p>
                         </div>
+                        <button onClick={() => handleViewDetails(adoptionForm._id)}>View Details</button>
                     </div>
                 ))}
+
             </div>
 
             <div>

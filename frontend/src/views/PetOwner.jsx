@@ -15,6 +15,7 @@ import LostPet from '../components/PetOwner/LostPet/LostPet';
 import LostNoticeForm from '../components/PetOwner/LostPet/LostNoticeForm';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
+import ViewForm from '../components/PetOwner/AdoptPet/ViewForm';
 
 const PetOwner = () => {
 
@@ -67,7 +68,8 @@ const PetOwner = () => {
                 <Route path='/store' element={<Store navBarProps={navBarProps} />} />
                 <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
                 <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
-                <Route path='/adopt/adoptionForm/update/:id' element={<UpdateForm />} />
+                <Route path='/profile/adoption-form-update/:id' element={<UpdateForm />} />
+                <Route path='/adopt/form-details/:id' element={<ViewForm navBarProps={navBarProps} />} />
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices/lostpetform' element={<LostNoticeForm navBarProps={navBarProps} />} />
