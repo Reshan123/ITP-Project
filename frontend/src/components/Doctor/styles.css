@@ -3,3 +3,7 @@
     min-height: 88vh;
     align-items: stretch;
 }
+
+.doctorPageMainContainer .doctorPages{
+    width: 83vw;
+}

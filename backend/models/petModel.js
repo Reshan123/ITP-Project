@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const petSchema = new Schema({
     ownerID:{
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'petOwner',
         required: true
     },
     petName:{

@@ -61,7 +61,7 @@ const Home = () => {
             <NavBar />
             <div className="doctorPageMainContainer">
                 <SideBar />
-                <div>
+                <div className='doctorPages'>
                     <Routes>
                     <Route path='/' element={<Navigate to='landingpage' />} />
                         <Route path='/landingpage' element={<LandingPage />} />

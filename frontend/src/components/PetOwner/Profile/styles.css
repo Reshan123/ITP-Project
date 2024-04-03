@@ -115,7 +115,7 @@
 
 .profilePage .detailsSection .detailsSectionCardContainer{
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     gap: 25px;
 }
 
@@ -124,7 +124,7 @@
 
 
 .petCard{
-    width: 25%;
+    width: 32%;
     color: #FFF;
     background-color: var(--primaryPurple);
     padding: 15px 25px;
