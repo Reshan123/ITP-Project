@@ -35,6 +35,19 @@
     margin-inline: 1rem 0;
 }
 
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink:hover{
+    /* box-shadow:inset .5rem 0px 0px .5rem #ffffff;
+    border-radius: 2.5rem 0 0 2.5rem; */
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink:hover .linkText{
+    color: #ffffff;
+}
+
+.adminSideBar .adminSideBarLinksContainer .adminSideBarLink:hover.active .linkText{
+    color: black;
+}
+
 .adminSideBar .adminSideBarLinksContainer .adminSideBarLink.active {
     display: block;
     background: white;
