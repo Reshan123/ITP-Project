@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import PetOwner from './views/PetOwner'
 import Admin from './views/Admin'
 import Doctor from './views/Doctor'
+import Store from './components/PetOwner/Store/Store'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
           <Route path='/pet/*' element={<PetOwner />} />
           <Route path='/admin/*' element={<Admin />} />
           <Route path='/doctor/*' element={<Doctor />} />
+          <Route path='/store/*' element={<Store />} />
+
         </Routes>
       </BrowserRouter>
 
