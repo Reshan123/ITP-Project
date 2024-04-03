@@ -10,15 +10,21 @@ const PetOwners = () => {
 
     return ( 
         <div className="allPetOwnerPage">
-            {petOwners && petOwners.map(petOwner => (
-                <>
-                    {petOwner.name}<br />
-                    {petOwner.email}<br />
-                    <button>delete</button>
-                    <br />
-                    <br />
-                </>
-            ))}
+            <div className="allPetOwnerHeader">
+                <p>All Pet Owner Details</p>
+            </div>
+            <hr />
+            <div className="allPetOwnerCardContainer">
+                {petOwners && petOwners.map(petOwner => (
+                    <div className="allPetOwnerCard">
+                        <div className="petOwnerName">{petOwner.name}</div>
+                        <div className="petOwnerEmail">{petOwner.email}</div>
+                        <div className="buttonContainer">
+                            <button>delete</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
      );
 }

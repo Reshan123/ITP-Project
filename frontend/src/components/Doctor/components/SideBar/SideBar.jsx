@@ -5,9 +5,13 @@ const SideBar = () => {
     return ( 
         <div className="doctorPageSideBar">
             <div className="doctorSideBarLinksContainer">
-                <NavLink to='/doctor/home'>Landing Page</NavLink>
+                <NavLink to='/doctor/home/landingpage' className='doctorSideBarLink'>
+                    <div className="linkText">Landing Page</div>
+                </NavLink>
                 <br />
-                <NavLink to='/doctor/home/pets'>All Pets</NavLink>
+                <NavLink to='/doctor/home/pets' className='doctorSideBarLink'>
+                    <div className="linkText">All Pets</div>
+                </NavLink>
             </div>
         </div>
      );

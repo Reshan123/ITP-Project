@@ -45,6 +45,28 @@ const lostNoticeSchema = new Schema({
             type:String,
             required:true
         },
+
+        location:{
+            type:String,
+            required:true
+        },
+
+        gender:{
+            type: String,
+            required: true,
+            enum: ['Male', 'Female']
+        },
+
+        age: {
+            type: Number,
+            required: true
+          },
+
+        status: { 
+            type: String, 
+            enum: ['Pending', 'Confirmed'], 
+            default: 'Pending' 
+        }, 
     
 },{timestamps:true})
 

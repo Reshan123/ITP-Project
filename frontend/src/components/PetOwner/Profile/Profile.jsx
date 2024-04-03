@@ -11,8 +11,9 @@ import './styles.css'
 import { useEffect } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
-import LostPetDetails from '../LostPet/LostPetDetails';
-import '../LostPet/styles.css'
+//import LostPetDetails from '../LostPet/LostPetDetails';
+import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
+//import '../LostPet/styles.css'
 
 const Profile = ({ navBarProps }) => {
 
@@ -147,7 +148,7 @@ const Profile = ({ navBarProps }) => {
     const uid = JSON.parse(localStorage.getItem('user'))["uid"]
 
     const handleView = (id) => {
-        navigate('/pet/adopt/adoptionForm/update/' + id);
+        navigate('/pet/profile/adoption-form-update/' + id);
     };
     //
     return (
@@ -228,15 +229,15 @@ const Profile = ({ navBarProps }) => {
                 < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Lost Pet Notices</div>
-                        <button className='detailsSectionAddButton' onClick={() => navigate('')}>Add Notice</button>
+                        <button className='detailsSectionAddButton' onClick={() =>{ window.scrollTo(0, 0); navigate('/pet/lostpetnotices/lostpetform')}}>Add Notice</button>
                     </div>
                     <hr />
                     <div className="detailsSectionCardContainer">
                         {/* add the map to show listings */}
-                        <div className="container">
+                        <div className="container1">
                             {/*mapping thought the notices only if ther are notices*/ }
                             {lostNotice && lostNotice.map((notice)=>(
-                                <LostPetDetails key={notice._id} notice={notice}/>
+                                <LostPetProfileDetails key={notice._id} notice={notice} />
                             ))}
                         </div>
                     </div>

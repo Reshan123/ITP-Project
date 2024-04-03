@@ -1,15 +1,15 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect  } from 'react'
 import './styles.css'
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext'
 import firebase from 'firebase/compat/app'
 import "firebase/compat/storage"
-
+import { useNavigate } from 'react-router-dom'
 
 const LostNoticeForm = ({navBarProps}) => {
     navBarProps("#FFF", "#B799D1")
 
-    
+    const navigate = useNavigate()
 
     const {dispatch} = useLostPetsContext()
 
@@ -21,13 +21,17 @@ const LostNoticeForm = ({navBarProps}) => {
     const [email, setEmail] = useState('')
     const [image, setImage] = useState('')
     const [error, setError] = useState(null)
+    const [location, setLocation] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState(0)
+    const [submissionStatus, setSubmissionStatus] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const uid = JSON.parse(localStorage.getItem('user'))["uid"]
     
-    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email}
+    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email,location,gender,age}
     //send the data in the form tho the database
     const response = await fetch('http://localhost:4000/api/lostPetNotice',{
       method: 'POST',
@@ -37,6 +41,8 @@ const LostNoticeForm = ({navBarProps}) => {
         
       }
     })
+
+      
     const json = await response.json()
 
     if (!response.ok ) {
@@ -51,8 +57,13 @@ const LostNoticeForm = ({navBarProps}) => {
       setContactNo('')
       setImage('')
       setEmail('')
+      setLocation('')
+      setGender('')
+      setAge(0)
       console.log('new notice added:', json)
       dispatch({type:'CREATE_LOSTPETNOTICE',payload:json})
+      setSubmissionStatus(true);
+      navigate('/pet/lostpetnotices')
     }
 
   }
@@ -78,6 +89,8 @@ const handleFileUpload = (e) => {
         console.log("No files selected")
     }
 }
+
+
     
 
   return (
@@ -114,6 +127,27 @@ const handleFileUpload = (e) => {
         value={breed} 
       />
 
+      <label>Location:</label>
+      <input 
+        type="text" 
+        onChange={(e) => setLocation(e.target.value)} 
+        value={location} 
+      />
+
+      <label>Gender:</label>
+        <select onChange={(e) => setGender(e.target.value)} value={gender}>
+            <option value="">Select...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>    
+        </select>
+
+      <label>Age:</label>
+      <input 
+        type="number" 
+        onChange={(e) => setAge(e.target.value)} 
+        value={age} 
+      /> 
+
     <label>Description:</label>
     <textarea 
         id="description" 
@@ -149,7 +183,7 @@ const handleFileUpload = (e) => {
         {image=="" || image==null ? "" : <img width={100} height={100} src={image} />}
         
 
-      <button>Publish Post</button>
+      <button >Publish Post</button>
         {error && <div className="error">{error}</div>}
     </form>
     </div>

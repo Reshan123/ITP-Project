@@ -5,10 +5,10 @@ const mongoose = require('mongoose')
 
 const createLostPetNotice = (req, res) => {
     
-    const { owner_id,petName,ownerName,breed,description,contactNo,image,email} = req.body
+    const { owner_id,petName,ownerName,breed,description,contactNo,image,email,location,gender,age} = req.body
 
     //returns a promise which is resoved by the .then
-    LostNoticeInfo.create({ owner_id:owner_id,petName,ownerName,breed,description,contactNo,image,email })
+    LostNoticeInfo.create({ owner_id:owner_id,petName,ownerName,breed,description,contactNo,image,email,location,gender,age })
         .then(result => {
             res.status(200).json(result)
         })

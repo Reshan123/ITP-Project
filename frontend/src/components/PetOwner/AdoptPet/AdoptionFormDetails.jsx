@@ -14,11 +14,16 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
         const response = await fetch('http://localhost:4000/api/adoption/' + adoptionForm._id, {
             method: 'DELETE'
         })
+        const confirmed = window.confirm("Are you sure you want to delete this form?");
 
+        if (!confirmed) {
+            return; // If not confirmed, return without submitting
+        }
         const json = await response.json()
 
         if (response.ok) {
             dispatch({ type: 'DELETE_FORM', payload: json })
+            navigate('/pet/profile')
         }
     }
 
@@ -36,6 +41,13 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const confirmed = window.confirm("Are you sure you want to submit this form?");
+
+        if (!confirmed) {
+            return; // If not confirmed, return without submitting
+        }
+
         // Submit the updated form data to the backend API
         try {
             const response = await fetch(`http://localhost:4000/api/adoption/${adoptionForm._id}`, {
@@ -49,7 +61,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
             if (response.ok) {
                 // Dispatch an action to update the context state
                 dispatch({ type: 'SET_FORMS', payload: updatedData });
-                // Optionally, you can navigate to a success page or show a success message
+                navigate('/pet/profile')
             }
         } catch (error) {
             console.error('Error updating form:', error);
@@ -79,7 +91,12 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
         } else {
             console.log("No files selected");
         }
-    };
+    }
+
+
+
+
+
 
 
     return (
@@ -107,7 +124,6 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                     <select name="gender" value={formData.gender} onChange={handleInputChange}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="other">Other</option>
                     </select>
                 </label>
                 <label>
@@ -140,7 +156,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                 </label>
                 <button type="submit">Update</button>
             </form>
-            <button className="adoptPetButton" onClick={handleClick}>Delete</button>
+            <button className="delete" onClick={handleClick}>Delete</button>
         </div>
     );
 
