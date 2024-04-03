@@ -34,6 +34,11 @@ const InventoryItemDetails = () => {
 
     }
   }
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
 
 
   return (
@@ -57,7 +62,7 @@ const InventoryItemDetails = () => {
             {/* have put both stock counts the same */}
             <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
             <img src={inventoryitem.itemImageURL} alt="item" />
-            <p>{inventoryitem.createdAt}</p>
+            <p>{formattedDate}</p>
 
             <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id)}>Delete</button>
             <button className='update-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
