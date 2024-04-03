@@ -9,3 +9,112 @@
 .adminPageMainContainer .pages{
     width: 83vw;
 }
+
+
+.adminLoginPage{
+    z-index: 999;
+    background: url(./Images/background.png) no-repeat, var(--primaryPurple);
+    background-position: 100px center;
+    background-size: 600px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    justify-items: center;
+}
+
+.adminLoginPage .adminLoginPageContent{
+    grid-column-start: 2;
+    width: 65%;
+    background-color: var(--primaryPurple);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(50px);
+    border-radius: 20px;
+    padding: 50px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: 0.3s;
+}
+
+/* .adminLoginPage .adminLoginPageContent:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+} */
+
+.adminLoginPage .adminLoginPageContent .adminLoginPageHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginPageHeader .adminLoginPageTitle{
+    font-size: 3.5rem;
+    color: #fff;
+    font-weight: 900;
+    font-family: 'Grinched2.0', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* .adminLoginPage .adminLoginPageContent .adminLoginPageHeader .loginNoAccount{
+    color: #fff;
+    text-align: right;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginPageHeader .loginNoAccount p{
+    font-size: .9rem;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginPageHeader .loginNoAccount a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: 0.3s;
+} */
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginInputWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginInputWrapper label{
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: 500;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginInputWrapper input{
+    border: none;
+    border-radius: 5px;
+    padding: 20px 10px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginInputWrapper input:focus{
+    border: none;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginButtonWrapper{
+    justify-self: center;
+    align-self: center;
+}
+
+.adminLoginPage .adminLoginPageContent .adminLoginForm .adminLoginButtonWrapper button{
+    padding: 10px 35px;
+    background-color: var(--primaryPurple);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    transition: 0.3s;
+}
