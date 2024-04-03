@@ -33,19 +33,14 @@ const InventoryItemDetails = () => {
       dispatch({ type: 'DELETE_ITEM', payload: json })
 
     }
-  }
-  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-});
+  };
 
 
   return (
 
 
     <div className="inventoryiems">
-      
+
       <div className="addItem">
         <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
       </div>
@@ -62,7 +57,7 @@ const InventoryItemDetails = () => {
             {/* have put both stock counts the same */}
             <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
             <img src={inventoryitem.itemImageURL} alt="item" />
-            <p>{formattedDate}</p>
+            <p>{inventoryitem.createdAt}</p>
 
             <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id)}>Delete</button>
             <button className='update-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
