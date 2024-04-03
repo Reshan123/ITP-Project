@@ -46,6 +46,11 @@
     flex-direction: column;
     padding: 10px 15px;
     color: white;
+    transition: transform 0.3s ease;
+}
+
+.allPetsPage .allPetCardsContainer .allPetsCard:hover{
+    transform: scale(1.05);
 }
 
 /* .allPetsPage .allPetCardsContainer .allPetsCard .petName{

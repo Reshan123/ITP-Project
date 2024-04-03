@@ -45,6 +45,11 @@
     display: grid;
     padding: 10px 15px;
     color: white;
+    transition: transform 0.3s ease;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard:hover{
+    transform: scale(1.05);
 }
 
 .allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .petOwnerName{
