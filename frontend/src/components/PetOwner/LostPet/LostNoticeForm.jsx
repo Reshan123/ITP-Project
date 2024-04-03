@@ -21,6 +21,9 @@ const LostNoticeForm = ({navBarProps}) => {
     const [email, setEmail] = useState('')
     const [image, setImage] = useState('')
     const [error, setError] = useState(null)
+    const [location, setLocation] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState(0)
     const [submissionStatus, setSubmissionStatus] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -28,7 +31,7 @@ const LostNoticeForm = ({navBarProps}) => {
 
     const uid = JSON.parse(localStorage.getItem('user'))["uid"]
     
-    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email}
+    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email,location,gender,age}
     //send the data in the form tho the database
     const response = await fetch('http://localhost:4000/api/lostPetNotice',{
       method: 'POST',
@@ -39,15 +42,7 @@ const LostNoticeForm = ({navBarProps}) => {
       }
     })
 
-      try {
-        // If submission is successful, navigate to another page
-      setSubmissionStatus(true);
-     } catch (error) {
-        console.error('Form submission failed:', error);
-        // If submission fails, set submissionStatus to false
-        setSubmissionStatus(false);
-      }
-
+      
     const json = await response.json()
 
     if (!response.ok ) {
@@ -62,8 +57,13 @@ const LostNoticeForm = ({navBarProps}) => {
       setContactNo('')
       setImage('')
       setEmail('')
+      setLocation('')
+      setGender('')
+      setAge(0)
       console.log('new notice added:', json)
       dispatch({type:'CREATE_LOSTPETNOTICE',payload:json})
+      setSubmissionStatus(true);
+      navigate('/pet/lostpetnotices')
     }
 
   }
@@ -90,12 +90,7 @@ const handleFileUpload = (e) => {
     }
 }
 
-useEffect(() => {
-  if (submissionStatus === true) {
-      window.scrollTo(0, 0);
-      navigate('/pet/lostpetnotices');
-  }
-}, [submissionStatus]);
+
     
 
   return (
@@ -131,6 +126,27 @@ useEffect(() => {
         onChange={(e) => setBreed(e.target.value)} 
         value={breed} 
       />
+
+      <label>Location:</label>
+      <input 
+        type="text" 
+        onChange={(e) => setLocation(e.target.value)} 
+        value={location} 
+      />
+
+      <label>Gender:</label>
+        <select onChange={(e) => setGender(e.target.value)} value={gender}>
+            <option value="">Select...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>    
+        </select>
+
+      <label>Age:</label>
+      <input 
+        type="number" 
+        onChange={(e) => setAge(e.target.value)} 
+        value={age} 
+      /> 
 
     <label>Description:</label>
     <textarea 

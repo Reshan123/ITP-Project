@@ -24,6 +24,7 @@ const LostPetDetails = ({notice}) => {
         <p><strong> </strong>{notice.breed}</p>
         <p><strong>Description: </strong>{notice.description}</p>
         <p><strong>ContactNo: </strong>{notice.contactNo}</p>
+        <p><strong>Location: </strong>{notice.location}</p>
         {/** <p><strong>Email: </strong>{notice.email}</p>*/}
         <p className='createdAt'>{formattedDate}</p>
         

@@ -21,10 +21,12 @@ const LostPetProfileDetails = ({notice}) => {
         <div className='details'>
             <h4>{notice.petName}</h4>
             {/* <p><strong>Owner Name: </strong>{notice.ownerName}</p>*/}
-            <p><strong> </strong>{notice.breed}</p>
+            <p><strong> Type:</strong>{notice.breed}</p>
+             <p><strong>Age: </strong>{notice.age}</p>
             {/* <p><strong>Description: </strong>{notice.description}</p> */}
-            <p><strong>ContactNo: </strong>{notice.contactNo}</p>
-            {/** <p><strong>Email: </strong>{notice.email}</p>*/}
+            <p><strong>Location: </strong>{notice.location}</p>
+            <p><strong>Gender: </strong>{notice.gender}</p>
+            <p><strong>Status: </strong>{notice.status}</p>
             <p className='createdAt'>{formattedDate}</p>
         </div>
         <button className='btn1'>View Details</button>
