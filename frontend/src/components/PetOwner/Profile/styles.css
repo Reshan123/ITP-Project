@@ -340,7 +340,8 @@
     margin-left: 40px;
 }
 .lostprofiledetails{
-    background: rgba(128, 81, 143, 0.541);
+    /* background: rgba(128, 81, 143, 0.541); */
+    background: #B799D1;
     width: 500px; 
     height: 300px; 
     margin: 10px;
@@ -378,7 +379,7 @@
 }
 
 .lostprofiledetails .btn1 {
-    background-color: black;
+    background-color: rgba(128, 81, 143, 0.541);
     color: white;
     padding: 12px 10px;
     text-align: center;
@@ -387,9 +388,8 @@
     position:absolute;
     top: 10px;
     right: 2%;
-    opacity: 0;
     transition: opacity 0.5s ease;
-}
+ }/*
 .lostprofiledetails .btn1:hover{
     opacity:1;
 }
@@ -398,9 +398,9 @@
 }
 .lostprofiledetails .btn3:hover{
     opacity:1;
-}
+} */
 .lostprofiledetails .btn2 {
-    background-color: black;
+    background-color: rgba(128, 81, 143, 0.541);
     color: white;
     padding: 12px 24px;
     text-align: center;
@@ -409,12 +409,11 @@
     position:absolute;
     top: 38%;
     right: 2%;
-    opacity: 0;
     transition: opacity 0.5s ease;
 }
 
 .lostprofiledetails .btn3 {
-    background-color: black;
+    background-color: rgba(128, 81, 143, 0.541);
     color: white;
     padding: 12px 24px;
     text-align: center;
@@ -423,12 +422,11 @@
     position:absolute;
     bottom: 10%;
     right: 2%;
-    opacity: 0;
     transition: opacity 0.5s ease;
 }
 
 
-.lostprofiledetails:hover{
+.lostprofiledetails:hover {
     background-color: rgb(62, 62, 62);
     color: white;
     cursor: pointer;

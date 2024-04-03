@@ -1,6 +1,10 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
+import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
 const LostPetProfileDetails = ({notice}) => {
+
+    const navigate = useNavigate();
+    const{dispatch} = useLostPetsContext()
 
     //making the date readable format
     const createdAt = notice.createdAt.split('T')[0]
@@ -9,6 +13,23 @@ const LostPetProfileDetails = ({notice}) => {
         month: "long",
         day: "numeric",
     });
+
+    const handleDelete = async(id) =>{
+        const response = await fetch('http://localhost:4000/api/lostPetNotice/' + id,{
+            method: 'DELETE'
+        })
+
+        const json = await response.json()
+
+        if(response.ok){
+
+            //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
+            dispatch({type:'DELETE_NOTICE',payload:json})
+            
+            //toast.success("Notice deleted sucessfully")
+            
+        }
+    }
 
   return (
     <div className= "lostprofiledetails" >
@@ -30,8 +51,8 @@ const LostPetProfileDetails = ({notice}) => {
             <p className='createdAt'>{formattedDate}</p>
         </div>
         <button className='btn1'>View Details</button>
-        <button className='btn2'>Update</button>
-        <button className='btn3'>Delete</button>
+        <button className='btn2'onClick={() => navigate('/pet/lostpetnotices/lostpetform/updatelostpet',{ state:notice, id:notice._id })}  >Update</button>
+        <button className='btn3' onClick={()=> handleDelete(notice._id)} >Delete</button>
     </div>
   )
 }
