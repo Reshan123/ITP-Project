@@ -40,6 +40,7 @@ const InventoryItemDetails = () => {
 
 
     <div className="inventoryiems">
+      
       <div className="addItem">
         <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
       </div>
