@@ -83,53 +83,57 @@ const InventoryItemUpdate = () => {
   };
 
   return (
-    <form className="update" onSubmit={handleUpdate}>
-      <h3>Update Item</h3>
+    <div className="update-items">
+      <form className="update" onSubmit={handleUpdate}>
+        <h3>Update Item</h3>
 
-      <label>Name of the Item</label>
-      <input
-        type="text"
-        onChange={(e) => setItemName(e.target.value)}
-        defaultValue={inventoryitem?.itemName}
-        required
-      />
-      <label>Item Price (in LKR)</label>
-      <input
-        type='number'
-        onChange={(e) => setItemPrice(e.target.value)}
-        defaultValue={inventoryitem?.itemPrice}
-      />
-      <label>Initial Stock Level</label>
-      <input
-        type="number"
-        onChange={(e) => setItemStockCount(e.target.value)}
-        defaultValue={inventoryitem?.itemStockCount}
-      />
-      <label>Item Description</label>
-      <input
-        type="text"
-        onChange={(e) => setItemDescription(e.target.value)}
-        defaultValue={inventoryitem?.itemDescription}
-      />
-      <img src={inventoryitem?.itemImageURL} alt="item" />
-      <label>Item Image</label>
-      <input
-        type="file"
-        defaultValue={inventoryitem?.itemImageURL}
-        onChange={handleFileUpload}
+        <label>Name of the Item</label>
+        <input
+          type="text"
+          onChange={(e) => setItemName(e.target.value)}
+          defaultValue={inventoryitem?.itemName}
+          required
+        />
+        <label>Item Price (in LKR)</label>
+        <input
+          type='number'
+          onChange={(e) => setItemPrice(e.target.value)}
+          defaultValue={inventoryitem?.itemPrice}
+        />
+        <label>Initial Stock Level</label>
+        <input
+          type="number"
+          onChange={(e) => setItemStockCount(e.target.value)}
+          defaultValue={inventoryitem?.itemStockCount}
+        />
+        <label>Item Description</label>
+        <input
+          type="text"
+          onChange={(e) => setItemDescription(e.target.value)}
+          defaultValue={inventoryitem?.itemDescription}
+        />
+        <img src={inventoryitem?.itemImageURL} alt="item" />
+        <label>Item Image</label>
+        <input
+          type="file"
+          defaultValue={inventoryitem?.itemImageURL}
+          onChange={handleFileUpload}
 
-      />
-      <input
-        type="text"
-        placeholder='Image URL'
-        value={itemImageURL}
-        onChange={(e) => setItemImageURL(e.target.value)}
-      />
+        />
+        <input
+          type="text"
+          placeholder='Image URL'
+          value={itemImageURL}
+          onChange={(e) => setItemImageURL(e.target.value)}
+        />
 
 
-      <button >Update</button>
-      {error && <div className="error">{error}</div>}
-    </form>
+        <button className='update-btn'>Update</button>
+        {error && <div className="error">{error}</div>}
+      </form>
+
+    </div>
+
   )
 
 }

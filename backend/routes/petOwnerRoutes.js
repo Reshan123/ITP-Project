@@ -1,5 +1,5 @@
 const express = require('express')
-const authorize = require('../middlewear/validateToken')
+const {authorize} = require('../middlewear/validateToken')
 //controller imports
 const petOwnerController = require('../controllers/petOwnerController')
 

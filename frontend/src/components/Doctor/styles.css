@@ -3,3 +3,126 @@
     min-height: 88vh;
     align-items: stretch;
 }
+
+.doctorPageMainContainer .doctorPages{
+    width: 83vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.doctorLoginPage{
+    z-index: 999;
+    background: url(./Images/background.png) no-repeat, var(--primaryPink);
+    background-position: 700px center;
+    background-size: 600px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    justify-items: center;
+}
+
+.doctorLoginPage .doctorLoginPageContent{
+    width: 65%;
+    background-color: var(--primaryPink);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(50px);
+    border-radius: 20px;
+    padding: 50px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: 0.3s;
+}
+
+/* .doctorLoginPage .doctorLoginPageContent:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+} */
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginPageHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginPageHeader .doctorLoginPageTitle{
+    font-size: 3.5rem;
+    color: #fff;
+    font-weight: 900;
+    font-family: 'Grinched2.0', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* .doctorLoginPage .doctorLoginPageContent .doctorLoginPageHeader .loginNoAccount{
+    color: #fff;
+    text-align: right;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginPageHeader .loginNoAccount p{
+    font-size: .9rem;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginPageHeader .loginNoAccount a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: 0.3s;
+} */
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginInputWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginInputWrapper label{
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: 500;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginInputWrapper input{
+    border: none;
+    border-radius: 5px;
+    padding: 20px 10px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginInputWrapper input:focus{
+    border: none;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginButtonWrapper{
+    justify-self: center;
+    align-self: center;
+}
+
+.doctorLoginPage .doctorLoginPageContent .doctorLoginForm .doctorLoginButtonWrapper button{
+    padding: 10px 35px;
+    background-color: var(--primaryPink);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    transition: 0.3s;
+}

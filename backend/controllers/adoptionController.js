@@ -100,24 +100,6 @@ const updateAdoptionForm = async (req, res) => {
 }
 
 
-// Get all adoption forms submitted by the authenticated user
-const getOwnerAdoptionForms = async (req, res) => {
-    const userID = req.user._id;
-
-    try {
-        if (!mongoose.Types.ObjectId.isValid(userID)) {
-            throw Error("Invalid User ID");
-        }
-
-        const ownerAdoptionForms = await PetAdoptionForm.find({ ownerID: userID }).sort({ createdAt: -1 });
-
-        res.status(200).json(ownerAdoptionForms);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-
-
 module.exports = {
     getAdoptionForms,
     getAdoptionForm,

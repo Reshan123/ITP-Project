@@ -148,7 +148,7 @@ const Profile = ({ navBarProps }) => {
     const uid = JSON.parse(localStorage.getItem('user'))["uid"]
 
     const handleView = (id) => {
-        navigate('/pet/adopt/adoptionForm/update/' + id);
+        navigate('/pet/profile/adoption-form-update/' + id);
     };
     //
     return (

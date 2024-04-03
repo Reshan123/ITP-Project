@@ -1,4 +1,4 @@
-import {Routes, Route, useNavigate} from 'react-router-dom'
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom'
 import { useEffect } from "react";
 import SideBar from './components/SideBar/SideBar'
 import NavBar from './components/NavBar/NavBar'
@@ -61,9 +61,10 @@ const Home = () => {
             <NavBar />
             <div className="doctorPageMainContainer">
                 <SideBar />
-                <div>
+                <div className='doctorPages'>
                     <Routes>
-                        <Route path='/' element={<LandingPage />} />
+                    <Route path='/' element={<Navigate to='landingpage' />} />
+                        <Route path='/landingpage' element={<LandingPage />} />
                         <Route path='/pets' element={<AllPets />} />
                         <Route path='/createpet' element={<CreatePet />} />
                     </Routes>

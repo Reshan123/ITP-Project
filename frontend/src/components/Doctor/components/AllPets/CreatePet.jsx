@@ -1,9 +1,14 @@
 import { useAllPetOwnerContext } from '../../../../hooks/useAllPetOwnerContext'
-import { useState } from 'react'
+import { useAllPetsContext } from "../../../../hooks/useAllPetsContext";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const CreatePet = () => {
 
+    const navigate = useNavigate();
     const {petOwners, dispatch: allPetOwnersDispatch} = useAllPetOwnerContext() 
+    const {pets, dispatch:allPetsDispatch} = useAllPetsContext()
+    const [error, setError] = useState('')
     const [formInput, setFormInput] = useState({
         ownerID: "",
         petName: "",
@@ -16,16 +21,34 @@ const CreatePet = () => {
     const handleInputChange = (input) => {
         const {name, value} = input.target;
         setFormInput(prevInput => ({...prevInput, [name]: value}))
-        console.log(formInput)
     }
 
     const handleFormSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        try{
+            const response = await fetch('http://localhost:4000/api/pet/adminCreatePet', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formInput)
+            })
+            const json = await response.json()
+        
+            if (!response.ok) {
+                throw Error(json.message)
+            }
+            setError("")
+            allPetsDispatch({type:"ADD PET",payload:json.message})
+            navigate('/doctor/home/pets')
+        } catch (error){
+            setError(error.message)
+        }
     }
 
 
     return ( 
         <>
+            {error && (<div className="error">{error}</div>)}
             <form onSubmit={handleFormSubmit}>
                 <div>
                     <label htmlFor="ownerID">Pet Owner: </label>

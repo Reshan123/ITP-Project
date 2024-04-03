@@ -5,17 +5,19 @@
   --primary: #1aac83;
   --error: #e7195a;
   --body-bg: #123;
-  --nav-bg: #234;
+  --nav-bg: #B799D1;
+  --nav-bg-dark: #a786c4;
+
 }
 
-.inventoryItems-details {
+.inventoryItems-details, .update {
   font-family: system-ui;
-  width: 80%;
+  width: 90%;
   font-size: 1.25rem;
-  background: #234;
+  background: var(--nav-bg);
   border-radius: 4px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 30px;
   position: relative;
   transition: transform 0.3s ease;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
@@ -24,7 +26,7 @@
 .inventoryItems-details h4,
 .inventoryItems-details p {
   margin: 0;
-  color: #ddd;
+  color: #123;
 }
 
 .inventoryItems-details h4 {
@@ -45,32 +47,23 @@
   border-radius: 50%;
   color: #333;
 }
-.inventoryItems-details img{
+
+.inventoryItems-details img {
   width: 200px;
   height: 200px;
 }
-.inventoryItems-details:hover{
+
+.inventoryItems-details:hover {
   transform: scale(1.01);
 
 }
-.update{
-  display: flex;
-  flex-flow: column;
-  margin-left: 20px;
+
+.update {
   padding: 30px;
 }
 
-.update input{
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
 
-.update img{
+.update img {
   width: 200px;
   height: 200px;
 }
@@ -82,7 +75,7 @@
 
 }
 
-.create input {
+.create input, .update input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -105,28 +98,33 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.dlt-btn:hover{
+.dlt-btn:hover {
   transform: translateY(3px);
 }
 
-.create-btn {
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  margin-top: 5px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  background: var(--primary);
-}
-.addItem{
+
+.addItem {
   display: flex;
   justify-content: center;
 }
-.add-btn, .update-btn{
+
+.create {
+  font-family: system-ui;
+  width: 40%;
+  font-size: 1.25rem;
+  background: var(--nav-bg);
+  border-radius: 4px;
+  margin: 20px 250px;
+  position: relative;
+  transition: transform 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.add-btn,
+.update-btn,
+.create-btn {
   border: 0;
-  background-color: var(--primary);
+  background-color: var(--nav-bg-dark);
   color: #fff;
   padding: 10px;
   font-size: 14px;
@@ -140,12 +138,6 @@
 
 }
 
-
-.create {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
 .create h3 {
   font-size: 24px;
   margin-bottom: 20px;
@@ -154,6 +146,16 @@
 .create label {
   display: block;
   margin-bottom: 5px;
+}
+
+.create, .update input[type="text"],
+.create, .update input[type="number"],
+.create, .update input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .create input[type="text"],
@@ -166,8 +168,13 @@
   border-radius: 4px;
 }
 
+
 .error {
   color: red;
   margin-top: 10px;
 }
 
+.add-btn-container {
+  display: flex;
+  justify-content: center;
+}
