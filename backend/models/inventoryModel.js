@@ -7,6 +7,10 @@ const inventorySchema = new Schema({
     type: String,
     required: true
   },
+  supplierID: {
+    type: Schema.Types.ObjectId,
+    ref: 'Supplier'
+  },
   itemPrice: {
     type: Number,
     required: true
