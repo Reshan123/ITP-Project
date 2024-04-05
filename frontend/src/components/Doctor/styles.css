@@ -15,11 +15,6 @@
 
 
 
-
-
-
-
-
 .doctorLoginPage{
     z-index: 999;
     background: url(./Images/background.png) no-repeat, var(--primaryPink);
@@ -126,3 +121,28 @@
     border: none;
     transition: 0.3s;
 }
+
+
+
+
+
+
+
+
+/* Calendar container styling */
+.calendar-container {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+  }
+
+  .calendar-container:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }

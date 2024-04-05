@@ -177,6 +177,7 @@
 .updateProfilePage .backArrow{
     margin: 25px 50px;
     align-self: self-start;
+    padding: 0px;
 }
 
 .updateProfilePage .backArrow svg{
