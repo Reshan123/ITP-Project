@@ -111,11 +111,27 @@ const getOwnerBookings = async (req, res) => {
     }
 }
 
+//GET all bookings for doctor
+const getDoctorBookings = async (req, res) => {
+    try {
+        const doctorName = req.params.doctorName;
+
+        const decodeDoctorName = decodeURIComponent(doctorName)
+        
+        const bookings = await Booking.find({ doctor: decodeDoctorName });
+
+        res.status(200).json(bookings);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 module.exports = {
     createBooking,
     getBookings,
     getBooking,
     updateBooking,
     getOwnerBookings,
-    deleteBooking
+    deleteBooking,
+    getDoctorBookings
 }
