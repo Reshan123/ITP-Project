@@ -1,6 +1,8 @@
 import React from 'react'
-
+import { useNavigate } from "react-router-dom"
 const LostPetDetails = ({notice}) => {
+
+    const navigate = useNavigate() 
 
     //making the date readable format
     const createdAt = notice.createdAt.split('T')[0]
@@ -31,7 +33,7 @@ const LostPetDetails = ({notice}) => {
                 {/** <p><strong>Email: </strong>{notice.email}</p>*/}
                 <p className='createdAt'>{formattedDate}</p>
                 
-                <button>View Details</button>
+                <button onClick={()=>{navigate('/pet/lostpetnotices/alldetails',{ state:notice })}}>View Details</button>
                 
                 
             </div>
