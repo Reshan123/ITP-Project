@@ -118,3 +118,37 @@
     border: none;
     transition: 0.3s;
 }
+
+/*Styles for lost pet*/
+.container .acceptbutton{
+    background-color: rgba(128, 81, 143, 0.541); /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display:inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 23px; /* Add margin-bottom to separate the buttons */
+    margin-left: 90px;
+}
+
+.container .discardbutton{
+    background-color: rgba(128, 81, 143, 0.541); /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display:inline;
+    position: relative;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Add margin-bottom to separate the buttons */
+    left: 20%;
+}

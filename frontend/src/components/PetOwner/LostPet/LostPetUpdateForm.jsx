@@ -38,7 +38,7 @@ const LostPetUpdateForm = ({navBarProps}) => {
         setDescription(location.state.description || '');
         setContactNo(location.state.contactNo || '');
         setEmail(location.state.email || '');
-        setLocation(location.state.locations || ''); 
+        setLocation(location.state.location || ''); 
         setGender(location.state.gender || '');
         setAge(location.state.age || 0); // Use default value 0 if age is null
         setImage(location.state.image || '')
@@ -132,7 +132,7 @@ const updateData = async (id) =>{
       <input 
         type="text" 
         onChange={(e) => setLocation(e.target.value)} 
-        value={location} 
+        value={locations} 
       />
 
       <label>Gender:</label>
