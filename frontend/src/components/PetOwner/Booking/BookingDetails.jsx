@@ -26,7 +26,7 @@ const BookingDetails = ({booking}) => {
         <p><strong>Date and Time :</strong> {new Date(booking.start_time).toLocaleString()}</p>
         <p><strong>Status :</strong> {booking.status}</p>
         <span onClick={handleDelete}>Delete</span>
-        <Link className='update-btn' to={`/update/${booking._id}`}>Update</Link>
+        <Link className='update-btn' to={`/pet/profile/booking-update/${booking._id}`}>Update</Link>
     </div>
   )
 }

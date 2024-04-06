@@ -33,14 +33,14 @@ const InventoryItemDetails = () => {
       dispatch({ type: 'DELETE_ITEM', payload: json })
 
     }
-  }
+  };
 
 
   return (
 
 
     <div className="inventoryiems">
-      
+
       <div className="addItem">
         <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
       </div>
