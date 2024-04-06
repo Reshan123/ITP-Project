@@ -53,10 +53,10 @@ const InventoryItemUpdate = () => {
     formData.append('itemName', itemName);
     formData.append('itemImage', itemImageURL);
     formData.append('itemPrice', itemPrice);
+    formData.append('id', itemID)
     formData.append('itemStockCount', itemStockCount);
     formData.append('itemDescription', itemDescription);
-    formData.append('locationID', locationID);
-    axios.put("http://localhost:4000/api/InventoryItemUpdate/", formData)
+    axios.put("http://localhost:4000/api/InventoryItemUpdate", formData)
       .then(res => {
         intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }] })
         setError("")
