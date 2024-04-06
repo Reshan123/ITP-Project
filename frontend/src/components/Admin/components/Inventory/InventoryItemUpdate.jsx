@@ -1,86 +1,69 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import firebase from "firebase/compat/app"
+import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
 import "firebase/compat/storage"
 import './styles.css'
+import { useInventoryItemsContext } from '../../../../hooks/useInventoryItemsContext'
+
 
 const InventoryItemUpdate = () => {
 
-  const { id } = useParams()
+  const { itemID } = useParams()
 
-  const [inventoryitem, setInventoryitem] = useState(null)
-
-  const [itemName, setItemName] = useState(inventoryitem?.itemName)
-  const [itemPrice, setItemPrice] = useState(inventoryitem?.itemPrice)
-  const [itemStockCount, setItemStockCount] = useState(inventoryitem?.itemStockCount)
-  const [itemDescription, setItemDescription] = useState(inventoryitem?.itemDescription)
-  const [itemImageURL, setItemImageURL] = useState(inventoryitem?.itemImageURL)
-  const [error, setError] = useState(null)
-
+  const { inventoryitem, dispatch: intentoryItemDispatch } = useInventoryItemsContext()
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetch('http://localhost:4000/api/inventoryItems/' + id);
-        const json = await response.json();
+    if (inventoryitem) {
+      inventoryitem.map(item => {
+        if (item._id == itemID) {
+          if (item.itemName) {
+            setItemName(item.itemName)
+          }
+          if (item.itemPrice) {
+            setItemName(item.itemPrice)
+          }
+          if (item.itemStockCount) {
+            setItemName(item.itemStockCount)
+          }
+          if (item.itemDescription) {
+            setItemName(item.itemDescription)
+          }
+          if (item.itemImageURL) {
+            setItemName(item.itemImageURL)
+          }
 
-        if (response.ok) {
-          setInventoryitem(json);
         }
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+      })
     }
+  }, [inventoryitem])
 
-    fetchItems()
-  }, [id])
+  const navigate = useNavigate()
 
-  const handleFileUpload = (e) => {
-    const selectedFile = e.target.files[0]
+  const [itemName, setItemName] = useState("")
+  const [itemPrice, setItemPrice] = useState("")
+  const [itemStockCount, setItemStockCount] = useState("")
+  const [itemDescription, setItemDescription] = useState("")
+  const [itemImageURL, setItemImageURL] = useState("")
+  const [error, setError] = useState("")
 
-    if (selectedFile) {
-      const storageRef = firebase.storage().ref()
-      const fileRef = storageRef.child(selectedFile.name)
-
-      fileRef.put(selectedFile)
-        .then((snapshot) => {
-          snapshot.ref.getDownloadURL()
-            .then((downloadURL) => {
-              console.log(downloadURL)
-              setItemImageURL(downloadURL)
-            })
-        })
-    } else {
-      console.log("No files selected")
-    }
-  }
-
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault()
+    const formData = new FormData();
 
-    const inventoryitem = { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }
-
-    const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
-      method: 'PATCH',
-      body: JSON.stringify(inventoryitem),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const json = await response.json()
-
-    if (!response.ok) {
-      setError(json.error)
-    }
-
-    if (response.ok) {
-      setError(null)
-      console.log('New Update Added', json)
-      window.history.back();
-    }
-  };
+    formData.append('itemName', itemName);
+    formData.append('itemImage', itemImageURL);
+    formData.append('itemPrice', itemPrice);
+    formData.append('itemStockCount', itemStockCount);
+    formData.append('itemDescription', itemDescription);
+    formData.append('locationID', locationID);
+    axios.put("http://localhost:4000/api/InventoryItemUpdate/", formData)
+      .then(res => {
+        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }] })
+        setError("")
+        navigate('/Inventoryitemdetails')
+      })
+      .catch(err => setError(err.response.data.error))
+  }
 
   return (
     <div className="update-items">
@@ -91,8 +74,7 @@ const InventoryItemUpdate = () => {
         <input
           type="text"
           onChange={(e) => setItemName(e.target.value)}
-          defaultValue={inventoryitem?.itemName}
-          required
+          value={itemName}
         />
         <label>Item Price (in LKR)</label>
         <input
@@ -116,14 +98,13 @@ const InventoryItemUpdate = () => {
         <label>Item Image</label>
         <input
           type="file"
-          defaultValue={inventoryitem?.itemImageURL}
-          onChange={handleFileUpload}
+          defaultValue={itemImageURL}
 
         />
         <input
           type="text"
           placeholder='Image URL'
-          value={itemImageURL}
+          defaultValue={inventoryitem?.itemImageURL}
           onChange={(e) => setItemImageURL(e.target.value)}
         />
 
@@ -135,7 +116,6 @@ const InventoryItemUpdate = () => {
     </div>
 
   )
+};
 
-}
-
-export default InventoryItemUpdate
+export default InventoryItemUpdate;
