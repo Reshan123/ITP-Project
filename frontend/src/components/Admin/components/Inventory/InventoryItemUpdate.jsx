@@ -49,21 +49,21 @@ const InventoryItemUpdate = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    const formData = new FormData();
-
-    formData.append('itemName', itemName);
-    formData.append('itemImage', itemImageURL);
-    formData.append('itemPrice', itemPrice);
-    formData.append('id', itemID)
-    formData.append('itemStockCount', itemStockCount);
-    formData.append('itemDescription', itemDescription);
-    axios.put("http://localhost:4000/api/InventoryItemUpdate", formData)
+    const formData = {
+      itemName,
+      itemPrice,
+      itemStockCount,
+      itemDescription,
+      itemImageURL
+    }
+    axios.put("http://localhost:4000/api/inventoryItems/"+itemID, formData)
       .then(res => {
         intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }] })
         setError("")
-        navigate('/Inventoryitemdetails')
+        console.log(res)
+        navigate('/admin/home/Inventoryitemdetails')
       })
-      .catch(err => setError(err.response.data.error))
+      .catch(err => setError(err.response.data))
   }
 
   return (
