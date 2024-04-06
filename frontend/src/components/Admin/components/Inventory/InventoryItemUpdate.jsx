@@ -10,32 +10,33 @@ const InventoryItemUpdate = () => {
 
   const { itemID } = useParams()
 
-  const { inventoryitem, dispatch: intentoryItemDispatch } = useInventoryItemsContext()
+  const { inventoryitems, dispatch: intentoryItemDispatch } = useInventoryItemsContext()
 
   useEffect(() => {
-    if (inventoryitem) {
-      inventoryitem.map(item => {
+    if (inventoryitems) {
+      inventoryitems.map(item => {
         if (item._id == itemID) {
+          console.log(item._id)
           if (item.itemName) {
             setItemName(item.itemName)
           }
           if (item.itemPrice) {
-            setItemName(item.itemPrice)
+            setItemPrice(item.itemPrice)
           }
           if (item.itemStockCount) {
-            setItemName(item.itemStockCount)
+            setItemStockCount(item.itemStockCount)
           }
           if (item.itemDescription) {
-            setItemName(item.itemDescription)
+            setItemDescription(item.itemDescription)
           }
           if (item.itemImageURL) {
-            setItemName(item.itemImageURL)
+            setItemImageURL(item.itemImageURL)
           }
 
         }
       })
     }
-  }, [inventoryitem])
+  }, [inventoryitems])
 
   const navigate = useNavigate()
 
@@ -80,21 +81,21 @@ const InventoryItemUpdate = () => {
         <input
           type='number'
           onChange={(e) => setItemPrice(e.target.value)}
-          defaultValue={inventoryitem?.itemPrice}
+          value={itemPrice}
         />
         <label>Initial Stock Level</label>
         <input
           type="number"
           onChange={(e) => setItemStockCount(e.target.value)}
-          defaultValue={inventoryitem?.itemStockCount}
+          value={itemStockCount}
         />
         <label>Item Description</label>
         <input
           type="text"
           onChange={(e) => setItemDescription(e.target.value)}
-          defaultValue={inventoryitem?.itemDescription}
+          value={itemDescription}
         />
-        <img src={inventoryitem?.itemImageURL} alt="item" />
+        <img src={inventoryitems?.itemImageURL} alt="item" />
         <label>Item Image</label>
         <input
           type="file"
@@ -104,7 +105,7 @@ const InventoryItemUpdate = () => {
         <input
           type="text"
           placeholder='Image URL'
-          defaultValue={inventoryitem?.itemImageURL}
+          value={itemImageURL}
           onChange={(e) => setItemImageURL(e.target.value)}
         />
 
