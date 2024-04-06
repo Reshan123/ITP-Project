@@ -14,13 +14,14 @@ const InventoryItemForm = () => {
     const [itemStockCount, setItemStockCount] = useState('')
     const [itemDescription, setItemDescription] = useState('')
     const [itemImageURL, setItemImageURL] = useState('')
+    const [supplierID, setSupplierID] = useState('')
     const [error, setError] = useState(null)
 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const inventoryitem = { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }
+        const inventoryitem = { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL, supplierID }
 
         const response = await fetch('http://localhost:4000/api/inventoryItems/', {
             method: 'POST',
@@ -41,6 +42,7 @@ const InventoryItemForm = () => {
             setItemStockCount('')
             setItemDescription('')
             setItemImageURL('')
+            setSupplierID('')
             setError(null)
             console.log('New Item Added!', json)
             dispatch({ type: 'CREATE_ITEM', payload: json })
@@ -80,6 +82,20 @@ const InventoryItemForm = () => {
                     onChange={(e) => setItemName(e.target.value)}
                     value={itemName}
                 />
+                {/* <label>Select the Supplier</label>
+                <select
+                    id="supplier"
+                    onChange={(e) => setSupplierID(e.target.value)}
+                    value={supplierID}
+                >
+                    <option value="">Select Supplier</option>
+                    {suppliers.map(supplier => (
+                        <option key={supplier._id} value={supplier._id}>{supplier.name}</option>
+                    ))}
+                </select> */}
+
+
+
                 <label>Item Price (in LKR)</label>
                 <input
                     type='number'

@@ -160,7 +160,8 @@
 
 .create input[type="text"],
 .create input[type="number"],
-.create input[type="file"] {
+.create input[type="file"],
+.create select {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
