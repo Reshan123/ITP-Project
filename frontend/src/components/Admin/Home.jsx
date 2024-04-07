@@ -89,7 +89,7 @@ const Home = () => {
                         <Route path='/LandingPage' element={<LandingPage />} exact />
                         <Route path='/Inventoryitemdetails' element={<InventoryItemDetails />} />
                         <Route path='/InventoryItemForm' element={<InventoryItemForm />} />
-                        <Route path='/InventoryItemUpdate/:id' element={<InventoryItemUpdate />} />
+                        <Route path='/InventoryItemUpdate/:itemID' element={<InventoryItemUpdate />} />
                         <Route path='/doctor' element={<Doctor />} />
                         <Route path='/petowners' element={<PetOwners />} />
                         <Route path='/createdoctor' element={<CreateDoctor />} />

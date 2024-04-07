@@ -22,6 +22,6 @@ router.post('/',addNewItem )
 router.delete('/:id', deleteItem)
 
 // UPDATE an item
-router.patch('/:id', updateItem)
+router.put('/:id', updateItem)
 
 module.exports = router
