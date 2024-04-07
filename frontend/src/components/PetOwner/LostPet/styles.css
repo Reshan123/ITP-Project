@@ -187,3 +187,57 @@
   outline: none;
 }
 
+/*All lost pet details*/
+.container2{
+  background-color: #f5f5f5; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    padding: 20px; 
+    border-radius: 20px; /* Rounded corners */
+    height:600px;
+    width: 75%;
+   display:flex;
+    margin-left: 12%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.allpetdetails {
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Add padding for spacing */
+  
+}
+.allpetdetailstext {
+  position: relative;
+  bottom: 65%;
+  left: 120%;
+  
+}
+.allpetdetails h4 {
+  font-size: 35px;
+}
+
+.allpetdetails p {
+  position: relative;
+  margin: 10px 0; /* Add spacing between paragraphs */
+}
+
+.allpetdetails p::after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  background-color: #ddd; /* Line color */
+  position: absolute;
+  bottom: 0; /* Align the line to the bottom of the paragraph */
+  left: 0; /* Start the line from the left edge */
+  
+}
+
+.allpetdetails img{
+  width: 100%; /* Adjust width of the image */
+  height: 300px; /* Maintain aspect ratio */
+  margin-top: 20px; /* Add bottom margin for spacing */
+  border-radius: 10px; /* Rounded corners */
+  
+}

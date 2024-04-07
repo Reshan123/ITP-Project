@@ -1,6 +1,8 @@
 import React from 'react'
-
+import { useNavigate } from "react-router-dom"
 const LostPetDetails = ({notice}) => {
+
+    const navigate = useNavigate() 
 
     //making the date readable format
     const createdAt = notice.createdAt.split('T')[0]
@@ -11,25 +13,33 @@ const LostPetDetails = ({notice}) => {
     });
 
   return (
-    <div className= "lostpetdetails" >
-        
+        <>
+        {notice.status === 'Confirmed' && (
+            <div className= "lostpetdetails" >
+                
+                
+                
+                {/* Display the images */}
+                    {notice.image && notice.image.map((imageSrc, index) => (
+                        <img key={index} src={imageSrc} alt={`Pet ${index + 1}`} />
+                    ))} 
 
-        {/* Display the images */}
-            {notice.image && notice.image.map((imageSrc, index) => (
-                <img key={index} src={imageSrc} alt={`Pet ${index + 1}`} />
-            ))} 
+                <h4>{notice.petName}</h4>
+                {/* <p><strong>Owner Name: </strong>{notice.ownerName}</p>*/}
+                <p><strong> </strong>{notice.breed}</p>
+                <p><strong>Description: </strong>{notice.description}</p>
+                <p><strong>ContactNo: </strong>{notice.contactNo}</p>
+                <p><strong>Location: </strong>{notice.location}</p>
+                {/** <p><strong>Email: </strong>{notice.email}</p>*/}
+                <p className='createdAt'>{formattedDate}</p>
+                
+                <button onClick={()=>{navigate('/pet/lostpetnotices/alldetails',{ state:notice })}}>View Details</button>
+                
+                
+            </div>
 
-        <h4>{notice.petName}</h4>
-        {/* <p><strong>Owner Name: </strong>{notice.ownerName}</p>*/}
-        <p><strong> </strong>{notice.breed}</p>
-        <p><strong>Description: </strong>{notice.description}</p>
-        <p><strong>ContactNo: </strong>{notice.contactNo}</p>
-        <p><strong>Location: </strong>{notice.location}</p>
-        {/** <p><strong>Email: </strong>{notice.email}</p>*/}
-        <p className='createdAt'>{formattedDate}</p>
-        
-        <button>View Details</button>
-    </div>
+        )}
+    </>   
   )
 }
 

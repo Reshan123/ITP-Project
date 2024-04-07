@@ -16,6 +16,14 @@ export const inventoryItemsReducer = (state, action) => {
             return {
                 inventoryitems: state.inventoryitems.filter((w) => w._id !== action.payload._id)
             }
+        case 'UPDATE':
+            const objIndex = state.inventoryitems.findIndex(obj => obj._id == action.payload[0])
+            state.inventoryitems[objIndex].itemName = action.payload[1].itemName
+            state.inventoryitems[objIndex].itemPrice = action.payload[1].itemPrice
+            state.inventoryitems[objIndex].itemStockCount = action.payload[1].itemStockCount
+            state.inventoryitems[objIndex].itemDescription = action.payload[1].itemDescription
+            state.inventoryitems[objIndex].itemImageURL = action.payload[1].itemImageURL
+            return state
         default:
             return state
     }

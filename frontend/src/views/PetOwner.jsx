@@ -13,6 +13,8 @@ import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import LostNoticeForm from '../components/PetOwner/LostPet/LostNoticeForm';
+import LostPetUpdateForm from '../components/PetOwner/LostPet/LostPetUpdateForm';
+import AllLostPetDetails from '../components/PetOwner/LostPet/AllLostPetDetails';
 import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
 import ViewForm from '../components/PetOwner/AdoptPet/ViewForm';
@@ -73,7 +75,9 @@ const PetOwner = () => {
                 <Route path='/adopt/form-details/:id' element={<ViewForm navBarProps={navBarProps} />} />
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
+                <Route path='/lostpetnotices/alldetails' element={<AllLostPetDetails navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices/lostpetform' element={<LostNoticeForm navBarProps={navBarProps} />} />
+                <Route path='/lostpetnotices/lostpetform/updatelostpet' element={<LostPetUpdateForm navBarProps={navBarProps} />} />
                 <Route path='/profile' element={<Profile navBarProps={navBarProps} />} />
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
