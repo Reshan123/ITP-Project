@@ -1,0 +1,121 @@
+/* Styles for the employee table */
+.booking-table{
+    width: 1200px;
+    margin: 20px 20px 20px 20px;
+    margin-top: 30px;
+    background-color: #f3f3f3;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+  
+/* Hover styles for the employee table */
+.booking-table:hover{
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+}
+  
+
+
+
+  /* Common styles for the tables */
+.booking-table-style{
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Agenda-Light, sans-serif;
+    font-weight: 100; 
+    background: #333; color: #fff;
+    text-rendering: optimizeLegibility;
+    border-radius: 5px; 
+  }
+  
+  /* Styles for the table header */
+  .booking-table-style thead tr th { 
+    font-weight: 600; 
+  }
+  
+  /* Styles for table header and table data */
+  .booking-table-style thead th, .booking-table-style tbody td { 
+    padding: 10px; 
+    font-size: 16px;
+  }
+  
+  
+  .booking-table-style tbody td { 
+    padding: .7rem; 
+    font-size: 16px;
+    color: #444; 
+    background: #eee;
+    transition: 0.3s;
+  }
+  
+  /* Styles for alternating rows in the table body - w3school */
+  .booking-table-style tbody tr:not(:last-child) { 
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Styles for the update button */
+  .table-update-btn{
+    width: 60px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    margin-right: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the update button */
+  .table-update-btn:hover{
+    background-color: #8737ce;
+  }
+  
+  /* Styles for the delete button */
+  .table-delete-btn{
+    width: 60px;
+    height:30px;
+    background-color: rgb(255, 0, 0);
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+    color: #FFF;
+    border: 0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the delete button */
+  .table-delete-btn:hover{
+    background-color: rgb(175, 0, 0);
+  }
+  
+  
+  .table-delete-btn a, .table-update-btn a{
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* responsive table - w3school*/
+  @media screen and (max-width: 600px) {
+    .booking-table-style caption { background-image: none; }
+    .booking-table-style thead { display: none; }
+    .booking-table-style tbody td { 
+      display: block; 
+      padding: .6rem; 
+    }
+    .booking-table-style tbody tr td:first-child { 
+      background: #666; 
+      color: #fff; 
+    }
+    .booking-table-style tbody td:before { 
+      content: attr(data-th); 
+      font-weight: bold;
+      display: inline-block;
+      width: 6rem;  
+    }
+  }
