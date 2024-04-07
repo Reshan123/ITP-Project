@@ -95,13 +95,12 @@ const InventoryItemUpdate = () => {
           onChange={(e) => setItemDescription(e.target.value)}
           value={itemDescription}
         />
-        <img src={inventoryitems?.itemImageURL} alt="item" />
         <label>Item Image</label>
         <input
           type="file"
           defaultValue={itemImageURL}
-
         />
+        <img src={itemImageURL} alt="item" />
         <input
           type="text"
           placeholder='Image URL'
