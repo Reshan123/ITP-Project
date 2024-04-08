@@ -256,7 +256,7 @@ const Home = ({ navBarProps }) => {
                                 <option defaultValue="Cat">Cat</option>
                                 <option defaultValue="Bird">Bird</option>
                             </select>
-                        </div> */}
+                        </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' onChange={(e) => setPetBreed(e.target.value)} value ={pet_breed} />
                         </div>
