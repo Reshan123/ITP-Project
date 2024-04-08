@@ -19,6 +19,7 @@ import AddPetForm from '../components/PetOwner/Profile/AddPetForm';
 import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
 import ViewForm from '../components/PetOwner/AdoptPet/ViewForm';
 import UpdateBooking from '../components/PetOwner/Booking/UpdateBooking';
+import Footer from '../components/PetOwner/Footer/Footer'
 
 const PetOwner = () => {
 
@@ -83,6 +84,7 @@ const PetOwner = () => {
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
                 <Route path='/profile/booking-update/:id' element={<UpdateBooking navBarProps={navBarProps}/>} />
             </Routes>
+            <Footer />
         </>
     );
 }

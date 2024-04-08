@@ -4,8 +4,11 @@ import ourServices from './Images/ourservices.png'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
 import { usePetContext } from '../../../hooks/usePetContext'
+import { useNavigate } from 'react-router-dom'
 
 const Home = ({ navBarProps }) => {
+
+    const navigate = useNavigate()
 
     navBarProps("#E2929D", "#FFF")
 
@@ -30,6 +33,29 @@ const Home = ({ navBarProps }) => {
     //doctor use states
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    useEffect(()=> {
+        const checkUserValid = async () => {
+            try {
+                const config = {
+                    method: 'GET',
+                    headers: {
+                        'authorization': `Bearer ${user.userToken}`
+                    }
+                }
+                const response = await fetch('http://localhost:4000/api/petOwner/verifyToken', config)
+                if (!response.ok){
+                    localStorage.removeItem('user')
+                    userDispatch({ type: "LOGOUT" })
+                    navigate('/pet/home')
+                }
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+        checkUserValid()
+    }, [])
+
 
     //booking submit function
     const handleSubmit = async(e) => {
@@ -100,14 +126,13 @@ const Home = ({ navBarProps }) => {
 
 
         const fetchPetData = async () => {
-
-            const config = {
-                headers: {
-                    'authorization': `Bearer ${user.userToken}`
-                }
-            }
-
             try {
+                const config = {
+                    method: 'GET',
+                    headers: {
+                        'authorization': `Bearer ${user.userToken}`
+                    }
+                }
                 const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
 
                 if (!petDetailsResponse.ok) {
@@ -116,9 +141,7 @@ const Home = ({ navBarProps }) => {
                 const petDetailsJson = await petDetailsResponse.json()
 
                 petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-
-                console.log(pets)
-
+                
             } catch (error) {
                 console.log("pet owner page error", error)
             }
@@ -210,7 +233,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Owner Name' onChange={(e) => setOwnerName(e.target.value)} value={user.username} required />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="email" placeholder='Owner Email' readOnly defaultValue={user.email} />
+                            <input type="email" placeholder='Owner Email' readOnly value={user.email} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
@@ -219,7 +242,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
                         </div> */}
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="petName" value={selectedPet ? selectedPet.petName : ''} onChange={(e) => handlePetSelect(e.target.value)} required>
+                            <select name="petName" onChange={(e) => setPetName(e.target.value)} required>
                                 <option value="">Select a Pet</option>
                                 {pets && pets.map(pet => (
                                     <option key={pet._id} value={pet.petName}>{pet.petName}</option>
@@ -227,9 +250,6 @@ const Home = ({ navBarProps }) => {
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Species' onChange={(e) => setPetSpecies(e.target.value)} value ={pet_species}  required/>
-                        </div>
-                        {/* <div className="homeBookAppointmentsFormInputWrapper">
                             <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
                                 <option defaultValue="">Select a Species</option>
                                 <option defaultValue="Dog">Dog</option>
@@ -244,18 +264,12 @@ const Home = ({ navBarProps }) => {
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
-                                <>
-                                    {doctors.length === 0 ? (
-                                        <input type = "text" value={"Sorry, no doctors available."} disabled/>
-                                    ) : (
-                                        <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
-                                            <option value="">Select a Doctor</option>
-                                            {doctors.map(doctor => (
-                                                <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
-                                            ))}
-                                        </select>
-                                    )}
-                                </>
+                                <select name="doctor" value={doctor} onChange={(e) => setDoctor(e.target.value)} required>
+                                <option value="">Select a Doctor</option>
+                                {doctors.map(doctor => (
+                                    <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
+                                ))}
+                                </select>
                             )}
                         </div>
 
