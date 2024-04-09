@@ -101,9 +101,9 @@ const Profile = ({ navBarProps }) => {
     
 
     const logOutUser = () => {
-        navigate('/pet/home')
         localStorage.removeItem('user')
         userDispatch({ type: "LOGOUT" })
+        navigate('/pet/home')
     }
 
     const deleteProfile = async () => {

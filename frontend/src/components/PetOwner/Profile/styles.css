@@ -367,9 +367,10 @@
     justify-content:center; /* Center details vertically */
 
     margin: 1px 0;
+    
 }
 .lostprofiledetails .details h4{
-    font-size: 25px;
+    font-size: 20px;
 }
 .lostprofiledetails .createdAt {
     position: absolute;
