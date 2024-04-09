@@ -50,8 +50,8 @@ const LostPetProfileDetails = ({notice}) => {
             <p><strong>Status: </strong>{notice.status}</p>
             <p className='createdAt'>{formattedDate}</p>
         </div>
-        <button className='btn1'>View Details</button>
-        <button className='btn2'onClick={() => navigate('/pet/lostpetnotices/lostpetform/updatelostpet',{ state:notice, id:notice._id })}  >Update</button>
+        <button className='btn1' onClick={()=>{navigate('/pet/lostpetnotices/alldetails',{ state:notice });{window.scrollTo(0,0);}}}>View Details</button>
+        <button className='btn2'onClick={() => {navigate('/pet/lostpetnotices/lostpetform/updatelostpet',{ state:notice, id:notice._id });{window.scrollTo(0,0);}}}  >Update</button>
         <button className='btn3' onClick={()=> handleDelete(notice._id)} >Delete</button>
     </div>
   )

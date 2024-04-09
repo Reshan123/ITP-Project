@@ -14,6 +14,7 @@ const AllLostPetDetails = ({navBarProps}) => {
                     <img key={index} src={imageSrc} alt={`Pet ${index + 1}`} />
                 ))} 
             <h4 className='allpetdetailstext'>{location.state.petName}</h4>
+            <button className='allpetdetailsbtn'>Send message</button>
             <p className='allpetdetailstext'><strong>Owner Name:</strong>{location.state.ownerName}</p>
             <p className='allpetdetailstext'><strong>Location:</strong>{location.state.location}</p>
             <p className='allpetdetailstext'><strong>Gender:</strong>{location.state.gender}</p>
