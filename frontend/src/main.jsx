@@ -10,8 +10,10 @@ import { DoctorContextProvider } from './context/doctorContext.jsx'
 import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
 import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
 import { LostPetsContextProvider } from './context/LostPetContext.jsx'
+import {ConversationProvider } from './context/ConversationContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
+import { SocketContextProvider } from './context/SocketContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -25,28 +27,32 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
     <AdoptionContextProvider>
       <PetContextProvider>
         <BookingContextProvider>
-          <LostPetsContextProvider>
-            <PetContextProvider>
-              <DoctorContextProvider>
-                <AllDoctorContextProvider>
-                  <AllPetOwnerContextProvider>
-                    <AllPetsContextProvider>
-                      <InventoryItemsContextProvider>
-                        <App />
-                      </InventoryItemsContextProvider>
-                    </AllPetsContextProvider>
-                  </AllPetOwnerContextProvider>
-                </AllDoctorContextProvider>
-              </DoctorContextProvider>
-            </PetContextProvider>
-          </LostPetsContextProvider>
+          <SocketContextProvider>
+            <LostPetsContextProvider>
+              <ConversationProvider>
+                <PetContextProvider>
+                  <DoctorContextProvider>
+                    <AllDoctorContextProvider>
+                      <AllPetOwnerContextProvider>
+                        <AllPetsContextProvider>
+                          <InventoryItemsContextProvider>
+                            <App />
+                          </InventoryItemsContextProvider>
+                        </AllPetsContextProvider>
+                      </AllPetOwnerContextProvider>
+                    </AllDoctorContextProvider>
+                  </DoctorContextProvider>
+                </PetContextProvider>
+              </ConversationProvider>
+            </LostPetsContextProvider>
+          </SocketContextProvider>
         </BookingContextProvider>
       </PetContextProvider>
     </AdoptionContextProvider>
   </UserContextProvider>
-)
+);
