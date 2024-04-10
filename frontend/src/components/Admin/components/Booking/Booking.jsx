@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useBookingContext } from '../../../../hooks/useBookingContext';
+import { useNavigate} from 'react-router-dom'
 import './styles.css';
 import ViewPopup from './ViewPopup';
 
@@ -7,6 +8,8 @@ const Booking = () => {
   const { bookings, dispatch } = useBookingContext();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [buttonPopup, setButtonPopup] = useState(false);
+
+  const navigate = useNavigate()
 
   // if(buttonPopup){
   //   document.body.classList.add('active-popup')
@@ -56,6 +59,10 @@ const Booking = () => {
         }
       }
   };
+
+  const handleUpdate = async(id) => {
+    navigate(`/admin/home/Booking/update/${id}`)
+  }
 
   return (
     <div className='booking-content'>
@@ -118,7 +125,7 @@ const Booking = () => {
             <button className="table-delete-btn" onClick={() => handleDelete(selectedBooking._id)}>
                 Delete
             </button>
-            <button className="table-update-btn">
+            <button className="table-update-btn" onClick={() => handleUpdate(selectedBooking._id)}>
                 Update
             </button>
           </div>

@@ -42,6 +42,8 @@
 
 
 
+
+
   /* Common styles for the tables */
 .booking-table-style{
     margin: 0 auto;
@@ -119,8 +121,12 @@
   }
 
 
-  /* Popup Styles */
 
+
+
+
+
+  /* Popup Styles */
   .popup{
     position: fixed;
     top: 0;
@@ -242,3 +248,106 @@
     color: #fff;
     text-decoration: none;
   }
+
+
+
+
+
+
+
+
+  /* Admin Update Booking Styles */
+
+#AdminUpdateAppointments{
+  scroll-margin-top: 5rem;
+}
+
+.AdminUpdateAppointments{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 100px;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsHeading{
+    font-size: 3rem;
+    color: #9453ce;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsText{
+    width: 75%;
+    color: #9453ce;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm{
+    width: 75%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px 25px;
+    align-content: stretch;
+}
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper input,
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper textarea, .AdminUpdateAppointmentsFormInputWrapper select{
+    padding: 10px 8px;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper:nth-child(9){
+    grid-column: 1/4;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton{
+  grid-column: 2;
+  align-self: center;
+  justify-self: center;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton button{
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background-color: #8f5ebb;
+  padding: 15px 25px;
+  transition: 0.3s;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton button:hover{
+  background-color:#6b0fbc;
+  transform: scale(1.03);
+  box-shadow: 0 10px 15px rgba(0,0,0,.3);
+}
+
+.hint-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint-button {
+  background-color: #e0e0e0;
+  color: #555;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: not-allowed;
+}
+
+.hint-text {
+  margin-top: 5px;
+  color: rgb(197, 2, 2); /* You can adjust the color as needed */
+  font-size: 16px;
+}
+
+.AdminUpdateAppointments .backArrow{
+  align-self: self-start;
+  transform: scale(1.8);
+  cursor: pointer;
+}
