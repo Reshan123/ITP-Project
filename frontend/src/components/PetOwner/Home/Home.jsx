@@ -44,17 +44,23 @@ const Home = ({ navBarProps }) => {
                     }
                 }
                 const response = await fetch('http://localhost:4000/api/petOwner/verifyToken', config)
+
                 if (!response.ok){
                     localStorage.removeItem('user')
                     userDispatch({ type: "LOGOUT" })
-                    navigate('/pet/home')
+                    navigate('/pet/login')
+                }
+                if(response.ok){
+                    console.log("Token Valid")
                 }
             } catch(error){
                 console.log(error.message)
             }
         }
-        checkUserValid()
-    }, [])
+        if (user){
+            checkUserValid()
+        }
+    }, [user])
 
 
     //booking submit function
@@ -123,33 +129,6 @@ const Home = ({ navBarProps }) => {
           };
       
         fetchDoctors();
-
-
-        const fetchPetData = async () => {
-            try {
-                const config = {
-                    method: 'GET',
-                    headers: {
-                        'authorization': `Bearer ${user.userToken}`
-                    }
-                }
-                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
-
-                if (!petDetailsResponse.ok) {
-                    throw Error("Invalid Token")
-                }
-                const petDetailsJson = await petDetailsResponse.json()
-
-                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-                
-            } catch (error) {
-                console.log("pet owner page error", error)
-            }
-        }
-
-        if (user) {
-            fetchPetData()
-        }
 
       }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
 
