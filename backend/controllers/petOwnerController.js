@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '1h' })
+    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '30m' })
 }
 
 const login = async (req, res) => {
@@ -167,7 +167,7 @@ const verifyToken = async (req, res) => {
             throw Error("Inavlid User")
         }
 
-        res.status(200)
+        res.status(200).json({message: "VALID USER"})
 
     } catch (error){
         res.status(400).json({error: error.message})

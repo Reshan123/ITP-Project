@@ -10,28 +10,19 @@ const InventoryItemDetails = () => {
   const { inventoryitems, dispatch } = useInventoryItemsContext()
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchInventoryItems = async () => {
-      const response = await fetch('http://localhost:4000/api/inventoryItems/')
+
+  const handleClick = async (id) => {
+    const confrimDelte = confirm("Are u sure?")
+    if (confrimDelte){
+        const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
+        method: 'DELETE'
+      })
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({ type: 'SET_ITEMS', payload: json })
+        dispatch({ type: 'DELETE_ITEM', payload: json })
+
       }
-    }
-
-    fetchInventoryItems()
-  }, [dispatch])
-
-  const handleClick = async (id) => {
-    const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
-      method: 'DELETE'
-    })
-    const json = await response.json()
-
-    if (response.ok) {
-      dispatch({ type: 'DELETE_ITEM', payload: json })
-
     }
   };
 

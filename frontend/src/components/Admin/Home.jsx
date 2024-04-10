@@ -18,6 +18,7 @@ import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
 import CreateDoctor from './components/Doctor/CreateDoctor';
 import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
+import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 
@@ -29,7 +30,8 @@ const Home = () => {
     const navigate = useNavigate()
 
 
-    const { doctors, dispatch: allDocDispatch } = useAllDocContext()
+  const { inventoryitems, dispatch } = useInventoryItemsContext()
+  const { doctors, dispatch: allDocDispatch } = useAllDocContext()
 
     const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
     const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext();
@@ -38,6 +40,20 @@ const Home = () => {
             navigate('/admin/login')
         }
     }, [])
+
+
+    useEffect(() => {
+        const fetchInventoryItems = async () => {
+          const response = await fetch('http://localhost:4000/api/inventoryItems/')
+          const json = await response.json()
+    
+          if (response.ok) {
+            dispatch({ type: 'SET_ITEMS', payload: json })
+          }
+        }
+    
+        fetchInventoryItems()
+      }, [dispatch])
 
     useEffect(() => {
         const fetchAllData = async () => {
