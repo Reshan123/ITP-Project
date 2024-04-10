@@ -118,6 +118,9 @@ const Booking = () => {
             <button className="table-delete-btn" onClick={() => handleDelete(selectedBooking._id)}>
                 Delete
             </button>
+            <button className="table-update-btn">
+                Update
+            </button>
           </div>
         </ViewPopup>
       )}

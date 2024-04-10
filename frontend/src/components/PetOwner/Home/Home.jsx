@@ -117,6 +117,11 @@ const Home = ({ navBarProps }) => {
 
         setInputValidity(isValid);
 
+      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
+
+
+      useEffect(() => {
+
         //fetching all available doctors
         const fetchDoctors = async () => {
             try {
@@ -130,9 +135,8 @@ const Home = ({ navBarProps }) => {
           };
       
         fetchDoctors();
-
-      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
-
+        
+      }, [])
 
 
 

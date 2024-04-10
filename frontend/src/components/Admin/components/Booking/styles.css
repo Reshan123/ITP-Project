@@ -88,7 +88,6 @@
     font-weight: bold;
     border: 0;
     color: #FFF;
-    margin-right: 5px;
     border-radius: 25px;
     cursor: pointer;
     transition: 0.3s;
@@ -97,34 +96,6 @@
   /* Hover styles for the view button */
   .table-view-btn:hover{
     background-color: #8737ce;
-  }
-  
-  /* Styles for the delete button */
-  .table-delete-btn{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 100px;
-    height:30px;
-    background-color: rgb(255, 0, 0);
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFF;
-    border: 0;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  /* Hover styles for the delete button */
-  .table-delete-btn:hover{
-    background-color: rgb(175, 0, 0);
-  }
-  
-  
-  .table-delete-btn a, .table-view-btn a{
-    color: #fff;
-    text-decoration: none;
   }
   
   /* responsive table - w3school*/
@@ -157,26 +128,33 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(0,0,0,0.2);
-
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(4px);
   }
 
   .popup-inner{
     position: relative;
-    padding: 32px;
+    padding: 30px;
     width: 100%;
+    border-radius: 15px;
     max-width: 640px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
     background-color: #FFF;
+    transition: 0.3s;
+  }
+
+  .popup-inner:hover{
+    box-shadow: 0 5px 10px rgba(0,0,0,.5);
   }
 
   .popup-inner .close-btn{
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 20px;
+    right: 20px;
     align-self: self-start;
-    transform: scale(1.5);
+    transform: scale(1.8);
     cursor: pointer;
   }
 
@@ -213,4 +191,54 @@
   .booking-popup-details strong{
     font-family: "Poppins", sans-serif;
     padding-right: 5px;
+  }
+
+   /* Styles for the delete button */
+   .table-delete-btn{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 100px;
+    height:30px;
+    background-color: rgb(255, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    border: 0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the delete button */
+  .table-delete-btn:hover{
+    background-color: rgb(175, 0, 0);
+  }
+
+  /* Styles for the view button */
+  .table-update-btn{
+    position: absolute;
+    top: 70px;
+    right: 16px;
+    width: 100px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .table-update-btn:hover{
+    background-color: #8737ce;
+  }
+  
+  
+  .table-delete-btn a, .table-update-btn a{
+    color: #fff;
+    text-decoration: none;
   }
