@@ -5,15 +5,35 @@ const SideBar = () => {
     return (
         <div className="adminSideBar">
             <div className="adminSideBarLinksContainer">
-                <NavLink to="/admin/home/">Home</NavLink>
+
+                <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Home</div>
+                </NavLink>
                 <br />
-                <NavLink to="/admin/home/doctor">Doctor</NavLink>
+
+                <NavLink to="/admin/home/doctor" className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Doctor</div>
+                </NavLink>
                 <br />
-                <NavLink to='/admin/home/petowners'>Pet Owners</NavLink>
+
+                <NavLink to='/admin/home/petowners' className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Pet Owners</div>
+                </NavLink>
                 <br />
-                <NavLink to='/admin/home/Inventoryitemdetails'>Inventory</NavLink>
+
+                <NavLink to='/admin/home/Inventoryitemdetails' className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Inventory</div>
+                </NavLink>
                 <br />
-                <NavLink to='/admin/home/adoption-forms'>Adoption Forms</NavLink>
+
+                <NavLink to='/admin/home/adoption-forms' className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Adoption Forms</div>
+                </NavLink>
+                <br />
+
+                <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Lost Pet Notices</div>
+                </NavLink>
             </div>
         </div>
     );

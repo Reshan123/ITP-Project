@@ -24,8 +24,8 @@ const doctorSchema = new Schema({
         require:true
     },
     availability: {
-        type: String,
-        default: "false"
+        type: Boolean,
+        default: false
     }
 },{timestamps: true})
 

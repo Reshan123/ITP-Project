@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '3d' })
+    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '30m' })
 }
 
 const login = async (req, res) => {
@@ -153,4 +153,25 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers }
+const verifyToken = async (req, res) => {
+    const userID = req.user._id
+    
+    try{
+        if (!userID){
+            throw Error("Invalid Token")
+        }
+
+        const response = await petOwner.findById(userID)
+
+        if(!response){
+            throw Error("Inavlid User")
+        }
+
+        res.status(200).json({message: "VALID USER"})
+
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
+
+module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers, verifyToken }

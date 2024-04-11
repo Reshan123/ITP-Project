@@ -16,6 +16,8 @@ export const allDoctorReducer = (state, action) => {
             state.doctors[objIndex].email = action.payload[1].email
             state.doctors[objIndex].contactNo = action.payload[1].contactNo
             return state 
+        case "DELETE DOCTOR":
+            return { doctors: state.doctors.filter(obj => obj._id != action.payload) }
         default:
             return state
     }

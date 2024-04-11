@@ -4,8 +4,11 @@ import ourServices from './Images/ourservices.png'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
 import { usePetContext } from '../../../hooks/usePetContext'
+import { useNavigate } from 'react-router-dom'
 
 const Home = ({ navBarProps }) => {
+
+    const navigate = useNavigate()
 
     navBarProps("#E2929D", "#FFF")
 
@@ -13,6 +16,7 @@ const Home = ({ navBarProps }) => {
 
     const { user, dispatch: userDispatch} = useUserContext()
     const { pets, dispatch: petDispatch } = usePetContext()
+    const [selectedPet, setSelectedPet] = useState(null);
 
     //booking use states
     const [owner_name, setOwnerName] = useState('')
@@ -29,6 +33,35 @@ const Home = ({ navBarProps }) => {
     //doctor use states
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    useEffect(()=> {
+        const checkUserValid = async () => {
+            try {
+                const config = {
+                    method: 'GET',
+                    headers: {
+                        'authorization': `Bearer ${user.userToken}`
+                    }
+                }
+                const response = await fetch('http://localhost:4000/api/petOwner/verifyToken', config)
+
+                if (!response.ok){
+                    localStorage.removeItem('user')
+                    userDispatch({ type: "LOGOUT" })
+                    navigate('/pet/login')
+                }
+                if(response.ok){
+                    console.log("Token Valid")
+                }
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+        if (user){
+            checkUserValid()
+        }
+    }, [user])
+
 
     //booking submit function
     const handleSubmit = async(e) => {
@@ -64,6 +97,13 @@ const Home = ({ navBarProps }) => {
         }
     }
 
+    const handlePetSelect = async(petName) => {
+        const selectedPet = pets.find(pet => pet.petName === petName);
+        setPetName(petName)
+        setSelectedPet(selectedPet);
+        setPetSpecies(selectedPet.petSpecies)
+    }
+
     useEffect(() => {
         //setting values
         if (user){
@@ -90,30 +130,10 @@ const Home = ({ navBarProps }) => {
       
         fetchDoctors();
 
-
-        const fetchPetData = async () => {
-            try {
-                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
-
-                if (!petDetailsResponse.ok) {
-                    throw Error("Invalid Token")
-                }
-                const petDetailsJson = await petDetailsResponse.json()
-
-                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-
-                console.log(pets)
-
-            } catch (error) {
-                console.log("pet owner page error", error)
-            }
-        }
-
-        if (user) {
-            fetchPetData()
-        }
-
       }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
+
+
+
 
     return ( 
         <>
@@ -192,7 +212,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Owner Name' onChange={(e) => setOwnerName(e.target.value)} value={user.username} required />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="email" placeholder='Owner Email' readOnly defaultValue={user.email} />
+                            <input type="email" placeholder='Owner Email' readOnly value={user.email} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
@@ -223,7 +243,7 @@ const Home = ({ navBarProps }) => {
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
-                                <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
+                                <select name="doctor" value={doctor} onChange={(e) => setDoctor(e.target.value)} required>
                                 <option value="">Select a Doctor</option>
                                 {doctors.map(doctor => (
                                     <option key={doctor._id} value={doctor.name}>{doctor.name}</option>

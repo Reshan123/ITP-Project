@@ -1,5 +1,5 @@
 const express = require('express')
-const authorize = require('../middlewear/validateToken')
+const {authorize} = require('../middlewear/validateToken')
 //controller imports
 const doctorController = require('../controllers/doctorContoller')
 
@@ -20,5 +20,7 @@ doctorRouter.delete('/deleteDoctorDetailsFromToken', authorize, doctorController
 doctorRouter.get('/availableDoctors', doctorController.getAvailableDoctors)
 
 doctorRouter.put('/updateDoctorFromID/:docID', doctorController.updateDoctorFromID)
+
+doctorRouter.delete('/deleteDoctorFromID/:docID', doctorController.deleteDoctorFromID)
 
 module.exports = doctorRouter
