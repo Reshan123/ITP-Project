@@ -67,7 +67,7 @@ const PetOwner = () => {
                 <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
                 <Route path='/store' element={<Store navBarProps={navBarProps} />} />
                 <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
-                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm />} />
                 <Route path='/profile/adoption-form-update/:id' element={<UpdateForm />} />
                 <Route path='/adopt/form-details/:id' element={<ViewForm navBarProps={navBarProps} />} />
                 <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />

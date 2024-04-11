@@ -148,11 +148,16 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                 </label>
                 <label>
                     Activity Level:
-                    <input type="text" name="activityLevel" value={formData.description?.activityLevel || ''} onChange={handleInputChange} />
+                    <select value={formData.description.activityLevel} onChange={handleInputChange}>
+                        <option value="">Select...</option>
+                        <option value="High (2-3 h daily)">High (2-3 h daily)</option>
+                        <option value="Moderate (1-2h daily)">Moderate (1-2h daily)</option>
+                        <option value="Low (30min-1h daily)">Low (30min-1h daily)</option>
+                    </select>
                 </label>
                 <label>
                     Special Needs:
-                    <input type="text" name="specialNeeds" value={formData.description?.specialNeeds || ''} onChange={handleInputChange} />
+                    <input type="text" name="specialNeeds" value={formData.description.specialNeeds} onChange={handleInputChange} />
                 </label>
                 <button type="submit">Update</button>
             </form>
