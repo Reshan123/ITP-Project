@@ -1,3 +1,84 @@
 .allPetOwnerPage{
-    /* padding-bottom: 500px; */
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.allPetOwnerPage .allPetOwnerHeader{
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.allPetOwnerPage .allPetOwnerHeader p{
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.allPetOwnerPage .allPetOwnerHeader button{
+    border-radius: 11px;
+    border: none;
+    color: #FFF;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.allPetOwnerPage hr{
+    margin-bottom: 35px;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard{
+    width: 23%;
+    background-color: var(--primaryPurple);
+    display: grid;
+    padding: 10px 15px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard:hover{
+    transform: scale(1.05);
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .petOwnerName{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .petOwnerEmail{
+    font-size: .9rem;
+    margin-bottom: 20px;
+}
+
+
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .buttonContainer{
+    align-self: end;
+    margin: 15px 8px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .buttonContainer button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: #FFF;
+    font-weight: 600;
+    padding: 5px 15px;
+    transition: 0.3s;
 }

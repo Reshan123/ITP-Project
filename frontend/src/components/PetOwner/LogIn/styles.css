@@ -1,8 +1,8 @@
 .loginPage{
     z-index: 999;
     background: url(./Images/background.png) no-repeat, var(--primaryPink);
-    background-position: 700px center;
-    background-size: 600px;
+    background-position: 750px center;
+    background-size: 500px;
     min-height: 85vh;
     display: grid;
     grid-template-columns: 1fr 1fr;

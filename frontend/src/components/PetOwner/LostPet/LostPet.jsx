@@ -38,7 +38,7 @@ const LostPet = ({ navBarProps }) => {
                 <div className="container">
                     {/*mapping thought the notices only if ther are notices*/ }
                     {lostNotice && lostNotice.map((notice)=>(
-                        <LostPetDetails key={notice._id} notice={notice}/>
+                        <LostPetDetails key={notice._id} notice={notice} />
                     ))}
                 </div>
             </div>

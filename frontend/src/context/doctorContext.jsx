@@ -11,6 +11,9 @@ export const doctorReducer = (state, action) => {
             return { doctor: null }
         case "UPDATE":
             return { doctor: {...action.payload, userToken: state.doctor.userToken}}
+        case "UPDATE AVAILABILITY":
+            state.doctor.availability = action.payload
+            return state
         default:
             return state
     }

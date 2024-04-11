@@ -13,7 +13,7 @@ export const lostPetReducer = (state,action) => {
             return{
                 lostNotice:[action.payload,...state.lostNotice]
             } 
-        case 'DELETE_WORKOUT' :
+        case 'DELETE_NOTICE' :
             return{
                 lostNotice: state.lostNotice.filter((w)=> w._id !== action.payload._id)
             }   
