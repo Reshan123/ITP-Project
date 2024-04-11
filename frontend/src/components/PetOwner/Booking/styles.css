@@ -8,6 +8,7 @@
 .bookings{
   z-index: 0;
 }
+
 .booked-appointments{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -111,7 +112,7 @@
 /* UpdateBooking Styles */
 
 #UpdateAppointments{
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 5rem;
 }
 
 .UpdateAppointments{

@@ -97,12 +97,13 @@ const Home = ({ navBarProps }) => {
         }
     }
 
-    const handlePetSelect = async(petName) => {
+    const handlePetSelect = async (petName) => {
         const selectedPet = pets.find(pet => pet.petName === petName);
-        setPetName(petName)
+        setPetName(petName);
         setSelectedPet(selectedPet);
-        setPetSpecies(selectedPet.petSpecies)
+        setPetSpecies(selectedPet.petSpecies); // Automatically set the pet species
     }
+    
 
     useEffect(() => {
         //setting values
@@ -115,6 +116,11 @@ const Home = ({ navBarProps }) => {
         const isValid = owner_name && owner_email && owner_contact && pet_name && pet_species && doctor && start_time;
 
         setInputValidity(isValid);
+
+      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
+
+
+      useEffect(() => {
 
         //fetching all available doctors
         const fetchDoctors = async () => {
@@ -129,9 +135,8 @@ const Home = ({ navBarProps }) => {
           };
       
         fetchDoctors();
-
-      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
-
+        
+      }, [])
 
 
 
@@ -221,7 +226,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
                         </div> */}
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="petName" onChange={(e) => setPetName(e.target.value)} required>
+                            <select name="petName" onChange={(e) => handlePetSelect(e.target.value)} required>
                                 <option value="">Select a Pet</option>
                                 {pets && pets.map(pet => (
                                     <option key={pet._id} value={pet.petName}>{pet.petName}</option>
@@ -229,11 +234,11 @@ const Home = ({ navBarProps }) => {
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
-                                <option defaultValue="">Select a Species</option>
-                                <option defaultValue="Dog">Dog</option>
-                                <option defaultValue="Cat">Cat</option>
-                                <option defaultValue="Bird">Bird</option>
+                            <select name="pet_species" value={pet_species} onChange={(e) => setPetSpecies(e.target.value)} required>
+                                <option value="" disabled>Select a Species</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
