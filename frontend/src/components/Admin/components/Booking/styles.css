@@ -82,7 +82,7 @@
   }
   
   /* Styles for the view button */
-  .table-view-btn{
+  .booking-table-style tbody td center .table-view-btn{
     width: 80px;
     height:30px;
     background-color: #9453ce;
@@ -96,7 +96,7 @@
   }
   
   /* Hover styles for the view button */
-  .table-view-btn:hover{
+  .booking-table-style tbody td center .table-view-btn:hover{
     background-color: #8737ce;
   }
   

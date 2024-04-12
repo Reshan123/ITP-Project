@@ -1,33 +1,34 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useUserContext } from "../../../hooks/userContextHook";
 import './styles.css'
 
-const LogIn = ({ navBarProps }) => {
-
-    navBarProps("#E2929D", "#FFF")
-    const navigate = useNavigate()
+const SignUp = ({ navBarProps }) => {
     
-    const { dispatch } = useUserContext();
+    navBarProps("#B597CF", "#FFF")
 
+    const navigate = useNavigate()
+    const {dispatch} = useUserContext()
+    
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [inputValidity, setInputValidity] = useState(false)
 
     useEffect(() => {
-        if(email.length != 0 && password.length >= 8){
+        if(name.length != 0 && email.length != 0 && password.length >= 8){
             setInputValidity(true)
         } else {
             setInputValidity(false)
         }
-    }, [email, password])
+    }, [name, email, password])
 
-    const onLoginFormSubmit = (e) => {
+    const onSigninFormSubmit = (e) => {
         e.preventDefault()
-        const dataToSend = { email, password }
+        const dataToSend = { name, email, password }
         const submitData = async () => {
-            const response = await fetch('http://localhost:4000/api/petOwner/login', {
+            const response = await fetch('http://localhost:4000/api/petOwner/signin', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(dataToSend)
@@ -35,33 +36,36 @@ const LogIn = ({ navBarProps }) => {
             const json = await response.json()
         
             if (!response.ok) {
-                setError(json.error)
+                setError(json.message)
             }
             if (response.ok) {
                 // save the user to local storage
                 localStorage.setItem('user', JSON.stringify(json))
-
+                
                 dispatch({type: "LOGIN", payload: json})
 
                 navigate('/pet/home')
-                
             }
         }
         submitData()
     }
 
     return ( 
-        <div className="loginPage">
-            <div className="loginPageContent">
-                <div className="loginHeader">
-                    <div className="loginHeading">Sign In</div>
-                    <div className="loginNoAccount">
-                        <p>Don't have an account?</p>
-                        <NavLink to="/pet/signin">Sign Up</NavLink>
+        <div className="signinPage">
+            <div className="signinPageContent">
+                <div className="signinHeader">
+                    <div className="signinHeading">Sign Up</div>
+                    <div className="signinNoAccount">
+                        <p>Already got an account?</p>
+                        <NavLink to="/pet/signin">Sign In</NavLink>
                     </div>
                 </div>
                 {error && (<div className="error">{error}</div>)}
-                <form className="loginForm" onSubmit={onLoginFormSubmit}>
+                <form className="signinForm" onSubmit={onSigninFormSubmit}>
+                    <div className="siginFormInputWrapper">
+                        <label htmlFor="name">Username </label>
+                        <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    </div>
                     <div className="siginFormInputWrapper">
                         <label htmlFor="email">Email </label>
                         <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -80,4 +84,4 @@ const LogIn = ({ navBarProps }) => {
      );
 }
  
-export default LogIn;
+export default SignUp;

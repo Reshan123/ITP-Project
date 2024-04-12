@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '3d' })
+    return jwt.sign({_id}, process.env.SECRET , { expiresIn: '1h' })
 }
 
 const login = async (req, res) => {
@@ -160,6 +160,28 @@ const deleteDoctorFromID = async (req, res) => {
     }
 }
 
+
+const verifyToken = async (req, res) => {
+    const userID = req.user._id
+    
+    try{
+        if (!userID){
+            throw Error("Invalid Token")
+        }
+
+        const response = await doctor.findById(userID)
+
+        if(!response){
+            throw Error("Inavlid User")
+        }
+
+        res.status(200).json({message: "VALID USER"})
+
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
+
 module.exports = { 
     login, 
     createDoctor, 
@@ -168,5 +190,6 @@ module.exports = {
     getAllDocs, 
     getAvailableDoctors, 
     updateDoctorFromID,
-    deleteDoctorFromID 
+    deleteDoctorFromID,
+    verifyToken
 }

@@ -19,6 +19,33 @@ const Home = () => {
     const {petOwners, dispatch: allPetOwnersDispatch} = useAllPetOwnerContext() 
     const navigate = useNavigate()
 
+    useEffect(()=> {
+        const checkUserValid = async () => {
+            try {
+                const config = {
+                    method: 'GET',
+                    headers: {
+                        'authorization': `Bearer ${doctor.userToken}`
+                    }
+                }
+                const response = await fetch('http://localhost:4000/api/doctor/verifyToken', config)
+
+                if (!response.ok){
+                    localStorage.removeItem('doctor')
+                    dispatch({ type: "LOGOUT" })
+                    navigate('/doctor/login')
+                }
+                if(response.ok){
+                    console.log("Token Valid")
+                }
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+        if (doctor){
+            checkUserValid()
+        }
+    }, [doctor])
 
     useEffect(() => {
         if (!doctor){
