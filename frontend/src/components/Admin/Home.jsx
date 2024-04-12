@@ -24,6 +24,8 @@ import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
+import Booking from './components/Booking/Booking';
+import BookingUpdate from './components/Booking/BookingUpdate';
 
 const Home = () => {
 
@@ -113,7 +115,8 @@ const Home = () => {
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
                         <Route path='/LostPet' element={<LostPet />} />
-
+                        <Route path='/Booking' element={<Booking />} />
+                        <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                     </Routes>
                 </div>
             </div>

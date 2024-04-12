@@ -5,6 +5,7 @@
 @import url('https://fonts.cdnfonts.com/css/grinched-2');
 @import url(https://db.onlinewebfonts.com/c/fe33a56dba677d78ff3d4cc5bdcbc286?family=Grinched2.0);
 @import url('https://fonts.cdnfonts.com/css/good-pawoo'); 
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
 
 :root{
   --primaryColor: #123456;
@@ -12,7 +13,28 @@
   --primaryPurple: #B799D1;
   --secondartColor: #123456;
   --accentColor: #123456;
+  --error: #e7195a;
 }
+
+
+/* dark mode looking scrollbar */
+::-webkit-scrollbar {
+	width: 1px;
+}
+
+::-webkit-scrollbar-track {
+	background: #646363;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #242424;
+}
+
 
 *{
   padding: 0;
@@ -55,4 +77,8 @@ button.disabled{
   background-color: rgba(0, 0, 0, 0.107);
   cursor:not-allowed;
   box-shadow: none;
+}
+
+input:focus{
+  outline: none;
 }

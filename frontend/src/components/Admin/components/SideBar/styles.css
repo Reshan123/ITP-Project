@@ -20,7 +20,7 @@
     padding: 0;
 
     display: grid;
-    gap: 1rem;
+    gap: 8px;
 }
 
 .adminSideBar .adminSideBarLinksContainer .adminSideBarLink .linkText{

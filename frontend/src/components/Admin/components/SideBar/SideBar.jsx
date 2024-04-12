@@ -34,6 +34,11 @@ const SideBar = () => {
                 <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Lost Pet Notices</div>
                 </NavLink>
+                <br />
+                
+                <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact>
+                    <div className='linkText'>Appointment Bookings</div>
+                </NavLink>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from "../components/PetOwner/Home/Home";
-import LogIn from '../components/PetOwner/LogIn/LogIn';
+import SignUp from '../components/PetOwner/SignUp/SignUp';
 import SignIn from '../components/PetOwner/SignIn/SignIn';
 import NavBar from '../components/PetOwner/NavBar/NavBar';
 import Profile from '../components/PetOwner/Profile/Profile';
@@ -26,10 +26,12 @@ const PetOwner = () => {
 
     const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("#E2929D")
     const [navBarColor, setNavBarColor] = useState("#FFF")
+    const [footerBackground, setFooterBackground] = useState("#FFF")
 
-    const navBarProps = (backgroundColor, textColor) => {
+    const navBarProps = (backgroundColor, textColor, footerBackground) => {
         setNavBarBackgroundColor(backgroundColor)
         setNavBarColor(textColor)
+        setFooterBackground(footerBackground)
     }
 
     const { user, dispatch: userDispatch } = useUserContext()
@@ -69,13 +71,13 @@ const PetOwner = () => {
             <NavBar navBarColor={navBarColor} navBarBackgroundColor={navBarBackgroundColor} />
             <Routes>
                 <Route path='/home' element={<Home navBarProps={navBarProps} />} />
-                <Route path='/login' element={<LogIn navBarProps={navBarProps} />} />
+                <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
                 <Route path='/store' element={<Store navBarProps={navBarProps} />} />
                 <Route path='/adopt' element={<AdoptPet navBarProps={navBarProps} />} />
-                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm navBarProps={navBarProps} />} />
+                <Route path='/adopt/adoptionForm' element={<CreateAdoptionForm />} />
                 <Route path='/profile/adoption-form-update/:id' element={<UpdateForm />} />
                 <Route path='/adopt/form-details/:id' element={<ViewForm navBarProps={navBarProps} />} />
-                <Route path='/signin' element={<SignIn navBarProps={navBarProps} />} />
+                <Route path='/signup' element={<SignUp navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices' element={<LostPet navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices/alldetails' element={<AllLostPetDetails navBarProps={navBarProps} />} />
                 <Route path='/lostpetnotices/lostpetform' element={<LostNoticeForm navBarProps={navBarProps} />} />
@@ -86,7 +88,7 @@ const PetOwner = () => {
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
                 <Route path='/profile/booking-update/:id' element={<UpdateBooking navBarProps={navBarProps}/>} />
             </Routes>
-            <Footer />
+            <Footer footerBackground={footerBackground} />
         </>
     );
 }

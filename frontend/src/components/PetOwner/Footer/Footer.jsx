@@ -1,9 +1,9 @@
 import './styles.css'
 import logo from './Images/logo.png'
 
-const Footer = () => {
+const Footer = ({ footerBackground }) => {
     return ( 
-        <footer>
+        <footer style={{background: footerBackground}}>
             <div className="footerGridContainer">
                 <div className="footerGridRow">
                     <div className="footerGridColoumn">

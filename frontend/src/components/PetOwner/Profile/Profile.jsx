@@ -67,7 +67,7 @@ const Profile = ({ navBarProps }) => {
   useEffect(()=>{
 
     if (!user) {
-        navigate('/pet/login')
+        navigate('/pet/signin')
     }
     
     const fetchLostPetNotices = async() =>{
