@@ -371,24 +371,6 @@
   margin-right: auto; /* Push the chat time to the left */
 }
 
-/* dark mode looking scrollbar */
-::-webkit-scrollbar {
-	width: 8px;
-}
-
-::-webkit-scrollbar-track {
-	background: #646363;
-}
-
-::-webkit-scrollbar-thumb {
-	background: #121212;
-	border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #242424;
-}
-
 /*styling the input message bar*/
 
 .custom-form {

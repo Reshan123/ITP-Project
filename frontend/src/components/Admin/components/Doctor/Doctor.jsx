@@ -62,8 +62,8 @@ const Doctor = () => {
                                 <td>{doc.availability ? "Available" : "Unavailable"}</td>
                                 <td>
                                     <center>
-                                        <button className="table-view-btn" onClick={() => navigate(`/admin/home/updatedoctor/${doc._id}`)}>update</button>
-                                        <button className="table-view-btn" onClick={() => deleteDoc(doc._id)}>delete</button>
+                                        <button className="table-view-btn" onClick={() => navigate(`/admin/home/updatedoctor/${doc._id}`)}>Update</button>
+                                        <button className="table-view-btn" onClick={() => deleteDoc(doc._id)}>Delete</button>
                                     </center>
                                 </td>
                             </tr>

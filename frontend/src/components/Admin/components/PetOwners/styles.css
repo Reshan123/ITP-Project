@@ -101,7 +101,7 @@
   }
   
   /* Styles for the view button */
-  .table-view-btn{
+  .allPetOwnerTable tbody td center .table-view-btn{
     width: 80px;
     height:30px;
     background-color: #9453ce;
@@ -115,6 +115,6 @@
   }
   
   /* Hover styles for the view button */
-  .table-view-btn:hover{
+  .allPetOwnerTable tbody td center .table-view-btn:hover{
     background-color: #8737ce;
   }

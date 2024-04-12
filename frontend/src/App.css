@@ -15,6 +15,26 @@
   --accentColor: #123456;
 }
 
+
+/* dark mode looking scrollbar */
+::-webkit-scrollbar {
+	width: 1px;
+}
+
+::-webkit-scrollbar-track {
+	background: #646363;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #242424;
+}
+
+
 *{
   padding: 0;
   margin: 0;

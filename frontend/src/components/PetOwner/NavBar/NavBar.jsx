@@ -29,7 +29,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
                         <NavLink to="/pet/lostpetnotices" className="NavLink" style={{color: navBarColor}} onClick={scrollToTop} end>Lost Pet Notices</NavLink>
                     </div>
                     <div className="navLogin">
-                        <NavLink to="/pet/login" className='NavLink buttonHoverAnimation' onClick={scrollToTop} style={{color: navBarColor, border: `${navBarColor} 4px solid` }} end>Login</NavLink>
+                        <NavLink to="/pet/signin" className='NavLink buttonHoverAnimation' onClick={scrollToTop} style={{color: navBarColor, border: `${navBarColor} 4px solid` }} end>SignIn</NavLink>
                     </div>
                 </nav>
             )}
