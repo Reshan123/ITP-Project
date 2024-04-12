@@ -26,13 +26,16 @@ const PetOwners = () => {
         <div className="allPetOwnerPage">
             <div className="allPetOwnerHeader">
                 <p>All Pet Owner Details</p>
-                <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                <div>
+                    <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                    <button>Print</button>
+                </div>
             </div>
             <hr />
             <div className="allPetOwnerCardContainer">
                 <table className="allPetOwnerTable">
                     <thead>
-                        <tr className="allPetOwnerTableHeading">
+                        <tr>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Actions</th>
@@ -41,13 +44,13 @@ const PetOwners = () => {
                     
                     <tbody>
                         {currentlyDisplayedItem && currentlyDisplayedItem.map(petOwner => (
-                        <tr key={petOwner._id} className="allPetOwnerTableRow">
+                        <tr key={petOwner._id}>
                             <td>{petOwner.name}</td>
                             <td>{petOwner.email}</td>
                             <td>
-                                <div className="buttonContainer">
-                                    <button>delete</button>
-                                </div>
+                                <center>
+                                    <button className="table-view-btn">Delete</button>
+                                </center>
                             </td>
                         </tr>
                     ))}

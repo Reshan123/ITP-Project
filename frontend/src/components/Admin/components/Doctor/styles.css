@@ -28,6 +28,35 @@
     transition: 0.3s;
 }
 
+.allDoctorsPage .allDoctorsHeader div{
+    align-self: flex-end;
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.allDoctorsPage .allDoctorsHeader div button{
+    border-radius: 11px;
+    border: none;
+    color: #FFF;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.allDoctorsPage .allDoctorsHeader div input{
+    /* border-radius: 15px; */
+    border: none;
+    border-bottom: 2px solid black;
+    /* color: #FFF; */
+    /* background-color: var(--primaryPurple); */
+    font-weight: 600;
+    padding: 6px 15px;
+    transition: 0.3s;
+}
+
 .allDoctorsPage hr{
     margin-bottom: 35px;
 }
@@ -39,51 +68,60 @@
     gap: 20px;
 }
 
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard{
-    width: 23%;
-    background-color: var(--primaryPurple);
-    display: flex;
-    flex-direction: column;
-    padding: 10px 15px;
-    color: white;
-    transition: transform 0.3s ease;
-}
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard:hover{
-    transform: scale(1.05);
-}
-
-/* .allDoctorsPage .allDoctorCardsContainer .allDoctorCard .docName{
-    
-}
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard .docEmail{
-    
-}
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard .docContactNo{
-    
-}
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard .docAvailability{
-    
-}
- */
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard .buttonContainer{
-    margin: 15px 8px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.allDoctorsPage .allDoctorCardsContainer .allDoctorCard .buttonContainer button{
-    border-radius: 11px;
-    border: none;
-    color: var(--primaryPurple);
-    background-color: #FFF;
-    font-weight: 600;
-    padding: 5px 15px;
+.allDoctorTable{
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Agenda-Light, sans-serif;
+    font-weight: 100; 
+    background: #333; color: #fff;
+    text-rendering: optimizeLegibility;
+    border-radius: 5px; 
+  }
+  
+  /* Styles for the table header */
+  .allDoctorTable thead tr th { 
+    font-weight: 600; 
+  }
+  
+  /* Styles for table header and table data */
+  .allDoctorTable thead th, .allDoctorTable tbody td { 
+    padding: 10px 35px; 
+    font-size: 16px;
+  }
+  
+  
+  .allDoctorTable tbody td { 
+    font-size: 16px;
+    color: #444; 
+    background: #eee;
     transition: 0.3s;
-}
+  }
+  
+  /* Styles for alternating rows in the table body - w3school */
+  .allDoctorTable tbody tr:not(:last-child) { 
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Styles for the view button */
+  .allDoctorTable tbody td center {
+    display: flex;
+    gap: 10px; 
+  }
+  .table-view-btn{
+    width: 80px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .table-view-btn:hover{
+    background-color: #8737ce;
+  }

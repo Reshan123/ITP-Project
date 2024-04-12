@@ -57,3 +57,7 @@ button.disabled{
   cursor:not-allowed;
   box-shadow: none;
 }
+
+input:focus{
+  outline: none;
+}

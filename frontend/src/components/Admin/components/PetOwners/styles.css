@@ -18,13 +18,32 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.allPetOwnerPage .allPetOwnerHeader button{
+.allPetOwnerPage .allPetOwnerHeader div{
+    align-self: flex-end;
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.allPetOwnerPage .allPetOwnerHeader div button{
     border-radius: 11px;
     border: none;
     color: #FFF;
     background-color: var(--primaryPurple);
     font-weight: 600;
     padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.allPetOwnerPage .allPetOwnerHeader div input{
+    /* border-radius: 15px; */
+    border: none;
+    border-bottom: 2px solid black;
+    /* color: #FFF; */
+    /* background-color: var(--primaryPurple); */
+    font-weight: 600;
+    padding: 6px 15px;
     transition: 0.3s;
 }
 
@@ -37,50 +56,65 @@
     justify-content: center;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable{
-    border: none;
+
+
+
+
+
+
+
+
+
+.allPetOwnerTable{
+    margin: 0 auto;
     border-collapse: collapse;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableHeading{
-    background-color: black;
-    color: white;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableHeading th{
-    padding: 15px 80px;
-    font-size: 1.3rem;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow{
-    background-color: #ececec;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td{
-    padding: 0px 80px;
-    border-bottom: 2px solid black;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td:nth-child(2){
-    /* border-left: 2px solid black;
-    border-right: 2px solid black; */
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td .buttonContainer{
-    align-self: end;
-    margin: 15px 8px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td .buttonContainer button{
-    border-radius: 11px;
-    border: none;
-    color: #FFF;
-    background-color: var(--primaryPurple);
-    font-weight: 600;
-    padding: 5px 15px;
+    font-family: Agenda-Light, sans-serif;
+    font-weight: 100; 
+    background: #333; color: #fff;
+    text-rendering: optimizeLegibility;
+    border-radius: 5px; 
+  }
+  
+  /* Styles for the table header */
+  .allPetOwnerTable thead tr th { 
+    font-weight: 600; 
+  }
+  
+  /* Styles for table header and table data */
+  .allPetOwnerTable thead th, .allPetOwnerTable tbody td { 
+    padding: 10px 100px; 
+    font-size: 16px;
+  }
+  
+  
+  .allPetOwnerTable tbody td { 
+    font-size: 16px;
+    color: #444; 
+    background: #eee;
     transition: 0.3s;
-}
+  }
+  
+  /* Styles for alternating rows in the table body - w3school */
+  .allPetOwnerTable tbody tr:not(:last-child) { 
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Styles for the view button */
+  .table-view-btn{
+    width: 80px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .table-view-btn:hover{
+    background-color: #8737ce;
+  }
