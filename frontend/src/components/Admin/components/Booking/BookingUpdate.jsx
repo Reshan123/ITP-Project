@@ -1,29 +1,11 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUserContext } from '../../../hooks/userContextHook'
-import { IoMdArrowRoundBack } from 'react-icons/io'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams} from 'react-router-dom'
 
-const formatDateForInput = (dateTimeString) => {
-    const dateTime = new Date(dateTimeString);
-    const year = dateTime.getFullYear();
-    const month = `${dateTime.getMonth() + 1}`.padStart(2, '0'); // Months are zero-indexed
-    const day = `${dateTime.getDate()}`.padStart(2, '0');
-    const hours = `${dateTime.getHours()}`.padStart(2, '0');
-    const minutes = `${dateTime.getMinutes()}`.padStart(2, '0');
-  
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  }
-
-const UpdateBooking = ({ navBarProps }) => {
+const BookingUpdate = () => {
 
     const navigate = useNavigate()
 
-    navBarProps("#B799D1", "#FFF")
-
     const {id} = useParams()
-
-    const [inputValidity, setInputValidity] = useState(false)
 
     const [booking, setBooking] = useState(null)
 
@@ -79,40 +61,37 @@ const UpdateBooking = ({ navBarProps }) => {
         if(response.ok){
             setError(null)
             console.log('New Update Added', json)
-            navigate('/pet/profile')
+            navigate('/admin/home/Booking')
         }
   };
 
+
+
   return (
-    
-    <div className="UpdateAppointments" id='UpdateAppointments'>
+    <div className="AdminUpdateAppointments" id='AdminUpdateAppointments'>
 
-            <div className="backArrow">
-                <IoMdArrowRoundBack onClick={() => {navigate('/pet/profile')}} />
-            </div>
+            <div className="AdminUpdateAppointmentsHeading">Update Appointments</div>
 
-            <div className="UpdateAppointmentsHeading">Update Appointments</div>
+            <div className="AdminUpdateAppointmentsText">Update users appointment booking details here.</div>
 
-            <div className="UpdateAppointmentsText">Update your appointment booking details here.</div>
+                    <form className="AdminUpdateAppointmentsForm" onSubmit={handleUpdate}>
 
-                    <form className="UpdateAppointmentsForm" onSubmit={handleUpdate}>
-
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Owner Name' onChange={(e) => setOwnerName(e.target.value)} defaultValue={booking?.owner_name} disabled/>
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="email" placeholder='Owner Email' onChange={(e) => setOwnerEmail(e.target.value)} defaultValue={booking?.owner_email} disabled/>
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} defaultValue={booking?.owner_contact} required  />
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} defaultValue={booking?.pet_name} required/>
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Species' onChange={(e) => setPetSpecies(e.target.value)} defaultValue={booking?.pet_species} required/>
                         </div>
-                        {/* <div className="UpdateAppointmentsFormInputWrapper">
+                        {/* <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
                                 <option defaultValue="">Select a Species</option>
                                 <option defaultValue="Dog">Dog</option>
@@ -120,13 +99,13 @@ const UpdateBooking = ({ navBarProps }) => {
                                 <option defaultValue="Bird">Bird</option>
                             </select>
                         </div> */}
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' onChange={(e) => setPetBreed(e.target.value)} defaultValue={booking?.pet_breed}/>
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Doctor' onChange={(e) => setDoctor(e.target.value)} defaultValue={booking?.doctor} required/>
                         </div>
-                        {/* <div className="UpdateAppointmentsFormInputWrapper">
+                        {/* <div className="AdminUpdateAppointmentsFormInputWrapper">
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
@@ -145,18 +124,19 @@ const UpdateBooking = ({ navBarProps }) => {
                             )}
                         </div> */}
 
-                        <div className="UpdateAppointmentsFormInputWrapper">
-                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} defaultValue={formatDateForInput(booking?.start_time)} required />
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
+                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} defaultValue={booking?.start_time} required />
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
+
+                        <div className="AdminUpdateAppointmentsFormInputWrapper">
                             <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional)' onChange={(e) => setDescription(e.target.value)} defaultValue={booking?.description}></textarea>
                         </div>
-                        <div className="UpdateAppointmentsFormButton">
+                        <div className="AdminUpdateAppointmentsFormButton">
                             <button type="submit">Update Appointment</button>
                         </div>
                     </form>
-            </div>
+        </div>
   )
 }
 
-export default UpdateBooking
+export default BookingUpdate

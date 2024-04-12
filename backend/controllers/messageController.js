@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Conversation = require("../models/conversationmodel");
 const Message = require("../models/messagemodel");
+const { getReceiverSocketId ,io} = require("../socket/socket");
 
 const sendMessage = async (req, res) => {
   try {
@@ -33,6 +34,14 @@ const sendMessage = async (req, res) => {
     //saves the messages and conversations in the database
     await Promise.all([conversation.save(), newMessage.save()]);
 
+    //socketio functionality
+    const receiverSocketId = getReceiverSocketId(receiverId);
+
+    if (receiverSocketId) {
+      // io.to(<socket_id>).emit() used to send events to specific client
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
@@ -42,7 +51,7 @@ const sendMessage = async (req, res) => {
 
 const getMessages = async (req, res) => {
   try {
-    const { id: userToChatId } = req.params;//receiver id
+    const { id: userToChatId } = req.params; //receiver id
     const senderId = req.user._id;
 
     //populate function do not sent the reference but it sends the actuall content that it stored, in this case its our messages

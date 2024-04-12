@@ -14,25 +14,46 @@ const AllPets = () => {
             <div className="allPetsPage">
                 <div className="allPetsHeader">
                     <p>All Pets Information</p>
-                    <button onClick={() => navigate('/doctor/home/createpet')}>Add Pets</button>
+                    <div>
+                        <input type="text" placeholder='Search Text' />
+                        <button>Print</button>
+                        <button onClick={() => navigate('/doctor/home/createpet')}>Add Pets</button>
+                    </div>
                 </div>
                 <hr />
                 <div className="allPetCardsContainer">
-                    {pets && pets.map(pet => (
-                        <div className="allPetsCard" key={pet._id}>
-                            <div className='petName'>Name: <span>{pet.petName}</span></div>
-                            <div className='petAge'>Age: <span>{pet.petAge}</span></div>
-                            <div className='petSpecies'>Species: <span>{pet.petSpecies}</span></div>
-                            <div className='petBreed'>Breed: <span>{pet.petBreed}</span></div>
-                            <div className='petGender'>Gender: <span>{pet.petGender}</span></div>
-                            <div className='petOwner'>Owner name: {petOwners.map(owner => ((pet.ownerID == owner._id) && owner.name))}</div>
-                            <div className="buttonContainer">
-                                <button>View Medical Record</button>
-                                <button>Update</button>
-                                <button>Delete</button>
-                            </div>
-                        </div>
-                    ))}
+                    <table className='allPetsTable'>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Species</th>
+                                <th>Breed</th>
+                                <th>Gender</th>
+                                <th>Owner Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pets && pets.map(pet => (
+                                <tr>
+                                    <td>{pet.petName}</td>
+                                    <td>{pet.petAge}</td>
+                                    <td>{pet.petSpecies}</td>
+                                    <td>{pet.petBreed}</td>
+                                    <td>{pet.petGender}</td>
+                                    <td>{petOwners.map(owner => ((pet.ownerID == owner._id) && owner.name))}</td>
+                                    <td>
+                                        <center>
+                                            <button className='table-view-btn' >Medical Record</button>
+                                            <button className='table-view-btn' >Update</button>
+                                            <button className='table-view-btn' >Delete</button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </>
