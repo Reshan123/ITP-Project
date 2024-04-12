@@ -34,37 +34,39 @@
 
 .allPetOwnerPage .allPetOwnerCardContainer{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard{
-    width: 23%;
-    background-color: var(--primaryPurple);
-    display: grid;
-    padding: 10px 15px;
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable{
+    border: none;
+    border-collapse: collapse;
+}
+
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableHeading{
+    background-color: black;
     color: white;
-    transition: transform 0.3s ease;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard:hover{
-    transform: scale(1.05);
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableHeading th{
+    padding: 15px 80px;
+    font-size: 1.3rem;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .petOwnerName{
-    font-size: 1.5rem;
-    font-weight: 600;
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow{
+    background-color: #ececec;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .petOwnerEmail{
-    font-size: .9rem;
-    margin-bottom: 20px;
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td{
+    padding: 0px 80px;
+    border-bottom: 2px solid black;
 }
 
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td:nth-child(2){
+    /* border-left: 2px solid black;
+    border-right: 2px solid black; */
+}
 
-
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .buttonContainer{
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td .buttonContainer{
     align-self: end;
     margin: 15px 8px;
     display: flex;
@@ -73,11 +75,11 @@
     gap: 15px;
 }
 
-.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerCard .buttonContainer button{
+.allPetOwnerPage .allPetOwnerCardContainer .allPetOwnerTable .allPetOwnerTableRow td .buttonContainer button{
     border-radius: 11px;
     border: none;
-    color: var(--primaryPurple);
-    background-color: #FFF;
+    color: #FFF;
+    background-color: var(--primaryPurple);
     font-weight: 600;
     padding: 5px 15px;
     transition: 0.3s;
