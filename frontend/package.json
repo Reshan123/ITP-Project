@@ -16,6 +16,7 @@
     "@fullcalendar/react": "^6.1.11",
     "@fullcalendar/timegrid": "^6.1.11",
     "and": "^0.0.3",
+    "antd": "^5.16.1",
     "axios": "^1.6.8",
     "firebase": "^10.10.0",
     "i": "^0.3.7",
