@@ -1,10 +1,11 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 const AllLostPetDetails = ({navBarProps}) => {
 
     navBarProps("#FFF", "#B799D1")
-
+    const navigate = useNavigate()
+  
     const location = useLocation()
 
   return (
@@ -14,7 +15,11 @@ const AllLostPetDetails = ({navBarProps}) => {
                     <img key={index} src={imageSrc} alt={`Pet ${index + 1}`} />
                 ))} 
             <h4 className='allpetdetailstext'>{location.state.petName}</h4>
-            <button className='allpetdetailsbtn'>Send message</button>
+        <button className='allpetdetailsbtn' onClick={() => {
+          console.log("Ownerid to be passed:", location.state.owner_id);
+          navigate("/pet/lostpetnotices/messages", {
+            state: { Ownerid: location.state.owner_id },
+          }); console.log("Ownerid to be passed2:", location.state.owner_id);}}>Send message</button>
             <p className='allpetdetailstext'><strong>Owner Name:</strong>{location.state.ownerName}</p>
             <p className='allpetdetailstext'><strong>Location:</strong>{location.state.location}</p>
             <p className='allpetdetailstext'><strong>Gender:</strong>{location.state.gender}</p>

@@ -10,5 +10,4 @@ const {
 
 router.get("/:id", authorize, getMessages);
 router.post("/send/:id", authorize, sendMessage);
-
 module.exports = router;

@@ -14,8 +14,9 @@ const petRoutes = require('./routes/petRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
 const medicalRecordRoute = require('./routes/medicalRecordRoute')
 const messageRoutes = require('./routes/messageRoutes')
+const { app, server } = require("./socket/socket");
 
-const app = express()
+//const app = express()
 
 const corsOptions ={
     origin:'*', 
@@ -57,9 +58,9 @@ app.use('/api/admin/login', (req, res) => {
 
 mongoose.connect(process.env.MONGOOSE_URI)
     .then(() => {
-        const PORT = app.listen(process.env.PORT, () => {
-            console.log("Connected to db listening on ",process.env.PORT);
-        }) 
+        const PORT = server.listen(process.env.PORT, () => {
+          console.log("Connected to db listening on ", process.env.PORT);
+        }); 
     })
     .catch((error) => {
         console.log(error)

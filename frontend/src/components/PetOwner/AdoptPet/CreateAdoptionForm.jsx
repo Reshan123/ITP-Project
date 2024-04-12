@@ -7,9 +7,9 @@ import * as yup from 'yup'
 import { useUserContext } from '../../../hooks/userContextHook';
 import { usePetContext } from '../../../hooks/usePetContext';
 
-const CreateAdoptionForm = ({ navBarProps }) => {
+const CreateAdoptionForm = () => {
 
-    navBarProps("#FFF", "#E2929D")
+
 
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
