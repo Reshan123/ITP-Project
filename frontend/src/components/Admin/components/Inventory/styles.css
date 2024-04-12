@@ -73,7 +73,7 @@
   border-collapse: collapse;
   font-family: Agenda-Light, sans-serif;
   font-weight: 100; 
-  background: #333; color: #fff;
+  background: var(--primaryPurple); color: #fff;
   text-rendering: optimizeLegibility;
   border-radius: 5px; 
 }
@@ -81,6 +81,7 @@
   width: 200px;
   height: 200px;
 }
+
 /* Styles for the table header */
 .inventoryItemsTable thead tr th { 
   font-weight: 600; 
@@ -90,7 +91,16 @@
 .inventoryItemsTable thead th, .inventoryItemsTable tbody td { 
   padding: 10px 35px; 
   font-size: 16px;
+
 }
+/* 
+.inventoryItemsTable tbody tr{
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.inventoryItemsTable tbody tr:hover{
+  transform: translateY(-3px);
+} */
 
 
 .inventoryItemsTable tbody td { 
@@ -113,37 +123,100 @@
 }
 
 .inventoryItemsTable tbody td center .dlt-btn{
-  width: 80px;
-  height:30px;
-  background-color: #9453ce;
-  font-size: 14px;
-  font-weight: bold;
   border: 0;
-  color: #FFF;
-  border-radius: 25px;
+  background-color: var(--error);
+  color: #fff;
+  padding: 10px;
+  margin-top: 5px;
+  font-family: "Calibri";
+  border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 /* Hover styles for the view button */
 .inventoryItemsTable tbody td center .dlt-btn:hover{
-  background-color: #8737ce;
+  transform: translateY(3px);
 }
 
-.inventoryItemsTable tbody td center .update-btn{
-  width: 80px;
-  height:30px;
-  background-color: #9453ce;
-  font-size: 14px;
-  font-weight: bold;
+
+/* Update Forum */
+.update {
+  font-family: system-ui;
+  width: 90%;
+  font-size: 1.25rem;
+  background: var(--nav-bg);
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 60px;
+  position: relative;
+  transition: transform 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.update img {
+  width: 200px;
+  height: 200px;
+}
+
+.create input, .update input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.create input[type="text"],
+.create input[type="number"],
+.create input[type="file"],
+.create select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.create {
+  font-family: system-ui;
+  width: 40%;
+  font-size: 1.25rem;
+  background: var(--nav-bg);
+  border-radius: 4px;
+  margin: 20px 250px;
+  position: relative;
+  transition: transform 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  
+}
+
+.add-btn,
+.update-btn,
+.create-btn {
   border: 0;
-  color: #FFF;
-  border-radius: 25px;
+  background-color: var(--nav-bg-dark);
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-family: "Calibri";
+  border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
-}
+  transition: background-color 0.3s ease, transform 0.3s ease;
 
-/* Hover styles for the view button */
-.inventoryItemsTable tbody td center .update-btn:hover{
-  background-color: #8737ce;
+}
+.create-btn:hover{
+  transform: translateY(-3px);
+}
+.update-btn:hover{
+  transform: translateY(-3px);
+}
+.add-btn:hover{
+  transform: translateY(-3px);
 }
