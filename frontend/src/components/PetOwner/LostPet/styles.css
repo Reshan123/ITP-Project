@@ -1,8 +1,3 @@
-*{
-    box-sizing: border-box;
-    padding: 0%;
-    margin: 0%;
-}
 .lostForm {
     max-width: 500px;
     margin: 0 auto;
@@ -284,10 +279,11 @@
 /*Styles for the messageSystem*/
 
 .messagecontainer {
-    min-width: 450px; 
-    display: flex;
-    flex-direction: column;
-     position: relative;
+  min-height: 80vh;
+  min-width: 450px; 
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .messageheader {
@@ -295,7 +291,7 @@
     padding: 8px 16px; /* Top and bottom padding of 8 pixels, left and right padding of 16 pixels */
     margin-bottom: 8px; /* Bottom margin of 8 pixels */
     
-    position: fixed; /* Make the header fixed */
+    position: sticky; /* Make the header fixed */
     /* top: 10%;  */
     width: 100%; /* Make it full width */
     z-index: 1;
@@ -398,7 +394,7 @@
 .custom-form {
     padding: 0 1rem;
     margin-top: 1.5rem;
-    position: fixed; /* Position the form fixed */
+    position: sticky; /* Position the form fixed */
     bottom: 0; /* Place it at the bottom of the viewport */
     width: 100%;
    
