@@ -5,17 +5,42 @@ import './styles.css';
 import ViewPopup from './ViewPopup';
 
 const Booking = () => {
+
   const { bookings, dispatch } = useBookingContext();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [buttonPopup, setButtonPopup] = useState(false);
 
+  //search states
+  const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
+  const [searchQuery, setSearchQuery] = useState("")
+
   const navigate = useNavigate()
 
-  // if(buttonPopup){
-  //   document.body.classList.add('active-popup')
-  // }else{
-  //   document.body.classList.remove('active-popup')
-  // }
+  if(buttonPopup){
+    document.body.classList.add('active-popup')
+  }else{
+    document.body.classList.remove('active-popup')
+  }
+
+  useEffect(() => {
+    setCurrentlyDisplayedItems(bookings)
+  }, [bookings])
+
+  useEffect(() => {
+    if (bookings){
+      const filteredList = bookings.filter(booking => { 
+        const searchQueryLower = searchQuery.toLowerCase();
+        return ((booking.owner_name.toLowerCase().startsWith(searchQueryLower))  ||
+                (booking.owner_email.toLowerCase().startsWith(searchQueryLower)) ||
+                (booking.pet_name.toLowerCase().startsWith(searchQueryLower)) ||
+                (booking.doctor.toLowerCase().startsWith(searchQueryLower)) ||
+                (booking.status.toLowerCase().startsWith(searchQueryLower)) ||
+                (booking.pet_species.toLowerCase().startsWith(searchQueryLower))) 
+                
+      })
+        setCurrentlyDisplayedItems(filteredList)
+    }
+  }, [searchQuery])
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -68,6 +93,10 @@ const Booking = () => {
     <div className='booking-content'>
       <div className="bookingHeader">
         <p>All Appointment Booking Details</p>
+        <div>
+          <input type="text" placeholder="Search Bookings" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+          <button>Print</button>
+        </div>
       </div>
       <hr />
       <div className="booking-table">
@@ -78,7 +107,7 @@ const Booking = () => {
               <th>Email</th>
               <th>Contact</th>
               <th>Pet Name</th>
-              <th>Pet Species</th>
+              <th width="7%">Species</th>
               <th width="8%">Pet Breed</th>
               <th>Doctor</th>
               <th width="10%">Start Time</th>
@@ -87,7 +116,7 @@ const Booking = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings && bookings.map((booking) => (
+            {currentlyDisplayedItem && currentlyDisplayedItem.map((booking) => (
               <tr key={booking._id}>
                 <td>{booking.owner_name}</td>
                 <td>{booking.owner_email}</td>
@@ -119,8 +148,8 @@ const Booking = () => {
             <p><strong>Pet Species:</strong> {selectedBooking.pet_species}</p>
             <p><strong>Pet Breed:</strong> {selectedBooking.pet_breed}</p>
             <p><strong>Doctor:</strong> {selectedBooking.doctor}</p>
+            <p data-fulltext={selectedBooking.description} className='desc'><strong>Description:</strong> {selectedBooking.description}</p>
             <p><strong>Start Time:</strong> {new Date(selectedBooking.start_time).toLocaleString()}</p>
-            <p><strong>Description:</strong> {selectedBooking.description}</p>
             <p><strong>Status:</strong> {selectedBooking.status}</p> <br/>
             <button className="table-delete-btn" onClick={() => handleDelete(selectedBooking._id)}>
                 Delete
