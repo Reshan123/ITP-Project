@@ -1,3 +1,27 @@
+.landing-image {
+    position: relative;
+
+}
+
+.image-text-1,
+.image-text-2 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: white;
+    left: 50%;
+}
+
+.image-text-1 {
+    top: 10%;
+    font-size: 80px;
+}
+
+.image-text-2 {
+    top: 30%;
+    font-size: 20px;
+    text-align: center;
+}
+
 .adoption-form {
     max-width: 600px;
     margin: 20px auto;
@@ -75,6 +99,15 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.section-1 {
+    width: 100%;
+    background-color: #666;
+
+
 }
 
 .adoption-form-preview {
@@ -103,20 +136,38 @@
     gap: 5px;
 }
 
+
+.add-newFrom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.New-Form-Text-container {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
 .adoptPetButton {
+    background-color: pink;
+    border: 2px solid pink;
+    border-radius: 5px;
     padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
+    font-size: 20px;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .adoptPetButton:hover {
-    background-color: #0056b3;
+    background-color: white;
+    color: pink;
 }
-
 
 /*update form */
 .adoption-form-details {
@@ -177,6 +228,8 @@
 
 
 /*adoption listing*/
+/* Fonts */
+
 
 :root {
     /* Colors */
@@ -195,12 +248,9 @@
     box-sizing: border-box;
 }
 
-/* Remove default margin */
-body,
-h2,
-p {
-    margin: 0;
-}
+
+
+
 
 h2 {
     font-size: 2.25rem;
@@ -209,12 +259,7 @@ h2 {
     line-height: 1.1;
 }
 
-p {
-    font-family: var(--font-text);
-    font-size: 1rem;
-    line-height: 1.5;
-    /* color: var(--white); */
-}
+
 
 .flow>*+* {
     margin-top: var(--flow-space, 1em);
@@ -225,9 +270,9 @@ p {
 .card {
     display: grid;
     place-items: center;
-    width: 80vw;
+    width: 300px;
     max-width: 21.875rem;
-    height: 28.125rem;
+    height: 400px;
     overflow: hidden;
     border-radius: 0.625rem;
     box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
@@ -350,7 +395,7 @@ p {
     .card:focus-within .card__button {
         opacity: 1;
         transition: opacity 500ms ease-in;
-        transition-delay: 1000ms;
+        transition-delay: 300ms;
     }
 
     .card:hover .card__title::after,
@@ -359,6 +404,56 @@ p {
         transform: scaleX(1);
         transform-origin: left;
         transition: opacity 500ms ease-in, transform 500ms ease-in;
-        transition-delay: 500ms;
+        transition-delay: 300ms;
     }
+}
+
+/*View Listing style*/
+
+.view-only-adoption-form {
+
+    margin-top: 50px;
+}
+
+.view-only-adoption-form h1 {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+}
+
+.adoption-image {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+}
+
+.pet-about {
+    text-align: left;
+}
+
+.pet-about p {
+    margin: 5px 0;
+    color: black;
+}
+
+
+.special-description {
+    text-align: left;
+    /* Align special description content to the left */
+}
+
+.special-description p {
+    margin: 5px 0;
+    /* Add some spacing between the paragraphs */
+}
+
+.owner-contact {
+    color: black;
+
 }

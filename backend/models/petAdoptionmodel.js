@@ -4,12 +4,12 @@ const Schema = mongoose.Schema
 
 const adoptionFormSchema = new Schema({
 
-  ownerID:{
+  ownerID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   petChoice: {
-    type: String, 
+    type: String,
     required: true
   },
   name: {
@@ -54,9 +54,10 @@ const adoptionFormSchema = new Schema({
     specialNeeds: { type: String, required: false } // Optional field for special needs
   },
   approved: {
-    type: Boolean,
-    default: false // Not approved by default
-  }
+    type: String,
+    enum: ['Approved', 'Rejected', 'Pending'],
+    default: 'Pending' // Initial value is pending
+  },
 }, { timestamps: true });
 
 const PetAdoptionForm = mongoose.model('PetAdoptionForm', adoptionFormSchema);

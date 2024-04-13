@@ -1,9 +1,11 @@
 import React from 'react'
 import { useBookingContext } from '../../../hooks/useBookingContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const BookingDetails = ({booking}) => {
 
+  const navigate = useNavigate()
+  
   const {dispatch} = useBookingContext()
 
   const handleDelete = async() => {
@@ -26,7 +28,8 @@ const BookingDetails = ({booking}) => {
         <p><strong>Date and Time :</strong> {new Date(booking.start_time).toLocaleString()}</p>
         <p><strong>Status :</strong> {booking.status}</p>
         <span onClick={handleDelete}>Delete</span>
-        <Link className='update-btn' to={`/pet/profile/booking-update/${booking._id}`}>Update</Link>
+        {/* <Link className='update-btn' to={`/pet/profile/booking-update/${booking._id}`}>Update</Link> */}
+        <button className='update-btn' onClick={() =>{ window.scrollTo(0, 0); navigate(`/pet/profile/booking-update/${booking._id}`)}}>Update</button>
     </div>
   )
 }
