@@ -1,0 +1,413 @@
+.lostForm {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .lostForm h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .lostForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .lostForm input[type="text"],
+  .lostForm input[type="file"],
+  .lostForm input[type="number"],
+  .lostForm select,
+  .lostForm textarea,
+  .lostForm button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /*.lostForm input[type="file"] {
+    display: none;
+  }*/
+  
+  .lostForm input[type="file"] + label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .lostForm input[type="file"] + label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .lostForm img {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .lostForm button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .lostForm button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+
+  /*Lost pet details cards*/
+/*container wraps the whole cards*/
+ .container{
+   /* display: flex;
+    justify-content: center;
+    flex-wrap: wrap;*/
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(270px,1fr)); /* Automatically fit three items in a row */
+    gap: 60px; /* Add some spacing between items */
+    justify-content:center; 
+    margin-left: 25%;
+    margin-right: 25%;
+    
+    
+ }
+ /*represents a single card*/
+ .frame{
+  background-color: #f3e9df;
+  
+ /* margin-left: 15%;
+ margin-right: 15%; */
+ margin-bottom: 15%;
+ padding: 30px 0;
+ }
+ .lostpetdetails{
+    background: rgba(128, 81, 143, 0.541);
+    width: 300px;
+    height: 450px;
+    margin: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    position:relative;
+    transition: transform 1s ease;
+ }
+
+ .lostpetdetails img{
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+    object-fit: cover;
+ }
+.lostpettext{
+    padding:2px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+ }
+ .lostpetdetails h4{
+    font-size: 25px;
+ }
+ 
+ .lostpetdetails .createdAt{
+    position: absolute; /* Position the createdAt text absolutely */
+    top: 50%; /* Position the text 10px from the top edge of the card */
+    right: 10px; /* Position the text 10px from the right edge of the card */
+    color: white; /* Set text color to white */
+    font-size: 15px; /* Adjust font size as needed */
+ }
+ .lostpetdetails button{
+    background-color: black;
+    color: white;
+    padding:12px 18px;
+    display: block;
+    text-align: center;
+    margin:10px auto;
+    border-radius: 8px;
+    border: none;
+    position:absolute;
+    bottom:0%;
+    /* right: 50%; */
+    left:50%;
+    transform: translateX(-50%);/*moves the button to 50% of its own scale*/
+ }
+ .lostpetdetails:hover{
+    background-color: rgb(62,62,62);
+    color:white;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 1s ease;
+ }
+
+ .noticebtn button {
+  background-color: rgba(128, 81, 143, 0.541); 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  position: relative;
+  left: 2%;
+  /* top: 15%; */
+}
+
+.noticebtn button:hover {
+  transition: 1s ease;
+  color: black;
+}
+
+.noticebtn button:focus {
+  outline: none;
+}
+
+/*All lost pet details*/
+.container2{
+  background-color: #f5f5f5; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    padding: 20px; 
+    border-radius: 20px; /* Rounded corners */
+    height:600px;
+    width: 1150px;
+   display:flex;
+    margin-left: 12%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    
+}
+.allpetdetails {
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Add padding for spacing */
+  margin: 20px;
+ 
+}
+.allpetdetailstext {
+  /* position: relative;
+  bottom: 80%;
+  left: 90%; */
+  position: absolute;
+  bottom: 75%; /* Adjust as needed */
+  left: 90%; /* Adjust as needed */
+  /* width: calc(100% - 40px); */
+  
+  
+}
+.allpetdetails h4 {
+  position: absolute;
+  top: 22%;
+  left: 51%;
+  font-size: 35px;
+  color: #B799D1;
+}
+
+.allpetdetails p {
+  position: relative;
+   margin: 10px 0px; 
+  /* display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical; text-overflow: ellipsis;*/
+  
+}
+
+.allpetdetails p::after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  background-color: #ddd; /* Line color */
+  position: absolute;
+  bottom: 0; /* Align the line to the bottom of the paragraph */
+  left: 0; /* Start the line from the left edge */
+  
+}
+
+.allpetdetails img{
+  width: 400px; /* Adjust width of the image */
+  height: 350px; /* Maintain aspect ratio */
+  margin-top: 20px; /* Add bottom margin for spacing */
+  border-radius: 10px; /* Rounded corners */
+  
+}
+
+.allpetdetailsbtn {
+  background-color: white; /* White button color */
+  border: 2px solid #B799D1; /* Pink border */
+  color: #B799D1; /* Pink text color */
+  border-radius: 8px; /* Border radius */
+  padding: 8px 16px; /* Padding */
+  cursor: pointer; /* Cursor style */
+  width: 200px;
+  transition: 0.5s ease;
+  position: relative; /* Position absolute */
+  top: 5%; /* Move to the top */
+  left: 90%; /* Move to the right */
+}
+.allpetdetailsbtn:hover {
+  background-color: #B799D1;
+  color: white;
+}
+
+/*Styles for the messageSystem*/
+
+.messagecontainer {
+  min-height: 80vh;
+  min-width: 450px; 
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.messageheader {
+    background-color: #4a5568; /* Slate-500 color */
+    padding: 8px 16px; /* Top and bottom padding of 8 pixels, left and right padding of 16 pixels */
+    margin-bottom: 8px; /* Bottom margin of 8 pixels */
+    
+    position: sticky; /* Make the header fixed */
+    /* top: 10%;  */
+    width: 100%; /* Make it full width */
+    z-index: 1;
+}
+
+.label-text {
+    color: #cbd5e0; /* Gray-400 color */
+}
+
+.recipient {
+    color: #cbd5e0; /* Gray-900 color */
+    font-weight: bold; /* Bold font weight */
+}
+
+.messages{
+  padding-left: 1rem; /* Equivalent to px-4 */
+    padding-right: 1rem; /* Equivalent to px-4 */
+     padding-top: 40px;
+    flex: 1; /* Equivalent to flex-1 */
+    overflow: auto; /* Equivalent to overflow-auto */
+}
+
+/*styling chat bubbles*/
+.chat {
+  display: flex;
+  justify-content: flex-end; /* Align chat to the end of the container */
+  align-items: center;
+  margin-bottom: 1rem; /* Add margin bottom between chat messages */
+}
+
+.chat-image-avatar {
+  margin-right: 0.5rem; 
+  margin-left: 1260px; 
+}
+
+.chat-image-avatar.other {
+  margin-right: auto; /* Push the avatar to the left if it belongs to the other person */
+  margin-left: 0.5rem; /* Reset margin-left */
+}
+
+.chat-image-avatar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* Make the image round */
+}
+
+.chat-bubble {
+  padding: 0.5rem 1rem; /* Add padding for bubble */
+  border-radius: 0.5rem; /* Add border-radius to make it round */
+  color: white;
+  background-color: #3b82f6; /* Blue background color */
+  align-self: flex-end; /* Align the bubble to the right */
+  margin-left: auto; /* Push the bubble to the right */
+  margin-bottom: 2.5rem;
+}
+.chat-bubble.other {
+  align-self: flex-start; /* Align the bubble to the left */
+  margin-right: 1260px; 
+  background-color: #5b5c5e;
+   padding: 0.5rem 1rem;
+  
+}
+
+
+
+
+.chat-footer {
+  opacity: 0.5; /* Set opacity to 50% */
+  font-size: 0.75rem; /* Set font size */
+  display: flex;
+  gap: 0.25rem; /* Add gap between items */
+  align-items: center;
+  
+}
+
+.chat-footer.other {
+  margin-right: auto; /* Push the chat time to the left */
+}
+
+/*styling the input message bar*/
+
+.custom-form {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+    position: sticky; /* Position the form fixed */
+    bottom: 0; /* Place it at the bottom of the viewport */
+    width: 100%;
+   
+}
+
+.input-messagewrapper {
+    position: relative;
+     
+}
+
+.input-messagewrapper input {
+    border: 1px solid #6b7280;
+    border-radius: 0.375rem; /* 6px */
+    background-color: #4b5563;
+    color: #fff;
+    padding: 0.625rem; /* 10px */
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+   
+}
+
+.input-messagewrapper button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.625rem; /* 10px */
+    color: #fff;
+    
+}
+

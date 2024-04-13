@@ -1,0 +1,81 @@
+.doctorPageSideBar{
+    /* background-color: var(--primaryPurple); */
+    width: 17vw;
+    background: var(--primaryPink);
+    /* position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0; */
+    padding-block: 2rem;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer{
+    position: sticky;
+    top: 120px;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 1rem;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink .linkText{
+    color: black;
+    display: block;
+    text-decoration: none;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink{
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    margin-inline: 1rem 0;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink:hover{
+    /* box-shadow:inset .5rem 0px 0px .5rem #ffffff;
+    border-radius: 2.5rem 0 0 2.5rem; */
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink:hover .linkText{
+    color: #ffffff;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink:hover.active .linkText{
+    color: black;
+}
+
+
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink.active {
+    display: block;
+    background: white;
+    position: relative;
+    z-index: -1;
+    border-radius: 100vw 0 0 100vw;
+}
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink.active::before,
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink.active::after {
+  --border-radius: 1rem;
+
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  right: 0rem;
+  background: var(--primaryPink);
+}
+
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink.active::before {
+    border-radius: 0 5px var(--border-radius);
+    top: calc(var(--border-radius) * -1);
+    box-shadow: 5px 5px 0 0px white;
+}
+
+
+.doctorPageSideBar .doctorSideBarLinksContainer .doctorSideBarLink.active::after {
+    border-radius: 0 var(--border-radius) 0 0;
+    bottom: calc(var(--border-radius) * -1);
+    box-shadow: 5px -5px 0 5px white;
+}

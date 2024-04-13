@@ -1,42 +1,84 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/grinched-2');
+@import url('https://fonts.cdnfonts.com/css/good-pawoo');
+@import url('https://fonts.cdnfonts.com/css/grinched-2');
+@import url(https://db.onlinewebfonts.com/c/fe33a56dba677d78ff3d4cc5bdcbc286?family=Grinched2.0);
+@import url('https://fonts.cdnfonts.com/css/good-pawoo'); 
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
+
+:root{
+  --primaryColor: #123456;
+  --primaryPink: #E78F9B;
+  --primaryPurple: #B799D1;
+  --secondartColor: #123456;
+  --accentColor: #123456;
+  --error: #e7195a;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+/* dark mode looking scrollbar */
+::-webkit-scrollbar {
+	width: 1px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-track {
+	background: #646363;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
 }
 
-.card {
-  padding: 2em;
+::-webkit-scrollbar-thumb:hover {
+	background: #242424;
 }
 
-.read-the-docs {
-  color: #888;
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Calibri';
+}
+
+a{
+  text-decoration: none;
+}
+
+div.error {
+  background-color: #ffdada;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-left: 5px solid #ff0000;
+  color: #d8000c;
+  border-radius: 4px;
+}
+
+button{
+  /* background-color: rgba(0, 0, 0, 0.203); */
+  /* font-size: 20px; */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover{
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+}
+
+button:active{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button.disabled{
+  background-color: rgba(0, 0, 0, 0.107);
+  cursor:not-allowed;
+  box-shadow: none;
+}
+
+input:focus{
+  outline: none;
 }

@@ -1,0 +1,42 @@
+.adminNavBar{
+    z-index: 500;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 12vh;
+    background-color: var(--primaryPurple);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.adminNavBar .adminNavLogo svg{
+    font-size: 3rem;
+}
+
+.adminNavBar .adminNavTitle{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.adminNavBar .adminProfile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.adminNavBar .adminProfile .adminNavUsername{
+    font-size: 1.1rem;
+}
+
+.adminNavBar .adminProfile button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: #fff;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
