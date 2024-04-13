@@ -53,20 +53,23 @@ const CreateAdoptionForm = () => {
                 }
                 const petDetailsJson = await petDetailsResponse.json()
 
-                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-
-                console.log(pets)
-
+                if (petDetailsJson.message.length === 0) {
+                    // If user doesn't have any pets, show error message and navigate to profile
+                    console.log("User doesn't have any pets");
+                    history.push("/profile"); // Assuming "/profile" is the route to the user's profile
+                } else {
+                    petDispatch({ type: "LOAD", payload: petDetailsJson.message });
+                    console.log(pets);
+                }
             } catch (error) {
-                console.log("pet owner page error", error)
+                console.log("pet owner page error", error);
             }
         }
 
-        if (user) {
-            fetchPetData()
+        if (user && pets.length === 0) {
+            fetchPetData();
         }
-
-    }, [user])
+    }, [user, petDispatch, history]);
 
 
     const handlePetSelect = async (petId) => {
@@ -92,7 +95,7 @@ const CreateAdoptionForm = () => {
         e.preventDefault();
         const uid = JSON.parse(localStorage.getItem('user'))["uid"]
 
-        navigate('/pet/adopt')
+
         const adoptionForm = {
             ownerID: uid,
             petChoice,
@@ -138,6 +141,8 @@ const CreateAdoptionForm = () => {
                 setActivityLevel('');
                 setSpecialNeeds('');
                 dispatch({ type: 'CREATE_FORM', payload: json })
+
+                navigate('/pet/adopt')
             }
             else {
                 setError(json.error)
@@ -145,11 +150,12 @@ const CreateAdoptionForm = () => {
         } catch (errors) {
             console.log(errors.inner)
 
-            const newErrors = {}
-            errors.inner.forEach(err => {
-                newErrors[err.path] = err.message
-            });
-
+            const newErrors = {};
+            if (errors && errors.inner) {
+                errors.inner.forEach(err => {
+                    newErrors[err.path] = err.message;
+                });
+            }
             setErrors(newErrors)
         }
 
@@ -187,7 +193,7 @@ const CreateAdoptionForm = () => {
                 onChange={(e) => handlePetSelect(e.target.value)}
             >
                 <option value="">Select Pet</option>
-                {pets.map(pet => (
+                {pets?.length > 0 && pets.map(pet => (
                     <option key={pet._id} value={pet._id}>{pet.petName}</option>
                 ))}
             </select>

@@ -24,8 +24,8 @@
 
 /* Styles for the employee table */
 .booking-table{
-    width: 1100px;
-    margin: 20px 50px 20px 20px;
+    width: 1140px;
+    align-content: center;
     margin-top: 30px;
     background-color: #f3f3f3;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
@@ -38,7 +38,43 @@
 .booking-table:hover{
     box-shadow: 0 10px 15px rgba(0,0,0,.3);
 }
-  
+
+.booking-content .bookingHeader div{
+  align-self: flex-end;
+  display: flex;
+  gap: 25px;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.booking-content .bookingHeader div button{
+  border-radius: 11px;
+  border: none;
+  color: #FFF;
+  background-color: #9453ce;
+  font-weight: 600;
+  padding: 10px 25px;
+  transition: 0.3s;
+}
+
+.booking-content .bookingHeader div input{
+  /* border-radius: 15px; */
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,.3);
+  /* color: #FFF; */
+  /* background-color: var(--primaryPurple); */
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  padding: 6px 15px;
+  transition: 0.3s;
+}
+
+.booking-content .bookingHeader div input:hover{
+  border-bottom: 2px solid rgba(0,0,0,.8);
+}
+
+
+
 
 
 
@@ -65,7 +101,6 @@
     padding: 10px; 
     font-size: 16px;
   }
-  
   
   .booking-table-style tbody td { 
     padding: .7rem; 
@@ -184,6 +219,26 @@
     color: #555;
   }
 
+  .booking-popup-details .desc{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 0.3s;
+  }
+
+  .booking-popup-details .desc:hover::before {
+    content: attr(data-fulltext);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 9999;
+    white-space: normal;
+  }
+
   .booking-popup-details h3{
     color: #555;
     font-family: "Poppins", sans-serif;
@@ -256,7 +311,7 @@
 
 
 
-  /* Admin Update Booking Styles */
+/* Admin Update Booking Styles */
 
 #AdminUpdateAppointments{
   scroll-margin-top: 5rem;
