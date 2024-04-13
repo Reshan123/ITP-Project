@@ -107,4 +107,38 @@ const getOneOwnerPets = async (req, res) => {
     }
 }
 
-module.exports = { getAllPets, getSinglePet, getOneOwnerPets, createPet, adminCreatePet }
+const deletePetFromID = async (req, res) => {
+    const { petID } = req.params
+
+    try{
+        const petExist = await pet.findById(petID)
+        if(!petExist){
+            throw Error("Invalid ID")
+        }
+
+        const response = await pet.findByIdAndDelete(petID)
+        res.status(200).json({message: "Pet Deleted"})
+
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+const updatePetFromID = async (req, res) => {
+    const { petID } = req.params
+    
+    try{
+        const petExist = await pet.findById(petID)
+        if(!petExist){
+            throw Error("Invalid ID")
+        }
+
+        const response = await pet.findByIdAndUpdate(petID, {...req.body}, {new:true})
+        res.status(200).json({message: response})
+
+    } catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
+
+module.exports = { getAllPets, getSinglePet, getOneOwnerPets, createPet, adminCreatePet, deletePetFromID, updatePetFromID }
