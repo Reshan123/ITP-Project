@@ -15,8 +15,8 @@ const PetOwners = () => {
     useEffect(() => {
         if (petOwners){
             const filteredList = petOwners.filter(petOwner => { 
-                return ((petOwner.name.startsWith(searchQuery))  ||
-                        (petOwner.email.startsWith(searchQuery)))
+                return ((petOwner.name.toLowerCase().startsWith(searchQuery.toLowerCase()))  ||
+                        (petOwner.email.toLowerCase().startsWith(searchQuery.toLowerCase())))
             })
             setCurrentlyDisplayedItems(filteredList)
         }

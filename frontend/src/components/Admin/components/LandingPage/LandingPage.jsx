@@ -1,8 +1,14 @@
+import './styles.css'
+
 const LandingPage = () => {
     return ( 
-        <>
-            landi
-        </>
+        <div className="landingPage">
+            <div className="landingPagesHeader">
+                <p>Admin Dashboard</p>
+                <button>Some Button</button>
+            </div>
+            <hr />
+        </div>
      );
 }
  
