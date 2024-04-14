@@ -65,37 +65,43 @@ const Home = ({ navBarProps }) => {
 
     //booking submit function
     const handleSubmit = async(e) => {
-        e.preventDefault()
-
-        const booking = {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description}
-
-        const response = await fetch('http://localhost:4000/api/bookings', {
-            method: 'POST',
-            body: JSON.stringify(booking),
-            headers: {
-                'Content-Type':'application/json',
-                "authorization": `Bearer ${user.userToken}`
+        e.preventDefault();
+    
+        const booking = {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description};
+    
+        try {
+            const response = await fetch('http://localhost:4000/api/bookings', {
+                method: 'POST',
+                body: JSON.stringify(booking),
+                headers: {
+                    'Content-Type':'application/json',
+                    "authorization": `Bearer ${user.userToken}`
+                }
+            });
+    
+            const json = await response.json();
+    
+            if(!response.ok){
+                setError(json.error); // Set error state if there's an error
+            } else {
+                // Clear error state if submission is successful
+                setError(null);
+                
+                setOwnerContact('');
+                setPetName('');
+                setPetSpecies('');
+                setPetBreed('');
+                setDoctor('');
+                setStartTime('');
+                setDescription('');
+                console.log('New Booking Added', json);
             }
-        })
-
-        const json = await response.json()
-
-        if(!response.ok){
-            setError(json.error)
+        } catch (error) {
+            console.error('Error submitting booking:', error);
+            setError('An error occurred while submitting the booking. Please try again.'); // Set a generic error message
         }
-
-        if(response.ok){
-
-            setOwnerContact('')
-            setPetName('')
-            setPetSpecies('')
-            setPetBreed('')
-            setDoctor('')
-            setStartTime('')
-            setDescription('')
-            console.log('New Booking Added', json)
-        }
-    }
+    };
+    
 
     const handlePetSelect = async (petName) => {
         const selectedPet = pets.find(pet => pet.petName === petName);
@@ -211,6 +217,7 @@ const Home = ({ navBarProps }) => {
             <div className="homeBookAppointments" id='bookAppointments'>
                 <div className="homeBookAppointmentsHeading">Book Appointments</div>
                 <div className="homeBookAppointmentsText">Take the first step towards your pet's well-being with Pawpulz Appointment Booking. Fill out the form below to schedule vet visits and manage medical records seamlessly, ensuring your furry friend receives top-notch care with ease and convenience.</div>
+                {error && (<div className="error-message">{error}</div>)}
                 {user ? (
                     <form className="homeBookAppointmentsForm" onSubmit={handleSubmit}>
                         <div className="homeBookAppointmentsFormInputWrapper">
@@ -260,9 +267,11 @@ const Home = ({ navBarProps }) => {
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value ={start_time} required />
                         </div>
+                        
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional) ' onChange={(e) => setDescription(e.target.value)} value ={description}></textarea>
                         </div>
+
                         <div className="homeBookAppointmentsFormButton">
                             {inputValidity && (<button type="submit">Book Appointment</button>)}
                             {!inputValidity && (<button type="submit" className="disabled" disabled>Book Appointment</button>)}
