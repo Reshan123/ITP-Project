@@ -198,17 +198,17 @@ const Profile = ({ navBarProps }) => {
                     <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
                 </div>
                 <hr />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <Pagination
+                        current={currentPage}
+                        total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
+                        pageSize={pageSize}
+                        onChange={handlePageChange}
+                        showSizeChanger={false}
+                    />
+                </div>
                 <div className="detailsSectionCardContainer">
                     <div className='bookings'>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
-                            <Pagination
-                                current={currentPage}
-                                total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
-                                pageSize={pageSize}
-                                onChange={handlePageChange}
-                                showSizeChanger={false}
-                            />
-                        </div>
                         <div className='booked-appointments'>
                             {currentBookings.map(booking => (
                                 <BookingDetails key={booking._id} booking={booking} />

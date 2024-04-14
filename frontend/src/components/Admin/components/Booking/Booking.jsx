@@ -5,6 +5,7 @@ import './styles.css';
 import ViewPopup from './ViewPopup';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { Pagination } from 'antd';
 
 const Booking = () => {
 
@@ -15,6 +16,8 @@ const Booking = () => {
   //search states
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5; // Number of items per page
 
   const navigate = useNavigate()
 
@@ -175,6 +178,19 @@ const generatePDF = () => {
   doc.save(filename);
 };
 
+  // Pagination functions
+  const totalItems = currentlyDisplayedItem ? currentlyDisplayedItem.length : 0;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+  };
+
+  const indexOfLastItem = currentPage * pageSize;
+  const indexOfFirstItem = indexOfLastItem - pageSize;
+  const currentItems = currentlyDisplayedItem ? currentlyDisplayedItem.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+
 
   return (
     <div className='booking-content'>
@@ -186,24 +202,32 @@ const generatePDF = () => {
         </div>
       </div>
       <hr />
+      <div className="pagination">
+          <Pagination
+            current={currentPage}
+            total={totalItems}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
+        </div>
       <div className="booking-table">
         <table className="booking-table-style">
           <thead>
             <tr>
-              <th>Owner Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Pet Name</th>
+              <th width="10%">Owner Name</th>
+              <th width="17%">Email</th>
+              <th width="10%">Contact</th>
+              <th width="8%">Pet Name</th>
               <th width="7%">Species</th>
               <th width="8%">Pet Breed</th>
-              <th>Doctor</th>
+              <th width="12%">Doctor</th>
               <th width="10%">Start Time</th>
-              <th width="10%">Status</th>
+              <th width="8%">Status</th>
               <th width="10%">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {currentlyDisplayedItem && currentlyDisplayedItem.map((booking) => (
+            {currentItems && currentItems.map((booking) => (
               <tr key={booking._id}>
                 <td>{booking.owner_name}</td>
                 <td>{booking.owner_email}</td>
