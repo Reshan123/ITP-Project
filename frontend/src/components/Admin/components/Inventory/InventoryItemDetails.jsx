@@ -3,7 +3,7 @@ import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsCon
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import './styles.css'
-import { useEffect , useState} from "react"
+import { useEffect, useState } from "react"
 
 const InventoryItemDetails = () => {
 
@@ -27,9 +27,8 @@ const InventoryItemDetails = () => {
     }
   }, [searchQuery])
 
-
-  const handleClick = async (id) => {
-    const confrimDelte = confirm("Are u sure?")
+  const handleClick = async (id, itemName) => {
+    const confrimDelte = confirm(`Are you sure you want to delete "${itemName}"?`)
     if (confrimDelte) {
       const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
         method: 'DELETE'
@@ -78,11 +77,10 @@ const InventoryItemDetails = () => {
               <td>{inventoryitem.currentStock}</td>
               <td>{inventoryitem.itemDescription}</td>
               <td>{<img src={inventoryitem.itemImageURL} alt="item" />}</td>
-
               <td>
                 <center>
                   <button className='update-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
-                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id)}>Delete</button>
+                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id, inventoryitem.itemName)}>Delete</button>
                 </center>
               </td>
             </tr>
