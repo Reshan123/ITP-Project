@@ -141,6 +141,26 @@ const deleteUserDetailsFromToken = async (req, res) => {
     }
 }
 
+const deleteUserFromUserID = async (req, res) => {
+    const { userID } = req.params
+
+    try{
+    
+        const userExist = await petOwner.findById(userID)
+        
+        if(!userExist){
+            throw Error("Invalid ID")
+        }
+
+        const response = await petOwner.findByIdAndDelete(userID)
+        res.status(200).json({message: "User Deleted"})
+
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+
+}
+
 const getAllUsers = async (req, res) => {
     try{
         const response = await petOwner.find()
@@ -174,4 +194,4 @@ const verifyToken = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers, verifyToken }
+module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers, verifyToken, deleteUserFromUserID }

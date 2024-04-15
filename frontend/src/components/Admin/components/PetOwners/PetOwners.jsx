@@ -15,12 +15,36 @@ const PetOwners = () => {
     useEffect(() => {
         if (petOwners){
             const filteredList = petOwners.filter(petOwner => { 
-                return ((petOwner.name.startsWith(searchQuery))  ||
-                        (petOwner.email.startsWith(searchQuery)))
+                return ((petOwner.name.toLowerCase().startsWith(searchQuery.toLowerCase()))  ||
+                        (petOwner.email.toLowerCase().startsWith(searchQuery.toLowerCase())))
             })
             setCurrentlyDisplayedItems(filteredList)
         }
     }, [searchQuery])
+
+    const deleteUser = async (userID) => {
+        const confimred = confirm("Are you sure?")
+        if(confimred){
+            try {
+                const config = {
+                    method: 'DELETE',
+                }
+                const response = await fetch(`http://localhost:4000/api/petOwner/deleteUserFromUserID/${userID}`, config);
+                const json = await response.json()
+    
+                if(!response.ok){
+                    throw Error(json.message)
+                }
+    
+                petOwnerDispatch({type: "DELETE PETOWNER", payload:userID})
+                navigate('/admin/home/petowners')
+    
+    
+            } catch (error){
+                console.log(error.message)
+            }
+        }
+    }
 
     return ( 
         <div className="allPetOwnerPage">
@@ -49,7 +73,7 @@ const PetOwners = () => {
                             <td>{petOwner.email}</td>
                             <td>
                                 <center>
-                                    <button className="table-view-btn">Delete</button>
+                                    <button onClick={() => deleteUser(petOwner._id)} className="table-view-btn">Delete</button>
                                 </center>
                             </td>
                         </tr>

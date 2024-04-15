@@ -31,6 +31,19 @@ const Profile = ({ navBarProps }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 4; // number of bookings per page
+  
+    useEffect(() => {
+
+        const fetchBookings = async () => {
+
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+
+            try {
+                const response = await fetch("http://localhost:4000/api/bookings/getOwner", config)
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -48,10 +61,6 @@ const Profile = ({ navBarProps }) => {
 
    //lostPets 
   useEffect(()=>{
-
-    if (!user) {
-        navigate('/pet/signin')
-    }
     
     const fetchLostPetNotices = async() =>{
         const option = {
