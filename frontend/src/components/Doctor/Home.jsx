@@ -4,6 +4,7 @@ import SideBar from './components/SideBar/SideBar'
 import NavBar from './components/NavBar/NavBar'
 import LandingPage from './components/LandingPage/LandingPage'
 import AllPets from './components/AllPets/AllPets';
+import UpdatePet from './components/AllPets/UpdatePet';
 
 import { useDoctorContext } from '../../hooks/useDoctorContext'
 import { useAllPetsContext } from '../../hooks/useAllPetsContext'
@@ -94,6 +95,7 @@ const Home = () => {
                         <Route path='/landingpage' element={<LandingPage />} />
                         <Route path='/pets' element={<AllPets />} />
                         <Route path='/createpet' element={<CreatePet />} />
+                        <Route path='/updatepet/:petID' element={<UpdatePet />} />
                     </Routes>
                 </div>
             </div>

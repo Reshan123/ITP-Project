@@ -26,17 +26,21 @@ import './styles.css'
 import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
 import BookingUpdate from './components/Booking/BookingUpdate';
+import { useBookingContext } from '../../hooks/useBookingContext';
 
 const Home = () => {
 
     const navigate = useNavigate()
 
 
-  const { inventoryitems, dispatch } = useInventoryItemsContext()
-  const { doctors, dispatch: allDocDispatch } = useAllDocContext()
+    const { inventoryitems, dispatch } = useInventoryItemsContext()
+    const { doctors, dispatch: allDocDispatch } = useAllDocContext()
 
     const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
-    const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext();
+    const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext()
+
+    const { bookings, dispatch: bookingDispatch } = useBookingContext()
+
     useEffect(() => {
         if (!localStorage.getItem('adminUser')) {
             navigate('/admin/login')
@@ -60,6 +64,17 @@ const Home = () => {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
+
+                const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
+      
+                if (!bookingResponse.ok) {
+                    throw Error(bookingResponse.message);
+                }
+        
+                const bookingJson = await bookingResponse.json();
+        
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
+
                 //allDocData
                 const allDocResponse = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
                 const allDocJson = await allDocResponse.json()
@@ -88,17 +103,28 @@ const Home = () => {
                 }
                 adoptionDispatch({ type: 'SET_FORMS', payload: json })
 
-
             } catch (error) {
                 console.log(error.message)
             }
         }
+
         fetchAllData()
+
+        // const fetchBookings = async () => {
+        //     try {
+              
+      
+        //     } catch (error) {
+        //       console.log("Error fetching bookings:", error);
+        //     }
+        //   };
+      
+        // fetchBookings();
     }, [])
 
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="adminPageMainContainer">
                 <SideBar />
                 <div className='pages'>

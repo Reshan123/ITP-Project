@@ -29,9 +29,6 @@ const Profile = ({ navBarProps }) => {
     const {lostNotice,dispatch:lostDispatch} = useLostPetsContext()
 
     useEffect(() => {
-        if (!user) {
-            navigate('/pet/login')
-        }
 
         const fetchBookings = async () => {
 
@@ -65,10 +62,6 @@ const Profile = ({ navBarProps }) => {
 
    //lostPets 
   useEffect(()=>{
-
-    if (!user) {
-        navigate('/pet/signin')
-    }
     
     const fetchLostPetNotices = async() =>{
         const option = {

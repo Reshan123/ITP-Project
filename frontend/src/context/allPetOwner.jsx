@@ -7,8 +7,8 @@ export const allPetOwnerReducer = (state, action) => {
     switch(action.type){
         case "LOAD":
             return { petOwners: action.payload }
-        case "LOGOUT":
-            return { petOwners: null }
+        case "DELETE PETOWNER":
+            return { petOwners: state.petOwners.filter(obj => obj._id != action.payload) }
         default:
             return state
     }

@@ -5,16 +5,19 @@ import './styles.css';
 import ViewPopup from './ViewPopup';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { Pagination } from 'antd';
 
 const Booking = () => {
 
-  const { bookings, dispatch } = useBookingContext();
+  const { bookings, dispatch: bookingDispatch } = useBookingContext();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [buttonPopup, setButtonPopup] = useState(false);
 
   //search states
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5; // Number of items per page
 
   const navigate = useNavigate()
 
@@ -44,27 +47,27 @@ const Booking = () => {
     }
   }, [searchQuery])
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/api/bookings/");
+  // useEffect(() => {
+  //   const fetchBookings = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4000/api/bookings/");
 
-        if (!response.ok) {
-          throw Error(response.message);
-        }
+  //       if (!response.ok) {
+  //         throw Error(response.message);
+  //       }
 
-        const json = await response.json();
+  //       const json = await response.json();
 
-        dispatch({ type: 'SET_BOOKINGS', payload: json });
+  //       dispatch({ type: 'SET_BOOKINGS', payload: json });
 
-      } catch (error) {
-        console.log("Error fetching bookings:", error);
-      }
-    };
+  //     } catch (error) {
+  //       console.log("Error fetching bookings:", error);
+  //     }
+  //   };
 
-    fetchBookings();
+  //   fetchBookings();
 
-  }, [dispatch]);
+  // }, [dispatch]);
 
   const handleViewDetails = (booking) => {
     setSelectedBooking(booking);
@@ -81,7 +84,7 @@ const Booking = () => {
       const confirmDelete = window.confirm("Are you sure you want to delete this booking?");
       if (confirmDelete) {
         if(response.ok){
-          dispatch({type: 'DELETE_BOOKING', payload: json})
+          bookingDispatch({type: 'DELETE_BOOKING', payload: json})
           setButtonPopup(false)
         }
       }
@@ -175,6 +178,19 @@ const generatePDF = () => {
   doc.save(filename);
 };
 
+  // Pagination functions
+  const totalItems = currentlyDisplayedItem ? currentlyDisplayedItem.length : 0;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+  };
+
+  const indexOfLastItem = currentPage * pageSize;
+  const indexOfFirstItem = indexOfLastItem - pageSize;
+  const currentItems = currentlyDisplayedItem ? currentlyDisplayedItem.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+
 
   return (
     <div className='booking-content'>
@@ -186,24 +202,32 @@ const generatePDF = () => {
         </div>
       </div>
       <hr />
+      <div className="pagination">
+          <Pagination
+            current={currentPage}
+            total={totalItems}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
+        </div>
       <div className="booking-table">
         <table className="booking-table-style">
           <thead>
             <tr>
-              <th>Owner Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Pet Name</th>
+              <th width="10%">Owner Name</th>
+              <th width="17%">Email</th>
+              <th width="10%">Contact</th>
+              <th width="8%">Pet Name</th>
               <th width="7%">Species</th>
               <th width="8%">Pet Breed</th>
-              <th>Doctor</th>
+              <th width="12%">Doctor</th>
               <th width="10%">Start Time</th>
-              <th width="10%">Status</th>
+              <th width="8%">Status</th>
               <th width="10%">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {currentlyDisplayedItem && currentlyDisplayedItem.map((booking) => (
+            {currentItems && currentItems.map((booking) => (
               <tr key={booking._id}>
                 <td>{booking.owner_name}</td>
                 <td>{booking.owner_email}</td>

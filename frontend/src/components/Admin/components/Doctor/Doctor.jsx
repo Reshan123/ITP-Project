@@ -1,11 +1,29 @@
 import { useAllDocContext } from "../../../../hooks/useAllDoctorContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import './styles.css'
 
 const Doctor = () => {
 
+    const [searchQuery, setSearchQuery] = useState("")
+    const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
     const {doctors, dispatch:allDocDispatch} = useAllDocContext()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setCurrentlyDisplayedItems(doctors)
+    }, [doctors])
+
+    useEffect(() => {
+        if (doctors){
+            const filteredList = doctors.filter(doc => { 
+                return ((doc.name.toLowerCase().includes(searchQuery.toLowerCase()))  ||
+                        (doc.email.toLowerCase().startsWith(searchQuery.toLowerCase())) ||
+                        ((doc.contactNo.toString()).includes(searchQuery)))
+            })
+            setCurrentlyDisplayedItems(filteredList)
+        }
+    }, [searchQuery])
 
     const deleteDoc = async (docID) => {
         const confirmed = confirm("Are You Sure?")
@@ -37,7 +55,7 @@ const Doctor = () => {
                 <div className="allDoctorsHeader">
                     <p>All Doctor Information</p>
                     <div>
-                        <input type="text" name="" id="" placeholder="Search Text" />
+                        <input type="text" name="" id="" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                         <button onClick={() => navigate('/admin/home/createdoctor')}>Add Doctors</button>
                         <button>Print</button>
                     </div>
@@ -54,12 +72,12 @@ const Doctor = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {doctors && doctors.map(doc => (
-                            <tr>
+                        {currentlyDisplayedItem && currentlyDisplayedItem.map(doc => (
+                            <tr key={doc._id}>
                                 <td>{doc.name}</td>
                                 <td>{doc.email}</td>
                                 <td>{doc.contactNo}</td>
-                                <td>{doc.availability ? "Available" : "Unavailable"}</td>
+                                <td>{doc.availability ? (<div style={{color:"green"}}>Available</div>) : (<div style={{color:"red"}}>Unavailable</div>)}</td>
                                 <td>
                                     <center>
                                         <button className="table-view-btn" onClick={() => navigate(`/admin/home/updatedoctor/${doc._id}`)}>Update</button>
