@@ -8,12 +8,13 @@ import BookingDetails from '../Booking/BookingDetails'
 import '../Booking/styles.css'
 
 import './styles.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
 //import LostPetDetails from '../LostPet/LostPetDetails';
 import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
 //import '../LostPet/styles.css'
+import { Pagination } from 'antd';
 
 const Profile = ({ navBarProps }) => {
 
@@ -28,6 +29,9 @@ const Profile = ({ navBarProps }) => {
     const { adoptionForms, dispatch } = useAdoptionContext();
     const {lostNotice,dispatch:lostDispatch} = useLostPetsContext()
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 4; // number of bookings per page
+  
     useEffect(() => {
 
         const fetchBookings = async () => {
@@ -41,22 +45,17 @@ const Profile = ({ navBarProps }) => {
             try {
                 const response = await fetch("http://localhost:4000/api/bookings/getOwner", config)
 
-                if (!response.ok) {
-                    throw Error(response.message)
-                }
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
-                const json = await response.json()
+    // Check if bookings is null or undefined, return an empty array if so
+    const currentBookings = bookings ? bookings.slice((currentPage - 1) * pageSize, currentPage * pageSize) : [];
 
-                bookingDispatch({ type: 'SET_BOOKINGS', payload: json.message })
 
-            } catch (error) {
-
-                console.log("pet owner page error", error)
-            }
-        }
-
-        if (user) {
-            fetchBookings()
+    useEffect(() => {
+        if (!user) {
+            navigate('/pet/login')
         }
     }, [user])
 
@@ -174,21 +173,30 @@ const Profile = ({ navBarProps }) => {
                 </div>
                 {/* appointments */}
                 <div className="detailsSection">
-                    <div className="detailsSectionTitleContainer">
-                        <div className="detailsSectionTitle">My Appointment Details</div>
-                        <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
-                    </div >
-                    <hr />
-                    <div className="detailsSectionCardContainer">
-                        <div className='bookings'>
-                            <div className='booked-appointments'>
-                                {bookings && bookings.map(booking => (
-                                    <BookingDetails key={booking._id} booking={booking} />
-                                ))}
-                            </div>
+                <div className="detailsSectionTitleContainer">
+                    <div className="detailsSectionTitle">My Appointment Details</div>
+                    <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
+                </div>
+                <hr />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <Pagination
+                        current={currentPage}
+                        total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
+                        pageSize={pageSize}
+                        onChange={handlePageChange}
+                        showSizeChanger={false}
+                    />
+                </div>
+                <div className="detailsSectionCardContainer">
+                    <div className='bookings'>
+                        <div className='booked-appointments'>
+                            {currentBookings.map(booking => (
+                                <BookingDetails key={booking._id} booking={booking} />
+                            ))}
                         </div>
                     </div>
-                </div >
+                </div>
+            </div>
                 {/* adoption listings */}
                 < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
