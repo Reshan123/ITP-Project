@@ -32,6 +32,9 @@ const InventoryItemUpdate = () => {
           if (item.itemImageURL) {
             setItemImageURL(item.itemImageURL)
           }
+          if(item.currentStock<19){
+            confirm(`The Stock level of "${item.itemName}" is low`)        
+          }
 
         }
       })
