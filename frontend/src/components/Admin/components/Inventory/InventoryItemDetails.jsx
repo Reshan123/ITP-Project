@@ -21,7 +21,8 @@ const InventoryItemDetails = () => {
   useEffect(() => {
     if (inventoryitems) {
       const filteredList = inventoryitems.filter(inventoryitem => {
-        return ((inventoryitem.itemName.startsWith(searchQuery)))
+        const searchQueryLower = searchQuery.toLowerCase();
+        return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
       })
       setCurrentlyDisplayedItems(filteredList)
     }
@@ -40,6 +41,79 @@ const InventoryItemDetails = () => {
 
       }
     }
+  };
+
+  //Download Report Content
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    // Get the current date
+    const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    doc.text(`Appointment Booking Report - ${currentDate}`, 14, 12);
+
+    // Define the columns and rows for the table
+    const columns = [
+      { header: 'Item Name', dataKey: 'itemName' },
+      { header: 'Price', dataKey: 'itemPrice' },
+      { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
+      { header: 'Current Stock Count', dataKey: 'currentStock' },
+      { header: 'Item Description', dataKey: 'itemDescription' },
+    ];
+
+    const filteredList = inventoryitems.filter(inventoryitem => {
+      const searchQueryLower = searchQuery.toLowerCase();
+      return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
+    });
+
+    const rows = filteredList.map((inventoryitem) => ({
+      itemName: booking.owner_name,
+      itemPrice: booking.owner_contact,
+      itemStockCount: booking.pet_name,
+      currentStock: booking.pet_species,
+      itemDescription: booking.doctor,
+    }));
+
+    // Add the table to the PDF
+    doc.autoTable({
+
+      columns,
+      body: rows,
+      startY: 20,
+
+      styles: {
+        // Styles applied to the table
+        cellPadding: 2,
+        fontSize: 10,
+        valign: 'middle',
+        halign: 'center',
+        cellWidth: 'wrap', // Auto column width
+      },
+
+      columnStyles: {
+        // Custom styles for specific columns
+        ownerName: { fontStyle: 'bold' },
+      },
+
+      headerStyles: {
+        fillColor: [100, 100, 100], // Header background color
+        textColor: [255, 255, 255], // Header text color
+        fontStyle: 'bold', // Bold font for header
+      },
+
+      bodyStyles: {
+        textColor: [50, 50, 50], // Body text color
+      },
+
+      alternateRowStyles: {
+        fillColor: [245, 245, 245], // Alternate row background color
+      },
+
+    });
+
+    // Save the PDF with a unique name
+    const filename = 'booking_report.pdf';
+    doc.save(filename);
   };
 
 
