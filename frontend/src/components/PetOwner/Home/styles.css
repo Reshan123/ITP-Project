@@ -180,3 +180,13 @@
     transform: scale(1.03);
     box-shadow: 0 10px 15px rgba(0,0,0,.3);
 }
+
+.homeBookAppointments .error-message {
+    background-color: #F8D7DA; 
+    color: #b70d1e; 
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #F5C6CB;
+    border-radius: 5px;
+    font-size: 16px;
+}

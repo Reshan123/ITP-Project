@@ -4,6 +4,11 @@
   flex-direction: column;
 }
 
+.booking-content .pagination{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .booking-content .bookingHeader{
   margin: 0 10px;
   display: flex;
@@ -89,6 +94,10 @@
     background: #333; color: #fff;
     text-rendering: optimizeLegibility;
     border-radius: 5px; 
+  }
+
+  .booking-table-style thead{
+    height: 70px;
   }
   
   /* Styles for the table header */
