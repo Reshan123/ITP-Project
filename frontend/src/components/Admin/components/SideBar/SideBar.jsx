@@ -5,23 +5,18 @@ import { CgProfile } from "react-icons/cg";
 
 const SideBar = () => {
 
-    const adminLogOut = () => {
-        localStorage.removeItem('adminUser')
-        window.location.href = '/admin/home'
-    }
-
     const username = JSON.parse(localStorage.getItem('adminUser'))
 
 
     return (
         <div className="adminSideBar">
-            <div className="adminSideBarLogo">
+            {/* <div className="adminSideBarLogo">
                 <IoPaw />
-            </div>
+            </div> */}
             <div className="adminSideBarProfile">
-                <CgProfile />
+                <IoPaw />
                 <div className="adminSideBarUsername">{username && username.username}</div>
-                <button onClick={adminLogOut}>Log Out</button>
+                
             </div>
             <div className="adminSideBarLinksContainer">
                 <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact="true">
