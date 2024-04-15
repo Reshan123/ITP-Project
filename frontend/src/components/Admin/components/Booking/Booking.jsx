@@ -9,7 +9,7 @@ import { Pagination } from 'antd';
 
 const Booking = () => {
 
-  const { bookings, dispatch } = useBookingContext();
+  const { bookings, dispatch: bookingDispatch } = useBookingContext();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -47,27 +47,27 @@ const Booking = () => {
     }
   }, [searchQuery])
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/api/bookings/");
+  // useEffect(() => {
+  //   const fetchBookings = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4000/api/bookings/");
 
-        if (!response.ok) {
-          throw Error(response.message);
-        }
+  //       if (!response.ok) {
+  //         throw Error(response.message);
+  //       }
 
-        const json = await response.json();
+  //       const json = await response.json();
 
-        dispatch({ type: 'SET_BOOKINGS', payload: json });
+  //       dispatch({ type: 'SET_BOOKINGS', payload: json });
 
-      } catch (error) {
-        console.log("Error fetching bookings:", error);
-      }
-    };
+  //     } catch (error) {
+  //       console.log("Error fetching bookings:", error);
+  //     }
+  //   };
 
-    fetchBookings();
+  //   fetchBookings();
 
-  }, [dispatch]);
+  // }, [dispatch]);
 
   const handleViewDetails = (booking) => {
     setSelectedBooking(booking);
@@ -84,7 +84,7 @@ const Booking = () => {
       const confirmDelete = window.confirm("Are you sure you want to delete this booking?");
       if (confirmDelete) {
         if(response.ok){
-          dispatch({type: 'DELETE_BOOKING', payload: json})
+          bookingDispatch({type: 'DELETE_BOOKING', payload: json})
           setButtonPopup(false)
         }
       }
