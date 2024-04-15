@@ -6,9 +6,10 @@ import { useBookingContext } from '../../../hooks/useBookingContext';
 import PetComponent from './PetComponent';
 import BookingDetails from '../Booking/BookingDetails'
 import '../Booking/styles.css'
+import { Pagination } from 'antd';
 
 import './styles.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
 //import LostPetDetails from '../LostPet/LostPetDetails';
@@ -27,6 +28,16 @@ const Profile = ({ navBarProps }) => {
 
     const { adoptionForms, dispatch } = useAdoptionContext();
     const {lostNotice,dispatch:lostDispatch} = useLostPetsContext()
+
+    //booking pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 4; 
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const currentBookings = bookings ? bookings.slice((currentPage - 1) * pageSize, currentPage * pageSize) : [];
 
     useEffect(() => {
 
@@ -179,10 +190,19 @@ const Profile = ({ navBarProps }) => {
                         <HashLink to="/pet/home/#bookAppointments" ><button className='detailsSectionAddButton'>Add Appointments</button></HashLink>
                     </div >
                     <hr />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+                            <Pagination
+                                current={currentPage}
+                                total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
+                                pageSize={pageSize}
+                                onChange={handlePageChange}
+                                showSizeChanger={false}
+                            />
+                    </div>
                     <div className="detailsSectionCardContainer">
                         <div className='bookings'>
                             <div className='booked-appointments'>
-                                {bookings && bookings.map(booking => (
+                                {currentBookings && currentBookings.map(booking => (
                                     <BookingDetails key={booking._id} booking={booking} />
                                 ))}
                             </div>
