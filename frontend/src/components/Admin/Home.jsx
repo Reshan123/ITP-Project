@@ -64,6 +64,17 @@ const Home = () => {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
+
+                const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
+      
+                if (!bookingResponse.ok) {
+                    throw Error(bookingResponse.message);
+                }
+        
+                const bookingJson = await bookingResponse.json();
+        
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
+
                 //allDocData
                 const allDocResponse = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
                 const allDocJson = await allDocResponse.json()
@@ -99,24 +110,16 @@ const Home = () => {
 
         fetchAllData()
 
-        const fetchBookings = async () => {
-            try {
-              const response = await fetch("http://localhost:4000/api/bookings/");
+        // const fetchBookings = async () => {
+        //     try {
+              
       
-              if (!response.ok) {
-                throw Error(response.message);
-              }
+        //     } catch (error) {
+        //       console.log("Error fetching bookings:", error);
+        //     }
+        //   };
       
-              const json = await response.json();
-      
-              bookingDispatch({ type: 'SET_BOOKINGS', payload: json });
-      
-            } catch (error) {
-              console.log("Error fetching bookings:", error);
-            }
-          };
-      
-        fetchBookings();
+        // fetchBookings();
     }, [])
 
     return (
