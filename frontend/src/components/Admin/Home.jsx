@@ -98,7 +98,7 @@ const Home = () => {
 
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="adminPageMainContainer">
                 <SideBar />
                 <div className='pages'>

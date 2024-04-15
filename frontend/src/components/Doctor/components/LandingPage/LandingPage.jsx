@@ -7,7 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction"
 
 const LandingPage = () => {
 
-    const [doctorAvailability, setDoctorAvailability] = useState()
+    const [doctorAvailability, setDoctorAvailability] = useState(false)
     const {doctor, dispatch} = useDoctorContext()
 
     const [events, setEvents] = useState([]);
@@ -70,7 +70,7 @@ const LandingPage = () => {
             }
 
             // console.log(json)
-            dispatch({type:"UPDATE AVAILABILITY", payload:json.availability})
+            dispatch({type:"UPDATE AVAILABILITY", payload:doctorAvailability})
 
         } catch (error){
             console.log(error.message)

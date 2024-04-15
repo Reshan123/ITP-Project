@@ -102,7 +102,7 @@
   
   .allPetsTable thead tr th:last-child,
   .allPetsTable tbody tr td:last-child{
-    width: 30%;
+    width: 35%;
   }
 
   .allPetsTable tbody td center {
