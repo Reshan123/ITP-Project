@@ -14,21 +14,29 @@ const LostPetProfileDetails = ({notice}) => {
         day: "numeric",
     });
 
-    const handleDelete = async(id) =>{
-        const response = await fetch('http://localhost:4000/api/lostPetNotice/' + id,{
-            method: 'DELETE'
-        })
+    const handleDelete = async (id) => {
+        const confirmed = window.confirm(
+          "Are you sure you want to delete this item?"
+        );
 
-        const json = await response.json()
+        if (confirmed) {
+            const response = await fetch(
+              "http://localhost:4000/api/lostPetNotice/" + id,
+              {
+                method: "DELETE",
+              }
+            );
 
-        if(response.ok){
+            const json = await response.json();
 
-            //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
-            dispatch({type:'DELETE_NOTICE',payload:json})
-            
-            //toast.success("Notice deleted sucessfully")
-            
+            if (response.ok) {
+              //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
+              dispatch({ type: "DELETE_NOTICE", payload: json });
+
+              //toast.success("Notice deleted sucessfully")
+            }
         }
+        
     }
 
   return (

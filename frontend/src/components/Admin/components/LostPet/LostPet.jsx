@@ -87,24 +87,30 @@ const LostPet = () => {
   };
 
   const discardPost = async (noticeId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/lostPetNotice/${noticeId}`,
-        {
-          method: "DELETE",
-        }
-      );
-      const json = await response.json();
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (confirmed) {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/lostPetNotice/${noticeId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        const json = await response.json();
 
-      if (response.ok) {
-        //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
-        dispatch({ type: "DELETE_NOTICE", payload: json });
-      } else {
-        console.error("Failed to discard notice");
+        if (response.ok) {
+          //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
+          dispatch({ type: "DELETE_NOTICE", payload: json });
+        } else {
+          console.error("Failed to discard notice");
+        }
+      } catch (error) {
+        console.error("Error discarding notice:", error);
       }
-    } catch (error) {
-      console.error("Error discarding notice:", error);
     }
+      
   };
 
   return (
