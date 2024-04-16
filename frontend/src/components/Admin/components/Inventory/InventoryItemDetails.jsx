@@ -1,8 +1,9 @@
 import React from "react"
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
-import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import './styles.css'
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 import { useEffect, useState } from "react"
 
 const InventoryItemDetails = () => {
@@ -67,11 +68,11 @@ const InventoryItemDetails = () => {
     });
 
     const rows = filteredList.map((inventoryitem) => ({
-      itemName: booking.owner_name,
-      itemPrice: booking.owner_contact,
-      itemStockCount: booking.pet_name,
-      currentStock: booking.pet_species,
-      itemDescription: booking.doctor,
+      itemName: inventoryitem.itemName,
+      itemPrice: inventoryitem.itemPrice,
+      itemStockCount: inventoryitem.itemStockCount,
+      currentStock: inventoryitem.currentStock,
+      itemDescription: inventoryitem.itemDescription,
     }));
 
     // Add the table to the PDF
@@ -127,7 +128,7 @@ const InventoryItemDetails = () => {
         <div>
           <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
-          <button>Print</button>
+          <button onClick={generatePDF}>Download Report</button>
         </div>
       </div>
 
