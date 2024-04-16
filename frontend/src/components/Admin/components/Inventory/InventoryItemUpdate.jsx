@@ -32,8 +32,11 @@ const InventoryItemUpdate = () => {
           if (item.itemImageURL) {
             setItemImageURL(item.itemImageURL)
           }
-          if(item.currentStock<19){
-            confirm(`The Stock level of "${item.itemName}" is low`)        
+          // if(item.currentStock<19){
+          //   confirm(`The Stock level of "${item.itemName}" is low`)        
+          // }
+          if(item.currentStock){
+            setCurrentStock(item.currentStock)
           }
 
         }
@@ -48,6 +51,7 @@ const InventoryItemUpdate = () => {
   const [itemStockCount, setItemStockCount] = useState("")
   const [itemDescription, setItemDescription] = useState("")
   const [itemImageURL, setItemImageURL] = useState("")
+  const [currentStock, setCurrentStock] = useState("")
   const [error, setError] = useState("")
 
   const handleUpdate = (e) => {
@@ -57,11 +61,12 @@ const InventoryItemUpdate = () => {
       itemPrice,
       itemStockCount,
       itemDescription,
-      itemImageURL
+      itemImageURL,
+      currentStock
     }
     axios.put("http://localhost:4000/api/inventoryItems/"+itemID, formData)
       .then(res => {
-        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL }] })
+        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount,currentStock, itemDescription, itemImageURL }] })
         setError("")
         console.log(res)
         navigate('/admin/home/Inventoryitemdetails')
@@ -91,6 +96,12 @@ const InventoryItemUpdate = () => {
           type="number"
           onChange={(e) => setItemStockCount(e.target.value)}
           value={itemStockCount}
+        />
+        <label>Curernt Stock Level</label>
+        <input
+          type="number"
+          onChange={(e) => setCurrentStock(e.target.value)}
+          value={currentStock}
         />
         <label>Item Description</label>
         <input
