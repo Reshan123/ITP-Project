@@ -1,11 +1,24 @@
 import './styles.css'
 import { NavLink } from 'react-router-dom'
+import { IoPaw } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 const SideBar = () => {
+
+    const username = JSON.parse(localStorage.getItem('adminUser'))
+
+
     return (
         <div className="adminSideBar">
+            {/* <div className="adminSideBarLogo">
+                <IoPaw />
+            </div> */}
+            <div className="adminSideBarProfile">
+                <IoPaw />
+                <div className="adminSideBarUsername">{username && username.username}</div>
+                
+            </div>
             <div className="adminSideBarLinksContainer">
-
                 <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact="true">
                     <div className='linkText'>Home</div>
                 </NavLink>
@@ -36,7 +49,7 @@ const SideBar = () => {
                 </NavLink>
                 <br />
                 
-                <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact>
+                <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Appointment Bookings</div>
                 </NavLink>
             </div>

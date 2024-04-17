@@ -35,6 +35,7 @@ const InventoryItemForm = () => {
         if (!response.ok) {
             setError(json.error)
         }
+        
 
         if (response.ok) {
             setItemName('')

@@ -30,9 +30,9 @@ const Store = ({ navBarProps }) => {
     };
 
 
-    return (
-        <div className="store">
-            {inventoryitems && inventoryitems.map(inventoryitem => (
+    function renderInventoryItem(inventoryitem) {
+        if (inventoryitem.currentStock >= 5) {
+            return (
                 <div key={inventoryitem._id} className="store-body">
                     <div className="store-cards">
                         <h4>{inventoryitem.itemName}</h4>
@@ -41,12 +41,33 @@ const Store = ({ navBarProps }) => {
                         <p><strong>Current Stock Count: </strong>{inventoryitem.currentStock}</p>
                         <img src={inventoryitem.itemImageURL} alt="item" />
                         <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
-                            <button className="buy-btn">Buy</button>
+                        <button className="buy-btn">Buy</button>
                     </div>
                 </div>
-            ))}
+            );
+        } else {
+            return (
+                <div key={inventoryitem._id} className="store-body out-of-stock">
+                    <div className="store-cards">
+                        <h4>{inventoryitem.itemName}</h4>
+                        <p><strong>Price (in LKR): </strong>{inventoryitem.itemPrice}</p>
+                        <p><strong>Initial Stock Count: </strong>{inventoryitem.itemStockCount}</p>
+                        <p>Out of Stock</p>
+                        <img src={inventoryitem.itemImageURL} alt="item" />
+                        <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
+                    </div>
+                </div>
+            );
+        }
+    }
+    
+    
+    return (
+        <div className="store">
+            {inventoryitems && inventoryitems.map(inventoryitem => renderInventoryItem(inventoryitem))}
         </div>
     );
+    ;
 };
 
 export default Store;
