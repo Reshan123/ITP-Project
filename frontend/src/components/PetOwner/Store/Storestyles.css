@@ -21,6 +21,17 @@
     background-color: var(--nav-bg);
 }
 
+.store-body.out-of-stock {
+    width: calc(33.33% - 20px);
+    /* Adjust width as needed for margins */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #ff0000;
+}
+
 .store-body:hover {
     transform: translateY(-5px);
     background-color: var(--nav-bg-dark);
