@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useAdoptionContext } from "../../../hooks/useAdoptionContext"
+import { useUserContext } from '../../../hooks/userContextHook';
 import { useNavigate } from "react-router-dom"
 import image1 from './images/image1.png'
 import './styles.css'
@@ -10,6 +11,7 @@ const AdoptPet = ({ navBarProps }) => {
     navBarProps("#FFF", "#E2929D")
 
     const { adoptionForms, dispatch } = useAdoptionContext();
+    const { user, dispatch: userDispatch } = useUserContext()
 
     useEffect(() => {
         const fetchForms = async () => {
@@ -24,7 +26,13 @@ const AdoptPet = ({ navBarProps }) => {
     }, [dispatch])
 
     const handleNewAdoptionClick = () => {
-        navigate('/pet/adopt/adoptionForm');
+
+        if (!user) {
+            navigate('/pet/signin')
+        }
+
+        else { navigate('/pet/adopt/adoptionForm'); }
+
     };
 
     const handleViewDetails = (id) => {

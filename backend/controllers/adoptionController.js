@@ -39,7 +39,7 @@ const createAdoptionForm = async (req, res) => {
         gender,
         imageUrl,
         ownerContact,
-        description: { activityLevel, specialNeeds } } = req.body
+        description: { activityLevel, specialNeeds, smallDescription } } = req.body
 
     try {
         const form = await PetAdoptionForm.create({
@@ -51,7 +51,7 @@ const createAdoptionForm = async (req, res) => {
             gender,
             imageUrl,
             ownerContact,
-            description: { activityLevel, specialNeeds }
+            description: { activityLevel, specialNeeds, smallDescription }
         })
         res.status(200).json(form)
     } catch (error) {

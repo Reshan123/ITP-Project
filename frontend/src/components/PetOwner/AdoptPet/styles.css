@@ -343,14 +343,16 @@
 }
 
 .view-listing-page .listing {
-    border: 3px solid #222;
-    border-radius: 10px;
-    box-shadow: #333;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
-    max-width: 1500px;
+    max-width: 2000px;
     height: 500px;
 }
+
 
 .view-listing-page .adoption-image {
     width: 400px;
@@ -366,18 +368,94 @@
     border-bottom-left-radius: 10px;
 }
 
+.view-listing-page .pet-details {
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
 .view-listing-page .pet-details h1 {
     margin-top: 0;
 }
 
-.view-listing-page .pet-about {
+.view-listing-page .pet_about_1 {
+    display: flex;
+    padding-left: 10px;
+    margin-left: 5px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.pet_about_1 .species {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    border-radius: 30%;
+    height: 40px;
+
+}
+
+.pet_about_1 .species img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.pet_about_1 .gender {
+    width: 50px;
+    background-color: #3498db;
+    border-radius: 10px;
+    height: 40px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+
+}
+
+.pet_about_1 .gender p {
+    margin: 0;
+}
+
+.view-listing-page .pet-about_2 {
     margin-bottom: 20px;
+    margin-top: 30px;
 }
 
-.view-listing-page .special-description p {
-    margin: 5px 0;
+.view-listing-page .special-description {
+
+    margin-top: 40px;
 }
 
-.view-listing-page .owner-contact {
-    font-style: italic;
+
+.contact_details {
+
+    margin-top: 150px;
+    margin-left: 10px;
+}
+
+.owner-contact {
+    /* Style for the "Get In Touch" text */
+    cursor: pointer;
+
+}
+
+.owner-contact span {
+    /* Style for the owner contact */
+    display: none;
+    /* Initially hide the owner contact */
+}
+
+.owner-contact:hover span {
+    /* Style for the owner contact on hover */
+    display: inline;
+    /* Display the owner contact on hover */
+}
+
+.get-in-touch-button {
+    width: 150px;
+    background-color: pink;
+    border: transparent;
+    height: 40px;
 }
