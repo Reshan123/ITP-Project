@@ -138,13 +138,14 @@
     margin-bottom: 2px;
     margin-top: 2px;
     display: -webkit-box;
-  -webkit-line-clamp: 3; 
+  -webkit-line-clamp: 4; 
   -webkit-box-orient: vertical; 
   overflow: hidden;
   text-overflow: ellipsis;
  }
  .lostpetdetails h4{
     font-size: 20px;
+    padding: 5px 0px;
  }
  .date-container {
   display: flex;
@@ -193,7 +194,7 @@
     color:black;
     cursor: pointer;
     transform: scale(1.03);
-    transition: all 1s ease;
+    transition:  1s ease;
      border-style: solid;
      border-width: 3px;
     border-color: #cfb897;
@@ -227,91 +228,79 @@
 }
 
 /*All lost pet details*/
-.container2{
-  background-color: #f5f5f5; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-    padding: 20px; 
-    border-radius: 20px; /* Rounded corners */
-    height:600px;
-    width: 1150px;
-   display:flex;
-    margin-left: 12%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    overflow: hidden;
-    /* text-overflow: ellipsis; */
-    
-}
-.allpetdetails {
-  display: flex;
-  flex-direction: column;
-  padding: 20px; /* Add padding for spacing */
-  margin: 20px;
+.container2 {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 20px;
+  height: 600px;
+  width: 1150px;
  
+  /* align-items: center;  */
+  /* margin-left: 12%;
+  margin-top: 30px;
+  margin-bottom: 30px; */
+  margin-left: auto;
+   margin-right: auto;
+   margin-top: 25px;
+   margin-bottom: 25px;
 }
-.allpetdetailstext {
-  /* position: relative;
-  bottom: 80%;
-  left: 90%; */
-  position: absolute;
-  bottom: 75%; /* Adjust as needed */
-  left: 90%; /* Adjust as needed */
-  /* width: calc(100% - 40px); */
-  
-  
+
+.allpetdetails {
+  padding: 20px;
+  margin-left: 20px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.allpetdetailstext-container{
+  margin-left: 25px;
+ flex: 1;
+}
+
 .allpetdetails h4 {
-  position: absolute;
-  top: 22%;
-  left: 51%;
   font-size: 35px;
-  color: #B799D1;
+  color: #b799d1;
+  margin-top: 0;
+}
+
+
+.allpetdetails img {
+  width: 400px;
+  height: 350px;
+  border-radius: 10px;
+  object-fit: cover;
+ align-self:center;
+}
+
+.allpetdetailstext {
+  margin: 10px 0px;
+  display: flex;
+  padding: 10px;
 }
 
 .allpetdetails p {
-  position: relative;
-   margin: 10px 0px; 
-  /* display: -webkit-box;
-  -webkit-line-clamp: 1; 
-  -webkit-box-orient: vertical; text-overflow: ellipsis;*/
+  margin: 5px ;
   
 }
 
-.allpetdetails p::after {
-  content: "";
-  display: block;
-  width: 70%;
-  height: 1px;
-  background-color: #ddd; /* Line color */
-  position: absolute;
-  bottom: 0; /* Align the line to the bottom of the paragraph */
-  left: 0; /* Start the line from the left edge */
-  
-}
-
-.allpetdetails img{
-  width: 400px; /* Adjust width of the image */
-  height: 350px; /* Maintain aspect ratio */
-  margin-top: 20px; /* Add bottom margin for spacing */
-  border-radius: 10px; /* Rounded corners */
-  
-}
 
 .allpetdetailsbtn {
-  background-color: white; /* White button color */
-  border: 2px solid #B799D1; /* Pink border */
-  color: #B799D1; /* Pink text color */
-  border-radius: 8px; /* Border radius */
-  padding: 8px 16px; /* Padding */
-  cursor: pointer; /* Cursor style */
+  background-color: white;
+  border: 2px solid #b799d1;
+  color: #b799d1;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
   width: 200px;
-  transition: 0.5s ease;
-  position: relative; /* Position absolute */
-  top: 5%; /* Move to the top */
-  left: 90%; /* Move to the right */
+  margin-top: 20px;
+  margin-left:10px;
+ 
 }
+
 .allpetdetailsbtn:hover {
-  background-color: #B799D1;
+  background-color: #b799d1;
   color: white;
 }
 

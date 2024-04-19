@@ -36,9 +36,8 @@ const LostNoticeForm = ({navBarProps}) => {
       window.alert("Please login to add notices");
     }
     
-    const uid = JSON.parse(localStorage.getItem('user'))["uid"]
     
-    const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email,location,gender,age}
+    const notice = {petName, ownerName, breed, description, contactNo, image, email,location,gender,age}
     //send the data in the form tho the database
     const response = await fetch("http://localhost:4000/api/lostPetNotice", {
       method: "POST",

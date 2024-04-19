@@ -44,10 +44,10 @@ const LostPetDetails = ({ notice }) => {
             <strong>Description: </strong>
             {notice.description}
           </p>
-          <p className="lostpettext">
+          {/* <p className="lostpettext">
             <strong>ContactNo: </strong>
             {notice.contactNo}
-          </p>
+          </p> */}
 
           {/** <p><strong>Email: </strong>{notice.email}</p>*/}
 
