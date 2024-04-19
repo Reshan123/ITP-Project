@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext");
 .lostForm {
     max-width: 500px;
     margin: 0 auto;
@@ -91,7 +92,7 @@
  }
  /*represents a single card*/
  .frame{
-  background-color: #f3e9df;
+  background-color: #f2e8dd;
   
  /* margin-left: 15%;
  margin-right: 15%; */
@@ -99,7 +100,7 @@
  padding: 30px 0;
  }
  .lostpetdetails{
-    background: rgba(128, 81, 143, 0.541);
+    background: #ffffff;
     width: 300px;
     height: 450px;
     margin: 10px;
@@ -115,31 +116,65 @@
     margin-bottom: 15px;
     object-fit: cover;
  }
+ #noticePetName{
+  color: #086408;
+  font-family: 'Times New Roman', Times, serif, Arial, sans-serif;
+ }
+ .location-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+ .location{
+  margin: 2px 18px;
+  color: #d3c014;
+ }
+ .locationtext{
+  margin-top: 0;
+  margin-left: 1px;
+}
 .lostpettext{
     padding:2px;
     margin-left: 10px;
     margin-bottom: 2px;
     margin-top: 2px;
     display: -webkit-box;
-  -webkit-line-clamp: 2; 
+  -webkit-line-clamp: 3; 
   -webkit-box-orient: vertical; 
   overflow: hidden;
   text-overflow: ellipsis;
  }
  .lostpetdetails h4{
-    font-size: 25px;
+    font-size: 20px;
  }
- 
- .lostpetdetails .createdAt{
-    position: absolute; /* Position the createdAt text absolutely */
-    top: 50%; /* Position the text 10px from the top edge of the card */
-    right: 10px; /* Position the text 10px from the right edge of the card */
-    color: white; /* Set text color to white */
-    font-size: 15px; /* Adjust font size as needed */
- }
+ .date-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  position: absolute;
+  top: 49.2%;
+  right: 0
+}
+
+.date {
+  margin-right: 5px; /* Adjust margin as needed */
+  color: #059105;
+}
+
+.createdAt {
+  margin: 0; /* Remove default margin */
+  padding-right: 12px;
+}
+
+
+ /* .lostpetdetails .createdAt{
+    position: absolute; 
+    top: 50%; 
+    right: 10px; 
+    color: black; 
+    font-size: 15px; 
+ } */
  .lostpetdetails button{
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     padding:12px 18px;
     display: block;
     text-align: center;
@@ -151,13 +186,17 @@
     /* right: 50%; */
     left:50%;
     transform: translateX(-50%);/*moves the button to 50% of its own scale*/
+    transition: 0.5s ease;
  }
  .lostpetdetails:hover{
-    background-color: rgb(62,62,62);
-    color:white;
+    /* background-color: rgb(62,62,62); */
+    color:black;
     cursor: pointer;
     transform: scale(1.03);
     transition: all 1s ease;
+     border-style: solid;
+     border-width: 3px;
+    border-color: #cfb897;
  }
 
  .noticebtn button {
