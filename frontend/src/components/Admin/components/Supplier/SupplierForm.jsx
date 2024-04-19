@@ -11,7 +11,7 @@ const SupplierForm = () => {
         e.preventDefault()
 
         const supplier = {supplierName, supplierContact, supplierEmail, supplierCompany, itemId}
-        const response = await fetch('http://localhost:2000/api/supplier', {
+        const response = await fetch('http://localhost:4000/api/supplier', {
             method:'POST', 
             body:JSON.stringify(supplier),
             headers:{

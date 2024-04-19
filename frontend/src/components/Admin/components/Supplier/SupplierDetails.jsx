@@ -1,4 +1,4 @@
-import { useSupplierContext } from "../hooks/useSupplierContext"
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 
 const SupplierDetails = ({supplier})=> {
 
@@ -6,7 +6,7 @@ const SupplierDetails = ({supplier})=> {
 
     
     const handleClick = async ()=>{
-        const response = await  fetch('http://localhost:2000/api/supplier/' + supplier._id, {
+        const response = await  fetch('http://localhost:4000/api/supplier/' + supplier._id, {
             method:'DELETE'
         })
         const json = await response.json()

@@ -27,7 +27,7 @@ export const SupplierContextProvider = ({ children }) => {
         suppliers: null
     })
 
-    
+    console.log('supplier state:', state)
 
     return(
         <SupplierContext.Provider value={{...state, dispatch}}>

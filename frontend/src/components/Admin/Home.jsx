@@ -27,14 +27,17 @@ import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
 import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
+import { useSupplierContext } from "../../hooks/useSupplierContext"
+import SupplierDetails from './components/Supplier/SupplierDetails';
 
 const Home = () => {
 
     const navigate = useNavigate()
 
 
-    const { inventoryitems, dispatch } = useInventoryItemsContext()
+    const { inventoryitems, dispatch: inventoryDispatch } = useInventoryItemsContext()
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
+    const { supplierDetails, dispatch: supplierDispatch } = useSupplierContext()
 
     const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
     const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext()
@@ -50,16 +53,15 @@ const Home = () => {
 
     useEffect(() => {
         const fetchInventoryItems = async () => {
-          const response = await fetch('http://localhost:4000/api/inventoryItems/')
-          const json = await response.json()
-    
-          if (response.ok) {
-            dispatch({ type: 'SET_ITEMS', payload: json })
+          try{
+            
+          } catch (error){
+            console.log(error.message)
           }
         }
     
         fetchInventoryItems()
-      }, [dispatch])
+      }, [])
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -74,6 +76,18 @@ const Home = () => {
                 const bookingJson = await bookingResponse.json();
         
                 bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
+
+                //supplier
+
+                const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
+      
+                if (!supplierResponse.ok) {
+                    throw Error(supplierResponse.message);
+                }
+        
+                const supplierJson = await supplierResponse.json();
+        
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
 
                 //allDocData
                 const allDocResponse = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
@@ -94,17 +108,23 @@ const Home = () => {
                 petOwnerDispatch({ type: "LOAD", payload: allPetOwnerJson })
 
 
-                //getAllAdoptionForms
-                const allForms = await fetch('http://localhost:4000/api/adoption')
-                const json = await allForms.json()
-
-                if (!json.ok) {
-                    throw Error(json.message)
+                const inventoryResponse = await fetch('http://localhost:4000/api/inventoryItems/')
+                const inventoryJson = await inventoryResponse.json()
+            
+                if (inventoryResponse.ok) {
+                    inventoryDispatch({ type: 'SET_ITEMS', payload: inventoryJson })
                 }
-                adoptionDispatch({ type: 'SET_FORMS', payload: json })
+
+                //getAllAdoptionForms
+                const adoptionResponse = await fetch('http://localhost:4000/api/adoption')
+                const adoptionJson = await adoptionResponse.json()
+
+                if (adoptionResponse.ok) {
+                    adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
+                }
 
             } catch (error) {
-                console.log(error.message)
+                console.log(error)
             }
         }
 
@@ -143,6 +163,7 @@ const Home = () => {
                         <Route path='/LostPet' element={<LostPet />} />
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
+                        <Route path='/Supplier' element={<SupplierDetails />} />
                     </Routes>
                 </div>
             </div>

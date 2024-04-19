@@ -18,7 +18,7 @@ const SupplierUpdateForm = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch('http://localhost:2000/api/supplier/' + id);
+        const response = await fetch('http://localhost:4000/api/supplier/' + id);
         const json = await response.json();
 
         if(!response.ok){
