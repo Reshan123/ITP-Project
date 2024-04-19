@@ -112,41 +112,47 @@ const AllForms = () => {
             title: 'Approval Status',
             dataIndex: 'approved',
             key: 'approved',
-
-
+            filters: [
+                { text: 'Pending', value: 'Pending' },
+                { text: 'Approved', value: 'Approved' },
+                { text: 'Rejected', value: 'Rejected' }
+            ],
+            filteredValue: filteredInfo.approved || null,
+            onFilter: (value, record) => record.approved === value,
         },
         {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <>
-
                     <Button className="view-details-btn" onClick={() => handleViewDetails(record._id)}>View Details</Button>
                     <Button type="primary" className="listing-delete-btn" danger onClick={() => handleDelete(record._id)}>
                         <DeleteOutlined />
                     </Button>
                 </>
-            ),
-        },
+            )
+        }
     ];
 
     return (
         <div className="allforms-admin">
-            <input
-                type="text"
-                placeholder="Search..."
-                value={searchText}
-                onChange={handleSearch}
-                className="search-input"
-            />
-
-
+            <div className="allforms-header">
+                <p>All Adoption Form Details</p>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchText}
+                    onChange={handleSearch}
+                    className="search-input"
+                />
+                <button>Print</button>
+            </div>
+            <hr></hr>
             <ConfigProvider
                 theme={{
                     components: {
                         Table: {
                             headerBg: "#333",
-
                         }
                     },
                 }}

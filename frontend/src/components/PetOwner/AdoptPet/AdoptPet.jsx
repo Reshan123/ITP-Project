@@ -31,6 +31,21 @@ const AdoptPet = ({ navBarProps }) => {
         navigate(('/pet/adopt/form-details/' + id))
     }
 
+    function getDaysSinceCreation(createdAt) {
+        const creationDate = new Date(createdAt);
+        const currentDate = new Date();
+        const differenceInTime = currentDate.getTime() - creationDate.getTime();
+        const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+
+        if (differenceInDays === 0) {
+            // Calculate the difference in hours
+            const differenceInHours = Math.floor(differenceInTime / (1000 * 3600));
+            return differenceInHours + " hours";
+        } else {
+            return differenceInDays + " days";
+        }
+    }
+
     return (
         <div className="AdoptionFormPage">
 
@@ -50,24 +65,33 @@ const AdoptPet = ({ navBarProps }) => {
                         .filter(adoptionForm => adoptionForm.approved === 'Approved') // Filter out forms that are not approved
                         .map((adoptionForm, index) => (
                             <article key={index} className="card">
-                                <img
-                                    className="card__background"
-                                    src={adoptionForm.imageUrl || ''}
-                                    alt="Pet"
-                                    width="1920"
-                                    height="2193"
-                                />
-                                <div className="card__content | flow">
-                                    <div className="card__content--container | flow">
-                                        <h2 className="card__title">{adoptionForm.name}</h2>
+                                <div className="card_header">
+                                    <img
+                                        className="card__background"
+                                        src={adoptionForm.imageUrl || ''}
+                                        alt="Pet"
+                                        width="1920"
+                                        height="2193"
+                                    />
+
+                                </div>
+                                <div className="card__content">
+                                    <h2 className="card__title">{adoptionForm.name}</h2>
+                                    <div className="card__content--container">
+                                        <h2 className="card__content_title">About {adoptionForm.name}</h2>
                                         <p className="card__description">
                                             <strong>Gender: </strong>{adoptionForm.gender}<br />
                                             <strong>Breed: </strong>{adoptionForm.breed}
                                         </p>
                                     </div>
-                                    <button className="card__button" onClick={() => handleViewDetails(adoptionForm._id)}>View Details</button>
+                                    <div className="card_footer">
+                                        <p>{getDaysSinceCreation(adoptionForm.createdAt)} ago</p>
+                                        <button className="card__button" onClick={() => handleViewDetails(adoptionForm._id)}>View Details</button>
+                                    </div>
+
                                 </div>
                             </article>
+
                         ))}
                 </div>
 
