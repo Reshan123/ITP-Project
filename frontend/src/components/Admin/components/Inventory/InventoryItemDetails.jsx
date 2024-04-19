@@ -1,8 +1,9 @@
 import React from "react"
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
-import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
 import './styles.css'
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 import { useEffect, useState } from "react"
 
 const InventoryItemDetails = () => {
@@ -21,7 +22,8 @@ const InventoryItemDetails = () => {
   useEffect(() => {
     if (inventoryitems) {
       const filteredList = inventoryitems.filter(inventoryitem => {
-        return ((inventoryitem.itemName.startsWith(searchQuery)))
+        const searchQueryLower = searchQuery.toLowerCase();
+        return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
       })
       setCurrentlyDisplayedItems(filteredList)
     }
@@ -42,6 +44,80 @@ const InventoryItemDetails = () => {
     }
   };
 
+  //Download Report Content
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    // Get the current date
+    const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    doc.text(`Appointment Booking Report - ${currentDate}`, 14, 12);
+
+    // Define the columns and rows for the table
+    const columns = [
+      { header: 'Item Name', dataKey: 'itemName' },
+      { header: 'Price', dataKey: 'itemPrice' },
+      { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
+      { header: 'Current Stock Count', dataKey: 'currentStock' },
+      { header: 'Item Description', dataKey: 'itemDescription' },
+    ];
+
+    const filteredList = inventoryitems.filter(inventoryitem => {
+      const searchQueryLower = searchQuery.toLowerCase();
+      return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
+    });
+
+    const rows = filteredList.map((inventoryitem) => ({
+      itemName: inventoryitem.itemName,
+      itemPrice: inventoryitem.itemPrice,
+      itemStockCount: inventoryitem.itemStockCount,
+      currentStock: inventoryitem.currentStock,
+      itemDescription: inventoryitem.itemDescription,
+    }));
+
+    // Add the table to the PDF
+    doc.autoTable({
+      columns,
+      body: rows,
+      startY: 20,
+
+      styles: {
+        // Styles applied to the table
+        cellPadding: 2,
+        fontSize: 10,
+        valign: 'middle',
+        halign: 'center',
+        cellWidth: 'auto', // Auto column width
+      },
+
+      columnStyles: {
+        // Custom styles for specific columns
+        itemName: { fontStyle: 'bold' },
+        itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
+      },
+
+      headerStyles: {
+        fillColor: [100, 100, 100], // Header background color
+        textColor: [255, 255, 255], // Header text color
+        fontStyle: 'bold', // Bold font for header
+      },
+
+      bodyStyles: {
+        textColor: [50, 50, 50], // Body text color
+      },
+
+      alternateRowStyles: {
+        fillColor: [245, 245, 245], // Alternate row background color
+      },
+    });
+
+
+
+    // Save the PDF with a unique name
+    const filename = 'inventoryReport.pdf';
+    doc.save(filename);
+  };
+
 
   return (
 
@@ -53,7 +129,7 @@ const InventoryItemDetails = () => {
         <div>
           <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
-          <button>Print</button>
+          <button onClick={generatePDF}>Download Report</button>
         </div>
       </div>
 
@@ -70,7 +146,7 @@ const InventoryItemDetails = () => {
         </thead>
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
-            <tr>
+            <tr key={inventoryitem._id}>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>

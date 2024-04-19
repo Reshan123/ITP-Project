@@ -35,6 +35,7 @@ const InventoryItemForm = () => {
         if (!response.ok) {
             setError(json.error)
         }
+        
 
         if (response.ok) {
             setItemName('')
@@ -82,6 +83,8 @@ const InventoryItemForm = () => {
                     onChange={(e) => setItemName(e.target.value)}
                     value={itemName}
                 />
+
+
                 {/* <label>Select the Supplier</label>
                 <select
                     id="supplier"
@@ -89,8 +92,8 @@ const InventoryItemForm = () => {
                     value={supplierID}
                 >
                     <option value="">Select Supplier</option>
-                    {suppliers.map(supplier => (
-                        <option key={supplier._id} value={supplier._id}>{supplier.name}</option>
+                    {Supplier.map(supplier => (
+                        <option key={supplier._id} value={supplier._id}>{supplier.supplierName}</option>
                     ))}
                 </select> */}
 

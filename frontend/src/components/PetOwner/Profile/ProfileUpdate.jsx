@@ -13,7 +13,7 @@ const ProfileUpdate = ({navBarProps}) => {
 
     useEffect(()=>{
         if(!user){
-            navigate('/pet/login')
+            navigate('/pet/signin')
         }
     }, [])
     

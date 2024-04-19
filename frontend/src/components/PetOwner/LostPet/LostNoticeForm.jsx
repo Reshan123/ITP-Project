@@ -5,11 +5,14 @@ import { useLostPetsContext } from '../../../hooks/useLostPetsContext'
 import firebase from 'firebase/compat/app'
 import "firebase/compat/storage"
 import { useNavigate } from 'react-router-dom'
+import { useUserContext } from '../../../hooks/userContextHook'
+
 
 const LostNoticeForm = ({navBarProps}) => {
     navBarProps("#FFF", "#B799D1")
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const { user } = useUserContext()
 
     const {dispatch} = useLostPetsContext()
 
@@ -29,18 +32,24 @@ const LostNoticeForm = ({navBarProps}) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!user) {
+      window.alert("Please login to add notices");
+    }
+    
     const uid = JSON.parse(localStorage.getItem('user'))["uid"]
     
     const notice = {owner_id:uid,petName, ownerName, breed, description, contactNo, image, email,location,gender,age}
     //send the data in the form tho the database
-    const response = await fetch('http://localhost:4000/api/lostPetNotice',{
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/api/lostPetNotice", {
+      method: "POST",
       body: JSON.stringify(notice),
       headers: {
-        'Content-Type': 'application/json',
-        
-      }
-    })
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.userToken}`,
+      },
+    });
+
+    
 
       
     const json = await response.json()

@@ -35,27 +35,28 @@ const ViewForm = () => {
 
     return (
 
-        <div className="view-only-adoption-form">
-            <h1>Meet {adoptionForms.name}</h1>
-            {adoptionForms.imageUrl && (
+        <div className="view-listing-page">
+            <div className="listing">
                 <div className="adoption-image">
-                    <img src={adoptionForms.imageUrl} alt="Pet" />
+                    {adoptionForms.imageUrl && (
+                        <img src={adoptionForms.imageUrl} alt="Pet" />
+                    )}
                 </div>
-            )}
-            <div className="pet-about">
-                <p>Age: {adoptionForms.age}</p>
-                <p>Species: {adoptionForms.species}</p>
-                <p>Breed: {adoptionForms.breed}</p>
-                <p>Gender: {adoptionForms.gender}</p>
-
-                <div className="special-description">
-                    <p>Activity Level: {adoptionForms.description?.activityLevel || 'Not specified'}</p>
-                    <p>Special Needs: {adoptionForms.description?.specialNeeds || 'None'}</p>
+                <div className="pet-details">
+                    <h1>Meet {adoptionForms.name}</h1>
+                    <div className="pet-about">
+                        <p>Age: {adoptionForms.age}</p>
+                        <p>Species: {adoptionForms.species}</p>
+                        <p>Breed: {adoptionForms.breed}</p>
+                        <p>Gender: {adoptionForms.gender}</p>
+                        <div className="special-description">
+                            <p>Activity Level: {adoptionForms.description?.activityLevel || 'Not specified'}</p>
+                            <p>Special Needs: {adoptionForms.description?.specialNeeds || 'None'}</p>
+                        </div>
+                    </div>
+                    <p className="owner-contact">You can contact the owner: {adoptionForms.ownerContact}</p>
                 </div>
             </div>
-
-            <p className="owner-contact">You can contact the owner: {adoptionForms.ownerContact}</p>
-
         </div>
 
 

@@ -14,6 +14,7 @@ const petRoutes = require('./routes/petRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
 const medicalRecordRoute = require('./routes/medicalRecordRoute')
 const messageRoutes = require('./routes/messageRoutes')
+const supplierRoutes = require('./routes/supplierRoutes')
 const { app, server } = require("./socket/socket");
 
 //const app = express()
@@ -43,7 +44,9 @@ app.use('/api/adoption', adoptionFormRoutes)
 app.use('/api/pet', petRoutes)
 app.use('/api/doctor', doctorRoutes)
 app.use('/medical-records', medicalRecordRoute);
+app.use("/api/supplier", supplierRoutes);
 app.use("/api/messages", messageRoutes);
+
 
 app.use('/api/admin/login', (req, res) => {
     const {email, password} = req.body

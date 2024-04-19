@@ -8,7 +8,7 @@ const router = express.Router()
 const {createLostPetNotice,getNotice,getAllNotice,updateLostPetNotice,deleteLostPetNotice,getUserLostPetNotice}=require('../controllers/lostPetNoticeController')
 
 //route to create/posting the notice
-router.post('/', createLostPetNotice)
+router.post('/',authorize, createLostPetNotice)
 
 //retriving a paticular notice
 router.get('/getSingleNotice/:id', getNotice)
