@@ -124,7 +124,7 @@
 
 
 .petCard{
-    width: 32%;
+    /* width: 32%; */
     color: #FFF;
     background-color: var(--primaryPurple);
     padding: 15px 25px;

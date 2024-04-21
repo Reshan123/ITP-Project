@@ -126,6 +126,10 @@ const deletePetFromID = async (req, res) => {
 
 const updatePetFromID = async (req, res) => {
     const { petID } = req.params
+    const {ownerID, petName,petAge,petSpecies,petGender,petBreed} = req.body
+    const options = {
+        new: true
+    }
     
     try{
         const petExist = await pet.findById(petID)
@@ -133,7 +137,23 @@ const updatePetFromID = async (req, res) => {
             throw Error("Invalid ID")
         }
 
-        const response = await pet.findByIdAndUpdate(petID, {...req.body}, {new:true})
+        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed) {
+            throw Error('All fields must be filled')
+        }
+        if(!validator.isAlpha(petName, ['en-US'], {ignore: '-s'})){
+            throw Error('Pet name can only have letters')
+        }
+        if(!validator.isAlpha(petSpecies, ['en-US'], {ignore: '-s'})){
+            throw Error('pet species can only have letters')
+        }
+        if(!validator.isAlpha(petGender, ['en-US'], {ignore: '-s'})){
+            throw Error('Pet gender can only have letters')
+        }
+        if(!validator.isAlpha(petBreed, ['en-US'], {ignore: '-s'})){
+            throw Error('Pet breed can only have letters')
+        }
+
+        const response = await pet.findByIdAndUpdate(petID, {...req.body}, options)
         res.status(200).json({message: response})
 
     } catch(error){
