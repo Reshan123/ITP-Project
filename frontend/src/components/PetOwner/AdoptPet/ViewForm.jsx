@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAdoptionContext } from "../../../hooks/useAdoptionContext";
 import { useParams } from "react-router-dom";
 import './styles.css'
+import cat from './images/cat.png'
+import dog from './images/dog.png'
 
 const ViewForm = () => {
 
-
+    // State to control whether to show owner contact or "Get In Touch"
+    const [showOwnerContact, setShowOwnerContact] = useState(false);
 
     const { adoptionForms, dispatch } = useAdoptionContext();
     const params = useParams(); // Get the ID parameter from the URL
@@ -31,37 +34,57 @@ const ViewForm = () => {
         fetchData()
     }, [dispatch])
 
-
-
     return (
 
         <div className="view-listing-page">
             <div className="listing">
                 <div className="adoption-image">
-                    {adoptionForms.imageUrl && (
+                    {adoptionForms && adoptionForms.imageUrl && (
                         <img src={adoptionForms.imageUrl} alt="Pet" />
                     )}
                 </div>
                 <div className="pet-details">
-                    <h1>Meet {adoptionForms.name}</h1>
-                    <div className="pet-about">
-                        <p>Age: {adoptionForms.age}</p>
-                        <p>Species: {adoptionForms.species}</p>
-                        <p>Breed: {adoptionForms.breed}</p>
-                        <p>Gender: {adoptionForms.gender}</p>
-                        <div className="special-description">
-                            <p>Activity Level: {adoptionForms.description?.activityLevel || 'Not specified'}</p>
-                            <p>Special Needs: {adoptionForms.description?.specialNeeds || 'None'}</p>
+                    <h1>Meet {adoptionForms && adoptionForms.name}</h1>
+                    <div className="pet_about_1">
+                        <div className="species" style={{ backgroundColor: adoptionForms?.species === 'Dog' ? 'rgba(139, 69, 19, 0.6)' : (adoptionForms?.species === 'Cat' ? 'rgba(128, 128, 128, 0.6)' : 'transparent') }}>
+
+                            {adoptionForms?.species === 'Dog' && <img src={dog} alt="Dog" />}
+                            {adoptionForms?.species === 'Cat' && <img src={cat} alt="Cat" />}
+                            {adoptionForms?.species !== 'Dog' && adoptionForms?.species !== 'Cat' && (
+                                <p > {adoptionForms?.species}</p>
+                            )}
+
+                        </div>
+                        <div className="gender">
+                            <p> {adoptionForms && adoptionForms.gender}</p>
                         </div>
                     </div>
-                    <p className="owner-contact">You can contact the owner: {adoptionForms.ownerContact}</p>
+                    <div className="pet-about_2">
+                        <p><strong>Age: </strong> {adoptionForms && adoptionForms.age}</p>
+
+                        <p><strong>Breed:</strong>  {adoptionForms && adoptionForms.breed}</p>
+                        <div className="pet_description">
+                            <strong>About {adoptionForms.name} </strong><br />
+                            <p>{adoptionForms?.description?.smallDescription}</p>
+                        </div>
+                        <div className="special-description">
+                            <p><strong>Activity Level:</strong> {adoptionForms?.description?.activityLevel || 'Not specified'}</p>
+                            <p><strong>Special Needs:</strong>  {adoptionForms?.description?.specialNeeds || 'None'}</p>
+                        </div>
+                    </div>
+                    <div className="contact_details">
+                        {showOwnerContact ? (
+                            <p className="owner-contact"><strong>Owner Contact:</strong>{adoptionForms?.ownerContact}</p>
+                        ) : (
+                            <button className="get-in-touch-button" onClick={() => setShowOwnerContact(true)}>
+                                Get In Touch
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
-
-
     )
-
 }
 
-export default ViewForm
+export default ViewForm;
