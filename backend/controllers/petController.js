@@ -10,7 +10,7 @@ const createPet = async (req, res) => {
     try{
         const { files } = req;
         const filenames = files.map(file => (file.filename))
-        if (!petName || !petAge || !petSpecies || !petGender || !petBreed) {
+        if (!petName || !petAge || !petSpecies || !petGender || !petBreed || files.length == 0) {
             throw Error('All fields must be filled')
         }
         if(!validator.isAlpha(petName, ['en-US'], {ignore: '-s'})){
@@ -44,7 +44,7 @@ const adminCreatePet = async (req, res) => {
         const filenames = files.map(file => (file.filename))
         // let ownerID = mongoose.Types.ObjectId(userID);
 
-        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed) {
+        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed || files.length == 0) {
             throw Error('All fields must be filled')
         }
         if(!validator.isAlpha(petName, ['en-US'], {ignore: '-s'})){
@@ -136,13 +136,14 @@ const updatePetFromID = async (req, res) => {
     
     try{
         const { files } = req;
+        console.log(files)
         const filenames = files.map(file => (file.filename))
         const petExist = await pet.findById(petID)
         if(!petExist){
             throw Error("Invalid ID")
         }
 
-        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed) {
+        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed || files.length == 0) {
             throw Error('All fields must be filled')
         }
         if(!validator.isAlpha(petName, ['en-US'], {ignore: '-s'})){

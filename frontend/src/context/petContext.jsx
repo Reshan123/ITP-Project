@@ -18,7 +18,9 @@ export const petReducer = (state, action) => {
             state.pets[objIndex].petSpecies = action.payload[1].petSpecies
             state.pets[objIndex].petGender = action.payload[1].petGender
             state.pets[objIndex].petBreed = action.payload[1].petBreed
-            state.pets[objIndex].petImage = action.payload[1].petImage
+            if (action.payload[1].petImage){
+                state.pets[objIndex].petImage = action.payload[1].petImage
+            }
             return state;
         case "DELETE PET":
             return { pets: state.pets.filter(obj => obj._id != action.payload) }
