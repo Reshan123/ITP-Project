@@ -8,6 +8,8 @@ const createPet = async (req, res) => {
     const {petName,petAge,petSpecies,petGender,petBreed} = req.body
 
     try{
+        const { files } = req;
+        const filenames = files.map(file => (file.filename))
         if (!petName || !petAge || !petSpecies || !petGender || !petBreed) {
             throw Error('All fields must be filled')
         }
@@ -25,7 +27,7 @@ const createPet = async (req, res) => {
         }
 
 
-        const petResponse = await pet.create({ownerID: userID,petName,petAge,petSpecies,petGender,petBreed})
+        const petResponse = await pet.create({ownerID: userID,petName,petAge,petSpecies,petGender,petBreed,petImage:[...filenames]})
 
         res.status(200).json({message: petResponse})
     } catch (error){
@@ -38,7 +40,8 @@ const adminCreatePet = async (req, res) => {
 
     
     try{
-
+        const { files } = req;
+        const filenames = files.map(file => (file.filename))
         // let ownerID = mongoose.Types.ObjectId(userID);
 
         if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed) {
@@ -58,7 +61,7 @@ const adminCreatePet = async (req, res) => {
         }
 
 
-        const petResponse = await pet.create({ownerID, petName,petAge,petSpecies,petGender,petBreed})
+        const petResponse = await pet.create({ownerID, petName,petAge,petSpecies,petGender,petBreed,petImage:[...filenames]})
 
         res.status(200).json({message: petResponse})
     } catch (error){
@@ -132,6 +135,8 @@ const updatePetFromID = async (req, res) => {
     }
     
     try{
+        const { files } = req;
+        const filenames = files.map(file => (file.filename))
         const petExist = await pet.findById(petID)
         if(!petExist){
             throw Error("Invalid ID")
@@ -153,7 +158,7 @@ const updatePetFromID = async (req, res) => {
             throw Error('Pet breed can only have letters')
         }
 
-        const response = await pet.findByIdAndUpdate(petID, {...req.body}, options)
+        const response = await pet.findByIdAndUpdate(petID, {...req.body, petImage:[...filenames]}, options)
         res.status(200).json({message: response})
 
     } catch(error){
