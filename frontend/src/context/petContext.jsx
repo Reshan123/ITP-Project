@@ -12,13 +12,13 @@ export const petReducer = (state, action) => {
             return state
         case "UPDATE PET":
             const objIndex = state.pets.findIndex(obj => obj._id == action.payload[0])
-            console.log(action.payload)
             state.pets[objIndex].ownerID = action.payload[1].ownerID
             state.pets[objIndex].petName = action.payload[1].petName
             state.pets[objIndex].petAge = action.payload[1].petAge
             state.pets[objIndex].petSpecies = action.payload[1].petSpecies
             state.pets[objIndex].petGender = action.payload[1].petGender
             state.pets[objIndex].petBreed = action.payload[1].petBreed
+            state.pets[objIndex].petImage = action.payload[1].petImage
             return state;
         case "DELETE PET":
             return { pets: state.pets.filter(obj => obj._id != action.payload) }

@@ -34,6 +34,8 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
+app.use(express.static('Images'))
+
 
 //Routes
 app.use("/api/petOwner", petOwnerRoutes)
