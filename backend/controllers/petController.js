@@ -143,7 +143,7 @@ const updatePetFromID = async (req, res) => {
             throw Error("Invalid ID")
         }
 
-        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed || files.length == 0) {
+        if (!ownerID || !petName || !petAge || !petSpecies || !petGender || !petBreed) {
             throw Error('All fields must be filled')
         }
         if(!validator.isAlpha(petName, ['en-US'], {ignore: '-s'})){
@@ -159,7 +159,13 @@ const updatePetFromID = async (req, res) => {
             throw Error('Pet breed can only have letters')
         }
 
-        const response = await pet.findByIdAndUpdate(petID, {...req.body, petImage:[...filenames]}, options)
+        if(filenames.length > 0){
+            const response = await pet.findByIdAndUpdate(petID, {...req.body, petImage:[...filenames]}, options)
+            res.status(200).json({message: response})
+            return;    
+        }
+
+        const response = await pet.findByIdAndUpdate(petID, {...req.body}, options)
         res.status(200).json({message: response})
 
     } catch(error){
