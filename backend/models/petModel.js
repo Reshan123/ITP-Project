@@ -28,6 +28,10 @@ const petSchema = new Schema({
     petBreed:{
         type: String,
         required: true
+    },
+    petImage:{
+        type: [String],
+        required: true
     }
 },{timestamps: true})
 

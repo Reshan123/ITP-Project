@@ -51,7 +51,9 @@ const adoptionFormSchema = new Schema({
         'Low (30min-1h daily)'  // Low activity level
       ]
     },
-    specialNeeds: { type: String, required: false } // Optional field for special needs
+    specialNeeds: { type: String, required: false },
+
+    smallDescription: { type: String, required: true }
   },
   approved: {
     type: String,
