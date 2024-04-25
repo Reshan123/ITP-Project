@@ -23,6 +23,7 @@ const PetUpdate = ({ navBarProps }) => {
     })
     const [inputsValid, setInputsValid] = useState(true)
     const [error, setError] = useState("")
+    const [petImage, setPetImage] = useState([])
 
     
     useEffect(() => {
@@ -49,17 +50,26 @@ const PetUpdate = ({ navBarProps }) => {
 
     const updatePetProfile = async (e) => {
         e.preventDefault()
+
+        const data = new FormData()
+        data.append('ownerID', formInputs.ownerID)
+        data.append('petName', formInputs.petName)
+        data.append('petAge', formInputs.petAge)
+        data.append('petSpecies', formInputs.petSpecies)
+        data.append('petGender', formInputs.petGender)
+        data.append('petBreed', formInputs.petBreed)
+        for (let i = 0; i < petImage.length; i++){
+            data.append('petImage', petImage[i])
+        }
+
         try{
             const config = {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formInputs)
+                body: data
             }
             const response = await fetch("http://localhost:4000/api/pet/updatePetFromID/" + id, config);
             const json = await response.json()
-
+            console.log(json)
             if(!response.ok){
                 throw Error(json.message)
             }
@@ -100,6 +110,10 @@ const PetUpdate = ({ navBarProps }) => {
                 <div className="petProfileUpdateInputWrapper">
                     <label htmlFor="petBreed">Pet Breed : </label>
                     <input type="text" name="petBreed" id="petBreed" value={formInputs.petBreed} onChange={handleInputChange} />
+                </div>
+                <div className="petProfileUpdateInputWrapper">
+                    <label htmlFor="petImage">Pet Image</label>
+                    <input type="file" name="petImage" id="petImage" onChange={(e) => setPetImage(e.target.files)} multiple/>
                 </div>
                 <div className="petProfileUpdateSubmitButton">
                     {inputsValid && (<button type="submit">Update Profile</button>)}
