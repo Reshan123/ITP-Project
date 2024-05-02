@@ -3,7 +3,7 @@ import './Storestyles.css';
 import { useInventoryItemsContext } from '../../../hooks/useInventoryItemsContext';
 import storeImage from './images/store.png'
 const Store = ({ navBarProps }) => {
-    navBarProps("#FFF", "#B799D1");
+    navBarProps("#FFF", "#B799D1", "#B799D1");
 
     const { inventoryitems, dispatch } = useInventoryItemsContext();
     // const [inventoryItems, setInventoryItems] = useState([]);
@@ -33,32 +33,28 @@ const Store = ({ navBarProps }) => {
     function renderInventoryItem(inventoryitem) {
         if (inventoryitem.currentStock >= 5) {
             return (
-                <div className="shopItems">
-                    <div className="card">
-                        <div className="image">
-                            <img src={inventoryitem.itemImageURL} alt="" />
-                        </div>
-                        <div className="desc">In Stock: {inventoryitem.currentStock}</div>
-                        <div className="title">{inventoryitem.itemName}</div>
-                        <div className="box">
-                            <div className="price">{inventoryitem.itemPrice} LKR</div>
-                            <button className="btn">View More</button>
-                        </div>
+                <div className="card">
+                    <div className="image">
+                        <img src={inventoryitem.itemImageURL} alt="" />
+                    </div>
+                    <div className="desc">In Stock: {inventoryitem.currentStock}</div>
+                    <div className="title">{inventoryitem.itemName}</div>
+                    <div className="box">
+                        <div className="price">{inventoryitem.itemPrice} LKR</div>
+                        <button className="btn">View More</button>
                     </div>
                 </div>
             );
         } else {
             return (
-                <div className="shopItems">
-                    <div className="card">
-                        <div className="image">
-                            <img src={inventoryitem.itemImageURL} alt="" />
-                        </div>
-                        <div className="desc" style={{ color: 'red' }}>Not in Stock</div>
-                        <div className="title">{inventoryitem.itemName}</div>
-                        <div className="box">
-                            <div className="price">{inventoryitem.itemPrice} LKR</div>
-                        </div>
+                <div className="card">
+                    <div className="image">
+                        <img src={inventoryitem.itemImageURL} alt="" />
+                    </div>
+                    <div className="desc" style={{ color: 'red' }}>Not in Stock</div>
+                    <div className="title">{inventoryitem.itemName}</div>
+                    <div className="box">
+                        <div className="price">{inventoryitem.itemPrice} LKR</div>
                     </div>
                 </div>
             );
@@ -86,8 +82,9 @@ const Store = ({ navBarProps }) => {
                 </div>
             </div>
 
-
-            {inventoryitems && inventoryitems.map(inventoryitem => renderInventoryItem(inventoryitem))}
+            <div className="shopItems">
+                {inventoryitems && inventoryitems.map(inventoryitem => renderInventoryItem(inventoryitem))}
+            </div>
 
         </div>
     );
