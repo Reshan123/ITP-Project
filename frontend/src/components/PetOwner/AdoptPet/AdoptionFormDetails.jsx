@@ -159,6 +159,10 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                     Special Needs:
                     <input type="text" name="specialNeeds" value={formData.description.specialNeeds} onChange={handleInputChange} />
                 </label>
+                <label>
+                    Description:
+                    <input type="text" name="speciasmalldescription" value={formData.description.smallDescription} onChange={handleInputChange} />
+                </label>
                 <button type="submit">Update</button>
             </form>
             <button className="delete" onClick={handleClick}>Delete</button>

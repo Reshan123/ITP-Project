@@ -48,7 +48,7 @@ const Home = ({ navBarProps }) => {
                 if (!response.ok){
                     localStorage.removeItem('user')
                     userDispatch({ type: "LOGOUT" })
-                    navigate('/pet/login')
+                    navigate('/pet/signin')
                 }
                 if(response.ok){
                     console.log("Token Valid")

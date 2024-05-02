@@ -35,6 +35,8 @@ const CreateAdoptionForm = () => {
     const [ownerContact, setOwnerContact] = useState('');
     const [activityLevel, setActivityLevel] = useState('');
     const [specialNeeds, setSpecialNeeds] = useState('');
+    const [smallDescription, setsmallDescription] = useState('');
+
     const [error, setError] = useState(null);
     const [errors, setErrors] = useState('');
 
@@ -108,7 +110,8 @@ const CreateAdoptionForm = () => {
             ownerContact,
             description: {
                 activityLevel,
-                specialNeeds
+                specialNeeds,
+                smallDescription
             }
         }
 
@@ -140,6 +143,7 @@ const CreateAdoptionForm = () => {
                 setOwnerContact('');
                 setActivityLevel('');
                 setSpecialNeeds('');
+                setsmallDescription('')
                 dispatch({ type: 'CREATE_FORM', payload: json })
 
                 navigate('/pet/adopt')
@@ -272,6 +276,13 @@ const CreateAdoptionForm = () => {
                 onChange={(e) => setSpecialNeeds(e.target.value)}
                 value={specialNeeds}
             />
+            <label>Small Description About Your Pet:</label>
+            <input
+                type="text"
+                onChange={(e) => setsmallDescription(e.target.value)}
+                value={smallDescription}
+            />
+
 
             <button className='adoptPetButton' onClick={handleSubmit} >Submit Form</button>
             {error && <div className="error">{error}</div>}

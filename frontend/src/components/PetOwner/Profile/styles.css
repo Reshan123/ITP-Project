@@ -124,13 +124,61 @@
 
 
 .petCard{
-    width: 32%;
+    /* width: 32%; */
     color: #FFF;
     background-color: var(--primaryPurple);
     padding: 15px 25px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: transform .3s ease;
+}
+
+.petCard:hover{
+    transform: scale(1.05);
+}
+
+.petCard .carousel{
+    position: relative;
+}
+
+.carousel__item{
+    width: 300px;
+    height: 240px;
+    padding: 1em;
+    color: #ffffff;
+    display: none;
+}
+.carousel__item img{
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__item--selected{
+    display: block;
+}
+
+.carousel__nav {
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+.carousel__button {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.707);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel__button--selected {
+    background: rgb(255, 255, 255);
 }
 
 .petCard .majorDetails{
@@ -152,9 +200,25 @@
     justify-content: space-around;
 }
 
+.petCard .buttonContainer{
+    display: flex;
+    gap: 25px;
+}
 
+.petCard .buttonContainer button{
+    border-radius: 11px;
+    border: none;
+    color: #000;
+    background-color: #FFF;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
 
-
+.petCard .buttonContainer button.delete{
+    background-color: rgb(234, 53, 53);
+    color: white;
+}
 
 
 
@@ -239,6 +303,90 @@
     transition: 0.3s;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+.updatePetPage{
+    background-color: #fff0ff;
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.updatePetPage .backArrow{
+    margin: 25px 50px;
+    align-self: self-start;
+    padding: 0px;
+}
+
+.updatePetPage .backArrow svg{
+    font-size: 1.5rem;
+}
+
+.updatePetPage .backArrow svg:hover{
+    cursor: pointer;
+}
+
+.updatePetPage .petProfileUpdateForm{
+    background-color: var(--primaryPurple);
+    padding: 65px 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.updatePetPage .petProfileUpdateForm .updateFormTitle{
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper label{
+    font-size: 1.3rem;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper input{
+    padding: 8px 10px;
+    border-radius: 8px;     
+    font-size: 1.1rem;   
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateSubmitButton{
+    align-self: center;
+    margin-top: 25px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateSubmitButton button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
 
 
 

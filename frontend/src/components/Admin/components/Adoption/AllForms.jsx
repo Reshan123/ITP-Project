@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Table, Button, ConfigProvider } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons';
 import './adoptionAdmin.css'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const AllForms = () => {
 
@@ -73,6 +75,55 @@ const AllForms = () => {
     if (!Array.isArray(adoptionForms)) {
         return <p>No adoption forms available.</p>;
     }
+
+
+    //Report generation
+    const generatePDF = (data) => {
+        // Create a new PDF instance
+        const doc = new jsPDF();
+
+        // Convert data to an array of arrays
+        const tableData = data.map((form) => [
+            form.name,
+            form.age,
+            form.species,
+            form.gender,
+            form.approved
+        ]);
+
+        // Add the table to the PDF
+        doc.autoTable({
+            head: [['Name', 'Age', 'Species', 'Gender', 'Approval Status']],
+            body: tableData,
+            startY: 20,
+            styles: {
+                // Styles applied to the table
+                cellPadding: 2,
+                fontSize: 10,
+                valign: 'middle',
+                halign: 'center',
+                cellWidth: 'wrap', // Auto column width
+            },
+            columnStyles: {
+                // Custom styles for specific columns (if needed)
+            },
+            headStyles: {
+                fillColor: [100, 100, 100], // Header background color
+                textColor: [255, 255, 255], // Header text color
+                fontStyle: 'bold', // Bold font for header
+            },
+            bodyStyles: {
+                textColor: [50, 50, 50], // Body text color
+            },
+            alternateRowStyles: {
+                fillColor: [245, 245, 245], // Alternate row background color
+            },
+        });
+
+        // Save the PDF with a unique name
+        doc.save('adoption_forms_report.pdf');
+    };
+
 
     const columns = [
         {
@@ -145,7 +196,7 @@ const AllForms = () => {
                     onChange={handleSearch}
                     className="search-input"
                 />
-                <button>Print</button>
+                <button onClick={() => { console.log(filteredForms); generatePDF(filteredForms) }}>Print</button>
             </div>
             <hr></hr>
             <ConfigProvider
