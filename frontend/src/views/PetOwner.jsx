@@ -21,6 +21,7 @@ import UpdateForm from '../components/PetOwner/AdoptPet/UpdateForm';
 import ViewForm from '../components/PetOwner/AdoptPet/ViewForm';
 import UpdateBooking from '../components/PetOwner/Booking/UpdateBooking';
 import Footer from '../components/PetOwner/Footer/Footer'
+import PetUpdate from '../components/PetOwner/Profile/PetUpdate';
 
 const PetOwner = () => {
 
@@ -87,6 +88,7 @@ const PetOwner = () => {
                 <Route path='/profile/update' element={<ProfileUpdate navBarProps={navBarProps} />} />
                 <Route path='/profile/addpet' element={<AddPetForm navBarProps={navBarProps} />} />
                 <Route path='/profile/booking-update/:id' element={<UpdateBooking navBarProps={navBarProps}/>} />
+                <Route path='/profile/petUpdate/:id' element={<PetUpdate navBarProps={navBarProps}/>} />
             </Routes>
             <Footer footerBackground={footerBackground} />
         </>

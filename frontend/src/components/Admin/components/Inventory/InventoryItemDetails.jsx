@@ -77,7 +77,6 @@ const InventoryItemDetails = () => {
 
     // Add the table to the PDF
     doc.autoTable({
-
       columns,
       body: rows,
       startY: 20,
@@ -88,12 +87,13 @@ const InventoryItemDetails = () => {
         fontSize: 10,
         valign: 'middle',
         halign: 'center',
-        cellWidth: 'wrap', // Auto column width
+        cellWidth: 'auto', // Auto column width
       },
 
       columnStyles: {
         // Custom styles for specific columns
-        ownerName: { fontStyle: 'bold' },
+        itemName: { fontStyle: 'bold' },
+        itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
       },
 
       headerStyles: {
@@ -109,11 +109,12 @@ const InventoryItemDetails = () => {
       alternateRowStyles: {
         fillColor: [245, 245, 245], // Alternate row background color
       },
-
     });
 
+
+
     // Save the PDF with a unique name
-    const filename = 'booking_report.pdf';
+    const filename = 'inventoryReport.pdf';
     doc.save(filename);
   };
 
@@ -145,7 +146,7 @@ const InventoryItemDetails = () => {
         </thead>
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
-            <tr>
+            <tr key={inventoryitem._id}>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
