@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Storestyles.css';
 import { useInventoryItemsContext } from '../../../hooks/useInventoryItemsContext';
-
+import storeImage from './images/store.png'
 const Store = ({ navBarProps }) => {
     navBarProps("#FFF", "#B799D1");
 
@@ -33,38 +33,62 @@ const Store = ({ navBarProps }) => {
     function renderInventoryItem(inventoryitem) {
         if (inventoryitem.currentStock >= 5) {
             return (
-                <div key={inventoryitem._id} className="store-body">
-                    <div className="store-cards">
-                        <h4>{inventoryitem.itemName}</h4>
-                        <p><strong>Price (in LKR): </strong>{inventoryitem.itemPrice}</p>
-                        <p><strong>Initial Stock Count: </strong>{inventoryitem.itemStockCount}</p>
-                        <p><strong>Current Stock Count: </strong>{inventoryitem.currentStock}</p>
-                        <img src={inventoryitem.itemImageURL} alt="item" />
-                        <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
-                        <button className="buy-btn">Buy</button>
+                <div className="shopItems">
+                    <div className="card">
+                        <div className="image">
+                            <img src={inventoryitem.itemImageURL} alt="" />
+                        </div>
+                        <div className="desc">In Stock: {inventoryitem.currentStock}</div>
+                        <div className="title">{inventoryitem.itemName}</div>
+                        <div className="box">
+                            <div className="price">{inventoryitem.itemPrice} LKR</div>
+                            <button className="btn">View More</button>
+                        </div>
                     </div>
                 </div>
             );
         } else {
             return (
-                <div key={inventoryitem._id} className="store-body out-of-stock">
-                    <div className="store-cards">
-                        <h4>{inventoryitem.itemName}</h4>
-                        <p><strong>Price (in LKR): </strong>{inventoryitem.itemPrice}</p>
-                        <p><strong>Initial Stock Count: </strong>{inventoryitem.itemStockCount}</p>
-                        <p>Out of Stock</p>
-                        <img src={inventoryitem.itemImageURL} alt="item" />
-                        <p><strong>Item Description: </strong>{inventoryitem.itemDescription}</p>
+                <div className="shopItems">
+                    <div className="card">
+                        <div className="image">
+                            <img src={inventoryitem.itemImageURL} alt="" />
+                        </div>
+                        <div className="desc" style={{ color: 'red' }}>Not in Stock</div>
+                        <div className="title">{inventoryitem.itemName}</div>
+                        <div className="box">
+                            <div className="price">{inventoryitem.itemPrice} LKR</div>
+                        </div>
                     </div>
                 </div>
             );
+
         }
     }
-    
-    
+
+
     return (
         <div className="store">
+
+
+            <div class="landing-section">
+                <div class="content-wrapper">
+                    <div class="image-section">
+                        <img src={storeImage} alt="" />
+                    </div>
+                    <div class="text-section">
+                        <div class="heading">Pet Foods and Many More!</div>
+                        <div class="paraText">Pawsitively delightful treats and treasures await at
+                            Pawpulz! From yummy eats to adorable accessories, we've got everything your fur
+                            baby needs for a tail-wagging good time!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             {inventoryitems && inventoryitems.map(inventoryitem => renderInventoryItem(inventoryitem))}
+
         </div>
     );
     ;
