@@ -37,6 +37,11 @@ const createSupplier =  async(req,res) => {
 //update supplier
 const updateSupplier = async(req,res) =>{
     const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such item in the inventory' })
+
+    }
+
     const supplier = await Supplier.findOneAndUpdate({_id: id}, {
         ...req.body
     })
@@ -52,6 +57,11 @@ const updateSupplier = async(req,res) =>{
 const deleteSupplier = async (req,res) =>
 {
     const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such item in the inventory' })
+
+    }
+    
     const supplier = await Supplier.findByIdAndDelete({_id: id})
 
     if(!supplier)
