@@ -9,11 +9,6 @@ const LandingPage = () => {
         window.location.href = '/admin/home'
     }
 
-    // const contactSeller = () => {
-
-    // }
-
-
 
     function checkInventoryLevel(inventoryitem) {
         if (inventoryitem.currentStock <= 5) {
