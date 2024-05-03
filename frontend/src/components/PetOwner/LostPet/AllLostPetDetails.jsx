@@ -11,7 +11,7 @@ const AllLostPetDetails = ({navBarProps}) => {
 
   const { user } = useUserContext();
 
-  var loggedInUserId = user.uid;
+  var loggedInUserId = user?.uid;
   
   // Check if the logged-in user is the owner of the pet state id gives the owner id of the notice owner
   const isOwner = loggedInUserId === location.state.owner_id;
