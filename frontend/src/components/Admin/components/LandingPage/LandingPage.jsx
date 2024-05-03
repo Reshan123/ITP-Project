@@ -19,11 +19,11 @@ const LandingPage = () => {
         if (inventoryitem.currentStock <= 5) {
             return (
                 <div className="inventoryManagement">
-                    <p style={{ color: 'red' }}>The item {inventoryitem.itemName} needs restocking.
-                        Please contact the seller SELLER NAME</p>
-                    <button onClick={contactSeller}>Contact The Seller</button>
-                    <br />
-                    <br />
+                    <div className="inventoryManagement-notifi">
+                        <p style={{ color: 'red' }}>The item {inventoryitem.itemName} needs restocking.
+                            Please contact the seller SELLER NAME</p>
+                        <button onClick={contactSeller}>Contact The Seller</button>
+                    </div>
                 </div>
             )
         }
@@ -45,7 +45,7 @@ const LandingPage = () => {
 
             <hr />
             <div className="inventoryManagement">
-            <h2>Inventory Management System</h2>
+                <h2>Inventory Management System</h2>
                 {inventoryitems && inventoryitems.map(inventoryitem => checkInventoryLevel(inventoryitem))}
             </div>
             <hr />

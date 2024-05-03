@@ -28,6 +28,10 @@
     transition: 0.3s;
 }
 
+.inventoryManagement-notifi{
+    padding: 20px;
+}
+
 .inventoryManagement p{
     font-size: 1.1rem;
     font-weight: 500;
