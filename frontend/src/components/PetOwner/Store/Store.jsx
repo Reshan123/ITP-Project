@@ -51,7 +51,7 @@ const Store = ({ navBarProps }) => {
                     <div className="image">
                         <img src={inventoryitem.itemImageURL} alt="" />
                     </div>
-                    <div className="desc" style={{ color: 'red' }}>Not in Stock</div>
+                    <div className="desc" style={{ color: 'red' }}>Out of Stock</div>
                     <div className="title">{inventoryitem.itemName}</div>
                     <div className="box">
                         <div className="price">{inventoryitem.itemPrice} LKR</div>
