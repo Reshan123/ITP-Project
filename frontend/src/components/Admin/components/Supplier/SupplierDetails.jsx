@@ -1,12 +1,14 @@
 import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import './styles.css'
 import jsPDF from "jspdf"
 
 const SupplierDetails = ({supplier})=> {
 
     const {suppliers, dispatch} = useSupplierContext()
     const [currentlyDisplayedSupplier, setCurrentlyDisplayedSupplier] = useState({})
+    const navigate = useNavigate();
 
     useEffect(()=>{
         setCurrentlyDisplayedSupplier(suppliers)
