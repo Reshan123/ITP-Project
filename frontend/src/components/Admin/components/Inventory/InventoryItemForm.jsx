@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 import firebase from "firebase/compat/app"
 import { useNavigate } from 'react-router-dom'
 import "firebase/compat/storage"
 import './styles.css'
 
 const InventoryItemForm = () => {
+
+    const { Supplier, dispatch:supplierDispatch } = useSupplierContext()
 
     const navigate = useNavigate()
     const { dispatch } = useInventoryItemsContext()

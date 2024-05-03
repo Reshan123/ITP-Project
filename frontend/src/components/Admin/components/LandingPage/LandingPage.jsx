@@ -9,9 +9,9 @@ const LandingPage = () => {
         window.location.href = '/admin/home'
     }
 
-    const contactSeller = () => {
+    // const contactSeller = () => {
 
-    }
+    // }
 
 
 
@@ -22,7 +22,7 @@ const LandingPage = () => {
                     <div className="inventoryManagement-notifi">
                         <p style={{ color: 'red' }}>The item {inventoryitem.itemName} needs restocking.
                             Please contact the seller SELLER NAME</p>
-                        <button onClick={contactSeller}>Contact The Seller</button>
+                        <a href="mailto:kavindyavishva@gmail.com"><button >Contact The Seller</button></a>
                     </div>
                 </div>
             )
