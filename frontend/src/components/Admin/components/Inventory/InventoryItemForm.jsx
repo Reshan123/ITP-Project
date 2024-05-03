@@ -88,7 +88,7 @@ const InventoryItemForm = () => {
                 />
 
 
-                {/* <label>Select the Supplier</label>
+                <label>Select the Supplier</label>
                 <select
                     id="supplier"
                     onChange={(e) => setSupplierID(e.target.value)}
@@ -98,7 +98,7 @@ const InventoryItemForm = () => {
                     {Supplier.map(supplier => (
                         <option key={supplier._id} value={supplier._id}>{supplier.supplierName}</option>
                     ))}
-                </select> */}
+                </select>
 
 
 
