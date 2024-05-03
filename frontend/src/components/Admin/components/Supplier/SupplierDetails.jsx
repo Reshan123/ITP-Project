@@ -98,7 +98,7 @@ const SupplierDetails = ({supplier})=> {
   
   
       // Save the PDF with a unique name
-      const filename = 'inventoryReport.pdf';
+      const filename = 'supplierReport.pdf';
       doc.save(filename);
       
     };
