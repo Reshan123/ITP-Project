@@ -15,6 +15,15 @@ const SupplierDetails = ({supplier})=> {
         setCurrentlyDisplayedSupplier(suppliers)
     }, [suppliers])
 
+    useEffect(() => {
+        if (suppliers) {
+          const filteredList = suppliers.filter(supplier => {
+            const searchQueryLower = searchQuery.toLowerCase();
+            return ((supplier.supplierName.toLowerCase().startsWith(searchQueryLower)))
+          })
+          setCurrentlyDisplayedSupplier(filteredList)
+        }
+      }, [searchQuery])
     
     const handleClick = async (id, supplierName)=>{
         const confirmDelete = confirm(`Are you sure you want to delete "${supplierName}"?`)
