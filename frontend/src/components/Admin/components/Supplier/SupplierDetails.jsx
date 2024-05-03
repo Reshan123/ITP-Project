@@ -7,7 +7,7 @@ import jsPDF from "jspdf"
 const SupplierDetails = ({supplier})=> {
 
     const {suppliers, dispatch} = useSupplierContext()
-    const [currentlyDisplayedSupplier, setCurrentlyDisplayedSupplier] = useState({})
+    const [currentlyDisplayedSupplier, setCurrentlyDisplayedSupplier] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
     const navigate = useNavigate();
 
