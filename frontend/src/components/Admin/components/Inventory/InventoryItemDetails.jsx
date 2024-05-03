@@ -1,5 +1,6 @@
 import React from "react"
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 import { useNavigate } from "react-router-dom"
 import './styles.css'
 import { jsPDF } from 'jspdf';
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react"
 const InventoryItemDetails = () => {
 
   const {inventoryitems, dispatch } = useInventoryItemsContext()
+  const { suppliers, dispatch:supplierDispatch } = useSupplierContext()
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
@@ -151,7 +153,7 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
-              <td>{inventoryitem.Supplier}</td>
+              <td>{suppliers.map(Supplier => ( (inventoryitem.supplierID == Supplier._id) && Supplier.supplierName ))}</td>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
