@@ -8,7 +8,7 @@ import './styles.css'
 
 const InventoryItemForm = () => {
 
-    const { Supplier, dispatch:supplierDispatch } = useSupplierContext()
+    const { suppliers, dispatch:supplierDispatch } = useSupplierContext()
 
     const navigate = useNavigate()
     const { dispatch } = useInventoryItemsContext()
@@ -95,8 +95,8 @@ const InventoryItemForm = () => {
                     value={supplierID}
                 >
                     <option value="">Select Supplier</option>
-                    {Supplier.map(supplier => (
-                        <option key={supplier._id} value={supplier._id}>{supplier.supplierName}</option>
+                    {suppliers.map(Supplier => (
+                        <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
                     ))}
                 </select>
 
