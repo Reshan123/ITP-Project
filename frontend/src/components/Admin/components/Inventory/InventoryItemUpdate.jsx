@@ -19,8 +19,8 @@ const InventoryItemUpdate = () => {
       inventoryitems.map(item => {
         if (item._id == itemID) {
           console.log(item._id)
-          if (item.Supplier) {
-            setItemName(item.Supplier)
+          if (item.supplierID) {
+            setSupplierID(item.supplierID)
           }
           if (item.itemName) {
             setItemName(item.itemName)
