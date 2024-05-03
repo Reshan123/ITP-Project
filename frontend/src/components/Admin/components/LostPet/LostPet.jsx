@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLostPetsContext } from "../../../../hooks/useLostPetsContext";
 import "./styles.css";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const LostPet = () => {
   const { lostNotice, dispatch } = useLostPetsContext();
@@ -113,6 +115,84 @@ const LostPet = () => {
       
   };
 
+  //download report
+  const downloadReport = () => {
+  const table = document.getElementById("lostpet-table"); // Get the table element
+  if (!table) {
+    console.error("Table element not found.");
+    return;
+  }
+
+  const tbody = table.querySelector("tbody"); // Get the tbody element
+  if (!tbody) {
+    console.error("Table body not found.");
+    return;
+  }
+
+  const thead = table.querySelector("thead"); // Get the thead element
+  if (!thead) {
+    console.error("Table header not found.");
+    return;
+  }
+
+  const actionColumnIndex = 10; // Specify the index of the actions column
+
+  // Remove the header cell corresponding to the actions column
+  const headerRow = thead.querySelector("tr");
+  if (headerRow) {
+    const headerCell = headerRow.cells[actionColumnIndex];
+    if (headerCell) {
+      headerCell.parentNode.removeChild(headerCell); // Remove the header cell
+    }
+  }
+
+  // Remove the actions column from each row in the tbody
+  const rows = tbody.getElementsByTagName("tr"); // Get all rows in the tbody
+  for (let i = 0; i < rows.length; i++) {
+    const cellsInRow = rows[i].getElementsByTagName("td"); // Get all cells in the current row
+    if (cellsInRow.length > actionColumnIndex) {
+      // Check if the row has the actions column
+      const cellToRemove = cellsInRow[actionColumnIndex];
+      cellToRemove.parentNode.removeChild(cellToRemove); // Remove the cell
+    }
+  }
+
+  // Generate PDF from the modified table
+  html2canvas(table).then((canvas) => {
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF();
+    const imgHeight = (canvas.height * 208) / canvas.width;
+
+    // Add title in bold
+    const title = "Lost Pets Notice Report";
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.text(title, 10, 10);
+
+    // Add current date
+    const date = new Date().toLocaleDateString("en-US");
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+    pdf.text(`Date: ${date}`, 10, 20);
+
+    // Add the image to the PDF
+    pdf.addImage(imgData, 10, 30, 190, imgHeight);
+    pdf.save("LostPetsReport.pdf");
+    
+    
+    
+
+    // Refresh the page
+    window.location.reload();
+  });
+};
+
+
+
+
+
+
+
   return (
     <div className="lostpet-content">
       <div className="lostpetHeader">
@@ -124,10 +204,10 @@ const LostPet = () => {
             value={filter}
             onChange={handleFilterChange}
           />
-          <button>Download Report</button>
+          <button onClick={downloadReport}>Download Report</button>
         </div>
       </div>
-      <div className="lostpet-table">
+      <div className="lostpet-table" id="lostpet-table">
         <table className="lostpet-table-style">
           <thead>
             <tr>
