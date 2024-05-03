@@ -4,12 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import "firebase/compat/storage"
 import './styles.css'
 import { useInventoryItemsContext } from '../../../../hooks/useInventoryItemsContext'
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 
 
 const InventoryItemUpdate = () => {
 
   const { itemID } = useParams()
 
+  const { suppliers, dispatch:supplierDispatch } = useSupplierContext()
   const { inventoryitems, dispatch: intentoryItemDispatch } = useInventoryItemsContext()
 
   useEffect(() => {
@@ -17,6 +19,9 @@ const InventoryItemUpdate = () => {
       inventoryitems.map(item => {
         if (item._id == itemID) {
           console.log(item._id)
+          if (item.Supplier) {
+            setItemName(item.Supplier)
+          }
           if (item.itemName) {
             setItemName(item.itemName)
           }
@@ -32,10 +37,7 @@ const InventoryItemUpdate = () => {
           if (item.itemImageURL) {
             setItemImageURL(item.itemImageURL)
           }
-          // if(item.currentStock<19){
-          //   confirm(`The Stock level of "${item.itemName}" is low`)        
-          // }
-          if(item.currentStock){
+          if (item.currentStock) {
             setCurrentStock(item.currentStock)
           }
 
@@ -45,7 +47,7 @@ const InventoryItemUpdate = () => {
   }, [inventoryitems])
 
   const navigate = useNavigate()
-
+  const [supplierID, setSupplierID] = useState('')
   const [itemName, setItemName] = useState("")
   const [itemPrice, setItemPrice] = useState("")
   const [itemStockCount, setItemStockCount] = useState("")
@@ -57,6 +59,7 @@ const InventoryItemUpdate = () => {
   const handleUpdate = (e) => {
     e.preventDefault()
     const formData = {
+      supplierID,
       itemName,
       itemPrice,
       itemStockCount,
@@ -64,9 +67,9 @@ const InventoryItemUpdate = () => {
       itemImageURL,
       currentStock
     }
-    axios.put("http://localhost:4000/api/inventoryItems/"+itemID, formData)
+    axios.put("http://localhost:4000/api/inventoryItems/" + itemID, formData)
       .then(res => {
-        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount,currentStock, itemDescription, itemImageURL }] })
+        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, currentStock, itemDescription, itemImageURL }] })
         setError("")
         console.log(res)
         navigate('/admin/home/Inventoryitemdetails')
@@ -78,6 +81,18 @@ const InventoryItemUpdate = () => {
     <div className="update-items">
       <form className="update" onSubmit={handleUpdate}>
         <h3>Update Item</h3>
+
+        <label>Select the Supplier</label>
+        <select
+          id="supplier"
+          onChange={(e) => setSupplierID(e.target.value)}
+          value={supplierID}
+        >
+          <option value="">Select Supplier</option>
+          {suppliers.map(Supplier => (
+            <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
+          ))}
+        </select>
 
         <label>Name of the Item</label>
         <input

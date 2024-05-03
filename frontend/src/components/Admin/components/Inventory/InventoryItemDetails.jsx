@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 
 const InventoryItemDetails = () => {
 
-  const { inventoryitems, dispatch } = useInventoryItemsContext()
+  const {inventoryitems, dispatch } = useInventoryItemsContext()
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
@@ -55,11 +55,13 @@ const InventoryItemDetails = () => {
 
     // Define the columns and rows for the table
     const columns = [
+      { header: 'Supplier', dataKey: 'Supplier' },
       { header: 'Item Name', dataKey: 'itemName' },
       { header: 'Price', dataKey: 'itemPrice' },
       { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
       { header: 'Current Stock Count', dataKey: 'currentStock' },
       { header: 'Item Description', dataKey: 'itemDescription' },
+
     ];
 
     const filteredList = inventoryitems.filter(inventoryitem => {
@@ -68,6 +70,7 @@ const InventoryItemDetails = () => {
     });
 
     const rows = filteredList.map((inventoryitem) => ({
+      Supplier: inventoryitem.Supplier,
       itemName: inventoryitem.itemName,
       itemPrice: inventoryitem.itemPrice,
       itemStockCount: inventoryitem.itemStockCount,
@@ -136,6 +139,7 @@ const InventoryItemDetails = () => {
       <table className="inventoryItemsTable">
         <thead>
           <tr>
+            <th>Supplier</th>
             <th>Item Name</th>
             <th>Price</th>
             <th>Initial Stock Count</th>
@@ -147,6 +151,7 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
+              <td>{inventoryitem.Supplier}</td>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
