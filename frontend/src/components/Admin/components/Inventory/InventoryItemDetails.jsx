@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 const InventoryItemDetails = () => {
 
   const {inventoryitems, dispatch } = useInventoryItemsContext()
-  const { suppliers, dispatch:supplierDispatch } = useSupplierContext()
+  const {suppliers, dispatch:supplierDispatch } = useSupplierContext()
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();

@@ -24,7 +24,7 @@ const InventoryItemForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const inventoryitem = { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL, supplierID }
+        const inventoryitem = { itemName, itemPrice, itemStockCount,currentStock:itemStockCount, itemDescription, itemImageURL, supplierID }
 
         const response = await fetch('http://localhost:4000/api/inventoryItems/', {
             method: 'POST',
