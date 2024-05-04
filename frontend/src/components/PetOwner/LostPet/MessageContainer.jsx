@@ -44,7 +44,7 @@ const MessageContainer = ({ navBarProps}) => {
          // Ensure ownerid is defined before making the request
          fetchOwnerName();
        }
-     }, [location.state.Ownerid]);
+     }, [location.state &&  location.state.Ownerid]);
 
   return (
     <div className="messagecontainer">
