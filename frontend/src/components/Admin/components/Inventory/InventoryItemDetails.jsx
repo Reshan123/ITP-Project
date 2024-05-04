@@ -9,11 +9,12 @@ import { useEffect, useState } from "react"
 
 const InventoryItemDetails = () => {
 
-  const {inventoryitems, dispatch } = useInventoryItemsContext()
-  const {suppliers, dispatch:supplierDispatch } = useSupplierContext()
+  const { inventoryitems, dispatch } = useInventoryItemsContext()
+  const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
+  var supplierName
 
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const InventoryItemDetails = () => {
 
     // Define the columns and rows for the table
     const columns = [
-      { header: 'Supplier', dataKey: 'Supplier' },
+      { header: 'Supplier Name', dataKey: 'Supplier' },
       { header: 'Item Name', dataKey: 'itemName' },
       { header: 'Price', dataKey: 'itemPrice' },
       { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
@@ -72,7 +73,7 @@ const InventoryItemDetails = () => {
     });
 
     const rows = filteredList.map((inventoryitem) => ({
-      Supplier: inventoryitem.Supplier,
+      Supplier: supplierName = suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName)),
       itemName: inventoryitem.itemName,
       itemPrice: inventoryitem.itemPrice,
       itemStockCount: inventoryitem.itemStockCount,
@@ -143,7 +144,7 @@ const InventoryItemDetails = () => {
           <tr>
             <th>Supplier</th>
             <th>Item Name</th>
-            <th>Price</th>
+            <th>Price <br />(in LKR)</th>
             <th>Initial Stock Count</th>
             <th>Current Stock Count</th>
             <th>Item Description</th>
@@ -153,7 +154,7 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
-              <td>{suppliers.map(Supplier => ( (inventoryitem.supplierID == Supplier._id) && Supplier.supplierName ))}</td>
+              <td>{supplierName = suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
