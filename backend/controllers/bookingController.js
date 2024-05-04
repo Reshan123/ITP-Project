@@ -3,13 +3,37 @@ const mongoose = require('mongoose')
 
 //POST new booking
 const createBooking = async(req,res) => {
-    const {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status} = req.body
 
-    try{
-        const booking = await Booking.create({owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description,status})
-        res.status(200).json(booking)
-    }catch(error){
-        res.status(404).json({error:error.message})
+    const userID = req.user._id; 
+    const { owner_name, owner_email, owner_contact, pet_name, pet_species, pet_breed, doctor, start_time, description, status } = req.body;
+
+    try {
+        // Check if the start_time already exists for the given doctor
+        const existingBooking = await Booking.findOne({ doctor: doctor, start_time: start_time });
+        
+        if (existingBooking) {
+            // If booking already exists for the same start_time, send error message
+            return res.status(400).json({ error: "Appointment slot is not available, please select a different data & time." });
+        }
+
+        // Create the booking
+        const booking = await Booking.create({
+            owner_id: userID,
+            owner_name,
+            owner_email,
+            owner_contact,
+            pet_name,
+            pet_species,
+            pet_breed,
+            doctor,
+            start_time,
+            description,
+            status
+        });
+
+        res.status(200).json(booking);
+    } catch (error) {
+        res.status(404).json({ error: error.message });
     }
 }
 
@@ -91,10 +115,46 @@ const deleteBooking = async(req,res) => {
     }
 }
 
+
+//GET all owner bookings
+const getOwnerBookings = async (req, res) => {
+    const userID = req.user._id;
+
+    try {
+        if (!userID) {
+            throw Error("Invalid User ID");
+        }
+
+        const allbookings = await Booking.find({ owner_id: userID });
+
+        res.status(200).json({ message: allbookings });
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+//GET all bookings for doctor
+const getDoctorBookings = async (req, res) => {
+    try {
+        const doctorName = req.params.doctorName;
+
+        const decodeDoctorName = decodeURIComponent(doctorName)
+        
+        const bookings = await Booking.find({ doctor: decodeDoctorName });
+
+        res.status(200).json(bookings);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 module.exports = {
     createBooking,
     getBookings,
     getBooking,
     updateBooking,
-    deleteBooking
+    getOwnerBookings,
+    deleteBooking,
+    getDoctorBookings
 }

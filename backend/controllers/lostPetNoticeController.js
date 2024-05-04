@@ -4,16 +4,29 @@ const mongoose = require('mongoose')
 //Posting a notice
 
 const createLostPetNotice = (req, res) => {
-    const { petName,ownerName,breed,description,contactNo,image,email} = req.body
+    const owner_Id = req.user._id;
+    const { petName,ownerName,breed,description,contactNo,image,email,location,gender,age} = req.body
 
     //returns a promise which is resoved by the .then
-    LostNoticeInfo.create({ petName,ownerName,breed,description,contactNo,image,email })
-        .then(result => {
-            res.status(200).json(result)
-        })
-        .catch(error => {
-            res.status(404).json({ error: error.message })
-        })
+    LostNoticeInfo.create({
+      owner_id: owner_Id,
+      petName,
+      ownerName,
+      breed,
+      description,
+      contactNo,
+      image,
+      email,
+      location,
+      gender,
+      age,
+    })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((error) => {
+        res.status(404).json({ error: error.message });
+      });
 }
 
 //getting all the notices
@@ -93,10 +106,31 @@ const deleteLostPetNotice = (req, res) => {
         });
 };
 
+//getting the users id and the mathching notices of them
+
+const getUserLostPetNotice = async (req,res) =>{
+
+    const userID = req.user._id;
+    
+    try {
+        if (!userID) {
+            throw Error("Invalid User ID");
+        }
+
+        const userNotices = await LostNoticeInfo.find({ owner_id: userID });
+
+        res.status(200).json({ message: userNotices });
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 module.exports = {
     createLostPetNotice,
     getAllNotice,
     getNotice,
     updateLostPetNotice,
-    deleteLostPetNotice
+    deleteLostPetNotice,
+    getUserLostPetNotice
 }

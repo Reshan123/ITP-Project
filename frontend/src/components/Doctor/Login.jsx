@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDoctorContext } from '../../hooks/useDoctorContext'
+import './styles.css'
 
 const Login = () => {
 
@@ -49,22 +50,26 @@ const Login = () => {
     }
 
     return ( 
-        <div className="adminLoginPage" onSubmit={handleFormSubmit}>
-            <div className="adminLoginPageTitle">Login Page</div>
-            {error && (<div className="error">{error}</div>)}
-            <form className="adminLoginForm">
-                <div className="adminLoginInputWrapper">
-                    <label htmlFor="email">Email </label>
-                    <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="doctorLoginPage" onSubmit={handleFormSubmit}>
+            <div className="doctorLoginPageContent">
+                <div className="doctorLoginPageHeader">
+                    <div className="doctorLoginPageTitle">Doctor Login Page</div>
                 </div>
-                <div className="adminLoginInputWrapper">
-                    <label htmlFor="password">Password </label>
-                    <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="adminLoginButtonWrapper">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+                {error && (<div className="error">{error}</div>)}
+                <form className="doctorLoginForm">
+                    <div className="doctorLoginInputWrapper">
+                        <label htmlFor="email">Email </label>
+                        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div className="doctorLoginInputWrapper">
+                        <label htmlFor="password">Password </label>
+                        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className="doctorLoginButtonWrapper">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
      );
 }

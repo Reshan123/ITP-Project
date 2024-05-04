@@ -45,21 +45,25 @@ const Login = () => {
 
     return ( 
         <div className="adminLoginPage" onSubmit={handleFormSubmit}>
-            <div className="adminLoginPageTitle">Login Page</div>
-            {error && (<div className="error">{error}</div>)}
-            <form className="adminLoginForm">
-                <div className="adminLoginInputWrapper">
-                    <label htmlFor="email">Email </label>
-                    <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-                <div className="adminLoginInputWrapper">
-                    <label htmlFor="password">Password </label>
-                    <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="adminLoginButtonWrapper">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+            <div className="adminLoginPageContent">
+                <dov className="adminLoginPageHeader">
+                    <div className="adminLoginPageTitle">Admin Login Page</div>
+                </dov>
+                {error && (<div className="error">{error}</div>)}
+                <form className="adminLoginForm">
+                    <div className="adminLoginInputWrapper">
+                        <label htmlFor="email">Email </label>
+                        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div className="adminLoginInputWrapper">
+                        <label htmlFor="password">Password </label>
+                        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className="adminLoginButtonWrapper">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
      );
 }

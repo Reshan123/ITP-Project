@@ -11,9 +11,11 @@ const ProfileUpdate = ({navBarProps}) => {
     const { user, dispatch: userDispatch} = useUserContext()
     const navigate = useNavigate()
 
-    if(!user){
-        navigate('/pet/login')
-    }
+    useEffect(()=>{
+        if(!user){
+            navigate('/pet/signin')
+        }
+    }, [])
     
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")

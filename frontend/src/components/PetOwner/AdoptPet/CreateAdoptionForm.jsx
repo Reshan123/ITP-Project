@@ -5,21 +5,26 @@ import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import { useUserContext } from '../../../hooks/userContextHook';
+import { usePetContext } from '../../../hooks/usePetContext';
 
-const CreateAdoptionForm = ({ navBarProps }) => {
+const CreateAdoptionForm = () => {
 
-    navBarProps("#FFF", "#E2929D")
+
 
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
-    const {user, dispatch: userDispatch} = useUserContext()
+    const { user, dispatch: userDispatch } = useUserContext()
+    const { pets, dispatch: petDispatch } = usePetContext()
 
-    useEffect(()=> {
-        if (!user){
+
+    useEffect(() => {
+        if (!user) {
             navigate('/pet/login')
         }
     }, [user])
 
+
+    const [selectedPet, setSelectedPet] = useState(null);
     const [petChoice, setPetChoice] = useState('');
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -30,8 +35,58 @@ const CreateAdoptionForm = ({ navBarProps }) => {
     const [ownerContact, setOwnerContact] = useState('');
     const [activityLevel, setActivityLevel] = useState('');
     const [specialNeeds, setSpecialNeeds] = useState('');
+    const [smallDescription, setsmallDescription] = useState('');
+
     const [error, setError] = useState(null);
     const [errors, setErrors] = useState('');
+
+    const config = {
+        headers: {
+            "authorization": `Bearer ${user.userToken}`
+        }
+    }
+    useEffect(() => {
+        const fetchPetData = async () => {
+            try {
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
+
+                if (!petDetailsResponse.ok) {
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+
+                if (petDetailsJson.message.length === 0) {
+                    // If user doesn't have any pets, show error message and navigate to profile
+                    console.log("User doesn't have any pets");
+                    history.push("/profile"); // Assuming "/profile" is the route to the user's profile
+                } else {
+                    petDispatch({ type: "LOAD", payload: petDetailsJson.message });
+                    console.log(pets);
+                }
+            } catch (error) {
+                console.log("pet owner page error", error);
+            }
+        }
+
+        if (user && pets.length === 0) {
+            fetchPetData();
+        }
+    }, [user, petDispatch, history]);
+
+
+    const handlePetSelect = async (petId) => {
+        const selectedPet = pets.find(pet => pet._id === petId);
+        setSelectedPet(selectedPet);
+        // Auto-fill other sections of the form
+        setPetChoice(selectedPet.petName)
+        setName(selectedPet.petName);
+        setAge(selectedPet.petAge);
+        setSpecies(selectedPet.petSpecies);
+        setBreed(selectedPet.petBreed);
+        setGender(selectedPet.petGender);
+        // You can continue to set other fields accordingly
+    };
+
 
     const validationSchema = yup.object({
         name: yup.string().required("Enter name"),
@@ -40,9 +95,11 @@ const CreateAdoptionForm = ({ navBarProps }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const uid = JSON.parse(localStorage.getItem('user'))["uid"]
 
-        navigate('/pet/adopt')
+
         const adoptionForm = {
+            ownerID: uid,
             petChoice,
             name,
             age,
@@ -53,7 +110,8 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             ownerContact,
             description: {
                 activityLevel,
-                specialNeeds
+                specialNeeds,
+                smallDescription
             }
         }
 
@@ -73,6 +131,7 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             if (response.ok) {
                 setError(null);
                 console.log('New adoption form added:', json);
+                console.log(ownerID)
                 // Reset form fields
                 setPetChoice('');
                 setName('');
@@ -84,7 +143,10 @@ const CreateAdoptionForm = ({ navBarProps }) => {
                 setOwnerContact('');
                 setActivityLevel('');
                 setSpecialNeeds('');
+                setsmallDescription('')
                 dispatch({ type: 'CREATE_FORM', payload: json })
+
+                navigate('/pet/adopt')
             }
             else {
                 setError(json.error)
@@ -92,11 +154,12 @@ const CreateAdoptionForm = ({ navBarProps }) => {
         } catch (errors) {
             console.log(errors.inner)
 
-            const newErrors = {}
-            errors.inner.forEach(err => {
-                newErrors[err.path] = err.message
-            });
-
+            const newErrors = {};
+            if (errors && errors.inner) {
+                errors.inner.forEach(err => {
+                    newErrors[err.path] = err.message;
+                });
+            }
             setErrors(newErrors)
         }
 
@@ -129,11 +192,15 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             <h3>Submit a Pet Adoption Form</h3>
 
             <label>Pet Choice:</label>
-            <input
-                type="text"
-                onChange={(e) => setPetChoice(e.target.value)}
-                value={petChoice}
-            />
+            <select
+                value={selectedPet ? selectedPet._id : ''}
+                onChange={(e) => handlePetSelect(e.target.value)}
+            >
+                <option value="">Select Pet</option>
+                {pets?.length > 0 && pets.map(pet => (
+                    <option key={pet._id} value={pet._id}>{pet.petName}</option>
+                ))}
+            </select>
 
             <label>Name:</label>
             <input
@@ -209,6 +276,13 @@ const CreateAdoptionForm = ({ navBarProps }) => {
                 onChange={(e) => setSpecialNeeds(e.target.value)}
                 value={specialNeeds}
             />
+            <label>Small Description About Your Pet:</label>
+            <input
+                type="text"
+                onChange={(e) => setsmallDescription(e.target.value)}
+                value={smallDescription}
+            />
+
 
             <button className='adoptPetButton' onClick={handleSubmit} >Submit Form</button>
             {error && <div className="error">{error}</div>}

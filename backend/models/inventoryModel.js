@@ -7,6 +7,10 @@ const inventorySchema = new Schema({
     type: String,
     required: true
   },
+  supplierID: {
+    type: Schema.Types.ObjectId,
+    ref: 'Supplier'
+  },
   itemPrice: {
     type: Number,
     required: true
@@ -17,7 +21,7 @@ const inventorySchema = new Schema({
   },
   currentStock:{
     type:Number,
-    required: true
+    required: false
   },
   itemDescription: {
     type: String,
@@ -25,7 +29,7 @@ const inventorySchema = new Schema({
   },
   itemImageURL: {
     type: String,
-    required: true
+    required: false
   }
 
 }, { timestamps: true })
