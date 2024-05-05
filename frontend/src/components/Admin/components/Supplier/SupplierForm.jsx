@@ -19,6 +19,10 @@ const SupplierForm = () => {
             }
         })
         const json = await response.json()
+        if (!response.ok) {
+            setError(json.error)
+        }
+        
 
         if(response.ok)
         {

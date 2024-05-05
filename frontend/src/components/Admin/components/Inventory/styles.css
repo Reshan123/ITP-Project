@@ -198,7 +198,7 @@
 .update-btn,
 .create-btn {
   border: 0;
-  background-color: var(--nav-bg-dark);
+  background-color: var(--primaryPurple);
   color: #fff;
   padding: 10px;
   font-size: 14px;

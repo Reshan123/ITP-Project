@@ -108,6 +108,7 @@ const Home = () => {
                 petOwnerDispatch({ type: "LOAD", payload: allPetOwnerJson })
 
 
+                //inventory
                 const inventoryResponse = await fetch('http://localhost:4000/api/inventoryItems/')
                 const inventoryJson = await inventoryResponse.json()
             

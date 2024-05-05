@@ -125,7 +125,7 @@ const InventoryItemDetails = () => {
     <div className="inventoryiems">
 
       <div className="inventoryiemsHeader">
-        <p>Invenotry Items</p>
+        <p>Inventory Items</p>
         <div>
           <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           <button className='add-btn' onClick={() => navigate(`/admin/home/InventoryItemForm/`)} >Add a new Item</button>
