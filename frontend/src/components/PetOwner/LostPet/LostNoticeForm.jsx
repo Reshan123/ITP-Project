@@ -57,7 +57,11 @@ const LostNoticeForm = ({navBarProps}) => {
     }
 
     if (!breed.trim()) {
-      window.alert("Breed is required")
+      window.alert("Breed is required");
+      isValid = false;
+      return isValid;
+    } else if (/\d/.test(breed)) {
+      window.alert("Breed cannot contain numbers.");
       isValid = false;
       return isValid;
     }
@@ -78,8 +82,8 @@ const LostNoticeForm = ({navBarProps}) => {
       window.alert("Age is required")
       isValid = false;
        return isValid;
-    } else if (age <= 0) {
-      window.alert("Age must be greater than 0.")
+    } else if (age <= 0 || age > 15) {
+      window.alert("Age must be a appropriate number.");
       isValid = false;
       return isValid;
     }
