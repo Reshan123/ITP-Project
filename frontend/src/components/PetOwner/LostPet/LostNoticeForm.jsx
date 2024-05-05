@@ -6,6 +6,7 @@ import firebase from 'firebase/compat/app'
 import "firebase/compat/storage"
 import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '../../../hooks/userContextHook'
+import { usePetContext } from '../../../hooks/usePetContext'
 
 
 const LostNoticeForm = ({navBarProps}) => {
@@ -13,6 +14,7 @@ const LostNoticeForm = ({navBarProps}) => {
 
   const navigate = useNavigate()
   const { user } = useUserContext()
+  const { pets, dispatch: petDispatch } = usePetContext();
 
     const {dispatch} = useLostPetsContext()
 
@@ -28,6 +30,13 @@ const LostNoticeForm = ({navBarProps}) => {
     const [gender, setGender] = useState('')
     const [age, setAge] = useState(0)
   const [submissionStatus, setSubmissionStatus] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      setOwnerName(user?.username);
+      setEmail(user?.email);
+    }
+  }, [user]);
   
   //form validations
 
@@ -111,6 +120,12 @@ const LostNoticeForm = ({navBarProps}) => {
     return isValid;
   };
 
+  const handlePetSelect = async (petId) => {
+    const selectedPet = pets.find((pet) => pet._id === petId);
+    setPetName(selectedPet.petName);
+    
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -192,19 +207,33 @@ const handleFileUpload = (e) => {
       <form className="lostForm" onSubmit={handleSubmit}>
         <h3>Create A Lost Pet Post</h3>
 
-        <label>Pet Name:</label>
+        {/* <label>Pet Name:</label>
         <input
           type="text"
           onChange={(e) => setPetName(e.target.value)}
           value={petName}
           placeholder="Enter the first name."
-        />
+        /> */}
+
+        <label>Pet Choice:</label>
+        <select
+          value={petName ? petName._id : ""}
+          onChange={(e) => handlePetSelect(e.target.value)}
+        >
+          <option value="">Select Pet</option>
+          {pets?.length > 0 &&
+            pets.map((pet) => (
+              <option key={pet._id} value={pet._id}>
+                {pet.petName}
+              </option>
+            ))}
+        </select>
 
         <label>Owner Name:</label>
         <input
           type="text"
-          onChange={(e) => setOwnerName(e.target.value)}
-          value={ownerName}
+          // onChange={(e) => setOwnerName(user.username)}
+          value={user.username}
         />
         {/** 
       <label for="petType">Pet Type:</label>
@@ -266,8 +295,8 @@ const handleFileUpload = (e) => {
         <label>Email:</label>
         <input
           type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          // onChange={(e) => setEmail(user.email)}
+          value={user.email}
           placeholder="anonymous@gmail.com"
         />
 
