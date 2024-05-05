@@ -49,3 +49,16 @@
     padding: 10px 15px;
     transition: 0.3s;
 }
+
+.inventoryManagement {
+    margin-bottom: 20px;
+}
+
+.inventoryManagement-notifi {
+    margin-top: 20px;
+    background-color: #f8d7da; /* Red tone for error */
+    color: #721c24; /* Dark tone for text */
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}

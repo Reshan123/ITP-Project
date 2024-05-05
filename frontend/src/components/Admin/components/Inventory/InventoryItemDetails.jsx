@@ -1,5 +1,6 @@
 import React from "react"
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 import { useNavigate } from "react-router-dom"
 import './styles.css'
 import { jsPDF } from 'jspdf';
@@ -9,9 +10,11 @@ import { useEffect, useState } from "react"
 const InventoryItemDetails = () => {
 
   const { inventoryitems, dispatch } = useInventoryItemsContext()
+  const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
+  var supplierName
 
 
   useEffect(() => {
@@ -21,13 +24,17 @@ const InventoryItemDetails = () => {
 
   useEffect(() => {
     if (inventoryitems) {
-      const filteredList = inventoryitems.filter(inventoryitem => {
-        const searchQueryLower = searchQuery.toLowerCase();
-        return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
-      })
-      setCurrentlyDisplayedItems(filteredList)
+        const filteredList = inventoryitems.filter(inventoryitem => {
+            const searchQueryLower = searchQuery.toLowerCase();
+            const itemNameLower = inventoryitem.itemName.toLowerCase();
+            const supplier = suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id);
+            const supplierNameLower = supplier ? supplier.supplierName.toLowerCase() : '';
+            return (itemNameLower.startsWith(searchQueryLower) || supplierNameLower.startsWith(searchQueryLower));
+        });
+        setCurrentlyDisplayedItems(filteredList);
     }
-  }, [searchQuery])
+}, [searchQuery, inventoryitems, suppliers]);
+
 
   const handleClick = async (id, itemName) => {
     const confrimDelte = confirm(`Are you sure you want to delete "${itemName}"?`)
@@ -55,68 +62,59 @@ const InventoryItemDetails = () => {
 
     // Define the columns and rows for the table
     const columns = [
-      { header: 'Item Name', dataKey: 'itemName' },
-      { header: 'Price', dataKey: 'itemPrice' },
-      { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
-      { header: 'Current Stock Count', dataKey: 'currentStock' },
-      { header: 'Item Description', dataKey: 'itemDescription' },
+        { header: 'Supplier Name', dataKey: 'supplierName' },
+        { header: 'Item Name', dataKey: 'itemName' },
+        { header: 'Price', dataKey: 'itemPrice' },
+        { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
+        { header: 'Current Stock Count', dataKey: 'currentStock' },
+        { header: 'Item Description', dataKey: 'itemDescription' },
     ];
 
-    const filteredList = inventoryitems.filter(inventoryitem => {
-      const searchQueryLower = searchQuery.toLowerCase();
-      return ((inventoryitem.itemName.toLowerCase().startsWith(searchQueryLower)))
-    });
-
-    const rows = filteredList.map((inventoryitem) => ({
-      itemName: inventoryitem.itemName,
-      itemPrice: inventoryitem.itemPrice,
-      itemStockCount: inventoryitem.itemStockCount,
-      currentStock: inventoryitem.currentStock,
-      itemDescription: inventoryitem.itemDescription,
+    const rows = currentlyDisplayedItem.map((inventoryitem) => ({
+        supplierName: suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id)?.supplierName || '',
+        itemName: inventoryitem.itemName,
+        itemPrice: inventoryitem.itemPrice,
+        itemStockCount: inventoryitem.itemStockCount,
+        currentStock: inventoryitem.currentStock,
+        itemDescription: inventoryitem.itemDescription,
     }));
 
     // Add the table to the PDF
     doc.autoTable({
-      columns,
-      body: rows,
-      startY: 20,
-
-      styles: {
-        // Styles applied to the table
-        cellPadding: 2,
-        fontSize: 10,
-        valign: 'middle',
-        halign: 'center',
-        cellWidth: 'auto', // Auto column width
-      },
-
-      columnStyles: {
-        // Custom styles for specific columns
-        itemName: { fontStyle: 'bold' },
-        itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
-      },
-
-      headerStyles: {
-        fillColor: [100, 100, 100], // Header background color
-        textColor: [255, 255, 255], // Header text color
-        fontStyle: 'bold', // Bold font for header
-      },
-
-      bodyStyles: {
-        textColor: [50, 50, 50], // Body text color
-      },
-
-      alternateRowStyles: {
-        fillColor: [245, 245, 245], // Alternate row background color
-      },
+        columns,
+        body: rows,
+        startY: 20,
+        styles: {
+            // Styles applied to the table
+            cellPadding: 2,
+            fontSize: 10,
+            valign: 'middle',
+            halign: 'center',
+            cellWidth: 'auto', // Auto column width
+        },
+        columnStyles: {
+            // Custom styles for specific columns
+            itemName: { fontStyle: 'bold' },
+            itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
+        },
+        headerStyles: {
+            fillColor: [100, 100, 100], // Header background color
+            textColor: [255, 255, 255], // Header text color
+            fontStyle: 'bold', // Bold font for header
+        },
+        bodyStyles: {
+            textColor: [50, 50, 50], // Body text color
+        },
+        alternateRowStyles: {
+            fillColor: [245, 245, 245], // Alternate row background color
+        },
     });
-
-
 
     // Save the PDF with a unique name
     const filename = 'inventoryReport.pdf';
     doc.save(filename);
-  };
+};
+
 
 
   return (
@@ -136,8 +134,9 @@ const InventoryItemDetails = () => {
       <table className="inventoryItemsTable">
         <thead>
           <tr>
+            <th>Supplier</th>
             <th>Item Name</th>
-            <th>Price</th>
+            <th>Price <br />(in LKR)</th>
             <th>Initial Stock Count</th>
             <th>Current Stock Count</th>
             <th>Item Description</th>
@@ -147,6 +146,7 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
+              <td>{supplierName = suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
               <td>{inventoryitem.itemName}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>

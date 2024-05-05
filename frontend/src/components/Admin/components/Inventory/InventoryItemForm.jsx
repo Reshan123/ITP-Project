@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext"
+import { useSupplierContext } from "../../../../hooks/useSupplierContext"
 import firebase from "firebase/compat/app"
 import { useNavigate } from 'react-router-dom'
 import "firebase/compat/storage"
 import './styles.css'
 
 const InventoryItemForm = () => {
+
+    const { suppliers, dispatch:supplierDispatch } = useSupplierContext()
 
     const navigate = useNavigate()
     const { dispatch } = useInventoryItemsContext()
@@ -21,7 +24,7 @@ const InventoryItemForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const inventoryitem = { itemName, itemPrice, itemStockCount, itemDescription, itemImageURL, supplierID }
+        const inventoryitem = { itemName, itemPrice, itemStockCount,currentStock:itemStockCount, itemDescription, itemImageURL, supplierID }
 
         const response = await fetch('http://localhost:4000/api/inventoryItems/', {
             method: 'POST',
@@ -85,17 +88,17 @@ const InventoryItemForm = () => {
                 />
 
 
-                {/* <label>Select the Supplier</label>
+                <label>Select the Supplier</label>
                 <select
                     id="supplier"
                     onChange={(e) => setSupplierID(e.target.value)}
                     value={supplierID}
                 >
                     <option value="">Select Supplier</option>
-                    {Supplier.map(supplier => (
-                        <option key={supplier._id} value={supplier._id}>{supplier.supplierName}</option>
+                    {suppliers.map(Supplier => (
+                        <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
                     ))}
-                </select> */}
+                </select>
 
 
 
