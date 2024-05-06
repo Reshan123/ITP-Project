@@ -100,7 +100,7 @@ const InventoryItemUpdate = () => {
           onChange={(e) => setItemName(e.target.value)}
           value={itemName}
         />
-        <label>Item Price (in LKR)</label>
+        <label>Item Price(in LKR)</label>
         <input
           type='number'
           onChange={(e) => setItemPrice(e.target.value)}
@@ -112,7 +112,7 @@ const InventoryItemUpdate = () => {
           onChange={(e) => setItemStockCount(e.target.value)}
           value={itemStockCount}
         />
-        <label>Curernt Stock Level</label>
+        <label>Current Stock Level</label>
         <input
           type="number"
           onChange={(e) => setCurrentStock(e.target.value)}
