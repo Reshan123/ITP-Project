@@ -1,11 +1,18 @@
 import { useState } from "react"
+import { useSupplierContext } from "../../../../context/SupplierContext"
+import { useNavigate } from 'react-router-dom'
+import './styles.css'
 
 const SupplierForm = () => {
+    const navigate = useNavigate
+    const {dispatch} = useSupplierContext()
     const [supplierName, setsupplierName] = useState('')
     const [supplierContact, setsupplierContact] = useState('')
     const [supplierEmail, setsupplierEmail] = useState('')
     const [supplierCompany, setsupplierCompany] = useState('')
     const [itemId, setitemId] = useState('')
+    const [error, setError] = useState(null)
+
     const handleSubmit = async(e) =>
     {
         e.preventDefault()
@@ -31,7 +38,11 @@ const SupplierForm = () => {
             setsupplierEmail('')
             setsupplierContact('')
             setitemId ('')
+            setError(null)
+
             console.log('new supplier added', json)
+            dispatch({type:'CREATE_SUPPLIERS', payload:json})
+            navigate('/admin/home/SupplierDetails')
         }
     }
 
@@ -68,7 +79,11 @@ const SupplierForm = () => {
                 onChange={(e)=> setitemId(e.target.value)}
                 value = {itemId}
             />
-            <button>Add Supplier</button>
+             <div className="add-btn-container">
+                <button className="create-btn">Add Supplier</button>
+
+            </div>
+            {error && <div className="error">{error}</div>}
            
            
            

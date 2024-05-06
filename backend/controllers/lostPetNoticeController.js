@@ -5,28 +5,28 @@ const mongoose = require('mongoose')
 
 const createLostPetNotice = (req, res) => {
     const owner_Id = req.user._id;
-    const { petName,ownerName,breed,description,contactNo,image,email,location,gender,age} = req.body
+    const { petName, ownerName, breed, description, contactNo, image, email, location, gender, age } = req.body
 
     //returns a promise which is resoved by the .then
     LostNoticeInfo.create({
-      owner_id: owner_Id,
-      petName,
-      ownerName,
-      breed,
-      description,
-      contactNo,
-      image,
-      email,
-      location,
-      gender,
-      age,
+        owner_id: owner_Id,
+        petName,
+        ownerName,
+        breed,
+        description,
+        contactNo,
+        image,
+        email,
+        location,
+        gender,
+        age,
     })
-      .then((result) => {
-        res.status(200).json(result);
-      })
-      .catch((error) => {
-        res.status(404).json({ error: error.message });
-      });
+        .then((result) => {
+            res.status(200).json(result);
+        })
+        .catch((error) => {
+            res.status(404).json({ error: error.message });
+        });
 }
 
 //getting all the notices
@@ -108,10 +108,10 @@ const deleteLostPetNotice = (req, res) => {
 
 //getting the users id and the mathching notices of them
 
-const getUserLostPetNotice = async (req,res) =>{
+const getUserLostPetNotice = async (req, res) => {
 
     const userID = req.user._id;
-    
+
     try {
         if (!userID) {
             throw Error("Invalid User ID");

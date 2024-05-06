@@ -18,6 +18,7 @@ export const inventoryItemsReducer = (state, action) => {
             }
         case 'UPDATE':
             const objIndex = state.inventoryitems.findIndex(obj => obj._id == action.payload[0])
+            state.inventoryitems[objIndex].Supplier = action.payload[1].Supplier
             state.inventoryitems[objIndex].itemName = action.payload[1].itemName
             state.inventoryitems[objIndex].itemPrice = action.payload[1].itemPrice
             state.inventoryitems[objIndex].itemStockCount = action.payload[1].itemStockCount
