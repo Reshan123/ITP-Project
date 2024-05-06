@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUserContext } from '../../../hooks/userContextHook'
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import { usePetContext } from '../../../hooks/usePetContext'
 
 
 const UpdateBooking = ({ navBarProps }) => {
@@ -16,6 +17,7 @@ const UpdateBooking = ({ navBarProps }) => {
     const [inputValidity, setInputValidity] = useState(false)
 
     const [booking, setBooking] = useState(null)
+    const { pets, dispatch: petDispatch } = usePetContext()
 
     const [owner_id, setOwnerId] = useState(booking?.owner_id)
     const [owner_name, setOwnerName] = useState(booking?.owner_name)
@@ -28,6 +30,9 @@ const UpdateBooking = ({ navBarProps }) => {
     const [start_time, setStartTime] = useState(booking?.start_time)
     const [description, setDescription] = useState(booking?.description)
     const [error, setError] = useState(null)
+
+    const [doctors, setDoctors] = useState([]);
+    const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -85,6 +90,24 @@ const UpdateBooking = ({ navBarProps }) => {
         }
   };
 
+  useEffect(() => {
+
+    //fetching all available doctors
+    const fetchDoctors = async () => {
+        try {
+          const response = await fetch('http://localhost:4000/api/doctor/availableDoctors');
+          const data = await response.json();
+          setDoctors(data);
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+    fetchDoctors();
+    
+  }, [])
+
   return (
     
     <div className="UpdateAppointments" id='UpdateAppointments'>
@@ -109,26 +132,28 @@ const UpdateBooking = ({ navBarProps }) => {
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} defaultValue={booking?.owner_contact} required  />
                         </div>
                         <div className="UpdateAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} defaultValue={booking?.pet_name} required/>
+                            <select name="petName" onChange={(e) => handlePetSelect(e.target.value)} required value={booking?.pet_name}>
+                                <option value="">Select a Pet</option>
+                                    {pets && pets.map(pet => (
+                                        <option key={pet._id} value={pet.petName} selected={booking?.pet_name === pet.petName}>{pet.petName}</option>
+                                    ))}
+                            </select>
                         </div>
                         <div className="UpdateAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Species' onChange={(e) => setPetSpecies(e.target.value)} defaultValue={booking?.pet_species} required/>
-                        </div>
-                        {/* <div className="UpdateAppointmentsFormInputWrapper">
-                            <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
-                                <option defaultValue="">Select a Species</option>
-                                <option defaultValue="Dog">Dog</option>
-                                <option defaultValue="Cat">Cat</option>
-                                <option defaultValue="Bird">Bird</option>
+                            <select name="pet_species" value={booking?.pet_species} onChange={(e) => setPetSpecies(e.target.value)} required>
+                                <option value="" disabled>Select a Species</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
                             </select>
-                        </div> */}
+                        </div>
                         <div className="UpdateAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' onChange={(e) => setPetBreed(e.target.value)} defaultValue={booking?.pet_breed}/>
                         </div>
-                        <div className="UpdateAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Doctor' onChange={(e) => setDoctor(e.target.value)} defaultValue={booking?.doctor} required/>
-                        </div>
                         {/* <div className="UpdateAppointmentsFormInputWrapper">
+                            <input type="text" placeholder='Doctor' onChange={(e) => setDoctor(e.target.value)} defaultValue={booking?.doctor} required/>
+                        </div> */}
+                        <div className="UpdateAppointmentsFormInputWrapper">
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
@@ -136,7 +161,7 @@ const UpdateBooking = ({ navBarProps }) => {
                                     {doctors.length === 0 ? (
                                         <input type = "text" value={"Sorry, no doctors available."} disabled/>
                                     ) : (
-                                        <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
+                                        <select name="doctor" value={booking?.doctor} onChange={(e) => setDoctor(e.target.value)} required>
                                             <option value="">Select a Doctor</option>
                                             {doctors.map(doctor => (
                                                 <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
@@ -145,7 +170,7 @@ const UpdateBooking = ({ navBarProps }) => {
                                     )}
                                 </>
                             )}
-                        </div> */}
+                        </div>
 
                         <div className="UpdateAppointmentsFormInputWrapper">
                             <input type="datetime-local" placeholder="Start Time" value={start_time} onChange={(e) => setStartTime(e.target.value)} required />

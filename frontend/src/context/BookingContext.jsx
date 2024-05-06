@@ -17,7 +17,16 @@ export const bookingReducer = (state,action) => {
         case 'DELETE_BOOKING':
             return {
                 bookings: state.bookings.filter((b) => b._id !== action.payload._id)
-            }    
+            }
+            
+        case 'UPDATE_BOOKING_STATUS':
+            return {
+                bookings: state.bookings.map((booking) =>
+                booking._id === action.payload.id
+                    ? { ...booking, status: action.payload.status }
+                    : booking
+                )
+            }
 
         default:
             return state
