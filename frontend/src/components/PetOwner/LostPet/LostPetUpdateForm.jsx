@@ -73,7 +73,7 @@ const updateData = async (id) =>{
   //const notice = {petName, ownerName, breed, description, contactNo, image, email}
   const response = await fetch('http://localhost:4000/api/lostPetNotice/'+id, {
     method: 'PATCH',
-    body: JSON.stringify({petName:petName,ownerName:ownerName,breed:breed,description:description,contactNo:contactNo,email:email,image:image,locations:locations,gender:gender,age:age}),
+    body: JSON.stringify({petName:petName,ownerName:ownerName,breed:breed,description:description,contactNo:contactNo,email:email,image:image,location:locations,gender:gender,age:age}),
     headers: {
       'Content-Type': 'application/json'
     }

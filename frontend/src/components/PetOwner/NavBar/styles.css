@@ -29,7 +29,12 @@ nav .navMidContainer{
 
 nav .navMidContainer a.NavLink:hover,
 nav .navMidContainer a.aboutUsLink:hover{
-    opacity: 0.8;
+    opacity: 0.5;
+}
+
+nav .navMidContainer a.NavLink.active,
+nav .navLogin a.NavLink.active{
+    opacity: 0.7;
 }
 
 nav .navMidContainer a{
@@ -38,25 +43,6 @@ nav .navMidContainer a{
     font-family: "League Spartan", sans-serif;
     color: #fff;
 }
-
-nav .navMidContainer a.active.NavLink{
-    /* border: #B597CF 4px solid; */
-    /* text-decoration: underline; */
-    background-color: #fff;
-    color: #E2929D;
-    border-radius: 15px;
-    padding: 10px 15px;
-    /* color: #B597CF; */
-}
-
-/* nav .navLogin a.active.NavLink{
-    background-color: var(--primaryPink)
-}
-  
-nav .navMidContainer a.activeHaslink{
-    background-color: var(--primaryPink);
-    color: #123456;
-} */
 
 nav .navMidContainer a:nth-child(2){
     border: 4px solid white;
@@ -79,3 +65,46 @@ nav div .buttonHoverAnimation:hover{
     box-shadow: 0 10px 15px rgba(0,0,0,.3);
     transition: 0.3s;
 }
+
+/*notifications*/
+
+/* .notificationdot{
+    position: absolute;
+    top: -5;
+    right: -5;
+    color: red;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+} */
+
+/* notification list*/
+
+.notificationList {
+  position: absolute;
+  top: 100%; /* Position the notification list below the bell icon */
+  right: 20px; /* Align the notification list to the right side */
+  width: 200px; /* Set the width of the notification list */
+  max-height: 300px; /* Set the maximum height of the notification list */
+  overflow-y: auto; /* Add a vertical scrollbar when content exceeds the height */
+  background-color: #fff; /* Background color of the notification list */
+  border: 1px solid #ccc; /* Border around the notification list */
+  border-radius: 5px; /* Border radius to round the corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect for the notification list */
+  z-index: 999; /* Ensure the notification list appears above other content */
+}
+
+.notificationItem {
+  padding: 10px; /* Add padding around each notification item */
+  border-bottom: 1px solid #eee; /* Add a bottom border to separate notifications */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.notificationItem:last-child {
+  border-bottom: none; /* Remove bottom border for the last notification item */
+}
+
+.notificationItem:hover {
+  background-color: #f9f9f9; /* Change background color on hover */
+}
+

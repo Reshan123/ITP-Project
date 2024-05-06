@@ -33,12 +33,13 @@ const Message = ({ ownerid, message }) => {
             alt="circled-user-male-skin-type-3--v1"
           />
         </div>
+        
       </div>
       <div className={`chat-bubble ${fromMe ? "" : "other"}`}>
         {message.message}
-      </div>
-      <div className={`chat-footer ${fromMe ? "" : "other"}`}>
-        {extractTime(message.createdAt)}
+        <div className={`chat-footer ${fromMe ? "" : "other"}`}>
+          {extractTime(message.createdAt)}
+        </div>
       </div>
     </div>
   );

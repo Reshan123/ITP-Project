@@ -30,6 +30,7 @@ const BookingUpdate = () => {
 
         if (response.ok) {
           setBooking(json);
+          setStartTime(formatDateForInput(json.start_time))
         }
       } catch (error) {
         console.error('Error fetching booking:', error);
@@ -38,6 +39,17 @@ const BookingUpdate = () => {
 
     fetchBooking()
   }, [id])
+
+  const formatDateForInput = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const year = dateTime.getFullYear();
+    const month = `${dateTime.getMonth() + 1}`.padStart(2, '0'); // Months are zero-indexed
+    const day = `${dateTime.getDate()}`.padStart(2, '0');
+    const hours = `${dateTime.getHours()}`.padStart(2, '0');
+    const minutes = `${dateTime.getMinutes()}`.padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault()
@@ -125,7 +137,7 @@ const BookingUpdate = () => {
                         </div> */}
 
                         <div className="AdminUpdateAppointmentsFormInputWrapper">
-                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} defaultValue={booking?.start_time} required />
+                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value={start_time} required />
                         </div>
 
                         <div className="AdminUpdateAppointmentsFormInputWrapper">

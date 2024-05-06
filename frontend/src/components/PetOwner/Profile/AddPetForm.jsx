@@ -21,6 +21,8 @@ const AddPetForm = ({ navBarProps }) => {
         petGender:"",
         petBreed:""
     })
+    const [petImage, setPetImage] = useState([])
+
 
 
     const handleInputChange = (e) => {
@@ -30,13 +32,22 @@ const AddPetForm = ({ navBarProps }) => {
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
+        const data = new FormData()
+        data.append('petName', formInputs.petName)
+        data.append('petAge', formInputs.petAge)
+        data.append('petSpecies', formInputs.petSpecies)
+        data.append('petGender', formInputs.petGender)
+        data.append('petBreed', formInputs.petBreed)
+        for (let i = 0; i < petImage.length; i++){
+            data.append('petImage', petImage[i])
+        }
+
         const config = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 "authorization": `Bearer ${user.userToken}`
             },
-            body: JSON.stringify(formInputs)
+            body: data
         }
         
         try{
@@ -85,6 +96,10 @@ const AddPetForm = ({ navBarProps }) => {
                 <div className="addPetFormInputWrapper">
                     <label htmlFor="petBreed">Pet Breed</label>
                     <input type="text" name="petBreed" id="petBreed" value={formInputs.petBreed}  onChange={(e) => handleInputChange(e)} />
+                </div>
+                <div className="addPetFormInputWrapper">
+                    <label htmlFor="petImage">Pet Image</label>
+                    <input type="file" name="petImage" id="petImage" onChange={(e) => setPetImage(e.target.files)} multiple/>
                 </div>
                 <div className="addPetFormSubmitButtonWrapper">
                     <button>Submit</button>

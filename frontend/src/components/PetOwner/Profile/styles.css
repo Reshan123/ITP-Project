@@ -1,11 +1,11 @@
-.profilePage{
+.profilePage {
     background-color: #fff0ff;
     min-height: 85vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.profilePage .userDetails{
+.profilePage .userDetails {
     margin-top: 50px;
     margin-left: 50px;
     display: flex;
@@ -13,7 +13,7 @@
     /* gap: 15px; */
 }
 
-.profilePage .userDetails .username{
+.profilePage .userDetails .username {
     font-size: 2.5rem;
     font-weight: 500;
     display: flex;
@@ -21,26 +21,26 @@
     gap: 10px;
 }
 
-.profilePage .userDetails .username span{
+.profilePage .userDetails .username span {
     font-size: 3.5rem;
     font-weight: 700;
 }
 
-.profilePage .userDetails .email{
+.profilePage .userDetails .email {
     margin-bottom: 25px;
 }
 
-.profilePage .userDetails .email span{
+.profilePage .userDetails .email span {
     font-size: 1rem;
     font-weight: 600;
 }
 
-.profilePage .userDetails .actionButtons{
+.profilePage .userDetails .actionButtons {
     display: flex;
     gap: 15px;
 }
 
-.profilePage .userDetails .actionButtons button{
+.profilePage .userDetails .actionButtons button {
     border-radius: 11px;
     border: none;
     color: #fff;
@@ -50,17 +50,17 @@
     transition: 0.3s;
 }
 
-.profilePage .userDetails .actionButtons button.delete{
+.profilePage .userDetails .actionButtons button.delete {
     background-color: rgb(234, 53, 53);
 }
 
-.profilePage .logOutButton{
+.profilePage .logOutButton {
     margin-top: 20px;
     margin-right: 50px;
     justify-self: self-end;
 }
 
-.profilePage .logOutButton button{
+.profilePage .logOutButton button {
     border-radius: 11px;
     border: none;
     color: var(--primaryPurple);
@@ -78,7 +78,7 @@
 
 
 
-.profilePage .detailsSection{
+.profilePage .detailsSection {
     margin: 50px;
     grid-column: 1/3;
     display: flex;
@@ -86,18 +86,18 @@
     flex-wrap: wrap;
 }
 
-.profilePage .detailsSection .detailsSectionTitleContainer{
+.profilePage .detailsSection .detailsSectionTitleContainer {
     display: flex;
     justify-content: space-between;
     margin: 0 15px 10px 15px;
 }
 
-.profilePage .detailsSection .detailsSectionTitleContainer .detailsSectionTitle{
+.profilePage .detailsSection .detailsSectionTitleContainer .detailsSectionTitle {
     font-size: 2.2rem;
     font-weight: 600;
 }
 
-.profilePage .detailsSection .detailsSectionTitleContainer button{
+.profilePage .detailsSection .detailsSectionTitleContainer button {
     border-radius: 11px;
     border: none;
     color: #fff;
@@ -107,13 +107,13 @@
     transition: 0.3s;
 }
 
-.profilePage .detailsSection hr{
+.profilePage .detailsSection hr {
     height: 2px;
     background-color: black;
     margin-bottom: 25px;
 }
 
-.profilePage .detailsSection .detailsSectionCardContainer{
+.profilePage .detailsSection .detailsSectionCardContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
@@ -123,35 +123,103 @@
 
 
 
-.petCard{
-    width: 32%;
+.petCard {
+    /* width: 32%; */
     color: #FFF;
     background-color: var(--primaryPurple);
     padding: 15px 25px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: transform .3s ease;
 }
 
-.petCard .majorDetails{
+.petCard:hover {
+    transform: scale(1.05);
+}
+
+.petCard .carousel {
+    position: relative;
+}
+
+.carousel__item {
+    width: 300px;
+    height: 240px;
+    padding: 1em;
+    color: #ffffff;
+    display: none;
+}
+
+.carousel__item img {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__item--selected {
+    display: block;
+}
+
+.carousel__nav {
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+.carousel__button {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.707);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel__button--selected {
+    background: rgb(255, 255, 255);
+}
+
+.petCard .majorDetails {
     margin: 0 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.petCard .majorDetails .petName{
+.petCard .majorDetails .petName {
     font-size: 1.5rem;
     font-weight: 600;
 }
 
-.petCard .otherDetails{
+.petCard .otherDetails {
     display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: space-around;
 }
 
+.petCard .buttonContainer {
+    display: flex;
+    gap: 25px;
+}
+
+.petCard .buttonContainer button {
+    border-radius: 11px;
+    border: none;
+    color: #000;
+    background-color: #FFF;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+.petCard .buttonContainer button.delete {
+    background-color: rgb(234, 53, 53);
+    color: white;
+}
 
 
 
@@ -162,10 +230,7 @@
 
 
 
-
-
-
-.updateProfilePage{
+.updateProfilePage {
     background-color: #fff0ff;
     min-height: 85vh;
     display: grid;
@@ -174,21 +239,21 @@
     justify-content: center;
 }
 
-.updateProfilePage .backArrow{
+.updateProfilePage .backArrow {
     margin: 25px 50px;
     align-self: self-start;
     padding: 0px;
 }
 
-.updateProfilePage .backArrow svg{
+.updateProfilePage .backArrow svg {
     font-size: 1.5rem;
 }
 
-.updateProfilePage .backArrow svg:hover{
+.updateProfilePage .backArrow svg:hover {
     cursor: pointer;
 }
 
-.updateProfilePage .profileUpdateForm{
+.updateProfilePage .profileUpdateForm {
     background-color: var(--primaryPurple);
     padding: 65px 40px;
     border-radius: 15px;
@@ -196,7 +261,7 @@
     flex-direction: column;
 }
 
-.updateProfilePage .profileUpdateForm .updateFormTitle{
+.updateProfilePage .profileUpdateForm .updateFormTitle {
     align-self: center;
     font-size: 3rem;
     font-weight: 600;
@@ -204,7 +269,7 @@
     margin-bottom: 35px;
 }
 
-.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper{
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper {
     display: grid;
     grid-template-columns: 1fr 5fr;
     align-items: center;
@@ -213,22 +278,107 @@
     margin-bottom: 10px;
 }
 
-.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper label{
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper label {
     font-size: 1.3rem;
 }
 
-.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper input{
+.updateProfilePage .profileUpdateForm .profileUpdateInputWrapper input {
     padding: 8px 10px;
-    border-radius: 8px;     
-    font-size: 1.1rem;   
+    border-radius: 8px;
+    font-size: 1.1rem;
 }
 
-.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton{
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton {
     align-self: center;
     margin-top: 25px;
 }
 
-.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton button{
+.updateProfilePage .profileUpdateForm .profileUpdateSubmitButton button {
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.updatePetPage {
+    background-color: #fff0ff;
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.updatePetPage .backArrow {
+    margin: 25px 50px;
+    align-self: self-start;
+    padding: 0px;
+}
+
+.updatePetPage .backArrow svg {
+    font-size: 1.5rem;
+}
+
+.updatePetPage .backArrow svg:hover {
+    cursor: pointer;
+}
+
+.updatePetPage .petProfileUpdateForm {
+    background-color: var(--primaryPurple);
+    padding: 65px 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.updatePetPage .petProfileUpdateForm .updateFormTitle {
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper label {
+    font-size: 1.3rem;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateInputWrapper input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateSubmitButton {
+    align-self: center;
+    margin-top: 25px;
+}
+
+.updatePetPage .petProfileUpdateForm .petProfileUpdateSubmitButton button {
     border-radius: 11px;
     border: none;
     color: var(--primaryPurple);
@@ -255,8 +405,7 @@
 
 
 
-
-.addPetPage{
+.addPetPage {
     background-color: #fff0ff;
     min-height: 85vh;
     display: grid;
@@ -265,20 +414,20 @@
     justify-content: center;
 }
 
-.addPetPage .backArrow{
+.addPetPage .backArrow {
     margin: 25px 50px;
     align-self: self-start;
 }
 
-.addPetPage .backArrow svg{
+.addPetPage .backArrow svg {
     font-size: 1.5rem;
 }
 
-.addPetPage .backArrow svg:hover{
+.addPetPage .backArrow svg:hover {
     cursor: pointer;
 }
 
-.addPetPage .addPetForm{
+.addPetPage .addPetForm {
     background-color: var(--primaryPurple);
     padding: 40px;
     border-radius: 15px;
@@ -286,7 +435,7 @@
     flex-direction: column;
 }
 
-.addPetPage .addPetForm .addPetFormTitle{
+.addPetPage .addPetForm .addPetFormTitle {
     align-self: center;
     font-size: 3rem;
     font-weight: 600;
@@ -294,7 +443,7 @@
     margin-bottom: 35px;
 }
 
-.addPetPage .addPetForm .addPetFormInputWrapper{
+.addPetPage .addPetForm .addPetFormInputWrapper {
     display: grid;
     grid-template-columns: 1fr 5fr;
     align-items: center;
@@ -303,22 +452,22 @@
     margin-bottom: 10px;
 }
 
-.addPetPage .addPetForm .addPetFormInputWrapper label{
+.addPetPage .addPetForm .addPetFormInputWrapper label {
     font-size: 1.3rem;
 }
 
-.addPetPage .addPetForm .addPetFormInputWrapper input{
+.addPetPage .addPetForm .addPetFormInputWrapper input {
     padding: 8px 10px;
-    border-radius: 8px;     
-    font-size: 1.1rem;   
+    border-radius: 8px;
+    font-size: 1.1rem;
 }
 
-.addPetPage .addPetForm .addPetFormSubmitButtonWrapper{
+.addPetPage .addPetForm .addPetFormSubmitButtonWrapper {
     align-self: center;
     margin-top: 25px;
 }
 
-.addPetPage .addPetForm .addPetFormSubmitButtonWrapper button{
+.addPetPage .addPetForm .addPetFormSubmitButtonWrapper button {
     border-radius: 11px;
     border: none;
     color: var(--primaryPurple);
@@ -334,44 +483,55 @@
 
 
 /*Styles for the lost pet profile cards*/
-.container1{
+.container1 {
     display: grid;
-    grid-template-columns: repeat(2, minmax(570px,1fr)); /* Automatically fit 2 items in a row */
-    gap: 100px; 
+    grid-template-columns: repeat(2, minmax(570px, 1fr));
+    /* Automatically fit 2 items in a row */
+    gap: 100px;
     margin-left: 40px;
 }
-.lostprofiledetails{
+
+.lostprofiledetails {
     /* background: rgba(128, 81, 143, 0.541); */
     background: #B799D1;
-    width: 500px; 
-    height: 300px; 
+    width: 500px;
+    height: 300px;
     margin: 10px;
     border-radius: 15px;
     overflow: hidden;
     position: relative;
-    display: flex; /* Use flexbox to create a horizontal layout */
+    display: flex;
+    /* Use flexbox to create a horizontal layout */
     transition: transform 1s ease;
 }
 
 .lostprofiledetails img {
-    width: 50%; /* Set width to occupy the first half of the card */
-    height: auto; /* Allow height to adjust proportionally */
+    width: 50%;
+    /* Set width to occupy the first half of the card */
+    height: auto;
+    /* Allow height to adjust proportionally */
     object-fit: cover;
 }
 
-.lostprofiledetails .details h4, .details p{
-    width: 50%; /* Set width to occupy the second half of the card */
-    padding: 3px; 
+.lostprofiledetails .details h4,
+.details p {
+    width: 50%;
+    /* Set width to occupy the second half of the card */
+    padding: 3px;
     display: flex;
-    flex-direction:column; /* Display details in a vertical layout */
-    justify-content:center; /* Center details vertically */
+    flex-direction: column;
+    /* Display details in a vertical layout */
+    justify-content: center;
+    /* Center details vertically */
 
     margin: 1px 0;
-    
+
 }
-.lostprofiledetails .details h4{
+
+.lostprofiledetails .details h4 {
     font-size: 20px;
 }
+
 .lostprofiledetails .createdAt {
     position: absolute;
     top: 10px;
@@ -387,11 +547,13 @@
     text-align: center;
     border-radius: 8px;
     border: none;
-    position:absolute;
+    position: absolute;
     top: 10px;
     right: 2%;
     transition: opacity 0.5s ease;
- }/*
+}
+
+/*
 .lostprofiledetails .btn1:hover{
     opacity:1;
 }
@@ -408,7 +570,7 @@
     text-align: center;
     border-radius: 8px;
     border: none;
-    position:absolute;
+    position: absolute;
     top: 38%;
     right: 2%;
     transition: opacity 0.5s ease;
@@ -421,7 +583,7 @@
     text-align: center;
     border-radius: 8px;
     border: none;
-    position:absolute;
+    position: absolute;
     bottom: 10%;
     right: 2%;
     transition: opacity 0.5s ease;
@@ -437,5 +599,71 @@
 }
 
 
+/*adoption form*/
+.detailsSectionCardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(570px, 1fr));
+    gap: 100px;
+    margin-left: 40px;
+}
 
+.detailsSectionCardContainer .adoption-form-preview {
+    background: #B799D1;
+    width: 500px;
+    height: 300px;
+    margin: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    transition: transform 1s ease;
+}
 
+.detailsSectionCardContainer .adoption-form-preview img.pet-image {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.detailsSectionCardContainer .adoption-form-preview .details {
+    width: 100%;
+
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.detailsSectionCardContainer .adoption-form-preview .details h4 {
+    font-size: 50px;
+    margin-bottom: 10px;
+
+}
+
+.detailsSectionCardContainer .adoption-form-preview .viewbtn1 {
+    background-color: rgba(128, 81, 143, 0.541);
+    color: white;
+    padding: 12px 10px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    position: absolute;
+    bottom: 10px;
+    /* Position the button at the bottom */
+    right: 2%;
+    transition: opacity 0.5s ease;
+}
+
+.detailsSectionCardContainer .adoption-form-preview:hover {
+    background-color: rgb(62, 62, 62);
+    color: white;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 1s ease;
+}
+
+.detailsSectionCardContainer .adoption-form-preview:hover .viewbtn1 {
+    opacity: 1;
+}

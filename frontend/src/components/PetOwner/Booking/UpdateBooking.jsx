@@ -4,16 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useUserContext } from '../../../hooks/userContextHook'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 
-const formatDateForInput = (dateTimeString) => {
-    const dateTime = new Date(dateTimeString);
-    const year = dateTime.getFullYear();
-    const month = `${dateTime.getMonth() + 1}`.padStart(2, '0'); // Months are zero-indexed
-    const day = `${dateTime.getDate()}`.padStart(2, '0');
-    const hours = `${dateTime.getHours()}`.padStart(2, '0');
-    const minutes = `${dateTime.getMinutes()}`.padStart(2, '0');
-  
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  }
 
 const UpdateBooking = ({ navBarProps }) => {
 
@@ -48,6 +38,7 @@ const UpdateBooking = ({ navBarProps }) => {
 
         if (response.ok) {
           setBooking(json);
+          setStartTime(formatDateForInput(json.start_time))
         }
       } catch (error) {
         console.error('Error fetching booking:', error);
@@ -56,6 +47,17 @@ const UpdateBooking = ({ navBarProps }) => {
 
     fetchBooking()
   }, [id])
+
+  const formatDateForInput = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const year = dateTime.getFullYear();
+    const month = `${dateTime.getMonth() + 1}`.padStart(2, '0'); // Months are zero-indexed
+    const day = `${dateTime.getDate()}`.padStart(2, '0');
+    const hours = `${dateTime.getHours()}`.padStart(2, '0');
+    const minutes = `${dateTime.getMinutes()}`.padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault()
@@ -146,7 +148,7 @@ const UpdateBooking = ({ navBarProps }) => {
                         </div> */}
 
                         <div className="UpdateAppointmentsFormInputWrapper">
-                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} defaultValue={formatDateForInput(booking?.start_time)} required />
+                            <input type="datetime-local" placeholder="Start Time" value={start_time} onChange={(e) => setStartTime(e.target.value)} required />
                         </div>
                         <div className="UpdateAppointmentsFormInputWrapper">
                             <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional)' onChange={(e) => setDescription(e.target.value)} defaultValue={booking?.description}></textarea>

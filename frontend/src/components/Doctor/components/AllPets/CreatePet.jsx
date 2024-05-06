@@ -17,6 +17,7 @@ const CreatePet = () => {
         petGender: "",
         petBreed: ""
     })
+    const [petImage, setPetImage] = useState([])
 
     const handleInputChange = (input) => {
         const {name, value} = input.target;
@@ -26,11 +27,28 @@ const CreatePet = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
+        const data = new FormData()
+        data.append('ownerID', formInput.ownerID)
+        data.append('petName', formInput.petName)
+        data.append('petAge', formInput.petAge)
+        data.append('petSpecies', formInput.petSpecies)
+        data.append('petGender', formInput.petGender)
+        data.append('petBreed', formInput.petBreed)
+        for (let i = 0; i < petImage.length; i++){
+            data.append('petImage', petImage[i])
+        }
+
+        for (let [key, value] of data) {
+            console.log(`${key}: ${value}`)
+        }
+
+        console.log(petImage)
+        console.log(data)
+
         try{
             const response = await fetch('http://localhost:4000/api/pet/adminCreatePet', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(formInput)
+                body: data
             })
             const json = await response.json()
         
@@ -75,6 +93,10 @@ const CreatePet = () => {
                 <div>
                     <label htmlFor="petBreed">Pet Breed: </label>
                     <input type="text" name='petBreed' id='petBreed' value={formInput.petBreed} onChange={(e) => handleInputChange(e)} />
+                </div>
+                <div>
+                    <label htmlFor="petBreed">Pet Photo: </label>
+                    <input type="file" name='petImage' id='petImage' onChange={(e) => setPetImage(e.target.files)} multiple/>
                 </div>
                 <div>
                     <button type="submit">Submit</button>

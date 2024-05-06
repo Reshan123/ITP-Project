@@ -41,18 +41,19 @@ const adoptionFormSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    activityLevel: {
-      type: String,
-      required: true,
-      enum: [
-        'High (2-3 h daily)',  // High activity level
-        'Moderate (1-2h daily)', // Moderate activity level
-        'Low (30min-1h daily)'  // Low activity level
-      ]
-    },
-    specialNeeds: { type: String, required: false } // Optional field for special needs
+  activityLevel: {
+    type: String,
+    required: true,
+    enum: [
+      'High (2-3 h daily)',  // High activity level
+      'Moderate (1-2h daily)', // Moderate activity level
+      'Low (30min-1h daily)'  // Low activity level
+    ]
   },
+  specialNeeds: { type: String, required: false },
+
+  smallDescription: { type: String, required: true },
+
   approved: {
     type: String,
     enum: ['Approved', 'Rejected', 'Pending'],

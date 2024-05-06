@@ -1,14 +1,9 @@
-
-* {
-    box-sizing: border-box;
-  }
 .adminSideBar{
     width: 17vw;
     padding-top: 10px;
     background: var(--primaryPurple);
     display: flex;
     flex-direction: column;
-    gap: 50px;
 }
 
 .adminSideBar .adminSideBarLogo{
@@ -56,7 +51,6 @@
     padding: 0;
 
     display: grid;
-    gap: 8px;
 }
 
 .adminSideBar .adminSideBarLinksContainer .adminSideBarLink .linkText{
@@ -66,7 +60,7 @@
 }
 
 .adminSideBar .adminSideBarLinksContainer .adminSideBarLink{
-    padding-block: .7rem;
+    padding-block: 1rem;
     padding-inline: 2rem;
     margin-inline: 1rem 0;
 }

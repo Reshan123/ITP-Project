@@ -15,6 +15,7 @@ const doctorRoutes = require('./routes/doctorRoutes')
 const medicalRecordRoute = require('./routes/medicalRecordRoute')
 const messageRoutes = require('./routes/messageRoutes')
 const supplierRoutes = require('./routes/supplierRoutes')
+const salesRoutes = require('./routes/salesRoutes')
 const { app, server } = require("./socket/socket");
 
 //const app = express()
@@ -34,6 +35,8 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
+app.use(express.static('Images'))
+
 
 //Routes
 app.use("/api/petOwner", petOwnerRoutes)
@@ -46,6 +49,7 @@ app.use('/api/doctor', doctorRoutes)
 app.use('/medical-records', medicalRecordRoute);
 app.use("/api/supplier", supplierRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/sales", salesRoutes)
 
 
 app.use('/api/admin/login', (req, res) => {
