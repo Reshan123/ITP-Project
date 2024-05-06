@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useBookingContext } from '../../../../hooks/useBookingContext';
-import { useNavigate} from 'react-router-dom'
-import './styles.css';
-import ViewPopup from './ViewPopup';
+import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
+import ViewPopup from './ViewPopup';
 import 'jspdf-autotable';
 import { Pagination } from 'antd';
 
-const Booking = () => {
+export const Booking = () => {
 
   const { bookings, dispatch: bookingDispatch } = useBookingContext();
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -91,7 +90,7 @@ const Booking = () => {
   };
 
   const handleUpdate = async(id) => {
-    navigate(`/admin/home/Booking/update/${id}`)
+    navigate(`/doctor/home/bookings/update/${id}`)
   }
 
 //Download Report Content
@@ -190,10 +189,8 @@ const generatePDF = () => {
   const indexOfFirstItem = indexOfLastItem - pageSize;
   const currentItems = currentlyDisplayedItem ? currentlyDisplayedItem.slice(indexOfFirstItem, indexOfLastItem) : [];
 
-
-
   return (
-    <div className='booking-content'>
+    <div className='doctor-booking-content'>
       <div className="bookingHeader">
         <p>All Appointment Booking Details</p>
         <div>
@@ -265,14 +262,9 @@ const generatePDF = () => {
             <button className="table-delete-btn" onClick={() => handleDelete(selectedBooking._id)}>
                 Delete
             </button>
-            <button className="table-update-btn" onClick={() => handleUpdate(selectedBooking._id)}>
-                Update
-            </button>
           </div>
         </ViewPopup>
       )}
     </div>
-  );
-};
-
-export default Booking;
+  )
+}

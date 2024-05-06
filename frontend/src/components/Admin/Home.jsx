@@ -67,6 +67,8 @@ const Home = () => {
         const fetchAllData = async () => {
             try {
 
+                //bookings
+
                 const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
       
                 if (!bookingResponse.ok) {
