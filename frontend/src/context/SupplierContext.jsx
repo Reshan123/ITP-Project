@@ -18,7 +18,7 @@ export const suppliersReducer = (state, action) => {
               suppliers: state.suppliers.filter((w) => w._id !== action.payload._id)
             }
             case 'UPDATE':
-                const objIndex = state.inventoryitems.findIndex(obj => obj._id == action.payload[0])
+                const objIndex = state.suppliers.findIndex(obj => obj._id == action.payload[0])
                 state.suppliers[objIndex].supplierName = action.payload[1].supplierName
                 state.suppliers[objIndex].supplierContact = action.payload[1].supplierContact
                 state.suppliers[objIndex].supplierEmail = action.payload[1].supplierEmail

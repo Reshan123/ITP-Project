@@ -12,12 +12,15 @@ import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext'
 
 import './styles.css'
 import CreatePet from './components/AllPets/CreatePet';
+import { Booking } from './components/Booking/Booking';
+import { useBookingContext } from '../../hooks/useBookingContext';
 
 const Home = () => {
 
     const {doctor, dispatch} = useDoctorContext()
     const {pets, dispatch: allPetsDispatch} = useAllPetsContext()
     const {petOwners, dispatch: allPetOwnersDispatch} = useAllPetOwnerContext() 
+    const { bookings, dispatch: bookingDispatch } = useBookingContext()
     const navigate = useNavigate()
 
     useEffect(()=> {
@@ -55,6 +58,19 @@ const Home = () => {
 
         const fetchData = async () => {
             try{
+
+                //bookings
+
+                const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
+      
+                if (!bookingResponse.ok) {
+                    throw Error(bookingResponse.message);
+                }
+        
+                const bookingJson = await bookingResponse.json();
+        
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
+
                 //get all pet data
                 const allPetsResponse = await fetch("http://localhost:4000/api/pet/getAllPets/")
                 const allPetsJson = await allPetsResponse.json()
@@ -96,6 +112,7 @@ const Home = () => {
                         <Route path='/pets' element={<AllPets />} />
                         <Route path='/createpet' element={<CreatePet />} />
                         <Route path='/updatepet/:petID' element={<UpdatePet />} />
+                        <Route path='/bookings' element={<Booking />} />
                     </Routes>
                 </div>
             </div>

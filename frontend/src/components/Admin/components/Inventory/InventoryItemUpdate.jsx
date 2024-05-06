@@ -58,6 +58,7 @@ const InventoryItemUpdate = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault()
+    
     const formData = {
       supplierID,
       itemName,

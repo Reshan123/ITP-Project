@@ -46,7 +46,7 @@ app.use('/api/bookings', bookingRoutes)
 app.use('/api/adoption', adoptionFormRoutes)
 app.use('/api/pet', petRoutes)
 app.use('/api/doctor', doctorRoutes)
-app.use('/medical-records', medicalRecordRoute);
+app.use('/api/medicalRec', medicalRecordRoute);
 app.use("/api/supplier", supplierRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/sales", salesRoutes)
