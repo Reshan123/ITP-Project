@@ -86,6 +86,7 @@
     color: var(--primaryPurple);
     padding: 8px 16px;
     font-weight: bold;
+    width: 60%;
     border: 1px solid var(--primaryPurple);
     border-radius: 20px;
     cursor: pointer;

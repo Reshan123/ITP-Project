@@ -55,7 +55,7 @@ const Store = ({ navBarProps }) => {
                                 value
                             />
                         </div>
-                        <button onClick={handleClick} className="btn">Buy</button>
+                        <button onClick={handleClick} className="btn">Buy Now</button>
                     </div>
                 </div>
             );
