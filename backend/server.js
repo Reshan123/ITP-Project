@@ -18,6 +18,8 @@ const supplierRoutes = require('./routes/supplierRoutes')
 const { app, server } = require("./socket/socket");
 
 //const app = express()
+const salesRoutes = require('./routes/salesRoutes')
+const app = express()
 
 const corsOptions ={
     origin:'*', 
@@ -48,6 +50,10 @@ app.use('/api/doctor', doctorRoutes)
 app.use('/medical-records', medicalRecordRoute);
 app.use("/api/supplier", supplierRoutes);
 app.use("/api/messages", messageRoutes);
+<<<<<<< HEAD
+=======
+app.use("/api/sales", salesRoutes)
+>>>>>>> Sales-Management-System
 
 
 app.use('/api/admin/login', (req, res) => {
