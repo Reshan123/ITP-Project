@@ -411,7 +411,7 @@
 .custom-form {
     padding: 0 1rem;
     margin-top: 1.5rem;
-    position: fixed; /* Position the form fixed */
+    position: fixed; /* Position the form fixed  make this sticky if u want it above the footer*/
     bottom: 0; /* Place it at the bottom of the viewport */
     width: 100%;
    box-sizing: border-box;
