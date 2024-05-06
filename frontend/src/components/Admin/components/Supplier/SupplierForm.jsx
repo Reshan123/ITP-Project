@@ -72,7 +72,7 @@ const SupplierForm = () => {
 
             <div className="add-btn-container">
 
-                < button className='create-btn'>Add Item</button>
+                < button className='create-btn'>Add Supplier</button>
             </div>
 
             {error && <div className="error">{error}</div>}
