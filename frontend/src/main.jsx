@@ -15,6 +15,7 @@ import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
+import { MedicalRecordContext } from './context/MedicalRecordContext.jsx'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -43,7 +44,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                         <AllPetsContextProvider>
                           <InventoryItemsContextProvider>
                             <SupplierContextProvider>
+                              <MedicalRecordContext>
                               <App />
+                              </MedicalRecordContext>
                             </SupplierContextProvider>
                           </InventoryItemsContextProvider>
                         </AllPetsContextProvider>
