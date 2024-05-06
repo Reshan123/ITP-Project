@@ -196,7 +196,8 @@
 
 .add-btn,
 .update-btn,
-.create-btn {
+.update-view-btn,
+.create-view-btn {
   border: 0;
   background-color: var(--primaryPurple);
   color: #fff;

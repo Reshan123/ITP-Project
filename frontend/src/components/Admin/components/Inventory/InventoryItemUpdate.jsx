@@ -138,7 +138,7 @@ const InventoryItemUpdate = () => {
         />
 
 
-        <button className='update-btn'>Update</button>
+        <button className='update-view-btn'>Update</button>
         {error && <div className="error">{error}</div>}
       </form>
 

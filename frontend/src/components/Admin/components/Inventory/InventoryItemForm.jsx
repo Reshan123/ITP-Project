@@ -135,7 +135,7 @@ const InventoryItemForm = () => {
 
                 <div className="add-btn-container">
 
-                    < button className='create-btn'>Add Item</button>
+                    < button className='create-view-btn'>Add Item</button>
                 </div>
                 {error && <div className="error">{error}</div>}
             </form>

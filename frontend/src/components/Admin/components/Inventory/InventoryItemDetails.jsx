@@ -155,7 +155,7 @@ const InventoryItemDetails = () => {
               <td>{<img src={inventoryitem.itemImageURL} alt="item" />}</td>
               <td>
                 <center>
-                  <button className='update-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
+                  <button className='update-view-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
                   <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id, inventoryitem.itemName)}>Delete</button>
                 </center>
               </td>
