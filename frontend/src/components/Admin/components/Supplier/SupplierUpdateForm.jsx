@@ -1,50 +1,40 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useSupplierContext } from '../../../../hooks/useSupplierContext'
-import './styles.css'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSupplierContext } from '../../../../hooks/useSupplierContext';
+import { useNavigate, useParams } from 'react-router-dom';
+import './styles.css';
 
 const SupplierUpdateForm = () => {
+  const { id } = useParams();
+  const { suppliers, dispatch: supplierDispatch } = useSupplierContext();
+  const navigate = useNavigate();
 
-  const { id } = useParams()
+  const [supplierName, setSupplierName] = useState("");
+  const [supplierContact, setSupplierContact] = useState("");
+  const [supplierEmail, setSupplierEmail] = useState("");
+  const [supplierCompany, setSupplierCompany] = useState("");
+  const [error, setError] = useState("");
 
-	const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
-
-	 useEffect(() => {
+  useEffect(() => {
     if (suppliers) {
-      suppliers.map(item => {
-        if (supplier._id == id) {
-          console.log(supplier._id)
+      suppliers.forEach(supplier => {
+        if (supplier._id === id) {
           if (supplier.supplierName) {
-            setSupplierName(supplier.supplierName)
+            setSupplierName(supplier.supplierName);
           }
           if (supplier.supplierContact) {
-            setSupplierContact(item.supplierContact)
+            setSupplierContact(supplier.supplierContact);
           }
           if (supplier.supplierEmail) {
-            setSupplierEmail(supplier.supplierEmail)
+            setSupplierEmail(supplier.supplierEmail);
           }
           if (supplier.supplierCompany) {
-            setSupplierCompany(supplier.supplierCompany)
+            setSupplierCompany(supplier.supplierCompany);
           }
-       
-          // if(item.currentStock<19){
-          //   confirm(`The Stock level of "${item.itemName}" is low`)        
-          // }
-
         }
-      })
+      });
     }
-  }, [suppliers])
-
-	const navigate = useNavigate()
-
-  const [supplierName, setsupplierName] = useState("")
-  const [supplierContact, setsupplierContact] = useState("")
-  const [supplierEmail, setsupplierEmail] = useState("")
-  const [supplierCompany, setsupplierCompany] = useState("")
-  const [error, setError] = useState("")
+  }, [id, suppliers]);
 
   const handleUpdate = (e) => {
     e.preventDefault()
@@ -53,15 +43,15 @@ const SupplierUpdateForm = () => {
       supplierContact,
       supplierEmail,
       supplierCompany,
-    }
-    axios.put("http://localhost:4000/api/supplier/"+ id, formData)
+    };
+    axios.put('http://localhost:4000/api/supplier/'+ id, formData)
       .then(res => {
-        supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail,supplierCompany }] })
-        setError("")
-        console.log(res)
-        navigate('/admin/home/supplierdetails')
+        supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail, supplierCompany }] });
+        setError("");
+        console.log(res);
+        navigate('/admin/home/supplier');
       })
-      .catch(err => setError(err.response.data))
+      .catch(err => setError(err.response.data));
   }
 
   return (
@@ -72,34 +62,32 @@ const SupplierUpdateForm = () => {
         <label>Name of the Supplier</label>
         <input
           type="text"
-          onChange={(e) => setsupplierName(e.target.value)}
+          onChange={(e) => setSupplierName(e.target.value)}
           value={supplierName}
         />
         <label>Supplier Contact</label>
         <input
-          type='number'
-          onChange={(e) => setsupplierContact(e.target.value)}
+          type='text'
+          onChange={(e) => setSupplierContact(e.target.value)}
           value={supplierContact}
         />
         <label>Supplier Email</label>
         <input
-          type="number"
-          onChange={(e) => setsupplierEmail(e.target.value)}
+          type="text"
+          onChange={(e) => setSupplierEmail(e.target.value)}
           value={supplierEmail}
         />
-        <label>Supplier Company </label>
+        <label>Supplier Company</label>
         <input
-          type="number"
-          onChange={(e) => setsupplierCompany(e.target.value)}
+          type="text"
+          onChange={(e) => setSupplierCompany(e.target.value)}
           value={supplierCompany}
         />
         <button className='update-btn'>Update</button>
         {error && <div className="error">{error}</div>}
       </form>
-
     </div>
-
-  )
+  );
 };
 
 export default SupplierUpdateForm;

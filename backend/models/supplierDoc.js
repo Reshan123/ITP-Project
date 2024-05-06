@@ -9,7 +9,7 @@ const supplierSchema = new Schema({
     },
     supplierContact: {
         type: String,
-        requireed: true
+        required: true
     },
     supplierEmail: {
         type: String,
@@ -28,9 +28,5 @@ const supplierSchema = new Schema({
         type: String,
         required: true
     },
-    itemId:{
-        type: String,
-        required: true
-    }
 })
 module.exports = mongoose.model('Supplier', supplierSchema)

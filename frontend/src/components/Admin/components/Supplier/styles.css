@@ -104,6 +104,7 @@
     color: #444; 
     background: #eee;
     transition: 0.3s;
+    padding: 0px 10px;
   }
   
   /* Styles for alternating rows in the table body - w3school */
