@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -22,6 +22,7 @@ import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 
+
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
@@ -29,6 +30,10 @@ import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
 import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
+
+import MedicalRecord from './components/MedicalRecord/MedicalR';
+import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
+
 
 const Home = () => {
 
@@ -43,6 +48,7 @@ const Home = () => {
     const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext()
 
     const { bookings, dispatch: bookingDispatch } = useBookingContext()
+    const { medicalRec, dispatch: medicalDispatch } = useMedicalRecordContext()
 
     useEffect(() => {
         if (!localStorage.getItem('adminUser')) {
@@ -61,6 +67,18 @@ const Home = () => {
         }
     
         fetchInventoryItems()
+      }, [])
+
+      useEffect(() =>{
+        const fetchMedicalRecord = async() => {
+            try{
+
+            }catch(error){
+                console.log(error.message)
+            }
+        }
+
+        fetchMedicalRecord()
       }, [])
 
     useEffect(() => {
@@ -116,6 +134,15 @@ const Home = () => {
                     inventoryDispatch({ type: 'SET_ITEMS', payload: inventoryJson })
                 }
 
+                //medicalRecord
+                const MedicalResponse = await fetch('http://localhost:4000/api/medicalRec/')
+                const MedicalJson = await MedicalResponse.json()
+
+                if(MedicalResponse.ok){
+
+                    medicalDispatch({type: 'SET_MEDICAL_RECORD', payload: MedicalJson})
+                }
+
                 //getAllAdoptionForms
                 const adoptionResponse = await fetch('http://localhost:4000/api/adoption')
                 const adoptionJson = await adoptionResponse.json()
@@ -123,6 +150,7 @@ const Home = () => {
                 if (adoptionResponse.ok) {
                     adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
                 }
+
 
             } catch (error) {
                 console.log(error)
@@ -165,6 +193,9 @@ const Home = () => {
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
+                        <Route path='/MedicalRecord' element={ <MedicalRecord />} />
+                        <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
+                        
                     </Routes>
                 </div>
             </div>
