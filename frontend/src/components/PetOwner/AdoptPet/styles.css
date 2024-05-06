@@ -1,0 +1,461 @@
+.landing-image {
+    position: relative;
+
+}
+
+.image-text-1,
+.image-text-2 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: white;
+    left: 50%;
+}
+
+.image-text-1 {
+    top: 10%;
+    font-size: 80px;
+}
+
+.image-text-2 {
+    top: 30%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.adoption-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.adoption-form h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.adoption-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #666;
+}
+
+.adoption-form input[type="text"],
+.adoption-form input[type="number"],
+.adoption-form input[type="file"],
+.adoption-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.adoption-form input[type="file"] {
+    border: none;
+    margin-bottom: 10px;
+}
+
+.adoption-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.adoption-form button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: #ff0000;
+    margin-bottom: 15px;
+}
+
+.adoption-form img {
+    display: block;
+    margin: 10px auto;
+    border-radius: 4px;
+}
+
+/* AdoptionFormPage.css */
+.AdoptionFormPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    max-width: 100%;
+}
+
+.section-1 {
+    width: 100%;
+    background-color: #666;
+
+
+}
+
+.adoption-form-preview {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 250px;
+    /* Adjust based on your preference */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pet-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.add-newFrom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.New-Form-Text-container {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+.adoptPetButton {
+    background-color: pink;
+    border: 2px solid pink;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.adoptPetButton:hover {
+    background-color: white;
+    color: pink;
+}
+
+/*update form */
+.adoption-form-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.adoption-form-details h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.adoption-form-details form {
+    display: grid;
+    grid-gap: 10px;
+}
+
+.adoption-form-details label {
+    display: block;
+}
+
+.adoption-form-details input[type="text"],
+.adoption-form-details select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.adoption-form-details input[type="file"] {
+    margin-top: 10px;
+}
+
+.adoption-form-details button[type="submit"],
+.adoption-form-details button.delete {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.adoption-form-details button[type="submit"]:hover,
+.adoption-form-details button.delete:hover {
+    background-color: #0056b3;
+}
+
+.adoption-form-details img {
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
+    margin-top: 10px;
+}
+
+
+
+/* CARD COMPONENT */
+
+.card {
+    max-width: 20rem;
+    max-height: fit-content;
+}
+
+.card_header {
+    margin: auto;
+
+    background: #272727;
+    border-left: 0.625rem solid #E2929D;
+
+    text-align: center;
+}
+
+.card_header h2 {
+    color: white;
+}
+
+.card__background {
+    display: block;
+    width: 100%;
+    /* Change width to 100% */
+    height: 15rem;
+    overflow: hidden;
+    margin: auto;
+    background: #B799D1;
+}
+
+.card__background img {
+    max-width: 100%;
+    filter: grayscale(100%);
+}
+
+.card__content {
+    line-height: 1.5;
+    background: #ededed;
+    padding: 1.5em 2rem;
+    color: #222;
+    font-family: 'Lato', sans-serif;
+}
+
+.card__content--container {
+    display: inline-block;
+    text-align: left;
+}
+
+.card__content_title {
+    margin: 0;
+    color: #333;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.card__content_title::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 1rem;
+    background: pink;
+    left: -5px;
+    top: 50%;
+    z-index: -1;
+}
+
+.card__description {
+    font-weight: 300;
+}
+
+.card_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__button,
+.card__button {
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-bottom: 0.1em;
+    color: #222;
+    text-decoration: none;
+    font-weight: bold;
+    border-top: 0.3125rem solid rgba(0, 0, 0, 0);
+    border-bottom: 0.3125rem solid #B799D1;
+    -webkit-transition: border 0.3s ease-in-out;
+    transition: border 0.3s ease-in-out;
+}
+
+.card__button::after {
+    content: "\25b6";
+    margin: 0 0.75em;
+    color: #222;
+}
+
+.card__button:hover,
+.card__button:focus {
+    border-top-color: #222;
+    border-bottom-color: #E2929D;
+}
+
+/*View Listing style*/
+.view-listing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.view-listing-page .listing {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    max-width: 2000px;
+    height: 500px;
+}
+
+
+.view-listing-page .adoption-image {
+    width: 400px;
+    margin-right: 20px;
+
+}
+
+.view-listing-page .adoption-image img {
+    width: 100%;
+    display: flex;
+    height: 500px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.view-listing-page .pet-details {
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+.view-listing-page .pet-details h1 {
+    margin-top: 0;
+}
+
+.view-listing-page .pet_about_1 {
+    display: flex;
+    padding-left: 10px;
+    margin-left: 5px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.pet_about_1 .species {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    border-radius: 30%;
+    height: 40px;
+
+}
+
+.pet_about_1 .species img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.pet_about_1 .gender {
+    width: 50px;
+    background-color: #3498db;
+    border-radius: 10px;
+    height: 40px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+
+}
+
+.pet_about_1 .gender p {
+    margin: 0;
+}
+
+.view-listing-page .pet-about_2 {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.view-listing-page .special-description {
+
+    margin-top: 40px;
+}
+
+
+.contact_details {
+
+    margin-top: 150px;
+    margin-left: 10px;
+}
+
+.owner-contact {
+    /* Style for the "Get In Touch" text */
+    cursor: pointer;
+
+}
+
+.owner-contact span {
+    /* Style for the owner contact */
+    display: none;
+    /* Initially hide the owner contact */
+}
+
+.owner-contact:hover span {
+    /* Style for the owner contact on hover */
+    display: inline;
+    /* Display the owner contact on hover */
+}
+
+.get-in-touch-button {
+    width: 150px;
+    background-color: pink;
+    border: transparent;
+    height: 40px;
+}
