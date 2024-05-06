@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh; 
+    height: 70vh;
 }
 
 .content-wrapper {
@@ -32,67 +32,66 @@
     line-height: 1.5;
 }
 
-.shopItems{
+.shopItems {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: stretch;
-    gap: 75px;
+    gap: 40px;
     padding: 40px 5%;
 }
 
 .shopItems .card {
-    width: 100%;
+    width: calc(25% - 40px);
     background: #f5f5f5;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    padding: 5px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
-
-.shopItems .card img{
-    height: 250px;
+.shopItems .card img {
+    height: 100%;
     width: 100%;
+    border-radius: 5px;
 }
 
-.shopItems .card .desc{
-    padding: 5px 20px;
-    opacity: 0.8;
+.shopItems .card .desc {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
 }
 
-.shopItems .card .title{
-    font-weight: 900;
+.shopItems .card .title {
+    font-weight: bold;
     font-size: 20px;
     color: #424144;
-    padding: 0 20px;
 }
 
-.shopItems .card .box{
+.shopItems .card .box {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    margin-top: 20px;
 }
 
-.shopItems .card .box .price{
+.shopItems .card .price {
     color: var(--primaryPurple);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-.shopItems .card .box .btn{
-    font-size: 13px;
+.shopItems .card .btn {
+    font-size: 14px;
     color: var(--primaryPurple);
-    padding: 10px 18px;
-    font-weight: 900;
+    padding: 8px 16px;
+    font-weight: bold;
     border: 1px solid var(--primaryPurple);
     border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.shopItems .card .box .btn:hover{
+.shopItems .card .btn:hover {
     background-color: var(--primaryPurple);
     color: white;
-    padding: 10px 18px;
-    font-weight: 900;
-    border-radius: 20px;
 }

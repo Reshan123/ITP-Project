@@ -65,11 +65,11 @@ const ViewForm = () => {
                         <p><strong>Breed:</strong>  {adoptionForms && adoptionForms.breed}</p>
                         <div className="pet_description">
                             <strong>About {adoptionForms.name} </strong><br />
-                            <p>{adoptionForms?.description?.smallDescription}</p>
+                            <p>{adoptionForms?.smallDescription}</p>
                         </div>
                         <div className="special-description">
-                            <p><strong>Activity Level:</strong> {adoptionForms?.description?.activityLevel || 'Not specified'}</p>
-                            <p><strong>Special Needs:</strong>  {adoptionForms?.description?.specialNeeds || 'None'}</p>
+                            <p><strong>Activity Level:</strong> {adoptionForms?.activityLevel || 'Not specified'}</p>
+                            <p><strong>Special Needs:</strong>  {adoptionForms?.specialNeeds || 'None'}</p>
                         </div>
                     </div>
                     <div className="contact_details">

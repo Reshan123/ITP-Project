@@ -1,107 +1,98 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useSupplierContext } from '../../../../hooks/useSupplierContext'
+import './styles.css'
 import { useParams } from 'react-router-dom'
 
 const SupplierUpdateForm = () => {
 
   const { id } = useParams()
 
-  const [supplierDetails, setSupplierDetails] = useState(null)
+	const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
 
-  const [supplierName, setSupplierName] = useState(supplierDetails?.supplierName)
-  const [supplierContact, setSupplierContact] = useState(supplierDetails?.supplierContact)
-  const [supplierEmail, setSupplierEmail] = useState(supplierDetails?.supplierEmail)
-  const [supplierCompany, setSupplierCompany] = useState(supplierDetails?.supplierCompany)
-  const [itemId, setitemId] = useState(supplierDetails?.itemId)
-  const [error, setError] = useState(null)
+	 useEffect(() => {
+    if (suppliers) {
+      suppliers.map(item => {
+        if (supplier._id == id) {
+          console.log(supplier._id)
+          if (supplier.supplierName) {
+            setSupplierName(supplier.supplierName)
+          }
+          if (supplier.supplierContact) {
+            setSupplierContact(item.supplierContact)
+          }
+          if (supplier.supplierEmail) {
+            setSupplierEmail(supplier.supplierEmail)
+          }
+          if (supplier.supplierCompany) {
+            setSupplierCompany(supplier.supplierCompany)
+          }
+       
+          // if(item.currentStock<19){
+          //   confirm(`The Stock level of "${item.itemName}" is low`)        
+          // }
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetch('http://localhost:4000/api/supplier/' + id);
-        const json = await response.json();
-
-        if(!response.ok){
-            console.log(json)
         }
-
-        if (response.ok) {
-            setSupplierDetails(json);
-        }
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+      })
     }
+  }, [suppliers])
 
-    fetchItems()
-  }, [id])
+	const navigate = useNavigate()
 
- 
+  const [supplierName, setsupplierName] = useState("")
+  const [supplierContact, setsupplierContact] = useState("")
+  const [supplierEmail, setsupplierEmail] = useState("")
+  const [supplierCompany, setsupplierCompany] = useState("")
+  const [error, setError] = useState("")
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault()
-
-    const supplier = { supplierName, supplierContact, supplierEmail, supplierCompany, itemId }
-
-    const response = await fetch('http://localhost:2000/api/supplier' + id, {
-      method: 'PATCH',
-      body: JSON.stringify(supplier),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const json = await response.json()
-
-    if (!response.ok) {
-      setError(json.error)
+    const formData = {
+      supplierName,
+      supplierContact,
+      supplierEmail,
+      supplierCompany,
     }
-
-    if (response.ok) {
-      setError(null)
-      console.log('New Update Added', json)
-      window.history.back();
-    }
-  };
+    axios.put("http://localhost:4000/api/supplier/"+ id, formData)
+      .then(res => {
+        supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail,supplierCompany }] })
+        setError("")
+        console.log(res)
+        navigate('/admin/home/supplierdetails')
+      })
+      .catch(err => setError(err.response.data))
+  }
 
   return (
-    <div className="update-items">
+    <div className="update-supplier">
       <form className="update" onSubmit={handleUpdate}>
         <h3>Update Supplier</h3>
-        {error && (<div>{error}</div>)}
+
         <label>Name of the Supplier</label>
         <input
           type="text"
-          onChange={(e) => setSupplierName(e.target.value)}
-          defaultValue={ supplierDetails?.supplierName }
-          required
+          onChange={(e) => setsupplierName(e.target.value)}
+          value={supplierName}
         />
-        <label> Enter Supplier Contact</label>
+        <label>Supplier Contact</label>
         <input
-          type='text'
-          onChange={(e) => setSupplierContact(e.target.value)}
-          defaultValue={ supplierDetails?.supplierContact }
+          type='number'
+          onChange={(e) => setsupplierContact(e.target.value)}
+          value={supplierContact}
         />
-        <label> Enter Supplier Email</label>
+        <label>Supplier Email</label>
         <input
-          type="text"
-          onChange={(e) => setSupplierEmail(e.target.value)}
-          defaultValue={ supplierDetails?.supplierEmail }
+          type="number"
+          onChange={(e) => setsupplierEmail(e.target.value)}
+          value={supplierEmail}
         />
-        <label> Enter Supplier Company</label>
+        <label>Supplier Company </label>
         <input
-          type="text"
-          onChange={(e) => setitemId(e.target.value)}
-          defaultValue={ supplierDetails?.supplierCompany}
+          type="number"
+          onChange={(e) => setsupplierCompany(e.target.value)}
+          value={supplierCompany}
         />
-	<label> Enter ItemID </label>
-	<input
-          type="text"
-          onChange={(e) => setSupplierCompany(e.target.value)}
-          defaultValue={ supplierDetails?.itemId}
-
-        />
-        
         <button className='update-btn'>Update</button>
         {error && <div className="error">{error}</div>}
       </form>
@@ -109,7 +100,6 @@ const SupplierUpdateForm = () => {
     </div>
 
   )
+};
 
-}
-
-export default SupplierUpdateForm
+export default SupplierUpdateForm;

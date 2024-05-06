@@ -27,11 +27,11 @@ const Profile = ({ navBarProps }) => {
     const { bookings, dispatch: bookingDispatch } = useBookingContext()
 
     const { adoptionForms, dispatch } = useAdoptionContext();
-    const {lostNotice,dispatch:lostDispatch} = useLostPetsContext()
+    const { lostNotice, dispatch: lostDispatch } = useLostPetsContext()
 
     //booking pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 4; 
+    const pageSize = 4;
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -71,38 +71,38 @@ const Profile = ({ navBarProps }) => {
         }
     }, [user])
 
-   //lostPets 
-  useEffect(()=>{
-    
-    const fetchLostPetNotices = async() =>{
-        const option = {
-            
-            headers: {
-                'authorization': `Bearer ${user.userToken}`
-            }
-        }
-        
-        try{
-            const response = await fetch("http://localhost:4000/api/lostPetNotice/getUser/",option)
+    //lostPets 
+    useEffect(() => {
 
-            if (!response.ok) {
-                throw Error(response.message)
+        const fetchLostPetNotices = async () => {
+            const option = {
+
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
             }
 
-            const json = await response.json()
+            try {
+                const response = await fetch("http://localhost:4000/api/lostPetNotice/getUser/", option)
 
-            lostDispatch({type:'SET_LOSTPETNOTICE',payload: json.message})
-            
+                if (!response.ok) {
+                    throw Error(response.message)
+                }
 
-        }catch(error){
-            console.log('Coudnt find the id of the user relavant to the post',error)
+                const json = await response.json()
+
+                lostDispatch({ type: 'SET_LOSTPETNOTICE', payload: json.message })
+
+
+            } catch (error) {
+                console.log('Coudnt find the id of the user relavant to the post', error)
+            }
         }
-    }
-        if(user){
+        if (user) {
             fetchLostPetNotices()
         }
-  },[user])  
-    
+    }, [user])
+
 
     const logOutUser = () => {
         localStorage.removeItem('user')
@@ -138,18 +138,35 @@ const Profile = ({ navBarProps }) => {
 
     //Pet adoption section
     useEffect(() => {
-        const fetchForms = async () => {
-            const response = await fetch('http://localhost:4000/api/adoption')
-            const json = await response.json()
 
-            if (response.ok) {
-                dispatch({ type: 'SET_FORMS', payload: json })
+        const config = {
+
+            headers: {
+                'authorization': `Bearer ${user.userToken}`
             }
         }
-        fetchForms()
-    }, [dispatch])
 
-    const uid = JSON.parse(localStorage.getItem('user'))["uid"]
+        const fetchForms = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/api/adoption/getUSER', config);
+                const json = await response.json();
+
+                if (response.ok) {
+                    dispatch({ type: 'SET_FORMS', payload: json });
+                    console.log('Adoption forms fetched successfully:', json); // Add this console log
+                } else {
+                    console.log('Failed to fetch adoption forms:', json); // Log error message
+                }
+            } catch (error) {
+                console.error('Error fetching adoption forms:', error); // Log fetch error
+            }
+        };
+
+        if (user) { fetchForms() }
+
+    }, [user])
+
+
 
     const handleView = (id) => {
         navigate('/pet/profile/adoption-form-update/' + id);
@@ -191,13 +208,13 @@ const Profile = ({ navBarProps }) => {
                     </div >
                     <hr />
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-                            <Pagination
-                                current={currentPage}
-                                total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
-                                pageSize={pageSize}
-                                onChange={handlePageChange}
-                                showSizeChanger={false}
-                            />
+                        <Pagination
+                            current={currentPage}
+                            total={bookings ? bookings.length : 0} // Ensure bookings is not null before getting length
+                            pageSize={pageSize}
+                            onChange={handlePageChange}
+                            showSizeChanger={false}
+                        />
                     </div>
                     <div className="detailsSectionCardContainer">
                         <div className='bookings'>
@@ -210,7 +227,7 @@ const Profile = ({ navBarProps }) => {
                     </div>
                 </div >
                 {/* adoption listings */}
-                < div className="detailsSection" >
+                <div className="detailsSection">
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Adoption Listings</div>
                         <button className='detailsSectionAddButton' onClick={() => { window.scrollTo(0, 0); navigate('/pet/adopt/adoptionForm') }}>Add Listing</button>
@@ -219,37 +236,34 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionCardContainer">
                         {adoptionForms && adoptionForms.length > 0 ? (
                             adoptionForms.map(adoptionForm => (
-                                (adoptionForm.ownerID === uid) && (
-                                    <div className="adoption-form-preview" key={adoptionForm._id}>
-                                        <img src={adoptionForm.imageUrl || ''} alt="Pet" className="pet-image" />
+                                <div className="adoption-form-preview" key={adoptionForm._id}>
+                                    <img src={adoptionForm.imageUrl || ''} alt="Pet" className="pet-image" />
+                                    <div className="details">
                                         <h4>{adoptionForm.name}</h4>
-                                        <div className="details">
-                                            <p><strong>Gender: </strong>{adoptionForm.gender}</p>
-                                            <p><strong>Breed: </strong>{adoptionForm.breed}</p>
-                                        </div>
-                                        <button onClick={() => {
-                                            handleView(adoptionForm._id)
-                                        }}>View Listing</button>
                                     </div>
-                                )
+                                    <button className='viewbtn1' onClick={() => handleView(adoptionForm._id)}>View Listing</button>
+                                </div>
                             ))
                         ) : (
                             <div>No forms added</div>
                         )}
                     </div>
-                </div >
+
+
+                </div>
+
                 {/* lost pet */}
                 < div className="detailsSection" >
                     <div className="detailsSectionTitleContainer">
                         <div className="detailsSectionTitle">My Lost Pet Notices</div>
-                        <button className='detailsSectionAddButton' onClick={() =>{ window.scrollTo(0, 0); navigate('/pet/lostpetnotices/lostpetform')}}>Add Notice</button>
+                        <button className='detailsSectionAddButton' onClick={() => { window.scrollTo(0, 0); navigate('/pet/lostpetnotices/lostpetform') }}>Add Notice</button>
                     </div>
                     <hr />
                     <div className="detailsSectionCardContainer">
                         {/* add the map to show listings */}
                         <div className="container1">
-                            {/*mapping thought the notices only if ther are notices*/ }
-                            {lostNotice && lostNotice.map((notice)=>(
+                            {/*mapping thought the notices only if ther are notices*/}
+                            {lostNotice && lostNotice.map((notice) => (
                                 <LostPetProfileDetails key={notice._id} notice={notice} />
                             ))}
                         </div>

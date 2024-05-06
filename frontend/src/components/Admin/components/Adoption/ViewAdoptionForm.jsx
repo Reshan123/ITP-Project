@@ -57,26 +57,36 @@ const ViewAdoptionForm = () => {
     };
 
     return (
-
-        <div className="adoption-listings-admin">
-
-            <p>Name: {adoptionForms.name}</p>
-            <p>Age: {adoptionForms.age}</p>
-            <p>Species: {adoptionForms.species}</p>
-            <p>Breed: {adoptionForms.breed}</p>
-            <p>Gender: {adoptionForms.gender}</p>
-            {adoptionForms.imageUrl && (
-                <div className="image-container">
-
-                    <img src={adoptionForms.imageUrl} alt="Pet" />
+        <div className="adoption-admin-form-page">
+            <div class="adoption-listings-admin">
+                <div class="image-container">
+                    {adoptionForms.imageUrl && (
+                        <img src={adoptionForms.imageUrl} alt="Pet" />
+                    )}
                 </div>
-            )}
-            <p>Owner Contact: {adoptionForms.ownerContact}</p>
-            <p>Activity Level: {adoptionForms.description?.activityLevel || 'Not specified'}</p>
-            <p>Special Needs: {adoptionForms.description?.specialNeeds || 'None'}</p>
-            <button onClick={() => handleApproval('Approved')}>Approve</button>
-            <button onClick={() => handleApproval('Rejected')}>Reject</button>
+                <div class="details">
+                    <div className="set">
+                        <p><strong>Name:</strong> {adoptionForms.name}</p>
+                        <p><strong>Age:</strong> {adoptionForms.age}</p>
+                    </div>
+                    <div className="set">
+                        <p><strong>Species:</strong> {adoptionForms.species}</p>
+                        <p><strong>Breed:</strong> {adoptionForms.breed}</p>
+                    </div>
+                    <p><strong>Gender:</strong> {adoptionForms.gender}</p>
+                    <p><strong>Owner Contact:</strong> {adoptionForms.ownerContact}</p>
+                    <p><strong>Activity Level:</strong> {adoptionForms?.activityLevel || 'Not specified'}</p>
+                    <p><strong>Description:</strong> {adoptionForms?.smallDescription || 'Not specified'}</p>
+                    <p><strong>Special Needs:</strong> {adoptionForms?.specialNeeds || 'None'}</p>
+
+                </div>
+                <div className="buttons">
+                    <button onClick={() => handleApproval('Approved')}>Approve</button>
+                    <button onClick={() => handleApproval('Rejected')}>Reject</button>
+                </div>
+            </div>
         </div>
+
 
     )
 }
