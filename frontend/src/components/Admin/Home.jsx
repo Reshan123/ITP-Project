@@ -29,7 +29,8 @@ import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
 import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
-
+import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
+import SupplierForm from './components/Supplier/SupplierForm'
 const Home = () => {
 
     const navigate = useNavigate()
@@ -108,6 +109,7 @@ const Home = () => {
                 petOwnerDispatch({ type: "LOAD", payload: allPetOwnerJson })
 
 
+                //inventory
                 const inventoryResponse = await fetch('http://localhost:4000/api/inventoryItems/')
                 const inventoryJson = await inventoryResponse.json()
             
@@ -164,6 +166,8 @@ const Home = () => {
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
+                        <Route path='/SupplierForm' element={<SupplierForm />} />
+                        <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
                     </Routes>
                 </div>
             </div>

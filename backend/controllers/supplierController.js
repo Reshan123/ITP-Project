@@ -1,4 +1,5 @@
 const Supplier = require('../models/supplierDoc')
+const mongoose = require('mongoose')
 
 //get all supplier
 const getallSupplier = async(req,res)=>
@@ -24,10 +25,10 @@ const getSupplier = async(req,res)=>
 
 //create supplier
 const createSupplier =  async(req,res) => {
-    const {supplierName, supplierContact, supplierEmail, supplierCompany, itemId} = req.body
+    const {supplierName, supplierContact, supplierEmail, supplierCompany} = req.body
 
     try{
-        const supplier = await Supplier.create({supplierName, supplierContact, supplierEmail, supplierCompany, itemId})
+        const supplier = await Supplier.create({supplierName, supplierContact, supplierEmail, supplierCompany})
         res.status(200).json(supplier)
     } catch(error){
         res.status(400).json({error: error.message})
@@ -37,6 +38,11 @@ const createSupplier =  async(req,res) => {
 //update supplier
 const updateSupplier = async(req,res) =>{
     const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such supplier' })
+
+    }
+
     const supplier = await Supplier.findOneAndUpdate({_id: id}, {
         ...req.body
     })
