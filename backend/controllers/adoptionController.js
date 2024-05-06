@@ -30,8 +30,8 @@ const getAdoptionForm = async (req, res) => {
 
 //create
 const createAdoptionForm = async (req, res) => {
-
-    const { ownerID, petChoice,
+    const owner_Id = req.user._id;
+    const { petChoice,
         name,
         age,
         species,
@@ -39,11 +39,13 @@ const createAdoptionForm = async (req, res) => {
         gender,
         imageUrl,
         ownerContact,
-        description: { activityLevel, specialNeeds, smallDescription } } = req.body
+        activityLevel,
+        specialNeeds,
+        smallDescription } = req.body
 
     try {
         const form = await PetAdoptionForm.create({
-            ownerID: ownerID, petChoice,
+            ownerID: owner_Id, petChoice,
             name,
             age,
             species,
@@ -51,7 +53,9 @@ const createAdoptionForm = async (req, res) => {
             gender,
             imageUrl,
             ownerContact,
-            description: { activityLevel, specialNeeds, smallDescription }
+            activityLevel,
+            specialNeeds,
+            smallDescription
         })
         res.status(200).json(form)
     } catch (error) {
@@ -100,10 +104,30 @@ const updateAdoptionForm = async (req, res) => {
 }
 
 
+const getUserAdoptionListings = async (req, res) => {
+
+    const userID = req.user._id;
+
+    try {
+        if (!userID) {
+            throw Error("Invalid User ID");
+        }
+
+        const adoptionform = await PetAdoptionForm.find({ ownerID: userID });
+
+        res.status(200).json(adoptionform);
+
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+
 module.exports = {
     getAdoptionForms,
     getAdoptionForm,
     createAdoptionForm,
     deleteAdoptionForm,
-    updateAdoptionForm
+    updateAdoptionForm,
+    getUserAdoptionListings
 }
