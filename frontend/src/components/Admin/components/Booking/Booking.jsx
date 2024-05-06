@@ -6,6 +6,7 @@ import ViewPopup from './ViewPopup';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { Pagination } from 'antd';
+import { Select } from 'antd';
 
 const Booking = () => {
 
@@ -68,6 +69,8 @@ const Booking = () => {
   //   fetchBookings();
 
   // }, [dispatch]);
+
+  console.log(bookings)
 
   const handleViewDetails = (booking) => {
     setSelectedBooking(booking);
@@ -190,6 +193,32 @@ const generatePDF = () => {
   const indexOfFirstItem = indexOfLastItem - pageSize;
   const currentItems = currentlyDisplayedItem ? currentlyDisplayedItem.slice(indexOfFirstItem, indexOfLastItem) : [];
 
+  const handleStatusChange = (id, value) => {
+    handleStatusUpdate(id, value);
+  };
+
+  //update status function
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/bookings/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update booking status');
+      }
+  
+      // Dispatch action to update status in context
+      bookingDispatch({ type: 'UPDATE_BOOKING_STATUS', payload: { id, status } });
+    } catch (error) {
+      console.error('Error updating booking status:', error.message);
+    }
+  };
+
 
 
   return (
@@ -237,7 +266,16 @@ const generatePDF = () => {
                 <td>{booking.pet_breed}</td>
                 <td>{booking.doctor}</td>
                 <td>{new Date(booking.start_time).toLocaleString()}</td>
-                <td>{booking.status}</td>
+                <td>
+                    <Select value={booking.status} onChange={(e) => handleStatusChange(booking._id, e)} style={{ width: 105 }}
+                        options={[
+                          { value: 'pending', label: 'Pending' },
+                          { value: 'approved', label: 'Approved' },
+                          { value: 'completed', label: 'Completed' },
+                          { value: 'cancelled', label: 'Cancelled'},
+                        ]}
+                    />
+                </td>
                 <td>
                   <center>
                     <button className="table-view-btn" onClick={() => handleViewDetails(booking)}>View</button>

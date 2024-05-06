@@ -126,7 +126,7 @@
     }
     
     /* Styles for the view button */
-    .booking-table-style tbody td center .table-view-btn{
+    .doctor-booking-content .booking-table-style tbody td center .table-view-btn{
       width: 80px;
       height:30px;
       background-color: var(--primaryPink);
@@ -140,7 +140,7 @@
     }
     
     /* Hover styles for the view button */
-    .booking-table-style tbody td center .table-view-btn:hover{
+    .doctor-booking-content .booking-table-style tbody td center .table-view-btn:hover{
       background-color: #c4747e;
     }
     
