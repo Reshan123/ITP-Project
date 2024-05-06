@@ -22,7 +22,7 @@ const LandingPage = () => {
                                 The item {inventoryitem.itemName} needs restocking. Please contact the seller{' '}
                                 {supplier.supplierName}.
                                 <br />
-                                <a href={`mailto:${supplier.supplierEmail}`}>
+                                <a href={`mailto:${supplier.supplierEmail} ` } target="_blank">
                                     <button>Contact The Seller</button>
                                 </a>
                             </p>
