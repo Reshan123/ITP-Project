@@ -312,17 +312,20 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  
 }
 
 .messageheader {
+    position: fixed; /* Make the header fixed */
+    z-index:1;
     background-color: #4a5568; /* Slate-500 color */
     padding: 8px 16px; /* Top and bottom padding of 8 pixels, left and right padding of 16 pixels */
     margin-bottom: 8px; /* Bottom margin of 8 pixels */
+     
     
-    position: sticky; /* Make the header fixed */
     /* top: 10%;  */
     width: 100%; /* Make it full width */
-    z-index: 1;
+    
 }
 
 .label-text {
@@ -374,6 +377,9 @@
   align-self: flex-end; /* Align the bubble to the right */
   margin-left: auto; /* Push the bubble to the right */
   margin-bottom: 2.5rem;
+
+  display: flex; /* Change display to flex */
+  flex-direction: column; /* Align content in a column */
 }
 .chat-bubble.other {
   align-self: flex-start; /* Align the bubble to the left */
@@ -392,11 +398,12 @@
   display: flex;
   gap: 0.25rem; /* Add gap between items */
   align-items: center;
-  
+   margin-top: 0.25rem;
+  align-self: flex-end;
 }
 
 .chat-footer.other {
-  margin-right: auto; /* Push the chat time to the left */
+ align-self: flex-end;
 }
 
 /*styling the input message bar*/
@@ -404,15 +411,16 @@
 .custom-form {
     padding: 0 1rem;
     margin-top: 1.5rem;
-    position: sticky; /* Position the form fixed */
+    position: fixed; /* Position the form fixed */
     bottom: 0; /* Place it at the bottom of the viewport */
     width: 100%;
-   
+   box-sizing: border-box;
+   z-index: 1;
 }
 
 .input-messagewrapper {
     position: relative;
-     
+    
 }
 
 .input-messagewrapper input {
