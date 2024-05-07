@@ -1,5 +1,4 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
 import {useEffect, useState} from "react"
 import { useSalesContext } from "../../../../hooks/useSalesContext"
 import { useNavigate } from "react-router-dom"
@@ -10,6 +9,9 @@ const SalesHome = () => {
     const [sales, setSales] = useState()
 
     const navigate = useNavigate();
+
+    
+    const { sales:salesFromDispatch, dispatch:salesDispatch} = useSalesContext()
 
     useEffect(() => {
       const fetchSales = async () => {
@@ -35,7 +37,7 @@ const SalesHome = () => {
           const json = await response.json()
 
           if(response.ok){
-              dispatch({type:'DELETE_SALE', payload: json})
+            salesDispatch({type:'DELETE_SALE', payload: json})
           }
       }
     }
