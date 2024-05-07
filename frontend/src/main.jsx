@@ -14,6 +14,7 @@ import {ConversationProvider } from './context/ConversationContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
 import { SocketContextProvider } from './context/SocketContext.jsx'
+import { SalesContextProvider } from './context/SalesContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
 import { MedicalRecordContext } from './context/MedicalRecordContext.jsx'
 
@@ -44,9 +45,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                         <AllPetsContextProvider>
                           <InventoryItemsContextProvider>
                             <SupplierContextProvider>
-                              <MedicalRecordContext>
-                              <App />
-                              </MedicalRecordContext>
+                              <SalesContextProvider>
+                                <MedicalRecordContext>
+                                  <App />
+                                </MedicalRecordContext>
+                              </SalesContextProvider>
                             </SupplierContextProvider>
                           </InventoryItemsContextProvider>
                         </AllPetsContextProvider>

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import { useUserContext } from '../../../hooks/userContextHook';
 import { usePetContext } from '../../../hooks/usePetContext';
+import form_img from './images/adoptionform.jpg'
+import upload from './images/photo_upload.png'
 
 const CreateAdoptionForm = () => {
 
@@ -88,18 +90,25 @@ const CreateAdoptionForm = () => {
     };
 
 
-    const validationSchema = yup.object({
-        name: yup.string().required("Enter name"),
-        species: yup.string().required("errrorrr")
-    })
+    const validationSchema = yup.object().shape({
+        name: yup.string().required('Enter name'),
+        age: yup.number().required('Enter age').positive('Age must be a positive number'),
+        species: yup.string().required('Enter species'),
+        breed: yup.string().required('Enter breed'),
+        gender: yup.string().required('Select gender'),
+        ownerContact: yup.string()
+            .required('Enter owner contact')
+            .matches(/^\d{10}$/, 'Owner contact must be a valid 10-digit phone number'),
+        activityLevel: yup.string().required('Select activity level'),
+        specialNeeds: yup.string(),
+        smallDescription: yup.string().required('Enter small description')
+    });
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const uid = JSON.parse(localStorage.getItem('user'))["uid"]
-
 
         const adoptionForm = {
-            ownerID: uid,
             petChoice,
             name,
             age,
@@ -108,11 +117,10 @@ const CreateAdoptionForm = () => {
             gender,
             imageUrl,
             ownerContact,
-            description: {
-                activityLevel,
-                specialNeeds,
-                smallDescription
-            }
+            activityLevel,
+            specialNeeds,
+            smallDescription
+
         }
 
         try {
@@ -123,12 +131,14 @@ const CreateAdoptionForm = () => {
                 method: 'POST',
                 body: JSON.stringify(adoptionForm),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${user.userToken}`
                 }
             });
             const json = await response.json();
 
             if (response.ok) {
+                navigate('/pet/profile')
                 setError(null);
                 console.log('New adoption form added:', json);
                 console.log(ownerID)
@@ -188,105 +198,186 @@ const CreateAdoptionForm = () => {
 
 
     return (
-        <form className="adoption-form" >
-            <h3>Submit a Pet Adoption Form</h3>
+        <div className="form-page">
+            <form className="adoption-form">
+                <div className='left-container'>
 
-            <label>Pet Choice:</label>
-            <select
-                value={selectedPet ? selectedPet._id : ''}
-                onChange={(e) => handlePetSelect(e.target.value)}
-            >
-                <option value="">Select Pet</option>
-                {pets?.length > 0 && pets.map(pet => (
-                    <option key={pet._id} value={pet._id}>{pet.petName}</option>
-                ))}
-            </select>
-
-            <label>Name:</label>
-            <input
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-
-            />
-            {errors.name && <div className="error">{errors.name}</div>}
-            <label>Age:</label>
-            <input
-                type="number"
-                onChange={(e) => setAge(e.target.value)}
-                value={age}
-            />
-
-            <label>Species:</label>
-            <input
-                type="text"
-                onChange={(e) => setSpecies(e.target.value)}
-                value={species}
-            />
-
-            <label>Breed:</label>
-            <input
-                type="text"
-                onChange={(e) => setBreed(e.target.value)}
-                value={breed}
-            />
-
-            <label>Gender:</label>
-            <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                <option value="">Select...</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-
-            <label>Upload Image</label>
-            <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                    handleFileUpload(e);
-                }}
-            />
-
-            {imageUrl && (
-                <div>
-                    <img src={imageUrl} alt="Preview" width="100" height="100" />
+                    <div className='puppy'>
+                        <img src={form_img} />
+                    </div>
                 </div>
-            )}
+                <div className='right-container'>
+                    <h3>Submit a Pet Adoption Form</h3>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label>Pet Choice:</label>
+                            <select
+                                value={selectedPet ? selectedPet._id : ''}
+                                onChange={(e) => handlePetSelect(e.target.value)}
+                            >
+                                <option value="">Select Pet</option>
+                                {pets?.length > 0 && pets.map(pet => (
+                                    <option key={pet._id} value={pet._id}>{pet.petName}</option>
+                                ))}
+                            </select>
+
+                            {errors.selectedPet && <div className="error">{errors.selectedPet}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label>Name:</label>
+                            <input
+                                type="text"
+                                onChange={(e) => setName(e.target.value)}
+                                value={name}
+                            />
+
+                            {errors.name && <div className="error">{errors.name}</div>}
+                        </div>
+
+                        <div className='input-container'>
+
+                            <label>Age:</label>
+                            <input
+                                type="number"
+                                onChange={(e) => setAge(e.target.value)}
+                                value={age}
+                            />
+
+                            {errors.age && <div className="error">{errors.age}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label>Species:</label>
+                            <input
+                                type="text"
+                                onChange={(e) => setSpecies(e.target.value)}
+                                value={species}
+                            />
+
+                            {errors.species && <div className="error">{errors.species}</div>}
+                        </div>
+
+                        <div className='input-container'>
+
+                            <label>Breed:</label>
+                            <input
+                                type="text"
+                                onChange={(e) => setBreed(e.target.value)}
+                                value={breed}
+                            />
+
+                            {errors.breed && <div className="error">{errors.breed}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+                            <label>Gender:</label>
+                            <input
+                                id='pet-gender-male'
+                                name='pet-gender'
+                                type='radio'
+                                value='Male'
+                                checked={gender === 'Male'}
+                                onChange={(e) => setGender(e.target.value)}
+                            />
+                            <label for='pet-gender-male'>Male</label>
+
+                            <input
+                                id='pet-gender-female'
+                                name='pet-gender'
+                                type='radio'
+                                value='Female'
+                                checked={gender === 'Female'}
+                                onChange={(e) => setGender(e.target.value)}
+                            />
+                            <label for='pet-gender-female'>Female</label>
+
+                            {errors.gender && <div className="error">{errors.gender}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label htmlFor="image-upload" className="custom-file-upload">
+                                Upload Your Photo:
+                                <img src={upload} alt="Upload Image" />
+
+                            </label>
+                            <input id="image-upload" type="file" accept="image/*" onChange={(e) => {
+                                handleFileUpload(e);
+                            }} style={{ display: 'none' }} />
+
+                            {errors.imageUrl && <div className="error">{errors.imageUrl}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label>Owner Contact:</label>
+                            <input
+                                type="text"
+                                onChange={(e) => setOwnerContact(e.target.value)}
+                                value={ownerContact}
+                            />
+
+                            {errors.ownerContact && <div className="error">{errors.ownerContact}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+
+                            <label>Activity Level:</label>
+                            <select value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)}>
+                                <option value="">Select...</option>
+                                <option value="High (2-3 h daily)">High (2-3 h daily)</option>
+                                <option value="Moderate (1-2h daily)">Moderate (1-2h daily)</option>
+                                <option value="Low (30min-1h daily)">Low (30min-1h daily)</option>
+                            </select>
+
+                            {errors.activityLevel && <div className="error">{errors.activityLevel}</div>}
+                        </div>
+                    </div>
+                    <div className='set'>
+                        <div className='input-container'>
+                            <div className="special-needs">
+                                <label>Special Needs:</label>
+                                <textarea
+                                    onChange={(e) => setSpecialNeeds(e.target.value)}
+                                    value={specialNeeds}
+                                ></textarea>
+                            </div>
+                            {errors.specialNeeds && <div className="error">{errors.specialNeeds}</div>}
+                        </div>
+                    </div>
+
+                    <div className='set'>
+                        <div className='input-container'>
+                            <div className="description">
+                                <label>Small Description About Your Pet:</label>
+                                <textarea
+                                    onChange={(e) => setsmallDescription(e.target.value)}
+                                    value={smallDescription}
+                                ></textarea>
+                            </div>
+                            {errors.smallDescription && <div className="error">{errors.smallDescription}</div>}
+                        </div>
+                    </div>
+
+                    <div className='adoptbutton-container'>
+                        <button className='adoptPetButton' onClick={handleSubmit}>Submit Form</button>
+                        {error && <div className="error">{error}</div>}
+                    </div>
+                </div>
+            </form>
+        </div>
 
 
-
-            <label>Owner Contact:</label>
-            <input
-                type="text"
-                onChange={(e) => setOwnerContact(e.target.value)}
-                value={ownerContact}
-            />
-
-            <label>Activity Level:</label>
-            <select value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)}>
-                <option value="">Select...</option>
-                <option value="High (2-3 h daily)">High (2-3 h daily)</option>
-                <option value="Moderate (1-2h daily)">Moderate (1-2h daily)</option>
-                <option value="Low (30min-1h daily)">Low (30min-1h daily)</option>
-            </select>
-
-            <label>Special Needs:</label>
-            <input
-                type="text"
-                onChange={(e) => setSpecialNeeds(e.target.value)}
-                value={specialNeeds}
-            />
-            <label>Small Description About Your Pet:</label>
-            <input
-                type="text"
-                onChange={(e) => setsmallDescription(e.target.value)}
-                value={smallDescription}
-            />
-
-
-            <button className='adoptPetButton' onClick={handleSubmit} >Submit Form</button>
-            {error && <div className="error">{error}</div>}
-        </form>
     );
 
 }

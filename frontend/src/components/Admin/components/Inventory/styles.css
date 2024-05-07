@@ -159,7 +159,7 @@
   height: 200px;
 }
 
-.create input, .update input {
+.create input, .update input, .update select {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -196,7 +196,8 @@
 
 .add-btn,
 .update-btn,
-.create-btn {
+.update-view-btn,
+.create-view-btn {
   border: 0;
   background-color: var(--primaryPurple);
   color: #fff;

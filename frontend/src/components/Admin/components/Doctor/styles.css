@@ -126,3 +126,117 @@
   .allDoctorTable tbody td center .table-view-btn:hover{
     background-color: #8737ce;
   }
+
+
+
+
+
+
+
+
+  .createDoctorForm{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0efefba;
+  }
+  
+  .createDoctorForm form{
+    background: white; 
+    padding: 25px 50px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px */
+  }
+  
+  .createDoctorForm form .formTitle{
+    align-self: center;
+    font-weight: 800;
+    font-size: 2.5rem;;
+    padding-bottom: 20px ;
+  }
+  
+  .createDoctorForm form .inputContainer{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 8px;
+  }
+  
+  .createDoctorForm form .inputContainer input,
+  .createDoctorForm form .inputContainer select{
+    padding: 5px 8px;
+  }
+  
+  .createDoctorForm form .buttonContainer{
+    margin-top: 5px;
+    align-self: center;
+  }
+  
+  .createDoctorForm form .buttonContainer button{
+    border-radius: 11px;
+    border: none;
+    color:  white;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+  }
+
+
+
+
+  .updateDoctorForm{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0efefba;
+  }
+  
+  .updateDoctorForm form{
+    background: white; 
+    padding: 25px 50px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px */
+  }
+  
+  .updateDoctorForm form .formTitle{
+    align-self: center;
+    font-weight: 800;
+    font-size: 2.5rem;;
+    padding-bottom: 20px ;
+  }
+  
+  .updateDoctorForm form .inputContainer{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 8px;
+  }
+  
+  .updateDoctorForm form .inputContainer input,
+  .updateDoctorForm form .inputContainer select{
+    padding: 5px 8px;
+  }
+  
+  .updateDoctorForm form .buttonContainer{
+    margin-top: 5px;
+    align-self: center;
+  }
+  
+  .updateDoctorForm form .buttonContainer button{
+    border-radius: 11px;
+    border: none;
+    color:  white;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+  }

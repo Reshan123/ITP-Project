@@ -92,33 +92,34 @@ const UpdateDoctor = () => {
 
 
     return ( 
-        <>
+        <div className='updateDoctorForm'>
             {docDetails[0] && (
                 <form onSubmit={handleFormSubmit}>
+                    <div className="formTitle">Update Doctor Information</div>
                     {error && <div className="error">{error}</div>}
-                    <div>
+                    <div className='inputContainer'>
                         <label htmlFor="name">Doctor Name: </label>
                         <input type="text" id="name" name="name" value={formInput.name} onChange={(e) => handleInputChange(e)} />
                     </div>
-                    <div>
+                    <div className='inputContainer'>
                         <label htmlFor="email">Doctor Email: </label>
                         <input type="email" id="email" name="email" value={formInput.email} onChange={(e) => handleInputChange(e)} />
                     </div>
-                    <div>
+                    <div className='inputContainer'>
                         <label htmlFor="password">Doctor Password: </label>
                         <input type="password" id="password" name="password" onChange={(e) => handleInputChange(e)} />
                     </div>
-                    <div>
+                    <div className='inputContainer'>
                         <label htmlFor="contactNo">Doctor Contact No: </label>
                         <input type="text" id="contactNo" name="contactNo" value={formInput.contactNo} onChange={(e) => handleInputChange(e)} />
                     </div>
-                    <div>
+                    <div className='buttonContainer'>
                         <button type="submit">Submit</button>
                     </div>
                 </form>
             )}
             {!docDetails[0] && (<div>Loading</div>)}
-        </>
+        </div>
     );
 }
  

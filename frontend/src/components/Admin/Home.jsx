@@ -20,9 +20,6 @@ import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
 import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
-
-
-
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
@@ -30,10 +27,13 @@ import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
 import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
+import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
+import SupplierForm from './components/Supplier/SupplierForm'
+import SalesHome from './components/Sales/SalesHome';
+import SalesUpdateForm from './components/Sales/SalesUpdate';
 
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
-
 
 const Home = () => {
 
@@ -84,6 +84,8 @@ const Home = () => {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
+
+                //bookings
 
                 const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
       
@@ -193,9 +195,12 @@ const Home = () => {
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
+                        <Route path='/SupplierForm' element={<SupplierForm />} />
+                        <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
+                        <Route path='/SalesHome' element={<SalesHome />} />
+                        <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
                         <Route path='/MedicalRecord' element={ <MedicalRecord />} />
                         <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
-                        
                     </Routes>
                 </div>
             </div>

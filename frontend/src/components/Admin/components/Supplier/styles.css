@@ -1,0 +1,215 @@
+.supplierDetails{
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .supplierDetails .supplierHeader{
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .supplierDetails .supplierHeaderp{
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .supplierDetails .supplierHeader button{
+    border-radius: 11px;
+    border: none;
+    color: #FFF;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+  }
+  
+  .supplierDetails .supplierHeader div{
+    align-self: flex-end;
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .supplierDetails .supplierHeader div button{
+    border-radius: 11px;
+    border: none;
+    color: #FFF;
+    background-color: var(--primaryPurple);
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
+  }
+  
+  .supplierDetails .supplierHeader div input{
+    /* border-radius: 15px; */
+    border: none;
+    border-bottom: 2px solid black;
+    /* color: #FFF; */
+    /* background-color: var(--primaryPurple); */
+    font-weight: 600;
+    padding: 6px 15px;
+    transition: 0.3s;
+  }
+  
+  .supplierDetails hr{
+    margin-bottom: 35px;
+  }
+  
+  /* .supplierDetails .inventoryItems-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  } */
+  
+  .supplierTable{
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Agenda-Light, sans-serif;
+    font-weight: 100; 
+    background: var(--primaryPurple); color: #fff;
+    text-rendering: optimizeLegibility;
+    border-radius: 5px; 
+  }
+  
+  /* Styles for the table header */
+  .supplierTable thead tr th { 
+    font-weight: 600; 
+  }
+  
+  /* Styles for table header and table data */
+  .supplierTable thead th, .inventoryItemsTable tbody td { 
+    padding: 10px 35px; 
+    font-size: 16px;
+  
+  }
+  /* 
+  .inventoryItemsTable tbody tr{
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .inventoryItemsTable tbody tr:hover{
+    transform: translateY(-3px);
+  } */
+  
+  
+  .supplierTable tbody td { 
+    font-size: 16px;
+    color: #444; 
+    background: #eee;
+    transition: 0.3s;
+    padding: 10px 10px;
+  }
+  
+  /* Styles for alternating rows in the table body - w3school */
+  .supplierTable tbody tr:not(:last-child) { 
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Styles for the view button */
+  .supplierTable tbody td center {
+    display: flex;
+    gap: 10px; 
+  }
+  
+  .supplierTable tbody td center .dlt-btn{
+    border: 0;
+    background-color: var(--error);
+    color: #fff;
+    padding: 10px;
+    margin-top: 5px;
+    font-family: "Calibri";
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Hover styles for the view button */
+  .supplierTable tbody td center .dlt-btn:hover{
+    transform: translateY(3px);
+  }
+  
+  
+  /* Update Forum */
+  .update {
+    font-family: system-ui;
+    width: 90%;
+    font-size: 1.25rem;
+    background: var(--nav-bg);
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 60px;
+    position: relative;
+    transition: transform 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  
+  .create input, .update input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .create input[type="text"],
+  .create input[type="number"],
+  .create input[type="file"],
+  .create select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .create {
+    font-family: system-ui;
+    width: 40%;
+    font-size: 1.25rem;
+    background: var(--nav-bg);
+    border-radius: 4px;
+    margin: 20px 250px;
+    position: relative;
+    transition: transform 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    
+  }
+  
+  .add-btn,
+  .update-sup-btn,
+  .create-sup-btn {
+    border: 0;
+    background-color: var(--primaryPurple);
+    color: #eee;
+    padding: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-family: "Calibri";
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  
+  }
+  .create-sup-btn:hover{
+    transform: translateY(-3px);
+  }
+  .update-sup-btn:hover{
+    transform: translateY(-3px);
+  }
+  .add-btn:hover{
+    transform: translateY(-3px);
+  }
