@@ -36,7 +36,6 @@ const MedicalUpdate = () => {
 
         if (response.ok) {
           setRecord(json);
-          setStartTime(formatDateForInput(json.start_time))
         }
       } catch (error) {
         console.error('Error fetching medical record:', error);
@@ -46,25 +45,14 @@ const MedicalUpdate = () => {
     fetchRecord()
   }, [id])
 
-  const formatDateForInput = (dateTimeString) => {
-    const dateTime = new Date(dateTimeString);
-    const year = dateTime.getFullYear();
-    const month = `${dateTime.getMonth() + 1}`.padStart(2, '0'); 
-    const day = `${dateTime.getDate()}`.padStart(2, '0');
-    const hours = `${dateTime.getHours()}`.padStart(2, '0');
-    const minutes = `${dateTime.getMinutes()}`.padStart(2, '0');
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
-
   const handleUpdate = async (e) => {
     e.preventDefault()
 
     const record = {vetID, vetName, bookingID, date, petName, species, gender, dob, vaccination,nextVaccination, remarks, symptoms, allergies, surgicalHistory }
  
-    const response = await fetch('http://localhost:4000/api/getAllMedicalRecords/' + id , {
-            method: 'PATCH',
-            body: JSON.stringify(booking),
+    const response = await fetch('http://localhost:4000/api/medicalRec/' + id , {
+            method: 'PUT',
+            body: JSON.stringify(record),
             headers: {
                 'Content-Type':'application/json'
             }
@@ -90,52 +78,46 @@ const MedicalUpdate = () => {
         <div className="AdminUpdateAppointmentsText">Update Medical Records here.</div>
         <form className="AdminUpdateAppointmentsForm" onSubmit={handleUpdate}>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Vet ID' onChange={(e) => setVetID(e.target.value)} value={vetID} required />
+                <input type="text" placeholder='Vet ID' onChange={(e) => setVetID(e.target.value)} defaultValue={record?.vetID} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Vet Name' onChange={(e) => setVetName(e.target.value)} value={vetName} required />
+                <input type="text" placeholder='Vet Name' onChange={(e) => setVetName(e.target.value)} defaultValue={record?.vetName} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Booking ID' onChange={(e) => setBookingID(e.target.value)} value={bookingID} required />
+                <input type="text" placeholder='Booking ID' onChange={(e) => setBookingID(e.target.value)} defaultValue={record?.bookingID} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="date" placeholder='Date' onChange={(e) => setDate(e.target.value)} value={date} required />
+                <input type="text" placeholder='Date' onChange={(e) => setDate(e.target.value)} defaultValue={record?.date} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value={petName} required />
+                <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} defaultValue={record?.petName} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Species' onChange={(e) => setSpecies(e.target.value)} value={species} required />
+                <input type="text" placeholder='Species' onChange={(e) => setSpecies(e.target.value)} defaultValue={record?.species} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Gender' onChange={(e) => setGender(e.target.value)} value={gender} required />
+                <input type="text" placeholder='Gender' onChange={(e) => setGender(e.target.value)} defaultValue={record?.gender} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="date" placeholder='DOB' onChange={(e) => setDob(e.target.value)} value={dob} required />
+                <input type="text" placeholder='DOB' onChange={(e) => setDob(e.target.value)} defaultValue={record?.dob} required />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Vaccination' onChange={(e) => setVaccination(e.target.value)} value={vaccination} />
+                <input type="text" placeholder='Vaccination' onChange={(e) => setVaccination(e.target.value)} defaultValue={record?.vaccination} />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="date" placeholder='Next Vaccination' onChange={(e) => setNextVaccination(e.target.value)} value={nextVaccination} />
+                <input type="text" placeholder='Next Vaccination' onChange={(e) => setNextVaccination(e.target.value)} defaultValue={record?.nextVaccination} />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Remarks' onChange={(e) => setRemarks(e.target.value)} value={remarks} />
+                <input type="text" placeholder='Remarks' onChange={(e) => setRemarks(e.target.value)} defaultValue={record?.remarks} />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Symptoms' onChange={(e) => setSymptoms(e.target.value)} value={symptoms} />
+                <input type="text" placeholder='Symptoms' onChange={(e) => setSymptoms(e.target.value)} defaultValue={record?.symptoms} />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Allergies' onChange={(e) => setAllergies(e.target.value)} value={allergies} />
+                <input type="text" placeholder='Allergies' onChange={(e) => setAllergies(e.target.value)} defaultValue={record?.allergies} />
             </div>
             <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="text" placeholder='Surgical History' onChange={(e) => setSurgicalHistory(e.target.value)} value={surgicalHistory} />
-            </div>
-            <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value={start_time} required />
-            </div>
-            <div className="AdminUpdateAppointmentsFormInputWrapper">
-                <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional)' onChange={(e) => setDescription(e.target.value)} defaultValue={booking?.description}></textarea>
+                <input type="text" placeholder='Surgical History' onChange={(e) => setSurgicalHistory(e.target.value)} defaultValue={record?.surgicalHistory} />
             </div>
             <div className="AdminUpdateAppointmentsFormButton">
                 <button type="submit">Update Medical Record</button>

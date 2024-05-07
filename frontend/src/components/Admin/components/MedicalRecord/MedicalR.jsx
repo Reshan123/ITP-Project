@@ -6,6 +6,7 @@ import MedicalCard from './MedicalCard';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { Pagination } from 'antd';
+import MedicalRecordForm from './MedicalRecordForm';
 
 const MedicalRecord = () => {
 
@@ -31,31 +32,31 @@ const MedicalRecord = () => {
     setCurrentlyDisplayedItems(medicalRec)
   }, [medicalRec])
 
- /* useEffect(() => {
-    const fetchMedicalRecord = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/api/medicalRec/");
+  // useEffect(() => {
+  //   const fetchMedicalRecord = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:4000/api/medicalRec/");
 
-        if (!response.ok) {
-          throw Error(response.message);
-        }
+  //       if (!response.ok) {
+  //         throw Error(response.message);
+  //       }
 
-        const json = await response.json();
+  //       const json = await response.json();
 
-        medicalDispatch({ type: 'SET_MEDICAL_RECORD', payload: json });
+  //       medicalDispatch({ type: 'SET_MEDICAL_RECORD', payload: json });
 
-      } catch (error) {
-        console.log("Error fetching medical record:", error);
-      }
-    };
+  //     } catch (error) {
+  //       console.log("Error fetching medical record:", error);
+  //     }
+  //   };
 
-    fetchMedicalRecord();
+  //   fetchMedicalRecord();
 
-  }, [medicalDispatch]); */
+  // }, [medicalDispatch]); 
 
   console.log(medicalRec)
 
-  /* useEffect(() => {
+  useEffect(() => {
      if (medicalRec){
        const filteredList = medicalRec.filter(record => { 
          const searchQueryLower = searchQuery.toLowerCase();
@@ -68,33 +69,33 @@ const MedicalRecord = () => {
        })
        setCurrentlyDisplayedItems(filteredList)
      }
-   }, [searchQuery])*/
+   }, [searchQuery])
 
-  useEffect(() => {
-    if (Array.isArray(medicalRec)) { // Check if medicalRec is an array
-      const filteredList = medicalRec.filter(record => {
-        const searchQueryLower = searchQuery.toLowerCase();
-        return (
-          record.vetName.toLowerCase().startsWith(searchQueryLower) ||
-          record.vetID.toLowerCase().startsWith(searchQueryLower) ||
-          record.bookingID.toLowerCase().startsWith(searchQueryLower) ||
-          record.petName.toLowerCase().startsWith(searchQueryLower) ||
-          record.species.toLowerCase().startsWith(searchQueryLower) ||
-          record.gender.toLowerCase().startsWith(searchQueryLower) ||
-          record.dob.toLowerCase().startsWith(searchQueryLower) ||
-          record.vaccination.toLowerCase().startsWith(searchQueryLower)||
-          record.nextVaccination.toLowerCase().startsWith(searchQueryLower)||
-          record.remarks.toLowerCase().startsWith(searchQueryLower)||
-          record.symptoms.toLowerCase().startsWith(searchQueryLower)||
-          record.allergies.toLowerCase().startsWith(searchQueryLower)||
-          record.surgicalHistory.toLowerCase().startsWith(searchQueryLower)
+  // useEffect(() => {
+  //   if (Array.isArray(medicalRec)) { // Check if medicalRec is an array
+  //     const filteredList = medicalRec.filter(record => {
+  //       const searchQueryLower = searchQuery.toLowerCase();
+  //       return (
+  //         record.vetName.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.vetID.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.bookingID.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.petName.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.species.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.gender.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.dob.toLowerCase().startsWith(searchQueryLower) ||
+  //         record.vaccination.toLowerCase().startsWith(searchQueryLower)||
+  //         record.nextVaccination.toLowerCase().startsWith(searchQueryLower)||
+  //         record.remarks.toLowerCase().startsWith(searchQueryLower)||
+  //         record.symptoms.toLowerCase().startsWith(searchQueryLower)||
+  //         record.allergies.toLowerCase().startsWith(searchQueryLower)||
+  //         record.surgicalHistory.toLowerCase().startsWith(searchQueryLower)
           
 
-        );
-      });
-      setCurrentlyDisplayedItems(filteredList);
-    }
-  }, [searchQuery, medicalRec]); // Include medicalRec in the dependencies array
+  //       );
+  //     });
+  //     setCurrentlyDisplayedItems(filteredList);
+  //   }
+  // }, [searchQuery, medicalRec]); // Include medicalRec in the dependencies array
   
 
 
@@ -104,7 +105,7 @@ const MedicalRecord = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch('http://localhost:4000/api/medical-records/' + id, {
+    const response = await fetch('http://localhost:4000/api/medicalRec/' + id, {
       method: 'DELETE'
     })
 
@@ -113,7 +114,7 @@ const MedicalRecord = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this record?");
     if (confirmDelete) {
       if (response.ok) {
-        medicalDispatch({ type: 'DELETE_RECORD', payload: json })
+        medicalDispatch({ type: 'DELETE_MEDICAL_RECORD', payload: json })
         setButtonPopup(false)
       }
     }
@@ -134,53 +135,48 @@ const MedicalRecord = () => {
 
     // Define the columns and rows for the table
     const columns = [
-      { header: 'Vet ID', dataKey: 'vetID' },
-      { header: 'Vet Name', dataKey: 'vetName' },
-      { header: 'Booking ID', dataKey: 'bookingID' },
-      { header: 'Date', dataKey: 'date' },
-      { header: 'Pet Name', dataKey: 'petName' },
-      { header: 'Species', dataKey: 'species' },
-      { header: 'Gender', dataKey: 'gender' },
-      { header: 'Date of Birth', dataKey: 'dob' },
-      { header: 'Vaccination', dataKey: 'vaccination' },
-      { header: 'Next Vaccination', dataKey: 'nextVaccination' },
-      { header: 'Remarks', dataKey: 'remarks' },
-      { header: 'Symptoms', dataKey: 'symptoms' },
-      { header: 'Allergies', dataKey: 'allergies' },
-      { header: 'Surgical History', dataKey: 'surgicalHistory' },
+  { header: 'Vet Name', dataKey: 'vetName', width: 10 },
+  { header: 'Date', dataKey: 'date', width: 10 },
+  { header: 'Pet Name', dataKey: 'petName', width: 10 },
+  { header: 'Species', dataKey: 'species', width: 10 },
+  { header: 'Gender', dataKey: 'gender', width: 10 },
+  { header: 'Date of Birth', dataKey: 'dob', width: 10 },
+  { header: 'Vaccination', dataKey: 'vaccination', width: 10 },
+  { header: 'Symptoms', dataKey: 'symptoms', width: 10 },
+  { header: 'Allergies', dataKey: 'allergies', width: 10 },
+  { header: 'Surgical History', dataKey: 'surgicalHistory', width: 10 },
     ];
 
-    /*const filteredList = medicalRec.filter((record) => {
+    const filteredList = medicalRec.filter((record) => {
       const searchQueryLower = searchQuery.toLowerCase();
       return (
         record.vetName.toLowerCase().startsWith(searchQueryLower) ||
-        record.vetID.toLowerCase().startsWith(searchQueryLower) ||
-        record.bookingID.toLowerCase().startsWith(searchQueryLower) ||
+        // record.vetID.toLowerCase().startsWith(searchQueryLower) ||
+        // record.bookingID.toLowerCase().startsWith(searchQueryLower) ||
         record.petName.toLowerCase().startsWith(searchQueryLower) ||
         record.species.toLowerCase().startsWith(searchQueryLower) ||
         record.gender.toLowerCase().startsWith(searchQueryLower) ||
         record.dob.toLowerCase().startsWith(searchQueryLower) ||
         record.vaccination.toLowerCase().startsWith(searchQueryLower)||
-        record.nextVaccination.toLowerCase().startsWith(searchQueryLower)||
-        record.remarks.toLowerCase().startsWith(searchQueryLower)||
+        // record.nextVaccination.toLowerCase().startsWith(searchQueryLower)||
+        // record.remarks.toLowerCase().startsWith(searchQueryLower)||
         record.symptoms.toLowerCase().startsWith(searchQueryLower)||
         record.allergies.toLowerCase().startsWith(searchQueryLower)||
-        record.surgicalHistory.toLowerCase().startsWith(searchQueryLower
-      )
-    },)*/
+        record.surgicalHistory.toLowerCase().startsWith(searchQueryLower))
+    })
 
     const rows = filteredList.map((record) => ({
-      vetID: record.vetID,
+      // vetID: record.vetID,
       vetName: record.vetName,
-      bookingID: record.bookingID,
+      // bookingID: record.bookingID,
       date: new Date(record.date).toLocaleString(),
       petName: record.petName,
       species: record.species,
       gender: record.gender,
       dob: new Date(record.dob).toLocaleString(),
       vaccination: record.vaccination,
-      nextVaccination: new Date(record.nextVaccination).toLocaleString(),
-      remarks: record.remarks,
+      // nextVaccination: new Date(record.nextVaccination).toLocaleString(),
+      // remarks: record.remarks,
       symptoms: record.symptoms,
       allergies: record.allergies,
       surgicalHistory: record.surgicalHistory
@@ -248,7 +244,7 @@ const MedicalRecord = () => {
           <input type="text" placeholder="Search Records" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           <button onClick={generatePDF}>Download Report</button>
           <div>
-            <button className='add-btn' onClick={() => navigate(`/admin/home/MedicalRecordForm.jsx/`)} >Add a new Record</button>
+            <button className='add-btn' onClick={() => navigate(`/admin/home/MedicalRecord/add`)} >Add a new Record</button>
 
           </div>
         </div>
@@ -266,17 +262,17 @@ const MedicalRecord = () => {
         <table className="mr-table-style">
           <thead>
             <tr>
-              <th width="10%">Vet ID</th>
+              {/* <th width="10%">Vet ID</th> */}
               <th width="17%">Vet Name</th>
-              <th width="10%">Booking ID</th>
+              {/* <th width="10%">Booking ID</th> */}
               <th width="8%">Date</th>
               <th width="7%">Pet Name</th>
               <th width="8%">Species</th>
               <th width="12%">Gender</th>
               <th width="10%">Date of Birth</th>
               <th width="8%">Vaccination</th>
-              <th width="8%">Next Vaccination</th>
-              <th width="8%">Remarks</th>
+              {/* <th width="8%">Next Vaccination</th> */}
+              {/* <th width="8%">Remarks</th> */}
               <th width="8%">Symptoms</th>
               <th width="8%">Allergies</th>
               <th width="8%">Surgical History</th>
@@ -286,17 +282,17 @@ const MedicalRecord = () => {
           <tbody>
             {currentItems && currentItems.map((record) => (
               <tr key={record._id}>
-                <td>{record.vetID}</td>
+                {/* <td>{record.vetID}</td> */}
                 <td>{record.vetName}</td>
-                <td>{record.bookingID}</td>
+                {/* <td>{record.bookingID}</td> */}
                 <td>{new Date(record.date).toLocaleString()}</td>
                 <td>{record.petName}</td>
                 <td>{record.species}</td>
                 <td>{record.gender}</td>
-                <td>{new Date(record.dob).toLocaleString()}</td>
+                {/* <td>{new Date(record.dob).toLocaleString()}</td> */}
                 <td>{record.vaccination}</td>
                 <td>{new Date(record.nextVaccination).toLocaleString()}</td>
-                <td>{record.remarks}</td>
+                {/* <td>{record.remarks}</td> */}
                 <td>{record.symptoms}</td>
                 <td>{record.allergies}</td>
                 <td>{record.surgicalHistory}</td>
