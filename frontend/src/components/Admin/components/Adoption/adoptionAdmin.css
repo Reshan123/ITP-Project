@@ -130,7 +130,7 @@
 }
 
 .adoption-listings-admin {
-    width: 600px;
+    width: 900px;
     padding: 60px;
     margin-bottom: 50px;
     color: #000000;
@@ -146,6 +146,7 @@
 
 .adoption-listings-admin .details {
     padding-top: 10px;
+    width: 500px;
 }
 
 .adoption-listings-admin .image-container {

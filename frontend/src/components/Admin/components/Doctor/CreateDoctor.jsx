@@ -44,30 +44,31 @@ const CreateDoctor = () => {
 
 
     return ( 
-        <>
+        <div className="createDoctorForm">
             <form onSubmit={handleFormSubmit}>
+                <div className="formTitle">Create Doctor</div>
                 {error && <div className="error">{error}</div>}
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="name">Doctor Name: </label>
                     <input type="text" id="name" name="name" onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="email">Doctor Email: </label>
                     <input type="email" id="email" name="email" onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="password">Doctor Password: </label>
                     <input type="password" id="password" name="password" onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="contactNo">Doctor Contact No: </label>
                     <input type="text" id="contactNo" name="contactNo" onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='buttonContainer'>
                     <button type="submit">Submit</button>
                 </div>
             </form>
-        </>
+        </div>
      );
 }
  

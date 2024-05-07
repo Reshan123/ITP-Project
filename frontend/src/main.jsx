@@ -18,11 +18,15 @@ import { InventoryItemsContextProvider } from './context/InventoryItemsContext.j
 =======
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
+<<<<<<< HEAD
 import { SalesContextProvider } from './context/SalesContext.jsx'
 >>>>>>> Stashed changes
 =======
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
+>>>>>>> InventoryManagementSystem
+=======
+import { MedicalRecordContext } from './context/MedicalRecordContext.jsx'
 >>>>>>> InventoryManagementSystem
 
 const firebaseConfig = {
@@ -73,11 +77,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                           <InventoryItemsContextProvider>
                             <SupplierContextProvider>
 <<<<<<< HEAD
+<<<<<<< HEAD
                               <SalesContextProvider>
                               <App />
                               </SalesContextProvider>
 =======
                               <App />
+>>>>>>> InventoryManagementSystem
+=======
+                              <MedicalRecordContext>
+                              <App />
+                              </MedicalRecordContext>
 >>>>>>> InventoryManagementSystem
                             </SupplierContextProvider>
                           </InventoryItemsContextProvider>

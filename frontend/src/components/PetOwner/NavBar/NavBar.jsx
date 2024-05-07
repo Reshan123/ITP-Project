@@ -197,7 +197,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
               }}
             />
             {unreadMessages && (
-              <div 
+              <div
                 style={{
                   position: "absolute",
                   top: -5,

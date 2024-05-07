@@ -110,7 +110,7 @@ const SupplierDetails = ({ supplier }) => {
         <p>Supplier Details</p>
         <div>
           <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-          <button className='add-btn' onClick={() => navigate(`/admin/home/SupplierForm/`)} >Add a new Item</button>
+          <button className='add-btn' onClick={() => navigate(`/admin/home/SupplierForm/`)} >Add a new Supplier</button>
           <button onClick={generatePDF}>Download Report</button>
         </div>
       </div>
