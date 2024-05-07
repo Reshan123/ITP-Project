@@ -77,7 +77,7 @@ const AdoptPet = ({ navBarProps }) => {
     const endIndex = currentPage * pageSize;
 
 
-    const filteredAdoptionForms = adoptionForms
+    const filteredAdoptionForms = Array.isArray(adoptionForms)
         ? adoptionForms.filter(adoptionForm =>
             adoptionForm.approved === 'Approved' &&
             (adoptionForm.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

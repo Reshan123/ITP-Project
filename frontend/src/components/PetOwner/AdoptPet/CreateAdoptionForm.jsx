@@ -101,19 +101,12 @@ const CreateAdoptionForm = () => {
             .matches(/^\d{10}$/, 'Owner contact must be a valid 10-digit phone number'),
         activityLevel: yup.string().required('Select activity level'),
         specialNeeds: yup.string(),
-        smallDescription: yup.string().required('Enter small description').test(
-            'wordCount',
-            'Small description should contain at least 10 words',
-            value => {
-                if (!value) return true; // Allow empty value
-                return value.trim().split(/\s+/).length >= 10;
-            }
-        )
+        smallDescription: yup.string().required('Enter small description')
     });
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
 
         const adoptionForm = {
             petChoice,
