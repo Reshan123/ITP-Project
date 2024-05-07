@@ -39,8 +39,8 @@ const SupplierUpdateForm = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     // Validation for contact field
-    if (supplierContact.length > 10) {
-      setError("Contact number cannot be more than 10 digits.");
+    if (supplierContact.length != 10) {
+      setError("Contact number should be 10 digits");
       return;
     }
   
