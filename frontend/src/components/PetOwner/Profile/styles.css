@@ -517,7 +517,7 @@
 .details p {
     width: 50%;
     /* Set width to occupy the second half of the card */
-    padding: 3px;
+    padding: 5px ;
     display: flex;
     flex-direction: column;
     /* Display details in a vertical layout */

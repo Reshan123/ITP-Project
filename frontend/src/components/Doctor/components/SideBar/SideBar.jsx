@@ -12,6 +12,10 @@ const SideBar = () => {
                 <NavLink to='/doctor/home/pets' className='doctorSideBarLink'>
                     <div className="linkText">All Pets</div>
                 </NavLink>
+                <br/>
+                <NavLink to='/doctor/home/bookings' className='doctorSideBarLink'>
+                    <div className="linkText">Appointment Bookings</div>
+                </NavLink>
             </div>
         </div>
      );

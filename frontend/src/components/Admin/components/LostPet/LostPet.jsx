@@ -60,33 +60,34 @@ const LostPet = () => {
   };
 
   const acceptPost = async (noticeId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/lostPetNotice/${noticeId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status: "Confirmed" }),
-        }
-      );
-      if (response.ok) {
-        // Update the status in the local state
-        const updatedNotices = lostNotice.map((notice) => {
-          if (notice._id === noticeId) {
-            return { ...notice, status: "Confirmed" };
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/lostPetNotice/${noticeId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status: "Confirmed" }),
           }
-          return notice;
-        });
-        dispatch({ type: "SET_LOSTPETNOTICE", payload: updatedNotices });
-      } else {
-        console.error("Failed to update status");
+        );
+        if (response.ok) {
+          // Update the status in the local state
+          const updatedNotices = lostNotice.map((notice) => {
+            if (notice._id === noticeId) {
+              return { ...notice, status: "Confirmed" };
+            }
+            return notice;
+          });
+          dispatch({ type: "SET_LOSTPETNOTICE", payload: updatedNotices });
+        } else {
+          console.error("Failed to update status");
+        }
+      } catch (error) {
+        console.error("Error updating status:", error);
       }
-    } catch (error) {
-      console.error("Error updating status:", error);
-    }
-  };
+    
+  }
 
   const discardPost = async (noticeId) => {
     const confirmed = window.confirm(
