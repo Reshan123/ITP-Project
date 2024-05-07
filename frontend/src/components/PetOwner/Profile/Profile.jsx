@@ -18,7 +18,7 @@ import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
 
 const Profile = ({ navBarProps }) => {
 
-    navBarProps("#B799D1", "#FFF")
+    navBarProps("#B799D1", "#FFF", "#B799D1")
 
     const navigate = useNavigate()
 
