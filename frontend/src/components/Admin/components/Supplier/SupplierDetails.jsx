@@ -133,7 +133,7 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierCompany}</td>
               <td>
                 <center>
-                  <button className='update-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
+                  <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
                   <button className='dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
                 </center>
               </td>

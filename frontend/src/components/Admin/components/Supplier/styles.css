@@ -104,7 +104,7 @@
     color: #444; 
     background: #eee;
     transition: 0.3s;
-    padding: 0px 10px;
+    padding: 10px 10px;
   }
   
   /* Styles for alternating rows in the table body - w3school */
@@ -188,11 +188,11 @@
   }
   
   .add-btn,
-  .update-btn,
-  .create-btn {
+  .update-sup-btn,
+  .create-sup-btn {
     border: 0;
-    background-color: var(--nav-bg-dark);
-    color: #fff;
+    background-color: var(--primaryPurple);
+    color: #eee;
     padding: 10px;
     font-size: 14px;
     text-decoration: none;
@@ -204,10 +204,10 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
   
   }
-  .create-btn:hover{
+  .create-sup-btn:hover{
     transform: translateY(-3px);
   }
-  .update-btn:hover{
+  .update-sup-btn:hover{
     transform: translateY(-3px);
   }
   .add-btn:hover{
