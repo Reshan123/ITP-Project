@@ -23,7 +23,19 @@ import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
+<<<<<<< Updated upstream
 
+=======
+import Booking from './components/Booking/Booking';
+import BookingUpdate from './components/Booking/BookingUpdate';
+import { useBookingContext } from '../../hooks/useBookingContext';
+import { useSupplierContext } from "../../hooks/useSupplierContext"
+import SupplierDetails from './components/Supplier/SupplierDetails';
+import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
+import SupplierForm from './components/Supplier/SupplierForm'
+import SalesHome from './components/Sales/SalesHome';
+import SalesUpdateForm from './components/Sales/SalesUpdate';
+>>>>>>> Stashed changes
 const Home = () => {
 
     const navigate = useNavigate()
@@ -97,7 +109,17 @@ const Home = () => {
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
                         <Route path='/LostPet' element={<LostPet />} />
+<<<<<<< Updated upstream
 
+=======
+                        <Route path='/Booking' element={<Booking />} />
+                        <Route path='/Booking/update/:id' element={<BookingUpdate />} />
+                        <Route path='/Supplier' element={<SupplierDetails />} />
+                        <Route path='/SupplierForm' element={<SupplierForm />} />
+                        <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
+                        <Route path='/SalesHome' element={<SalesHome />} />
+                        <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
+>>>>>>> Stashed changes
                     </Routes>
                 </div>
             </div>

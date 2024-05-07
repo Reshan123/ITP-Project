@@ -12,6 +12,12 @@ import { BookingContext, BookingContextProvider } from './context/BookingContext
 import { LostPetsContextProvider } from './context/LostPetContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
+<<<<<<< Updated upstream
+=======
+import { SocketContextProvider } from './context/SocketContext.jsx'
+import { SupplierContextProvider } from './context/SupplierContext.jsx'
+import { SalesContextProvider } from './context/SalesContext.jsx'
+>>>>>>> Stashed changes
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -30,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AdoptionContextProvider>
       <PetContextProvider>
         <BookingContextProvider>
+<<<<<<< Updated upstream
           <LostPetsContextProvider>
             <PetContextProvider>
               <DoctorContextProvider>
@@ -45,6 +52,31 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </DoctorContextProvider>
             </PetContextProvider>
           </LostPetsContextProvider>
+=======
+          <SocketContextProvider>
+            <LostPetsContextProvider>
+              <ConversationProvider>
+                <PetContextProvider>
+                  <DoctorContextProvider>
+                    <AllDoctorContextProvider>
+                      <AllPetOwnerContextProvider>
+                        <AllPetsContextProvider>
+                          <InventoryItemsContextProvider>
+                            <SupplierContextProvider>
+                              <SalesContextProvider>
+                              <App />
+                              </SalesContextProvider>
+                            </SupplierContextProvider>
+                          </InventoryItemsContextProvider>
+                        </AllPetsContextProvider>
+                      </AllPetOwnerContextProvider>
+                    </AllDoctorContextProvider>
+                  </DoctorContextProvider>
+                </PetContextProvider>
+              </ConversationProvider>
+            </LostPetsContextProvider>
+          </SocketContextProvider>
+>>>>>>> Stashed changes
         </BookingContextProvider>
       </PetContextProvider>
     </AdoptionContextProvider>
