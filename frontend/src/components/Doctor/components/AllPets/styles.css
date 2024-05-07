@@ -66,70 +66,178 @@
 
 
 .allPetsTable{
-    margin: 0 auto;
-    border-collapse: collapse;
-    font-family: Agenda-Light, sans-serif;
-    font-weight: 100; 
-    background: #333; color: #fff;
-    text-rendering: optimizeLegibility;
-    border-radius: 5px; 
-  }
-  
-  /* Styles for the table header */
-  .allPetsTable thead tr th { 
-    font-weight: 600; 
-  }
-  
-  /* Styles for table header and table data */
-  .allPetsTable thead th, .allPetsTable tbody td { 
-    padding: 10px 25px; 
-    font-size: 16px;
-  }
-  
-  
-  .allPetsTable tbody td { 
-    font-size: 16px;
-    color: #444; 
-    background: #eee;
-    transition: 0.3s;
-  }
-  
-  /* Styles for alternating rows in the table body - w3school */
-  .allPetsTable tbody tr:not(:last-child) { 
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;  
-  }
-  
-  .allPetsTable thead tr th:last-child,
-  .allPetsTable tbody tr td:last-child{
-    width: 35%;
-  }
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-family: Agenda-Light, sans-serif;
+  font-weight: 100; 
+  background: #333; color: #fff;
+  text-rendering: optimizeLegibility;
+  border-radius: 5px; 
+}
 
-  .allPetsTable tbody td center {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; 
-  }
+/* Styles for the table header */
+.allPetsTable thead tr th { 
+  font-weight: 600; 
+}
 
-  /* Styles for the view button */
-  .allPetsTable tbody td center .table-view-btn{
-    /* width: 80px; */
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height:30px;
-    background-color: #9453ce;
-    font-size: 14px;
-    font-weight: bold;
-    border: 0;
-    color: #FFF;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  /* Hover styles for the view button */
-  .allPetsTable tbody td center .table-view-btn:hover{
-    background-color: #8737ce;
-  }
+/* Styles for table header and table data */
+.allPetsTable thead th, .allPetsTable tbody td { 
+  padding: 10px 25px; 
+  font-size: 16px;
+}
+
+
+.allPetsTable tbody td { 
+  font-size: 16px;
+  color: #444; 
+  background: #eee;
+  transition: 0.3s;
+}
+
+/* Styles for alternating rows in the table body - w3school */
+.allPetsTable tbody tr:not(:last-child) { 
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;  
+}
+
+.allPetsTable thead tr th:last-child,
+.allPetsTable tbody tr td:last-child{
+  width: 35%;
+}
+
+.allPetsTable tbody td center {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+}
+
+/* Styles for the view button */
+.allPetsTable tbody td center .table-view-btn{
+/* width: 80px; */
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:30px;
+  background-color: #9453ce;
+  font-size: 14px;
+  font-weight: bold;
+  border: 0;
+  color: #FFF;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover styles for the view button */
+.allPetsTable tbody td center .table-view-btn:hover{
+  background-color: #8737ce;
+}
+
+
+
+.updatePetForm{
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0efefba;
+}
+
+.updatePetForm form{
+  background: white; 
+  padding: 25px 50px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 15px */
+}
+
+.updatePetForm form .formTitle{
+  align-self: center;
+  font-weight: 800;
+  font-size: 2.5rem;;
+  padding-bottom: 20px ;
+}
+
+.updatePetForm form .inputContainer{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 8px;
+}
+
+.updatePetForm form .inputContainer input,
+.updatePetForm form .inputContainer select{
+  padding: 5px 8px;
+}
+
+.updatePetForm form .buttonContainer{
+  margin-top: 5px;
+  align-self: center;
+}
+
+.updatePetForm form .buttonContainer button{
+  border-radius: 11px;
+  border: none;
+  color:  white;
+  background-color: var(--primaryPink);
+  font-weight: 600;
+  padding: 10px 25px;
+  transition: 0.3s;
+}
+
+
+
+.createPetForm{
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0efefba;
+}
+
+.createPetForm form{
+  background: white; 
+  padding: 25px 50px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 15px */
+}
+
+.createPetForm form .formTitle{
+  align-self: center;
+  font-weight: 800;
+  font-size: 2.5rem;;
+  padding-bottom: 20px ;
+}
+
+.createPetForm form .inputContainer{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 8px;
+}
+
+.createPetForm form .inputContainer input,
+.createPetForm form .inputContainer select{
+  padding: 5px 8px;
+}
+
+.createPetForm form .buttonContainer{
+  margin-top: 5px;
+  align-self: center;
+}
+
+.createPetForm form .buttonContainer button{
+  border-radius: 11px;
+  border: none;
+  color:  white;
+  background-color: var(--primaryPink);
+  font-weight: 600;
+  padding: 10px 25px;
+  transition: 0.3s;
+}

@@ -10,7 +10,7 @@ import search_img from './images/search.png'
 const AdoptPet = ({ navBarProps }) => {
     const navigate = useNavigate();
 
-    navBarProps("#FFF", "#E2929D")
+    navBarProps("#FFF", "#E2929D", "#E2929D")
 
     const { adoptionForms, dispatch } = useAdoptionContext();
     const { user, dispatch: userDispatch } = useUserContext()
@@ -77,7 +77,7 @@ const AdoptPet = ({ navBarProps }) => {
     const endIndex = currentPage * pageSize;
 
 
-    const filteredAdoptionForms = adoptionForms
+    const filteredAdoptionForms = Array.isArray(adoptionForms)
         ? adoptionForms.filter(adoptionForm =>
             adoptionForm.approved === 'Approved' &&
             (adoptionForm.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

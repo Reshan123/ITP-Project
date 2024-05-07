@@ -18,8 +18,8 @@ const salesItemSchema = new schema({
         required: true
       },
 
-      totalPurchase: {
-        type: Number,
+      status: {
+        type: String,
         required: true
       }
 
