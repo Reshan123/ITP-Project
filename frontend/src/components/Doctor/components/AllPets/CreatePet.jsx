@@ -65,44 +65,45 @@ const CreatePet = () => {
 
 
     return ( 
-        <>
-            {error && (<div className="error">{error}</div>)}
+        <div className='createPetForm'>
             <form onSubmit={handleFormSubmit}>
-                <div>
+                <div className="formTitle">Create Pet</div>
+                {error && (<div className="error">{error}</div>)}
+                <div className='inputContainer'>
                     <label htmlFor="ownerID">Pet Owner: </label>
                     <select name="ownerID" id="ownerID" onChange={(e) => handleInputChange(e)}>
                         {petOwners && (petOwners.map(owner => (<option key={owner._id} value={owner._id}>{owner.name}</option>)))}
                     </select>
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petName">Pet Name: </label>
                     <input type="text" name='petName' id='petName' value={formInput.petName}  onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petAge">Pet Age: </label>
                     <input type="number" name="petAge" id="petAge" value={formInput.petAge} onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petSpecies">Pet Species: </label>
                     <input type="text" name='petSpecies' id='petSpecies' value={formInput.petSpecies} onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petGender">Pet Gender: </label>
                     <input type="text" name='petGender' id='petGender' value={formInput.petGender} onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petBreed">Pet Breed: </label>
                     <input type="text" name='petBreed' id='petBreed' value={formInput.petBreed} onChange={(e) => handleInputChange(e)} />
                 </div>
-                <div>
+                <div className='inputContainer'>
                     <label htmlFor="petBreed">Pet Photo: </label>
                     <input type="file" name='petImage' id='petImage' onChange={(e) => setPetImage(e.target.files)} multiple/>
                 </div>
-                <div>
+                <div className='buttonContainer'>
                     <button type="submit">Submit</button>
                 </div>
             </form>
-        </>
+        </div>
      );
 }
  

@@ -79,7 +79,16 @@ const LandingPage = () => {
 
     return ( 
         <>
-            <div>Availability :  <button onClick={() => changeAvailability()}>{doctorAvailability ? "Available" : "Unavailable"}</button></div>
+            <div style={{
+                fontWeight: 600,
+                fontSize: '1.5rem',
+                margin: '50px 0px 0px 50px'
+            }}>Availability :  <button style={{
+                padding: '10px 17px',
+                border: '1px solid #00000045',
+                borderRadius: '8px',
+
+            }} onClick={() => changeAvailability()}>{doctorAvailability ? "Available" : "Unavailable"}</button></div>
 
             <div className="calendar-container">
                 <Fullcalendar
