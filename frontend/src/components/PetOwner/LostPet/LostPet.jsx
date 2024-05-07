@@ -5,7 +5,7 @@ import { useLostPetsContext } from "../../../hooks/useLostPetsContext"
 
 const LostPet = ({ navBarProps }) => {
     
-      navBarProps("#FFF", "#B799D1")
+      navBarProps("#FFF", "#B799D1", "#B799D1")
 
       const {lostNotice,dispatch} = useLostPetsContext()
       const navigate = useNavigate()  

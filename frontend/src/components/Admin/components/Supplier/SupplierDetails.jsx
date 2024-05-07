@@ -110,7 +110,7 @@ const SupplierDetails = ({ supplier }) => {
         <p>Supplier Details</p>
         <div>
           <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-          <button className='add-btn' onClick={() => navigate(`/admin/home/SupplierForm/`)} >Add a new Item</button>
+          <button className='add-btn' onClick={() => navigate(`/admin/home/SupplierForm/`)} >Add a new Supplier</button>
           <button onClick={generatePDF}>Download Report</button>
         </div>
       </div>
@@ -133,7 +133,7 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierCompany}</td>
               <td>
                 <center>
-                  <button className='update-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
+                  <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
                   <button className='dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
                 </center>
               </td>
@@ -141,11 +141,6 @@ const SupplierDetails = ({ supplier }) => {
           ))}
         </tbody>
       </table>
-
-
-
-
-
     </div>
 
 

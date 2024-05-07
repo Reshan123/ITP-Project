@@ -517,7 +517,7 @@
 .details p {
     width: 50%;
     /* Set width to occupy the second half of the card */
-    padding: 3px;
+    padding: 5px ;
     display: flex;
     flex-direction: column;
     /* Display details in a vertical layout */
@@ -651,9 +651,13 @@
     border: none;
     position: absolute;
     bottom: 10px;
-    /* Position the button at the bottom */
     right: 2%;
     transition: opacity 0.5s ease;
+}
+
+.detailsSectionCardContainer .adoption-form-preview .approval-status {
+
+    margin: 10px;
 }
 
 .detailsSectionCardContainer .adoption-form-preview:hover {

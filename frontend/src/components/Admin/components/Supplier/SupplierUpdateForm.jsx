@@ -37,6 +37,13 @@ const SupplierUpdateForm = () => {
   }, [id, suppliers]);
 
   const handleUpdate = (e) => {
+    e.preventDefault();
+    // Validation for contact field
+    if (supplierContact.length > 10) {
+      setError("Contact number cannot be more than 10 digits.");
+      return;
+    }
+  
     e.preventDefault()
     const formData = {
       supplierName,
@@ -44,7 +51,7 @@ const SupplierUpdateForm = () => {
       supplierEmail,
       supplierCompany,
     };
-    axios.put('http://localhost:4000/api/supplier/'+ id, formData)
+    axios.patch('http://localhost:4000/api/supplier/'+ id, formData)
       .then(res => {
         supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail, supplierCompany }] });
         setError("");
@@ -52,7 +59,9 @@ const SupplierUpdateForm = () => {
         navigate('/admin/home/supplier');
       })
       .catch(err => setError(err.response.data));
-  }
+  
+}
+
 
   return (
     <div className="update-supplier">
@@ -83,7 +92,7 @@ const SupplierUpdateForm = () => {
           onChange={(e) => setSupplierCompany(e.target.value)}
           value={supplierCompany}
         />
-        <button className='update-btn'>Update</button>
+        <button className='update-sup-btn'>Update</button>
         {error && <div className="error">{error}</div>}
       </form>
     </div>

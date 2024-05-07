@@ -41,6 +41,12 @@ const SupplierForm = () => {
             navigate('/admin/home/supplier')
         }
     }
+    const handleContactChange = (e) => {
+        const value = e.target.value;
+        if (value.length <= 10) {
+            setSupplierContact(value);
+        }
+    };
 
     return (
         <form className="create" onSubmit={handleSubmit}>
@@ -54,7 +60,7 @@ const SupplierForm = () => {
             <label> Supplier Contact</label>
             <input
                 type="text"
-                onChange={(e) => setSupplierContact(e.target.value)}
+                onChange={handleContactChange}
                 value={supplierContact}
             />
             <label> Supplier Email</label>
@@ -72,7 +78,7 @@ const SupplierForm = () => {
 
             <div className="add-btn-container">
 
-                < button className='create-btn'>Add Item</button>
+                < button className='create-sup-btn'>Add Supplier</button>
             </div>
 
             {error && <div className="error">{error}</div>}

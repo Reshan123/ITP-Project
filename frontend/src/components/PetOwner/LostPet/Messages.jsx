@@ -30,9 +30,9 @@ const Messages = ({ ownerid }) => {
           ))}
         {loading &&
           [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
-        {!loading && messages.length === 0 && (
+        { messages.length === 0 && (
           <p style={{ textAlign: "center" }}>
-            Send a message to start the conversation (if this happen just go back and click the send msg btn again)
+            Send a message to start the conversation 
           </p>
         )}
       </div>
