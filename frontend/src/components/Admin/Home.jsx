@@ -34,6 +34,8 @@ import SalesUpdateForm from './components/Sales/SalesUpdate';
 
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
+import MedicalUpdate from './components/MedicalRecord/MedicalUpdate';
+import MedicalRecordForm from './components/MedicalRecord/MedicalRecordForm';
 
 const Home = () => {
 
@@ -200,7 +202,8 @@ const Home = () => {
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
                         <Route path='/MedicalRecord' element={ <MedicalRecord />} />
-                        <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
+                        <Route path='/MedicalRecord/update/:id' element={ <MedicalUpdate/>}/>
+                        <Route path='/MedicalRecord/add' element={ <MedicalRecordForm/>}/>
                     </Routes>
                 </div>
             </div>
