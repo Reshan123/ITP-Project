@@ -18,7 +18,7 @@ import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
 
 const Profile = ({ navBarProps }) => {
 
-    navBarProps("#B799D1", "#FFF")
+    navBarProps("#B799D1", "#FFF", "#B799D1")
 
     const navigate = useNavigate()
 
@@ -241,6 +241,7 @@ const Profile = ({ navBarProps }) => {
                                     <div className="details">
                                         <h4>{adoptionForm.name}</h4>
                                     </div>
+                                    <h3 className='approval-status' style={{ color: adoptionForm.approved === 'Approved' ? 'green' : 'red' }}>{adoptionForm.approved}</h3>
                                     <button className='viewbtn1' onClick={() => handleView(adoptionForm._id)}>View Listing</button>
                                 </div>
                             ))

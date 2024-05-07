@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom";
 import './styles.css'
 import cat from './images/cat.png'
 import dog from './images/dog.png'
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useNavigate } from "react-router";
 
 const ViewForm = () => {
 
-    // State to control whether to show owner contact or "Get In Touch"
     const [showOwnerContact, setShowOwnerContact] = useState(false);
+    const navigate = useNavigate()
 
     const { adoptionForms, dispatch } = useAdoptionContext();
-    const params = useParams(); // Get the ID parameter from the URL
+    const params = useParams();
     const id = params.id;
 
     useEffect(() => {
@@ -37,6 +39,9 @@ const ViewForm = () => {
     return (
 
         <div className="view-listing-page">
+            <div className="backArrow">
+                <IoMdArrowRoundBack onClick={() => { navigate('/pet/adopt') }} />
+            </div>
             <div className="listing">
                 <div className="adoption-image">
                     {adoptionForms && adoptionForms.imageUrl && (
@@ -83,7 +88,9 @@ const ViewForm = () => {
                     </div>
                 </div>
             </div>
+
         </div>
+
     )
 }
 

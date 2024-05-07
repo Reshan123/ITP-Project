@@ -141,11 +141,14 @@ const SupplierDetails = ({ supplier }) => {
           ))}
         </tbody>
       </table>
+<<<<<<< HEAD
+=======
 
 
 
 
 
+>>>>>>> InventoryManagementSystem
     </div>
 
 
