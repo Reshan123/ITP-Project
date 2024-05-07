@@ -517,7 +517,7 @@
 .details p {
     width: 50%;
     /* Set width to occupy the second half of the card */
-    padding: 5px ;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     /* Display details in a vertical layout */
@@ -626,7 +626,7 @@
 }
 
 .detailsSectionCardContainer .adoption-form-preview .details {
-    width: 100%;
+    width: 150px;
 
     padding: 3px;
     display: flex;
@@ -637,7 +637,7 @@
 }
 
 .detailsSectionCardContainer .adoption-form-preview .details h4 {
-    font-size: 50px;
+    font-size: 30px;
     margin-bottom: 10px;
 
 }
@@ -657,7 +657,7 @@
 
 .detailsSectionCardContainer .adoption-form-preview .approval-status {
 
-    margin: 10px;
+    margin: 20px;
 }
 
 .detailsSectionCardContainer .adoption-form-preview:hover {
