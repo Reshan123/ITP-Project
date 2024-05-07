@@ -20,17 +20,8 @@ import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
 import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
-
-
-
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> InventoryManagementSystem
 import Booking from './components/Booking/Booking';
 import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
@@ -38,20 +29,12 @@ import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
 import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
 import SupplierForm from './components/Supplier/SupplierForm'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import SalesHome from './components/Sales/SalesHome';
 import SalesUpdateForm from './components/Sales/SalesUpdate';
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
-=======
 
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
 
-
->>>>>>> InventoryManagementSystem
 const Home = () => {
 
     const navigate = useNavigate()
@@ -209,29 +192,15 @@ const Home = () => {
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
                         <Route path='/LostPet' element={<LostPet />} />
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> InventoryManagementSystem
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
                         <Route path='/SupplierForm' element={<SupplierForm />} />
                         <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
-=======
                         <Route path='/MedicalRecord' element={ <MedicalRecord />} />
                         <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
-                        
->>>>>>> InventoryManagementSystem
                     </Routes>
                 </div>
             </div>
