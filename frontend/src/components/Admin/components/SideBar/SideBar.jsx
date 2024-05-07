@@ -1,41 +1,57 @@
 import './styles.css'
 import { NavLink } from 'react-router-dom'
+import { IoPaw } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 const SideBar = () => {
+
+    const username = JSON.parse(localStorage.getItem('adminUser'))
+
+
     return (
         <div className="adminSideBar">
+            {/* <div className="adminSideBarLogo">
+                <IoPaw />
+            </div> */}
+            <div className="adminSideBarProfile">
+                <IoPaw />
+                <div className="adminSideBarUsername">{username && username.username}</div>
+                
+            </div>
             <div className="adminSideBarLinksContainer">
-
-                <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact>
+                <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact="true">
                     <div className='linkText'>Home</div>
                 </NavLink>
                 <br />
 
-                <NavLink to="/admin/home/doctor" className='adminSideBarLink' exact>
+                <NavLink to="/admin/home/doctor" className='adminSideBarLink' exact="true">
                     <div className='linkText'>Doctor</div>
                 </NavLink>
                 <br />
 
-                <NavLink to='/admin/home/petowners' className='adminSideBarLink' exact>
+                <NavLink to='/admin/home/petowners' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Pet Owners</div>
                 </NavLink>
                 <br />
 
-                <NavLink to='/admin/home/Inventoryitemdetails' className='adminSideBarLink' exact>
+                <NavLink to='/admin/home/Inventoryitemdetails' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Inventory</div>
                 </NavLink>
                 <br />
 
-                <NavLink to='/admin/home/adoption-forms' className='adminSideBarLink' exact>
+                <NavLink to='/admin/home/adoption-forms' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Adoption Forms</div>
                 </NavLink>
                 <br />
 
-                <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact>
+                <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Lost Pet Notices</div>
                 </NavLink>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> InventoryManagementSystem
                 <br />
                 
                 <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact="true">
@@ -46,11 +62,14 @@ const SideBar = () => {
                 <NavLink to='/admin/home/Supplier' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Supplier</div>
                 </NavLink>
+<<<<<<< HEAD
 
                 <NavLink to='/admin/home/SalesHome' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Sales</div>
                     </NavLink>
 >>>>>>> Stashed changes
+=======
+>>>>>>> InventoryManagementSystem
             </div>
         </div>
     );

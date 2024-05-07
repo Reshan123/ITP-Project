@@ -14,21 +14,29 @@ const LostPetProfileDetails = ({notice}) => {
         day: "numeric",
     });
 
-    const handleDelete = async(id) =>{
-        const response = await fetch('http://localhost:4000/api/lostPetNotice/' + id,{
-            method: 'DELETE'
-        })
+    const handleDelete = async (id) => {
+        const confirmed = window.confirm(
+          "Are you sure you want to delete this item?"
+        );
 
-        const json = await response.json()
+        if (confirmed) {
+            const response = await fetch(
+              "http://localhost:4000/api/lostPetNotice/" + id,
+              {
+                method: "DELETE",
+              }
+            );
 
-        if(response.ok){
+            const json = await response.json();
 
-            //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
-            dispatch({type:'DELETE_NOTICE',payload:json})
-            
-            //toast.success("Notice deleted sucessfully")
-            
+            if (response.ok) {
+              //setNotices(notices.filter((notice)=> notice._id !== id)) //not deleted items will br filtered
+              dispatch({ type: "DELETE_NOTICE", payload: json });
+
+              //toast.success("Notice deleted sucessfully")
+            }
         }
+        
     }
 
   return (
@@ -50,8 +58,8 @@ const LostPetProfileDetails = ({notice}) => {
             <p><strong>Status: </strong>{notice.status}</p>
             <p className='createdAt'>{formattedDate}</p>
         </div>
-        <button className='btn1'>View Details</button>
-        <button className='btn2'onClick={() => navigate('/pet/lostpetnotices/lostpetform/updatelostpet',{ state:notice, id:notice._id })}  >Update</button>
+        <button className='btn1' onClick={()=>{navigate('/pet/lostpetnotices/alldetails',{ state:notice });{window.scrollTo(0,0);}}}>View Details</button>
+        <button className='btn2'onClick={() => {navigate('/pet/lostpetnotices/lostpetform/updatelostpet',{ state:notice, id:notice._id });{window.scrollTo(0,0);}}}  >Update</button>
         <button className='btn3' onClick={()=> handleDelete(notice._id)} >Delete</button>
     </div>
   )

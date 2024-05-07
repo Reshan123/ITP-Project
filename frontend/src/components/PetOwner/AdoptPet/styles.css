@@ -1,67 +1,171 @@
-.adoption-form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+.landing-image {
+    position: relative;
+
 }
 
-.adoption-form h3 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-}
-
-.adoption-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #666;
-}
-
-.adoption-form input[type="text"],
-.adoption-form input[type="number"],
-.adoption-form input[type="file"],
-.adoption-form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.adoption-form input[type="file"] {
-    border: none;
-    margin-bottom: 10px;
-}
-
-.adoption-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
+.image-text-1,
+.image-text-2 {
+    position: absolute;
+    transform: translate(-50%, -50%);
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+    left: 50%;
 }
 
-.adoption-form button:hover {
-    background-color: #0056b3;
+.image-text-1 {
+    top: 10%;
+    font-size: 80px;
+}
+
+.image-text-2 {
+    top: 30%;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+.puppy img {
+    width: 300px;
+    height: 300px;
+}
+
+.adoption-form {
+    display: flex;
+    max-width: 2000px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 50px;
+
+
+}
+
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-file-upload img {
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 4px;
+
+}
+
+/* Optional: Hover effect */
+.custom-file-upload:hover img {
+    border-color: #999;
+    /* Darker border color on hover */
+}
+
+
+
+.left-container {
+    overflow: hidden;
+
+    position: relative;
+    text-align: center;
+    width: 300px;
+    padding-right: 80px;
+    margin-right: 80px;
+}
+
+.form-page {
+    background-color: #FFDAB9;
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+    min-height: 100vh;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+.right-container {
+    display: grid;
+    grid-template-areas: "." ".";
+    width: 500px;
+    padding: 20px;
+    background-color: #E6E6FA;
+    transition: box-shadow 0.3s;
+    /* Add transition for smoother effect */
+}
+
+.right-container:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Add box shadow on hover */
+}
+
+.set {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.adoption-form input,
+.adoption-form select,
+.adoption-form textarea {
+    border-radius: 4px;
+    line-height: 38px;
+    padding-left: 5px;
+    margin-left: 20px;
+    border: 1px solid white;
+
+
 }
 
 .error {
     color: #ff0000;
-    margin-bottom: 15px;
+    margin-top: 5px;
+    /* Adjust spacing between input and error message */
 }
+
+.input-container {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .adoption-form img {
     display: block;
     margin: 10px auto;
     border-radius: 4px;
 }
+
+.adoption-form .description textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100px;
+    resize: vertical;
+    vertical-align: top;
+
+}
+
+.adoption-form .special-needs textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 50px;
+    resize: vertical;
+    vertical-align: top;
+
+}
+
+
+
+
 
 /* AdoptionFormPage.css */
 .AdoptionFormPage {
@@ -75,61 +179,88 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    max-width: 100%;
 }
 
-.adoption-form-preview {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    width: 250px;
-    /* Adjust based on your preference */
+.section-1 {
+    width: 100%;
+    background-color: #FFDAB9;
+
+
+}
+
+
+
+.add-newFrom {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    text-align: center;
 }
 
-.pet-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
+.New-Form-Text-container {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
 }
 
-.details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
+
 
 .adoptPetButton {
+    background-color: pink;
+    border: 2px solid pink;
+    border-radius: 5px;
     padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
+    font-size: 20px;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
     margin-top: 20px;
+    margin-bottom: 20px;
+
 }
 
 .adoptPetButton:hover {
-    background-color: #0056b3;
+    background-color: white;
+    color: pink;
+}
+
+.adoptbutton-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.listing-welcome-text {
+    font-size: 70px;
+    text-align: center;
 }
 
 
+
 /*update form */
+
 .adoption-form-details {
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    background-color: #FFDAB9;
+    /* Add background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Add box shadow */
 }
 
 .adoption-form-details h4 {
     font-size: 1.5rem;
     margin-bottom: 20px;
+    text-align: center;
+    /* Center align heading */
 }
 
 .adoption-form-details form {
@@ -139,11 +270,22 @@
 
 .adoption-form-details label {
     display: block;
+    margin-bottom: 5px;
+    /* Add margin bottom */
+}
+
+.adoption-form-details textarea {
+    border-radius: 4px;
+    line-height: 38px;
+
+    border: 1px solid white;
 }
 
 .adoption-form-details input[type="text"],
-.adoption-form-details select {
-    width: 100%;
+.adoption-form-details select,
+.adoption-form-details textarea {
+    width: calc(100% - 16px);
+    /* Adjust width */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -153,24 +295,365 @@
     margin-top: 10px;
 }
 
+.adoption-form-details .buttons {
+    display: flex;
+    /* Use flexbox */
+}
+
 .adoption-form-details button[type="submit"],
 .adoption-form-details button.delete {
-    padding: 10px 20px;
-    background-color: #007bff;
+    flex: 1;
+    width: 20px;
+    /* Set width to 80px */
+    padding: 10px 0;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 10px;
+
 }
 
 .adoption-form-details button[type="submit"]:hover,
 .adoption-form-details button.delete:hover {
-    background-color: #0056b3;
+
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    /* Add box shadow on hover */
 }
+
+.adoption-form-details button[type="submit"] {
+    background-color: var(--primaryPurple);
+    color: black;
+}
+
+.adoption-form-details button.delete {
+    margin-right: 0;
+    background-color: red;
+
+}
+
+
+
+
+
 
 .adoption-form-details img {
     display: block;
     max-width: 100px;
     max-height: 100px;
     margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Center align image */
+}
+
+
+/* CARD COMPONENT */
+
+.card {
+    max-width: 300px;
+    max-height: fit-content;
+    transition: transform 1s, box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.card_header {
+    margin: auto;
+
+    background: #272727;
+    border-left: 0.625rem solid #E2929D;
+
+    text-align: center;
+}
+
+.card_header h2 {
+    color: white;
+}
+
+.card__background {
+    display: block;
+    width: 100%;
+    /* Change width to 100% */
+    height: 15rem;
+    overflow: hidden;
+    margin: auto;
+    background: #B799D1;
+}
+
+.card__background img {
+    max-width: 100%;
+    filter: grayscale(100%);
+}
+
+.card__content {
+    line-height: 1.5;
+    background: #ededed;
+    padding: 1.5em 2rem;
+    color: #222;
+    font-family: 'Lato', sans-serif;
+}
+
+.card__content--container {
+    display: inline-block;
+    text-align: left;
+}
+
+.card__content_title {
+    margin: 0;
+    color: #333;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.card__content_title::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 1rem;
+    background: pink;
+    left: -5px;
+    top: 50%;
+    z-index: -1;
+}
+
+.card__description {
+    font-weight: 300;
+}
+
+.card_footer {
+    margin-top: 10px;
+    display: flex;
+    margin-left: 20px;
+}
+
+.card__button,
+.card__button {
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-bottom: 0.1em;
+    color: #222;
+    text-decoration: none;
+    font-weight: bold;
+    border-top: 0.3125rem solid rgba(0, 0, 0, 0);
+    border-bottom: 0.3125rem solid #B799D1;
+    -webkit-transition: border 0.3s ease-in-out;
+    transition: border 0.3s ease-in-out;
+    margin-left: 20px;
+}
+
+.card__button::after {
+    content: "\25b6";
+    margin: 0 0.75em;
+    color: #222;
+}
+
+.card__button:hover,
+.card__button:focus {
+    border-top-color: #222;
+    border-bottom-color: #E2929D;
+}
+
+/*View Listing style*/
+.view-listing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.view-listing-page .listing {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    max-width: 2000px;
+    height: 500px;
+}
+
+
+.view-listing-page .adoption-image {
+    width: 400px;
+    margin-right: 20px;
+
+}
+
+.view-listing-page .adoption-image img {
+    width: 100%;
+    display: flex;
+    height: 500px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.view-listing-page .pet-details {
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+.view-listing-page .pet-details h1 {
+    margin-top: 0;
+}
+
+.view-listing-page .pet_about_1 {
+    display: flex;
+    padding-left: 10px;
+    margin-left: 5px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.pet_about_1 .species {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    border-radius: 30%;
+    height: 40px;
+
+}
+
+.pet_about_1 .species img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.pet_about_1 .gender {
+    width: 50px;
+    background-color: #3498db;
+    border-radius: 10px;
+    height: 40px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+
+}
+
+.pet_about_1 .gender p {
+    margin: 0;
+}
+
+.view-listing-page .pet-about_2 {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.view-listing-page .special-description {
+
+    margin-top: 40px;
+}
+
+
+.contact_details {
+
+    margin-top: 150px;
+    margin-left: 10px;
+}
+
+.owner-contact {
+    /* Style for the "Get In Touch" text */
+    cursor: pointer;
+
+}
+
+.owner-contact span {
+    /* Style for the owner contact */
+    display: none;
+    /* Initially hide the owner contact */
+}
+
+.owner-contact:hover span {
+    /* Style for the owner contact on hover */
+    display: inline;
+    /* Display the owner contact on hover */
+}
+
+.get-in-touch-button {
+    width: 150px;
+    background-color: pink;
+    border: transparent;
+    height: 40px;
+}
+
+
+/*SEARCH BAR MAIN PAGE*/
+
+.search-box {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    margin: 30px;
+}
+
+.search-box .search-icon {
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-search {
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 25px;
+    transition: all 0.5s ease-in-out;
+    background-color: pink;
+    padding-right: 40px;
+    color: #fff;
+    border: 1px solid black;
+}
+
+.input-search::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+.btn-search {
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    color: #ffffff;
+    background-color: transparent;
+    pointer-events: painted;
+}
+
+.btn-search:focus~.input-search {
+    width: 300px;
+    border-radius: 0px;
+    background-color: #9453ce;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+
+.input-search:focus {
+    width: 300px;
+    border-radius: 0px;
+    background-color: #9453ce;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }

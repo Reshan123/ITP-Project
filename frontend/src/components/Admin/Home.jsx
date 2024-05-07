@@ -18,14 +18,18 @@ import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
 import CreateDoctor from './components/Doctor/CreateDoctor';
 import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
+import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
 =======
+=======
+>>>>>>> InventoryManagementSystem
 import Booking from './components/Booking/Booking';
 import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
@@ -33,27 +37,71 @@ import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
 import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
 import SupplierForm from './components/Supplier/SupplierForm'
+<<<<<<< HEAD
 import SalesHome from './components/Sales/SalesHome';
 import SalesUpdateForm from './components/Sales/SalesUpdate';
 >>>>>>> Stashed changes
+=======
+>>>>>>> InventoryManagementSystem
 const Home = () => {
 
     const navigate = useNavigate()
 
 
+    const { inventoryitems, dispatch: inventoryDispatch } = useInventoryItemsContext()
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
+    const { supplierDetails, dispatch: supplierDispatch } = useSupplierContext()
 
     const { petOwners, dispatch: petOwnerDispatch } = useAllPetOwnerContext()
-    const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext();
+    const { adoptionForms, dispatch: adoptionDispatch } = useAdoptionContext()
+
+    const { bookings, dispatch: bookingDispatch } = useBookingContext()
+
     useEffect(() => {
         if (!localStorage.getItem('adminUser')) {
             navigate('/admin/login')
         }
     }, [])
 
+
+    useEffect(() => {
+        const fetchInventoryItems = async () => {
+          try{
+            
+          } catch (error){
+            console.log(error.message)
+          }
+        }
+    
+        fetchInventoryItems()
+      }, [])
+
     useEffect(() => {
         const fetchAllData = async () => {
             try {
+
+                const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
+      
+                if (!bookingResponse.ok) {
+                    throw Error(bookingResponse.message);
+                }
+        
+                const bookingJson = await bookingResponse.json();
+        
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
+
+                //supplier
+
+                const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
+      
+                if (!supplierResponse.ok) {
+                    throw Error(supplierResponse.message);
+                }
+        
+                const supplierJson = await supplierResponse.json();
+        
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
+
                 //allDocData
                 const allDocResponse = await fetch("http://localhost:4000/api/doctor/getAllDocs/")
                 const allDocJson = await allDocResponse.json()
@@ -73,26 +121,44 @@ const Home = () => {
                 petOwnerDispatch({ type: "LOAD", payload: allPetOwnerJson })
 
 
-                //getAllAdoptionForms
-                const allForms = await fetch('http://localhost:4000/api/adoption')
-                const json = await allForms.json()
-
-                if (!json.ok) {
-                    throw Error(json.message)
+                //inventory
+                const inventoryResponse = await fetch('http://localhost:4000/api/inventoryItems/')
+                const inventoryJson = await inventoryResponse.json()
+            
+                if (inventoryResponse.ok) {
+                    inventoryDispatch({ type: 'SET_ITEMS', payload: inventoryJson })
                 }
-                adoptionDispatch({ type: 'SET_FORMS', payload: json })
 
+                //getAllAdoptionForms
+                const adoptionResponse = await fetch('http://localhost:4000/api/adoption')
+                const adoptionJson = await adoptionResponse.json()
+
+                if (adoptionResponse.ok) {
+                    adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
+                }
 
             } catch (error) {
-                console.log(error.message)
+                console.log(error)
             }
         }
+
         fetchAllData()
+
+        // const fetchBookings = async () => {
+        //     try {
+              
+      
+        //     } catch (error) {
+        //       console.log("Error fetching bookings:", error);
+        //     }
+        //   };
+      
+        // fetchBookings();
     }, [])
 
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="adminPageMainContainer">
                 <SideBar />
                 <div className='pages'>
@@ -109,17 +175,23 @@ const Home = () => {
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
                         <Route path='/LostPet' element={<LostPet />} />
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
 =======
+=======
+>>>>>>> InventoryManagementSystem
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
                         <Route path='/SupplierForm' element={<SupplierForm />} />
                         <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
+<<<<<<< HEAD
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
 >>>>>>> Stashed changes
+=======
+>>>>>>> InventoryManagementSystem
                     </Routes>
                 </div>
             </div>

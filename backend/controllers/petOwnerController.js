@@ -141,6 +141,26 @@ const deleteUserDetailsFromToken = async (req, res) => {
     }
 }
 
+const deleteUserFromUserID = async (req, res) => {
+    const { userID } = req.params
+
+    try{
+    
+        const userExist = await petOwner.findById(userID)
+        
+        if(!userExist){
+            throw Error("Invalid ID")
+        }
+
+        const response = await petOwner.findByIdAndDelete(userID)
+        res.status(200).json({message: "User Deleted"})
+
+    } catch (error){
+        res.status(400).json({message: error.message})
+    }
+
+}
+
 const getAllUsers = async (req, res) => {
     try{
         const response = await petOwner.find()
@@ -153,4 +173,25 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers }
+const verifyToken = async (req, res) => {
+    const userID = req.user._id
+    
+    try{
+        if (!userID){
+            throw Error("Invalid Token")
+        }
+
+        const response = await petOwner.findById(userID)
+
+        if(!response){
+            throw Error("Inavlid User")
+        }
+
+        res.status(200).json({message: "VALID USER"})
+
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
+
+module.exports = { login, signin, updateUserDetailsFromToken, deleteUserDetailsFromToken, getAllUsers, verifyToken, deleteUserFromUserID }

@@ -17,4 +17,8 @@ petOwnerRouter.delete('/deleteUserDetailsFromToken', authorize, petOwnerControll
 
 petOwnerRouter.get('/getAllUsers', petOwnerController.getAllUsers)
 
+petOwnerRouter.get('/verifyToken', authorize,  petOwnerController.verifyToken)
+
+petOwnerRouter.delete('/deleteUserFromUserID/:userID',  petOwnerController.deleteUserFromUserID)
+
 module.exports = petOwnerRouter

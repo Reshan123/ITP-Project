@@ -4,8 +4,11 @@ import ourServices from './Images/ourservices.png'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
 import { usePetContext } from '../../../hooks/usePetContext'
+import { useNavigate } from 'react-router-dom'
 
 const Home = ({ navBarProps }) => {
+
+    const navigate = useNavigate()
 
     navBarProps("#E2929D", "#FFF")
 
@@ -31,46 +34,109 @@ const Home = ({ navBarProps }) => {
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(()=> {
+        const checkUserValid = async () => {
+            try {
+                const config = {
+                    method: 'GET',
+                    headers: {
+                        'authorization': `Bearer ${user.userToken}`
+                    }
+                }
+                const response = await fetch('http://localhost:4000/api/petOwner/verifyToken', config)
+
+                if (!response.ok){
+                    localStorage.removeItem('user')
+                    userDispatch({ type: "LOGOUT" })
+                    navigate('/pet/signin')
+                }
+                if(response.ok){
+                    console.log("Token Valid")
+                }
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+
+        const fetchBookings = async () => {
+
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+
+            try {
+                const response = await fetch("http://localhost:4000/api/bookings/getOwner", config)
+
+                if (!response.ok) {
+                    throw Error(response.message)
+                }
+
+                const json = await response.json()
+
+                bookingDispatch({ type: 'SET_BOOKINGS', payload: json.message })
+
+            } catch (error) {
+
+                console.log("pet owner page error", error)
+            }
+        }
+
+        if (user){
+            checkUserValid()
+            fetchBookings()
+        }
+    }, [user])
+
+
     //booking submit function
     const handleSubmit = async(e) => {
-        e.preventDefault()
-
-        const booking = {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description}
-
-        const response = await fetch('http://localhost:4000/api/bookings', {
-            method: 'POST',
-            body: JSON.stringify(booking),
-            headers: {
-                'Content-Type':'application/json',
-                "authorization": `Bearer ${user.userToken}`
+        e.preventDefault();
+    
+        const booking = {owner_name,owner_email,owner_contact,pet_name,pet_species,pet_breed,doctor,start_time,description};
+    
+        try {
+            const response = await fetch('http://localhost:4000/api/bookings', {
+                method: 'POST',
+                body: JSON.stringify(booking),
+                headers: {
+                    'Content-Type':'application/json',
+                    "authorization": `Bearer ${user.userToken}`
+                }
+            });
+    
+            const json = await response.json();
+    
+            if(!response.ok){
+                setError(json.error); // Set error state if there's an error
+            } else {
+                // Clear error state if submission is successful
+                setError(null);
+                
+                setOwnerContact('');
+                setPetName('');
+                setPetSpecies('');
+                setPetBreed('');
+                setDoctor('');
+                setStartTime('');
+                setDescription('');
+                console.log('New Booking Added', json);
             }
-        })
-
-        const json = await response.json()
-
-        if(!response.ok){
-            setError(json.error)
+        } catch (error) {
+            console.error('Error submitting booking:', error);
+            setError('An error occurred while submitting the booking. Please try again.'); // Set a generic error message
         }
+    };
+    
 
-        if(response.ok){
-
-            setOwnerContact('')
-            setPetName('')
-            setPetSpecies('')
-            setPetBreed('')
-            setDoctor('')
-            setStartTime('')
-            setDescription('')
-            console.log('New Booking Added', json)
-        }
-    }
-
-    const handlePetSelect = async(petName) => {
+    const handlePetSelect = async (petName) => {
         const selectedPet = pets.find(pet => pet.petName === petName);
-        setPetName(petName)
+        setPetName(petName);
         setSelectedPet(selectedPet);
-        setPetSpecies(selectedPet.petSpecies)
+        setPetSpecies(selectedPet.petSpecies); // Automatically set the pet species
     }
+    
 
     useEffect(() => {
         //setting values
@@ -83,6 +149,11 @@ const Home = ({ navBarProps }) => {
         const isValid = owner_name && owner_email && owner_contact && pet_name && pet_species && doctor && start_time;
 
         setInputValidity(isValid);
+
+      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
+
+
+      useEffect(() => {
 
         //fetching all available doctors
         const fetchDoctors = async () => {
@@ -97,39 +168,8 @@ const Home = ({ navBarProps }) => {
           };
       
         fetchDoctors();
-
-
-        const fetchPetData = async () => {
-
-            const config = {
-                headers: {
-                    'authorization': `Bearer ${user.userToken}`
-                }
-            }
-
-            try {
-                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets/", config)
-
-                if (!petDetailsResponse.ok) {
-                    throw Error("Invalid Token")
-                }
-                const petDetailsJson = await petDetailsResponse.json()
-
-                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-
-                console.log(pets)
-
-            } catch (error) {
-                console.log("pet owner page error", error)
-            }
-        }
-
-        if (user) {
-            fetchPetData()
-        }
-
-      }, [owner_name, owner_email, owner_contact, pet_name, pet_species, doctor, start_time, user]);
-
+        
+      }, [])
 
 
 
@@ -204,13 +244,14 @@ const Home = ({ navBarProps }) => {
             <div className="homeBookAppointments" id='bookAppointments'>
                 <div className="homeBookAppointmentsHeading">Book Appointments</div>
                 <div className="homeBookAppointmentsText">Take the first step towards your pet's well-being with Pawpulz Appointment Booking. Fill out the form below to schedule vet visits and manage medical records seamlessly, ensuring your furry friend receives top-notch care with ease and convenience.</div>
+                {error && (<div className="error-message">{error}</div>)}
                 {user ? (
                     <form className="homeBookAppointmentsForm" onSubmit={handleSubmit}>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Owner Name' onChange={(e) => setOwnerName(e.target.value)} value={user.username} required />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="email" placeholder='Owner Email' readOnly defaultValue={user.email} />
+                            <input type="email" placeholder='Owner Email' readOnly value={user.email} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
@@ -219,7 +260,7 @@ const Home = ({ navBarProps }) => {
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
                         </div> */}
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="petName" value={selectedPet ? selectedPet.petName : ''} onChange={(e) => handlePetSelect(e.target.value)} required>
+                            <select name="petName" onChange={(e) => handlePetSelect(e.target.value)} required>
                                 <option value="">Select a Pet</option>
                                 {pets && pets.map(pet => (
                                     <option key={pet._id} value={pet.petName}>{pet.petName}</option>
@@ -227,16 +268,13 @@ const Home = ({ navBarProps }) => {
                             </select>
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="text" placeholder='Pet Species' onChange={(e) => setPetSpecies(e.target.value)} value ={pet_species}  required/>
-                        </div>
-                        {/* <div className="homeBookAppointmentsFormInputWrapper">
-                            <select name="pet_species" onChange={(e) => setPetSpecies(e.target.value)} required>
-                                <option defaultValue="">Select a Species</option>
-                                <option defaultValue="Dog">Dog</option>
-                                <option defaultValue="Cat">Cat</option>
-                                <option defaultValue="Bird">Bird</option>
+                            <select name="pet_species" value={pet_species} onChange={(e) => setPetSpecies(e.target.value)} required>
+                                <option value="" disabled>Select a Species</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
                             </select>
-                        </div> */}
+                        </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Breed' onChange={(e) => setPetBreed(e.target.value)} value ={pet_breed} />
                         </div>
@@ -244,27 +282,23 @@ const Home = ({ navBarProps }) => {
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
-                                <>
-                                    {doctors.length === 0 ? (
-                                        <input type = "text" value={"Sorry, no doctors available."} disabled/>
-                                    ) : (
-                                        <select name="doctor" onChange={(e) => setDoctor(e.target.value)} required>
-                                            <option value="">Select a Doctor</option>
-                                            {doctors.map(doctor => (
-                                                <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
-                                            ))}
-                                        </select>
-                                    )}
-                                </>
+                                <select name="doctor" value={doctor} onChange={(e) => setDoctor(e.target.value)} required>
+                                <option value="">Select a Doctor</option>
+                                {doctors.map(doctor => (
+                                    <option key={doctor._id} value={doctor.name}>{doctor.name}</option>
+                                ))}
+                                </select>
                             )}
                         </div>
 
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value ={start_time} required />
                         </div>
+                        
                         <div className="homeBookAppointmentsFormInputWrapper">
                             <textarea name="description" id="description" cols="80" rows="10" placeholder='Description (optional) ' onChange={(e) => setDescription(e.target.value)} value ={description}></textarea>
                         </div>
+
                         <div className="homeBookAppointmentsFormButton">
                             {inputValidity && (<button type="submit">Book Appointment</button>)}
                             {!inputValidity && (<button type="submit" className="disabled" disabled>Book Appointment</button>)}

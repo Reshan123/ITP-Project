@@ -10,14 +10,20 @@ import { DoctorContextProvider } from './context/doctorContext.jsx'
 import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
 import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
 import { LostPetsContextProvider } from './context/LostPetContext.jsx'
+import {ConversationProvider } from './context/ConversationContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
 import { SalesContextProvider } from './context/SalesContext.jsx'
 >>>>>>> Stashed changes
+=======
+import { SocketContextProvider } from './context/SocketContext.jsx'
+import { SupplierContextProvider } from './context/SupplierContext.jsx'
+>>>>>>> InventoryManagementSystem
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -31,11 +37,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
     <AdoptionContextProvider>
       <PetContextProvider>
         <BookingContextProvider>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
           <LostPetsContextProvider>
             <PetContextProvider>
@@ -53,6 +60,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </PetContextProvider>
           </LostPetsContextProvider>
 =======
+=======
+>>>>>>> InventoryManagementSystem
           <SocketContextProvider>
             <LostPetsContextProvider>
               <ConversationProvider>
@@ -63,9 +72,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <AllPetsContextProvider>
                           <InventoryItemsContextProvider>
                             <SupplierContextProvider>
+<<<<<<< HEAD
                               <SalesContextProvider>
                               <App />
                               </SalesContextProvider>
+=======
+                              <App />
+>>>>>>> InventoryManagementSystem
                             </SupplierContextProvider>
                           </InventoryItemsContextProvider>
                         </AllPetsContextProvider>
@@ -76,9 +89,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </ConversationProvider>
             </LostPetsContextProvider>
           </SocketContextProvider>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> InventoryManagementSystem
         </BookingContextProvider>
       </PetContextProvider>
     </AdoptionContextProvider>
   </UserContextProvider>
-)
+);

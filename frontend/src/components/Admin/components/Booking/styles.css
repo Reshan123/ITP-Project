@@ -1,0 +1,418 @@
+.booking-content{
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-content .pagination{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.booking-content .bookingHeader{
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.booking-content .bookingHeader p{
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.booking-content hr{
+  margin-bottom: 35px;
+}
+
+/* Styles for the employee table */
+.booking-table{
+    width: 1140px;
+    align-content: center;
+    margin-top: 30px;
+    background-color: #f3f3f3;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+  
+/* Hover styles for the employee table */
+.booking-table:hover{
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+}
+
+.booking-content .bookingHeader div{
+  align-self: flex-end;
+  display: flex;
+  gap: 25px;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.booking-content .bookingHeader div button{
+  border-radius: 11px;
+  border: none;
+  color: #FFF;
+  background-color: #9453ce;
+  font-weight: 600;
+  padding: 10px 25px;
+  transition: 0.3s;
+}
+
+.booking-content .bookingHeader div input{
+  /* border-radius: 15px; */
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,.3);
+  /* color: #FFF; */
+  /* background-color: var(--primaryPurple); */
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  padding: 6px 15px;
+  transition: 0.3s;
+}
+
+.booking-content .bookingHeader div input:hover{
+  border-bottom: 2px solid rgba(0,0,0,.8);
+}
+
+
+
+
+
+
+
+
+  /* Common styles for the tables */
+.booking-table-style{
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: Agenda-Light, sans-serif;
+    font-weight: 100; 
+    background: #333; color: #fff;
+    text-rendering: optimizeLegibility;
+    border-radius: 5px; 
+  }
+
+  .booking-table-style thead{
+    height: 70px;
+  }
+  
+  /* Styles for the table header */
+  .booking-table-style thead tr th { 
+    font-weight: 600; 
+  }
+  
+  /* Styles for table header and table data */
+  .booking-table-style thead th, .booking-table-style tbody td { 
+    padding: 10px; 
+    font-size: 16px;
+  }
+  
+  .booking-table-style tbody td { 
+    padding: .7rem; 
+    font-size: 16px;
+    color: #444; 
+    background: #eee;
+    transition: 0.3s;
+  }
+  
+  /* Styles for alternating rows in the table body - w3school */
+  .booking-table-style tbody tr:not(:last-child) { 
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;  
+  }
+  
+  /* Styles for the view button */
+  .booking-table-style tbody td center .table-view-btn{
+    width: 80px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .booking-table-style tbody td center .table-view-btn:hover{
+    background-color: #8737ce;
+  }
+  
+  /* responsive table - w3school*/
+  @media screen and (max-width: 600px) {
+    .booking-table-style caption { background-image: none; }
+    .booking-table-style thead { display: none; }
+    .booking-table-style tbody td { 
+      display: block; 
+      padding: .6rem; 
+    }
+    .booking-table-style tbody tr td:first-child { 
+      background: #666; 
+      color: #fff; 
+    }
+    .booking-table-style tbody td:before { 
+      content: attr(data-th); 
+      font-weight: bold;
+      display: inline-block;
+      width: 6rem;  
+    }
+  }
+
+
+
+
+
+
+
+  /* Popup Styles */
+  .popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .popup-inner{
+    position: relative;
+    padding: 30px;
+    width: 100%;
+    border-radius: 15px;
+    max-width: 640px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    background-color: #FFF;
+    transition: 0.3s;
+  }
+
+  .popup-inner:hover{
+    box-shadow: 0 5px 10px rgba(0,0,0,.5);
+  }
+
+  .popup-inner .close-btn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    align-self: self-start;
+    transform: scale(1.8);
+    cursor: pointer;
+  }
+
+  body.active-popup{
+    overflow-y: hidden;
+  }
+
+  .booking-popup-details{
+    background: #fff;
+    border-radius: 4px;
+    margin: 20px auto;
+    height: 420px;
+    padding: 20px;
+    position: relative;
+    transition: 0.3s;
+  }
+  
+  .booking-popup-details p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .booking-popup-details .desc{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 0.3s;
+  }
+
+  .booking-popup-details .desc:hover::before {
+    content: attr(data-fulltext);
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 9999;
+    white-space: normal;
+  }
+
+  .booking-popup-details h3{
+    color: #555;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .booking-popup-details p{
+    font-family: "Poppins", sans-serif;
+    padding: 6px 0;
+  }
+
+  .booking-popup-details strong{
+    font-family: "Poppins", sans-serif;
+    padding-right: 5px;
+  }
+
+   /* Styles for the delete button */
+   .table-delete-btn{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 100px;
+    height:30px;
+    background-color: rgb(255, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    border: 0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the delete button */
+  .table-delete-btn:hover{
+    background-color: rgb(175, 0, 0);
+  }
+
+  /* Styles for the view button */
+  .table-update-btn{
+    position: absolute;
+    top: 70px;
+    right: 16px;
+    width: 100px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .table-update-btn:hover{
+    background-color: #8737ce;
+  }
+  
+  
+  .table-delete-btn a, .table-update-btn a{
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+
+
+
+
+
+
+/* Admin Update Booking Styles */
+
+#AdminUpdateAppointments{
+  scroll-margin-top: 5rem;
+}
+
+.AdminUpdateAppointments{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 20px 100px;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsHeading{
+    font-size: 3rem;
+    color: #9453ce;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsText{
+    width: 75%;
+    color: #9453ce;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm{
+    width: 75%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px 25px;
+    align-content: stretch;
+}
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper input,
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper textarea, .AdminUpdateAppointmentsFormInputWrapper select{
+    padding: 10px 8px;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormInputWrapper:nth-child(9){
+    grid-column: 1/4;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton{
+  grid-column: 2;
+  align-self: center;
+  justify-self: center;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton button{
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background-color: #8f5ebb;
+  padding: 15px 25px;
+  transition: 0.3s;
+}
+
+.AdminUpdateAppointments .AdminUpdateAppointmentsForm .AdminUpdateAppointmentsFormButton button:hover{
+  background-color:#6b0fbc;
+  transform: scale(1.03);
+  box-shadow: 0 10px 15px rgba(0,0,0,.3);
+}
+
+.hint-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint-button {
+  background-color: #e0e0e0;
+  color: #555;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: not-allowed;
+}
+
+.hint-text {
+  margin-top: 5px;
+  color: rgb(197, 2, 2); /* You can adjust the color as needed */
+  font-size: 16px;
+}
+
+.AdminUpdateAppointments .backArrow{
+  align-self: self-start;
+  transform: scale(1.8);
+  cursor: pointer;
+}

@@ -17,7 +17,8 @@ const messageRoutes = require('./routes/messageRoutes')
 const supplierRoutes = require('./routes/supplierRoutes')
 const salesRoutes = require('./routes/salesRoutes')
 const { app, server } = require("./socket/socket");
-const app = express()
+
+//const app = express()
 
 const corsOptions ={
     origin:'*', 
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use(express.static('Images'))
+
 
 //Routes
 app.use("/api/petOwner", petOwnerRoutes)
@@ -63,9 +65,9 @@ app.use('/api/admin/login', (req, res) => {
 
 mongoose.connect(process.env.MONGOOSE_URI)
     .then(() => {
-        const PORT = app.listen(process.env.PORT, () => {
-            console.log("Connected to db listening on ",process.env.PORT);
-        }) 
+        const PORT = server.listen(process.env.PORT, () => {
+          console.log("Connected to db listening on ", process.env.PORT);
+        }); 
     })
     .catch((error) => {
         console.log(error)

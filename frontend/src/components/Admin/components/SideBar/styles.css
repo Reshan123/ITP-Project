@@ -1,26 +1,56 @@
-
-* {
-    box-sizing: border-box;
-  }
 .adminSideBar{
-    /* background-color: var(--primaryPurple); */
     width: 17vw;
+    padding-top: 10px;
     background: var(--primaryPurple);
-    /* position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0; */
-    padding-block: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.adminSideBar .adminSideBarLogo{
+    align-self: center;
+}
+
+.adminSideBar .adminSideBarLogo svg{
+    /* color: ; */
+    font-size: 2rem;
+}
+
+.adminSideBar .adminSideBarProfile{
+    position: sticky;
+    top: 10px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminSideBar .adminSideBarProfile svg{
+    font-size: 3.5rem;
+}
+
+.adminSideBar .adminSideBarProfile .adminSideBarUsername{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.adminSideBar .adminSideBarProfile button{
+    border-radius: 11px;
+    border: none;
+    color: var(--primaryPurple);
+    background-color: #fff;
+    font-weight: 600;
+    padding: 10px 25px;
+    transition: 0.3s;
 }
 
 .adminSideBar .adminSideBarLinksContainer{
     position: sticky;
-    top: 120px;
+    top: 150px;
     margin: 0;
     padding: 0;
 
     display: grid;
-    gap: 1rem;
 }
 
 .adminSideBar .adminSideBarLinksContainer .adminSideBarLink .linkText{
