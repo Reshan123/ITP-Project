@@ -82,7 +82,7 @@ const SupplierUpdateForm = () => {
         />
         <label>Supplier Email</label>
         <input
-          type="text"
+          type="email"
           onChange={(e) => setSupplierEmail(e.target.value)}
           value={supplierEmail}
         />
