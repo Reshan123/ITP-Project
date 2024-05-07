@@ -10,7 +10,7 @@ const Home = ({ navBarProps }) => {
 
     const navigate = useNavigate()
 
-    navBarProps("#E2929D", "#FFF")
+    navBarProps("#E2929D", "#FFF", "#B799D1")
 
     const [inputValidity, setInputValidity] = useState(false)
 

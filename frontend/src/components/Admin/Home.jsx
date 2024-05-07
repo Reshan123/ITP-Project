@@ -20,8 +20,6 @@ import AllForms from './components/Adoption/AllForms';
 import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
-
-
 import { useSalesContext } from "../../hooks/useSalesContext"
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
@@ -34,9 +32,9 @@ import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
 import SupplierForm from './components/Supplier/SupplierForm'
 import SalesHome from './components/Sales/SalesHome';
 import SalesUpdateForm from './components/Sales/SalesUpdate';
+
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
-
 
 const Home = () => {
 
