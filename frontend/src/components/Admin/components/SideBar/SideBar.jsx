@@ -47,11 +47,7 @@ const SideBar = () => {
                 <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Lost Pet Notices</div>
                 </NavLink>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> InventoryManagementSystem
+
                 <br />
                 
                 <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact="true">
@@ -62,14 +58,10 @@ const SideBar = () => {
                 <NavLink to='/admin/home/Supplier' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Supplier</div>
                 </NavLink>
-<<<<<<< HEAD
 
                 <NavLink to='/admin/home/SalesHome' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Sales</div>
                     </NavLink>
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
             </div>
         </div>
     );

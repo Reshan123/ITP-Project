@@ -11,7 +11,6 @@ import PetOwners from './components/PetOwners/PetOwners';
 import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 import { useAdoptionContext } from '../../hooks/useAdoptionContext';
-
 import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
 import InventoryItemForm from './components/Inventory/InventoryItemForm';
 import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
@@ -23,14 +22,9 @@ import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
 
 
 
+import { useSalesContext } from "../../hooks/useSalesContext"
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> InventoryManagementSystem
 import Booking from './components/Booking/Booking';
 import BookingUpdate from './components/Booking/BookingUpdate';
 import { useBookingContext } from '../../hooks/useBookingContext';
@@ -38,24 +32,17 @@ import { useSupplierContext } from "../../hooks/useSupplierContext"
 import SupplierDetails from './components/Supplier/SupplierDetails';
 import SupplierUpdateForm from './components/Supplier/SupplierUpdateForm';
 import SupplierForm from './components/Supplier/SupplierForm'
-<<<<<<< HEAD
-<<<<<<< HEAD
 import SalesHome from './components/Sales/SalesHome';
 import SalesUpdateForm from './components/Sales/SalesUpdate';
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
-=======
-
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
 
 
->>>>>>> InventoryManagementSystem
 const Home = () => {
 
     const navigate = useNavigate()
 
+    const { sales, dispatch:salesDispatch} = useSalesContext()
 
     const { inventoryitems, dispatch: inventoryDispatch } = useInventoryItemsContext()
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
@@ -170,6 +157,15 @@ const Home = () => {
                     adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
                 }
 
+                //sales 
+                const salesResponse= await fetch("http://localhost:4000/api/sales")
+                const salesJson = await salesResponse.json()
+                
+                if (salesResponse.ok) {
+                    console.log(salesJson)
+                    salesDispatch({ type: 'SET_SALES', payload: salesJson })
+                }
+
 
             } catch (error) {
                 console.log(error)
@@ -209,29 +205,15 @@ const Home = () => {
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
                         <Route path='/LostPet' element={<LostPet />} />
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> InventoryManagementSystem
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
                         <Route path='/Supplier' element={<SupplierDetails />} />
                         <Route path='/SupplierForm' element={<SupplierForm />} />
                         <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
-=======
                         <Route path='/MedicalRecord' element={ <MedicalRecord />} />
                         <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
-                        
->>>>>>> InventoryManagementSystem
                     </Routes>
                 </div>
             </div>

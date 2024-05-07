@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { UserContextProvider } from './context/userContext.jsx'
-import App from './App.jsx'
 import { AdoptionContextProvider } from './context/AdoptionContext.jsx'
-import firebase from "firebase/compat/app"
 import { PetContextProvider } from './context/petContext.jsx'
 import { AllDoctorContextProvider } from './context/allDoctorContext.jsx'
 import { DoctorContextProvider } from './context/doctorContext.jsx'
@@ -13,21 +11,12 @@ import { LostPetsContextProvider } from './context/LostPetContext.jsx'
 import {ConversationProvider } from './context/ConversationContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-import { SocketContextProvider } from './context/SocketContext.jsx'
-import { SupplierContextProvider } from './context/SupplierContext.jsx'
-<<<<<<< HEAD
 import { SalesContextProvider } from './context/SalesContext.jsx'
->>>>>>> Stashed changes
-=======
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
->>>>>>> InventoryManagementSystem
-=======
 import { MedicalRecordContext } from './context/MedicalRecordContext.jsx'
->>>>>>> InventoryManagementSystem
+import App from './App.jsx'
+import firebase from "firebase/compat/app"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdLhIFPlvnkqJiQASjo3TK14TnGlkNwkk",
@@ -45,66 +34,33 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <UserContextProvider>
     <AdoptionContextProvider>
       <PetContextProvider>
-        <BookingContextProvider>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-          <LostPetsContextProvider>
-            <PetContextProvider>
-              <DoctorContextProvider>
-                <AllDoctorContextProvider>
-                  <AllPetOwnerContextProvider>
+        <AllDoctorContextProvider>
+          <DoctorContextProvider>
+            <AllPetOwnerContextProvider> 
+              <BookingContextProvider>
+                <LostPetsContextProvider>
+                  <ConversationProvider>
                     <AllPetsContextProvider>
                       <InventoryItemsContextProvider>
-                        <App />
-                      </InventoryItemsContextProvider>
-                    </AllPetsContextProvider>
-                  </AllPetOwnerContextProvider>
-                </AllDoctorContextProvider>
-              </DoctorContextProvider>
-            </PetContextProvider>
-          </LostPetsContextProvider>
-=======
-=======
->>>>>>> InventoryManagementSystem
-          <SocketContextProvider>
-            <LostPetsContextProvider>
-              <ConversationProvider>
-                <PetContextProvider>
-                  <DoctorContextProvider>
-                    <AllDoctorContextProvider>
-                      <AllPetOwnerContextProvider>
-                        <AllPetsContextProvider>
-                          <InventoryItemsContextProvider>
-                            <SupplierContextProvider>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                              <SalesContextProvider>
-                              <App />
-                              </SalesContextProvider>
-=======
-                              <App />
->>>>>>> InventoryManagementSystem
-=======
+                        <SocketContextProvider>
+                          <SupplierContextProvider>
+                            <SalesContextProvider>
                               <MedicalRecordContext>
-                              <App />
-                              </MedicalRecordContext>
->>>>>>> InventoryManagementSystem
-                            </SupplierContextProvider>
-                          </InventoryItemsContextProvider>
-                        </AllPetsContextProvider>
-                      </AllPetOwnerContextProvider>
-                    </AllDoctorContextProvider>
-                  </DoctorContextProvider>
-                </PetContextProvider>
-              </ConversationProvider>
-            </LostPetsContextProvider>
-          </SocketContextProvider>
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> InventoryManagementSystem
-        </BookingContextProvider>
-      </PetContextProvider>
-    </AdoptionContextProvider>
-  </UserContextProvider>
+                                <App />
+                              </MedicalRecordContext>  
+                            </SalesContextProvider>  
+                          </SupplierContextProvider>  
+                        </SocketContextProvider>    
+                      </InventoryItemsContextProvider>  
+                    </AllPetsContextProvider>  
+                  </ConversationProvider>  
+                </LostPetsContextProvider>
+              </BookingContextProvider>
+            </AllPetOwnerContextProvider>   
+          </DoctorContextProvider>    
+        </AllDoctorContextProvider>    
+      </PetContextProvider>  
+    </AdoptionContextProvider>    
+  </UserContextProvider> 
 );
+
