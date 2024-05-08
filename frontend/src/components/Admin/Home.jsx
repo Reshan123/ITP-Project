@@ -11,7 +11,6 @@ import PetOwners from './components/PetOwners/PetOwners';
 import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 import { useAdoptionContext } from '../../hooks/useAdoptionContext';
-
 import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
 import InventoryItemForm from './components/Inventory/InventoryItemForm';
 import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
@@ -20,6 +19,8 @@ import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
 import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
+
+import { useSalesContext } from "../../hooks/useSalesContext"
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
@@ -34,11 +35,14 @@ import SalesUpdateForm from './components/Sales/SalesUpdate';
 
 import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
+import MedicalUpdate from './components/MedicalRecord/MedicalUpdate';
+import MedicalRecordForm from './components/MedicalRecord/MedicalRecordForm';
 
 const Home = () => {
 
     const navigate = useNavigate()
 
+    const { sales, dispatch:salesDispatch} = useSalesContext()
 
     const { inventoryitems, dispatch: inventoryDispatch } = useInventoryItemsContext()
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
@@ -153,6 +157,15 @@ const Home = () => {
                     adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
                 }
 
+                //sales 
+                const salesResponse= await fetch("http://localhost:4000/api/sales")
+                const salesJson = await salesResponse.json()
+                
+                if (salesResponse.ok) {
+                    console.log(salesJson)
+                    salesDispatch({ type: 'SET_SALES', payload: salesJson })
+                }
+
 
             } catch (error) {
                 console.log(error)
@@ -200,7 +213,8 @@ const Home = () => {
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
                         <Route path='/MedicalRecord' element={ <MedicalRecord />} />
-                        <Route path='/MedicalRecord/update/:id' element={ <MedicalRecord />} />
+                        <Route path='/MedicalRecord/update/:id' element={ <MedicalUpdate/>}/>
+                        <Route path='/MedicalRecord/add' element={ <MedicalRecordForm/>}/>
                     </Routes>
                 </div>
             </div>

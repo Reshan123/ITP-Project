@@ -59,19 +59,25 @@ const createMedicalRecord = async (request, response) => {
 
 // Function to get all medical records
 const getAllMedicalRecords = async (request, response) => {
-  try {
-    // Find all Medical Records from the database
-    const records = await MedicalRecord.find({});
+  // try {
+  //   // Find all Medical Records from the database
+  //   const records = await MedicalRecord.find({});
 
-    // Send response with the array of Medical Records
-    return response.status(200).json({
-      count: records.length,
-      data: records,
-    });
-  } catch (error) {
-    // Handle any errors and send appropriate response
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
+  //   // Send response with the array of Medical Records
+  //   return response.status(200).json({
+  //     count: records.length,
+  //     data: records,
+  //   });
+  // } catch (error) {
+  //   // Handle any errors and send appropriate response
+  //   console.log(error.message);
+  //   response.status(500).send({ message: error.message });
+  // }
+  try{
+    const record = await MedicalRecord.find({})
+    response.status(200).json(record)
+  }catch(error){
+    response.status(404).json({error:error.message})
   }
 };
 
