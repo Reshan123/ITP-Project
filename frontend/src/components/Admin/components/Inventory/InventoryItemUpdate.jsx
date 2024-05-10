@@ -57,8 +57,14 @@ const InventoryItemUpdate = () => {
   const [error, setError] = useState("")
 
   const handleUpdate = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
+    // Validation checks
+    if (parseFloat(itemPrice) <= 0 || parseFloat(currentStock) <= 0 || parseInt(itemStockCount) <= 0) {
+      setError("Price, current stock, and stock count must be greater than 0");
+      return;
+    }
+
     const formData = {
       supplierID,
       itemName,
@@ -67,7 +73,8 @@ const InventoryItemUpdate = () => {
       itemDescription,
       itemImageURL,
       currentStock
-    }
+    };
+
     axios.put("http://localhost:4000/api/inventoryItems/" + itemID, formData)
       .then(res => {
         intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, currentStock, itemDescription, itemImageURL }] })

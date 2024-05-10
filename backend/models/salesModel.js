@@ -13,7 +13,7 @@ const salesItemSchema = new schema({
         required: true
       },
 
-      itemQuantity: {
+      quantity: {
         type: Number,
         required: true
       },

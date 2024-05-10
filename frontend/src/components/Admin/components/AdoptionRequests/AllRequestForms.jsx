@@ -1,25 +1,38 @@
 import { useAdoptionContext } from "../../../../hooks/useAdoptionContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Table, Button, ConfigProvider } from 'antd'
+import { Table, Button, ConfigProvider, Modal } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons';
-import './adoptionAdmin.css'
+
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { useAdoptionRequestContext } from "../../../../hooks/useAdoptionRequestContext";
 
-const AllForms = () => {
+const AllRequestForms = () => {
 
 
-    const { adoptionForms, dispatch } = useAdoptionContext();
+    const { requestForms, dispatch } = useAdoptionRequestContext();
     const [sortedInfo, setSortedInfo] = useState({});
     const [filteredInfo, setFilteredInfo] = useState({});
     const [searchText, setSearchText] = useState('');
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [modalRecord, setModalRecord] = useState(null);
+
+    const showModal = (record) => {
+        setModalRecord(record);
+        setIsModalVisible(true);
+    };
+
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchForms = async () => {
-            const response = await fetch('http://localhost:4000/api/adoption')
+            const response = await fetch('http://localhost:4000/api/adoptionRequest/getAll')
             const json = await response.json()
 
             if (response.ok) {
@@ -50,7 +63,7 @@ const AllForms = () => {
             return;
         }
 
-        const response = await fetch(`http://localhost:4000/api/adoption/${id}`, {
+        const response = await fetch(`http://localhost:4000/api/adoptionRequest/${id}`, {
             method: 'DELETE'
         });
 
@@ -61,19 +74,18 @@ const AllForms = () => {
         }
     };
 
-    const filteredForms = adoptionForms && Array.isArray(adoptionForms) ?
-        adoptionForms.filter(form =>
-            form.name.toLowerCase().includes(searchText.toLowerCase())
-            || String(form.age).includes(searchText)
-            || form.species.toLowerCase().includes(searchText.toLowerCase())
-            || form.gender.toLowerCase() === searchText.toLowerCase()
-            || String(form.approved).toLowerCase() === searchText.toLowerCase()
+    const filteredForms = requestForms && Array.isArray(requestForms) ?
+        requestForms.filter(form =>
+            form.contactName.toLowerCase().includes(searchText.toLowerCase()) ||
+            form.contactEmail.toLowerCase().includes(searchText.toLowerCase()) ||
+            form.residenceType.toLowerCase().includes(searchText.toLowerCase())
+
         ) : [];
 
 
     // Check if adoptionForms is an array
-    if (!Array.isArray(adoptionForms)) {
-        return <p>No adoption forms available.</p>;
+    if (!Array.isArray(requestForms)) {
+        return <p>No Request forms available.</p>;
     }
 
 
@@ -84,16 +96,17 @@ const AllForms = () => {
 
         // Convert data to an array of arrays
         const tableData = data.map((form) => [
-            form.name,
-            form.age,
-            form.species,
-            form.gender,
-            form.approved
+            form.petName,
+            form.contactName,
+            form.contactEmail,
+            form.contactPhone,
+            form.residenceType,
+            form.status
         ]);
 
         // Add the table to the PDF
         doc.autoTable({
-            head: [['Name', 'Age', 'Species', 'Gender', 'Approval Status']],
+            head: [['Name', 'Email', 'Phone', 'Residence Type', 'Approval Status']],
             body: tableData,
             startY: 20,
             styles: {
@@ -121,85 +134,105 @@ const AllForms = () => {
         });
 
         // Save the PDF with a unique name
-        doc.save('adoption_forms_report.pdf');
+        doc.save('adoption_request_report.pdf');
     };
 
 
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            sorter: (a, b) => a.name.localeCompare(b.name),
-            sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+            title: 'Pet Name',
+            dataIndex: 'petName',
+            key: 'petName',
+            sorter: (a, b) => a.petName.localeCompare(b.petName),
+            sortOrder: sortedInfo.columnKey === 'petName' && sortedInfo.order,
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
-            sorter: (a, b) => a.age - b.age,
-            sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
+            title: 'Name',
+            dataIndex: 'contactName',
+            key: 'contactName',
+            sorter: (a, b) => a.contactName.localeCompare(b.contactName),
+            sortOrder: sortedInfo.columnKey === 'contactName' && sortedInfo.order,
+        },
+        {
+            title: 'Email',
+            dataIndex: 'contactEmail',
+            key: 'contactEmail',
+            sorter: (a, b) => a.contactEmail - b.contactEmail,
+            sortOrder: sortedInfo.columnKey === 'contactEmail' && sortedInfo.order,
 
         },
         {
-            title: 'Species',
-            dataIndex: 'species',
-            key: 'species',
-            sorter: (a, b) => a.species.localeCompare(b.species),
-            sortOrder: sortedInfo.columnKey === 'species' && sortedInfo.order,
+            title: 'Phone',
+            dataIndex: 'contactPhone',
+            key: 'contactPhone',
+            sorter: (a, b) => a.contactPhone - b.contactPhone,
+            sortOrder: sortedInfo.columnKey === 'contactPhone' && sortedInfo.order,
+
         },
         {
-            title: 'Gender',
-            dataIndex: 'gender',
-            key: 'gender',
-            filters: [
-                { text: 'Male', value: 'male' },
-                { text: 'Female', value: 'Female' },
-            ],
-            filteredValue: filteredInfo.gender || null,
-            onFilter: (value, record) => record.gender === value,
+            title: 'Residence Type',
+            dataIndex: 'residenceType',
+            key: 'residenceType',
+            sorter: (a, b) => a.residenceType.localeCompare(b.residenceType),
+            sortOrder: sortedInfo.columnKey === 'residenceType' && sortedInfo.order,
         },
         {
             title: 'Approval Status',
-            dataIndex: 'approved',
-            key: 'approved',
+            dataIndex: 'status',
+            key: 'status',
             filters: [
                 { text: 'Pending', value: 'Pending' },
                 { text: 'Approved', value: 'Approved' },
                 { text: 'Rejected', value: 'Rejected' }
             ],
-            filteredValue: filteredInfo.approved || null,
-            onFilter: (value, record) => record.approved === value,
-        }, {
-            title: 'Adoption Status',
-            dataIndex: 'adoptionStatus',
-            key: 'adoptionStatus',
-            filters: [
-                { text: 'Pending', value: 'Pending' },
-                { text: 'Adopted', value: 'Adopted' },
-
-            ],
-            filteredValue: filteredInfo.adoptionStatus || null,
-            onFilter: (value, record) => record.adoptionStatus === value,
+            filteredValue: filteredInfo.status || null,
+            onFilter: (value, record) => record.status === value,
         },
         {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <>
-                    <Button className="view-details-btn" onClick={() => handleViewDetails(record._id)}>View Details</Button>
+                    <Button className="view-details-btn" onClick={() => showModal(record)}>View Details</Button>
                     <Button type="primary" className="listing-delete-btn" danger onClick={() => handleDelete(record._id)}>
                         <DeleteOutlined />
                     </Button>
+                    <Modal
+                        title="Form Details"
+                        open={isModalVisible}
+                        onCancel={handleCancel}
+                        footer={[
+                            <Button key="cancel" onClick={handleCancel}>
+                                Cancel
+                            </Button>,
+
+                        ]}
+                    >
+
+                        {modalRecord && (
+                            <>
+                                <p>Pet Name: {modalRecord.petName}</p>
+                                <p>Name: {modalRecord.contactName}</p>
+                                <p>Email: {modalRecord.contactEmail}</p>
+                                <p>Phone: {modalRecord.contactPhone}</p>
+                                <p>Residence Type: {modalRecord.residenceType}</p>
+                                <p>Approval Status: {modalRecord.status}</p>
+                                <p>Current Pets: {modalRecord.currentPets ? "Yes" : "No"}</p>
+                                <p>Currunt Pet Details: {modalRecord.currentPetsDetails}</p>
+                                <p>Reason For Adoption: {modalRecord.reasonForAdoption}</p>
+                            </>
+                        )}
+                    </Modal>
                 </>
             )
         }
+
     ];
 
     return (
         <div className="allforms-admin">
             <div className="allforms-header">
-                <p>All Adoption Form Details</p>
+                <p>All Adoption Request Form Details</p>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -233,5 +266,4 @@ const AllForms = () => {
         </div>
     );
 }
-
-export default AllForms
+export default AllRequestForms

@@ -3,6 +3,9 @@ import './Storestyles.css';
 import { useInventoryItemsContext } from '../../../hooks/useInventoryItemsContext';
 import storeImage from './images/store.png'
 const Store = ({ navBarProps }) => {
+
+    const [quantity, setQuantity] = useState();
+
     navBarProps("#FFF", "#B799D1", "#B799D1");
 
     const { inventoryitems, dispatch } = useInventoryItemsContext();
@@ -25,8 +28,25 @@ const Store = ({ navBarProps }) => {
         fetchInventoryItems();
     }, [dispatch]);
 
-    const handleClick = async () => {
-        // Raveesha's Code
+    const handleClick = async (inventoryitem) => {
+
+       
+        const formData = {
+            itemName: inventoryitem.itemName,
+            itemPrice: inventoryitem.itemPrice,
+            quantity: quantity,
+            status: 'sold'
+        }
+        console.log(formData)
+
+        const createSale = await fetch('http://localhost:4000/api/sales/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+        })
+
+        const json = await createSale.json()
+        console.log(json)
 
     };
 
@@ -51,11 +71,11 @@ const Store = ({ navBarProps }) => {
                             <label>Select the Quantity</label>
                             <input
                                 type='number'
-                                onChange={(e) => (e.target.value)}
-                                value
+                                onChange={(e) => setQuantity(e.target.value)}
+                                value={quantity}
                             />
                         </div>
-                        <button onClick={handleClick} className="btn">Buy Now</button>
+                        <button onClick={() => {handleClick(inventoryitem)}} className="btn">Buy Now</button>
                     </div>
                 </div>
             );

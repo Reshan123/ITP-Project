@@ -7,6 +7,8 @@ import PetComponent from './PetComponent';
 import BookingDetails from '../Booking/BookingDetails'
 import '../Booking/styles.css'
 import { Pagination } from 'antd';
+import { Modal, Button } from 'antd';
+
 
 import './styles.css'
 import { useEffect, useState } from 'react';
@@ -14,6 +16,7 @@ import { useAdoptionContext } from '../../../hooks/useAdoptionContext';
 import { useLostPetsContext } from '../../../hooks/useLostPetsContext';
 //import LostPetDetails from '../LostPet/LostPetDetails';
 import LostPetProfileDetails from '../LostPet/LostPetProfileDetails';
+import { useAdoptionRequestContext } from '../../../hooks/useAdoptionRequestContext';
 //import '../LostPet/styles.css'
 
 const Profile = ({ navBarProps }) => {
@@ -28,6 +31,21 @@ const Profile = ({ navBarProps }) => {
 
     const { adoptionForms, dispatch } = useAdoptionContext();
     const { lostNotice, dispatch: lostDispatch } = useLostPetsContext()
+    const { requestForms, dispatch: applicationDispatch } = useAdoptionRequestContext();
+    const [visible, setVisible] = useState(false);
+    const [selectedForm, setSelectedForm] = useState(null);
+
+
+    const handleViewForm = (form) => {
+        setSelectedForm(form);
+        setVisible(true);
+    };
+
+    const handleCancel = () => {
+        setVisible(false);
+    };
+
+
 
     //booking pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -171,7 +189,126 @@ const Profile = ({ navBarProps }) => {
     const handleView = (id) => {
         navigate('/pet/profile/adoption-form-update/' + id);
     };
-    //
+
+
+
+    //getallrequestforms
+    useEffect(() => {
+        const fetchForms = async () => {
+            const response = await fetch('http://localhost:4000/api/adoptionRequest/getall')
+            const json = await response.json()
+
+            if (response.ok) {
+                applicationDispatch({ type: 'SET_FORMS', payload: json })
+            }
+        }
+        fetchForms()
+    }, [applicationDispatch])
+
+    //getting userID
+    const getUserIDFromToken = () => {
+        // Assuming user.userToken contains the JWT token
+        const token = user && user.userToken;
+
+        if (!token) {
+            console.error("Token is missing");
+            return null;
+        }
+
+        // Split the token by periods to get the payload part
+        const tokenParts = token.split('.');
+
+        if (tokenParts.length !== 3) {
+            console.error("Invalid token format");
+            return null;
+        }
+
+        // The payload is the second part
+        const payload = JSON.parse(atob(tokenParts[1]));
+
+        if (!payload._id) {
+            console.error("User ID not found in token");
+            console.log("Payload:", payload); // Log the payload to inspect its structure
+            return null;
+        }
+
+        // Extract the userID from the payload
+        return payload._id;
+    };
+
+
+    const userID = getUserIDFromToken(); // Get the current user's ID from the token
+    console.log("UserID:", userID);
+
+    const matchingRequestForms = requestForms && requestForms.length > 0
+        ? requestForms.filter(requestForm => userID === requestForm.userID)
+        : [];
+
+    console.log("Matching Request Forms:", matchingRequestForms);
+
+
+    const [approvalStatus, setStatus] = useState(requestForms ? requestForms.status : null);
+
+    const [adoptionStatus, setAdoptionStatus] = useState(adoptionForms ? adoptionForms.adoptionStatus : null);
+
+
+
+    const handleApproval = async (id, status, adoptionStatus, adoptionFormID) => {
+
+        const confirmation = window.confirm(`Are you sure you want to ${status === 'Approved' ? 'approve' : 'reject'} this adoption form?`);
+        if (!confirmation) return;
+        try {
+            const response = await fetch(`http://localhost:4000/api/adoptionRequest/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: status })
+            });
+            const json = await response.json();
+            setStatus(status);
+            if (response.ok) {
+
+                console.log(requestForms.status)
+            }
+
+            const res = await fetch(`http://localhost:4000/api/adoption/${adoptionFormID}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ adoptionStatus: adoptionStatus })
+            });
+            const json1 = await res.json();
+            setAdoptionStatus(adoptionStatus);
+            if (response.ok) {
+
+
+            }
+        } catch (error) {
+            console.error('Error updating approval status:', error);
+        }
+    };
+
+
+    const handleRequestDelete = async (id) => {
+        const response = await fetch('http://localhost:4000/api/adoptionRequest/' + id, {
+            method: 'DELETE'
+        })
+        const confirmed = window.confirm("Are you sure you want to delete this form?");
+
+        if (!confirmed) {
+            return; // If not confirmed, return without submitting
+        }
+        const json = await response.json()
+
+        if (response.ok) {
+            applicationDispatch({ type: 'DELETE_FORM', payload: json })
+            console.log('Deleted sucessfully')
+        }
+    }
+
+
     return (
         <>
             <div className="profilePage">
@@ -236,22 +373,149 @@ const Profile = ({ navBarProps }) => {
                     <div className="detailsSectionCardContainer">
                         {adoptionForms && adoptionForms.length > 0 ? (
                             adoptionForms.map(adoptionForm => (
-                                <div className="adoption-form-preview" key={adoptionForm._id}>
-                                    <img src={adoptionForm.imageUrl || ''} alt="Pet" className="pet-image" />
-                                    <div className="details">
-                                        <h4>{adoptionForm.name}</h4>
+                                // Check if adoptionStatus is 'Pending'
+                                adoptionForm.adoptionStatus === 'Pending' && (
+                                    <div className="adoption-form-preview" key={adoptionForm._id}>
+                                        <img src={adoptionForm.imageUrl || ''} alt="Pet" className="pet-image" />
+                                        <div className="details">
+                                            <h4>{adoptionForm.name}</h4>
+                                        </div>
+                                        <h3 className='approval-status' style={{ color: adoptionForm.approved === 'Approved' ? 'green' : 'red' }}>{adoptionForm.approved}</h3>
+                                        <button className='viewbtn1' onClick={() => handleView(adoptionForm._id)}>View Listing</button>
                                     </div>
-                                    <h3 className='approval-status' style={{ color: adoptionForm.approved === 'Approved' ? 'green' : 'red' }}>{adoptionForm.approved}</h3>
-                                    <button className='viewbtn1' onClick={() => handleView(adoptionForm._id)}>View Listing</button>
-                                </div>
+                                )
                             ))
                         ) : (
                             <div>No forms added</div>
                         )}
+
+                    </div>
+                </div>
+
+
+                {/*adoptionRequest*/}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Adoption Applications</div>
+
+                    </div>
+                    <hr />
+                    <div className="detailsSectionCardContainer">
+
+                        <div className="request-formss">
+                            {matchingRequestForms && matchingRequestForms.length > 0 ? (
+                                matchingRequestForms.map(form => (
+                                    <div className="request-forms" key={form._id}>
+
+                                        <p>Name: {form.petName}</p>
+                                        <p>Contact Name: {form.contactName}</p>
+                                        <p>Status: {form.status}</p>
+                                        <span onClick={() => handleRequestDelete(form._id)}>Delete</span>
+                                        <button className='view-btn1' onClick={() => handleViewForm(form)}>View Form</button>
+
+
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No adoption requests found</p>
+                            )}
+
+                            <Modal
+                                title="Request Form Details"
+                                visible={visible}
+                                onCancel={handleCancel}
+                                footer={[
+                                    <Button key="update" type="primary" onClick={() => navigate(`/pet/requestform/${selectedForm._id}`)}>
+                                        Update
+                                    </Button>,
+
+                                ]}
+                            >
+                                {selectedForm && (
+                                    <div>
+                                        <p>Contact Name: {selectedForm.contactName}</p>
+                                        <p>Pet Name: {selectedForm.petName}</p>
+                                        <p>Contact Email: {selectedForm.contactEmail}</p>
+                                        <p>Contact Phone: {selectedForm.contactPhone}</p>
+                                        <p>Residence Type: {selectedForm.residenceType}</p>
+                                        <p>Residence Details: {selectedForm.residenceDetails}</p>
+                                        <p>Current Pets: {selectedForm.currentPets ? 'Yes' : 'No'}</p>
+                                        <p>Current Pets Details: {selectedForm.currentPetsDetails}</p>
+                                        <p>Reason for Adoption: {selectedForm.reasonForAdoption}</p>
+                                    </div>
+                                )}
+                            </Modal>
+                        </div>
+
                     </div>
 
 
                 </div>
+
+                {/*Applications for a pet*/}
+                {/*adoptionRequest*/}
+                <div className="detailsSection">
+                    <div className="detailsSectionTitleContainer">
+                        <div className="detailsSectionTitle">My Adoption Requests</div>
+
+                    </div>
+                    <hr />
+                    <div className="detailsSectionCardContainer">
+                        <div className="applied-forms">
+                            {adoptionForms && adoptionForms.length > 0 ? (
+                                adoptionForms.map(adoptionForm => {
+                                    // Filter request forms for the current adoption form
+                                    const matchingRequestForms = requestForms ? requestForms.filter(form => form.adoptionFormID === adoptionForm._id) : [];
+
+
+                                    return (
+                                        <div key={adoptionForm._id}>
+                                            {matchingRequestForms.map(requestForm => (
+                                                <div className="request-forms" key={requestForm._id}>
+                                                    <p>Name: {requestForm.petName}</p>
+                                                    <p>Contact Name: {requestForm.contactName}</p>
+                                                    <p>Status: {requestForm.status}</p>
+
+
+                                                    <button className='view-btn1' onClick={() => handleViewForm(requestForm)}>View Form</button>
+
+                                                    <Modal
+                                                        title="Request Form Details"
+                                                        visible={visible && selectedForm === requestForm}
+                                                        onCancel={handleCancel}
+                                                        footer={null}
+                                                    >
+                                                        {selectedForm && (
+                                                            <div>
+
+                                                                <p>Contact Name: {selectedForm.contactName}</p>
+                                                                <p>Pet Name: {selectedForm.petName}</p>
+                                                                <p>Contact Email: {selectedForm.contactEmail}</p>
+                                                                <p>Contact Phone: {selectedForm.contactPhone}</p>
+                                                                <p>Residence Type: {selectedForm.residenceType}</p>
+                                                                <p>Residence Details: {selectedForm.residenceDetails}</p>
+                                                                <p>Current Pets: {selectedForm.currentPets}</p>
+                                                                <p>Current Pets Details: {selectedForm.currentPetsDetails}</p>
+                                                                <p>Reason for Adoption: {selectedForm.reasonForAdoption}</p>
+                                                                <Button onClick={() => handleApproval(selectedForm._id, 'Approved', 'Adopted', selectedForm.adoptionFormID)} type='primary'>Approve</Button>
+                                                                <Button onClick={() => handleApproval(selectedForm._id, 'Rejected', 'Pending', selectedForm.adoptionFormID)} type='primary'>Reject</Button>
+                                                            </div>
+                                                        )}
+                                                    </Modal>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <p>No adoption forms found</p>
+                            )}
+                        </div>
+                    </div>
+
+
+                </div>
+
 
                 {/* lost pet */}
                 < div className="detailsSection" >

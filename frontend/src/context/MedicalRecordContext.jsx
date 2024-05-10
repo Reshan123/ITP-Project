@@ -24,6 +24,8 @@ export const MedicalRecReducer = (state, action) => {
 export const MedicalRecordContext = ({ children }) => {
     const [state, dispatch] = useReducer(MedicalRecReducer, { medicalRec: null });
 
+    console.log('Medical state:', state)
+
     return (
         <medicalRecContext.Provider value={{ ...state, dispatch }}>
             {children}
