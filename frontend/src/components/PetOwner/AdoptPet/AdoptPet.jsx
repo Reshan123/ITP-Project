@@ -76,15 +76,16 @@ const AdoptPet = ({ navBarProps }) => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = currentPage * pageSize;
 
-
     const filteredAdoptionForms = Array.isArray(adoptionForms)
         ? adoptionForms.filter(adoptionForm =>
+            adoptionForm.adoptionStatus === 'Pending' &&
             adoptionForm.approved === 'Approved' &&
             (adoptionForm.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 adoptionForm.species.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 adoptionForm.gender.toLowerCase() === searchQuery.toLowerCase())
         )
         : [];
+
 
 
     return (

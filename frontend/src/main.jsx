@@ -8,13 +8,14 @@ import { DoctorContextProvider } from './context/doctorContext.jsx'
 import { AllPetOwnerContextProvider } from './context/allPetOwner.jsx'
 import { BookingContext, BookingContextProvider } from './context/BookingContext.jsx'
 import { LostPetsContextProvider } from './context/LostPetContext.jsx'
-import {ConversationProvider } from './context/ConversationContext.jsx'
+import { ConversationProvider } from './context/ConversationContext.jsx'
 import { AllPetsContextProvider } from './context/allPetsContext.jsx'
 import { InventoryItemsContextProvider } from './context/InventoryItemsContext.jsx'
 import { SalesContextProvider } from './context/SalesContext.jsx'
 import { SocketContextProvider } from './context/SocketContext.jsx'
 import { SupplierContextProvider } from './context/SupplierContext.jsx'
 import { MedicalRecordContext } from './context/MedicalRecordContext.jsx'
+import { AdoptionRequestProvider } from './context/AdoptionRequestContext.jsx'
 import App from './App.jsx'
 import firebase from "firebase/compat/app"
 
@@ -36,7 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <PetContextProvider>
         <AllDoctorContextProvider>
           <DoctorContextProvider>
-            <AllPetOwnerContextProvider> 
+            <AllPetOwnerContextProvider>
               <BookingContextProvider>
                 <LostPetsContextProvider>
                   <ConversationProvider>
@@ -46,21 +47,23 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                           <SupplierContextProvider>
                             <SalesContextProvider>
                               <MedicalRecordContext>
-                                <App />
-                              </MedicalRecordContext>  
-                            </SalesContextProvider>  
-                          </SupplierContextProvider>  
-                        </SocketContextProvider>    
-                      </InventoryItemsContextProvider>  
-                    </AllPetsContextProvider>  
-                  </ConversationProvider>  
+                                <AdoptionRequestProvider>
+                                  <App />
+                                </AdoptionRequestProvider>
+                              </MedicalRecordContext>
+                            </SalesContextProvider>
+                          </SupplierContextProvider>
+                        </SocketContextProvider>
+                      </InventoryItemsContextProvider>
+                    </AllPetsContextProvider>
+                  </ConversationProvider>
                 </LostPetsContextProvider>
               </BookingContextProvider>
-            </AllPetOwnerContextProvider>   
-          </DoctorContextProvider>    
-        </AllDoctorContextProvider>    
-      </PetContextProvider>  
-    </AdoptionContextProvider>    
-  </UserContextProvider> 
+            </AllPetOwnerContextProvider>
+          </DoctorContextProvider>
+        </AllDoctorContextProvider>
+      </PetContextProvider>
+    </AdoptionContextProvider>
+  </UserContextProvider>
 );
 
