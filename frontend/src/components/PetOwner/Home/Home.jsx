@@ -171,6 +171,16 @@ const Home = ({ navBarProps }) => {
         
       }, [])
 
+    // Function to get current date and time
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = `${now.getMonth() + 1}`.padStart(2, '0'); // Month is zero-based
+        const day = `${now.getDate()}`.padStart(2, '0');
+        const hours = `${now.getHours()}`.padStart(2, '0');
+        const minutes = `${now.getMinutes()}`.padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
 
 
     return ( 
@@ -254,7 +264,7 @@ const Home = ({ navBarProps }) => {
                             <input type="email" placeholder='Owner Email' readOnly value={user.email} />
                         </div>
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} value ={owner_contact} required  />
+                            <input type="number" placeholder='Owner Contact' onChange={(e) => setOwnerContact(e.target.value)} pattern="[0-9]{10}" value ={owner_contact} required  />
                         </div>
                         {/* <div className="homeBookAppointmentsFormInputWrapper">
                             <input type="text" placeholder='Pet Name' onChange={(e) => setPetName(e.target.value)} value ={pet_name} required/>
@@ -292,7 +302,7 @@ const Home = ({ navBarProps }) => {
                         </div>
 
                         <div className="homeBookAppointmentsFormInputWrapper">
-                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} value ={start_time} required />
+                            <input type="datetime-local" placeholder='Start Time' onChange={(e) => setStartTime(e.target.value)} min={getCurrentDateTime()} value ={start_time} required />
                         </div>
                         
                         <div className="homeBookAppointmentsFormInputWrapper">

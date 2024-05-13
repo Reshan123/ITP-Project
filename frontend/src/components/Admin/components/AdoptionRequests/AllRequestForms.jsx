@@ -78,7 +78,8 @@ const AllRequestForms = () => {
         requestForms.filter(form =>
             form.contactName.toLowerCase().includes(searchText.toLowerCase()) ||
             form.contactEmail.toLowerCase().includes(searchText.toLowerCase()) ||
-            form.residenceType.toLowerCase().includes(searchText.toLowerCase())
+            form.residenceType.toLowerCase().includes(searchText.toLowerCase()) ||
+            form.petName.toLowerCase().includes(searchText.toLowerCase())
 
         ) : [];
 
@@ -106,7 +107,7 @@ const AllRequestForms = () => {
 
         // Add the table to the PDF
         doc.autoTable({
-            head: [['Name', 'Email', 'Phone', 'Residence Type', 'Approval Status']],
+            head: [['Name', 'Email', 'Phone', 'Residence Type', 'Adoption Approval']],
             body: tableData,
             startY: 20,
             styles: {
@@ -177,7 +178,7 @@ const AllRequestForms = () => {
             sortOrder: sortedInfo.columnKey === 'residenceType' && sortedInfo.order,
         },
         {
-            title: 'Approval Status',
+            title: 'Adoption Approval',
             dataIndex: 'status',
             key: 'status',
             filters: [

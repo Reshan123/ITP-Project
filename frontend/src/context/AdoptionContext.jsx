@@ -11,8 +11,10 @@ export const AdoptionReducer = (state, action) => {
             }
         case 'CREATE_FORM':
             return {
-                adoptionForms: [action.payload, ...state.adoptionForms]
-            }
+                ...state,
+                requestForms: Array.isArray(state.requestForms) ? [action.payload, ...state.requestForms] : [action.payload]
+            };
+
         case 'DELETE_FORM':
             return {
                 adoptionForms: state.adoptionForms.filter(f => f._id !== action.payload._id)
