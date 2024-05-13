@@ -10,7 +10,7 @@ import search_img from './images/search.png'
 const AdoptPet = ({ navBarProps }) => {
     const navigate = useNavigate();
 
-    navBarProps("#FFF", "#E2929D", "#E2929D")
+    navBarProps("#E2929D", "#FFF", "#B799D1")
 
     const { adoptionForms, dispatch } = useAdoptionContext();
     const { user, dispatch: userDispatch } = useUserContext()
@@ -20,14 +20,11 @@ const AdoptPet = ({ navBarProps }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 4;
 
-
-    const totalAdoptionForms = 100;
-
-
     const handlePageChange = (page) => {
         setCurrentPage(page);
-
     };
+
+
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value); // Update search query
     };
@@ -73,8 +70,7 @@ const AdoptPet = ({ navBarProps }) => {
         }
     }
 
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = currentPage * pageSize;
+
 
     const filteredAdoptionForms = Array.isArray(adoptionForms)
         ? adoptionForms.filter(adoptionForm =>
@@ -82,17 +78,22 @@ const AdoptPet = ({ navBarProps }) => {
             adoptionForm.approved === 'Approved' &&
             (adoptionForm.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 adoptionForm.species.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                adoptionForm.gender.toLowerCase() === searchQuery.toLowerCase())
+                adoptionForm.gender.toLowerCase() === searchQuery.toLowerCase() ||
+                adoptionForm.breed.toLowerCase().includes(searchQuery.toLowerCase())
+            )
         )
         : [];
 
+    const totalPaginationPages = Math.ceil(filteredAdoptionForms.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = currentPage * pageSize;
 
 
     return (
         <div className="AdoptionFormPage">
 
             <div className="landing-image">
-                <img src={image1} alt="" />
+                <img className="welcome_image_adopt" src={image1} alt="" />
                 <div className="image-text-1">Don’t Buy, Adopt!</div>
                 <div className="image-text-2">Find your purr-fect match at
                     Pawpulz Adoption Center! Our cuddly companions are
@@ -103,20 +104,31 @@ const AdoptPet = ({ navBarProps }) => {
 
 
             <div className="section-1">
-                <div className="search-box">
-                    <button class="btn-search">
-                        <img src={search_img} alt="Search Icon" className="search-icon" />
-                        <i className="fas fa-search"></i>
-                    </button>
-                    <input
-                        type="text"
-                        className="input-search"
-                        placeholder="Type to Search..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                    />
+                <div className="search-pagination-container">
+                    <div className="search-box">
+                        <button className="btn-search">
+                            <img src={search_img} alt="Search Icon" className="search-icon" />
+                            <i className="fas fa-search"></i>
+                        </button>
+                        <input
+                            type="text"
+                            className="input-search"
+                            placeholder="Type to Search..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
+                    </div>
+                    <div className="paginationAdopt">
+                        <Pagination
+                            current={currentPage}
+                            total={filteredAdoptionForms.length}
+                            pageSize={pageSize}
+                            onChange={handlePageChange}
+                        />
+                    </div>
                 </div>
                 <div className="listings">
+
                     {filteredAdoptionForms.length > 0 ? (
                         filteredAdoptionForms
                             .slice(startIndex, endIndex) // Pagination logic
@@ -141,7 +153,7 @@ const AdoptPet = ({ navBarProps }) => {
                                             </p>
                                         </div>
                                         <div className="card_footer">
-                                            <p>{getDaysSinceCreation(adoptionForm.createdAt)} ago</p>
+                                            <p className="createdDate">{getDaysSinceCreation(adoptionForm.createdAt)} ago</p>
                                             <button className="card__button" onClick={() => handleViewDetails(adoptionForm._id)}>View Details</button>
                                         </div>
                                     </div>
@@ -151,14 +163,7 @@ const AdoptPet = ({ navBarProps }) => {
                         <p>No adoption forms available.</p>
                     )}
                 </div>
-                <div className="pagination">
-                    <Pagination
-                        defaultCurrent={1}
-                        total={totalAdoptionForms}
-                        pageSize={pageSize}
-                        onChange={handlePageChange}
-                    />
-                </div>
+
             </div>
 
 

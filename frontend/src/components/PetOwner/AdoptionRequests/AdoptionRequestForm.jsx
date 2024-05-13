@@ -17,8 +17,8 @@ const AdoptionRequestForm = () => {
 
     const [petName, setPetName] = useState(PETNAME);
     const [adoptionFormID, setadoptionFormID] = useState(adoptionFormIDFromURL);
-    const [contactName, setContactName] = useState('');
-    const [contactEmail, setContactEmail] = useState('');
+    const [contactName, setContactName] = useState(user.username);
+    const [contactEmail, setContactEmail] = useState(user.email);
     const [contactPhone, setContactPhone] = useState('');
     const [residenceType, setResidenceType] = useState('House');
     const [residenceDetails, setResidenceDetails] = useState('');
@@ -41,6 +41,7 @@ const AdoptionRequestForm = () => {
         residenceType: yup.string().required('Residence type is required')
     });
     //fetching adoption form data
+
 
 
     const handleSubmit = async (e) => {
