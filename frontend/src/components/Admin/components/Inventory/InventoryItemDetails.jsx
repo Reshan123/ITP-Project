@@ -14,20 +14,20 @@ const InventoryItemDetails = () => {
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
-  var supplierName
 
 
   useEffect(() => {
     setCurrentlyDisplayedItems(inventoryitems)
   }, [inventoryitems])
 
+  
 
   useEffect(() => {
     if (inventoryitems) {
         const filteredList = inventoryitems.filter(inventoryitem => {
             const searchQueryLower = searchQuery.toLowerCase();
-            const itemNameLower = inventoryitem.itemName.toLowerCase();
             const supplier = suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id);
+            const itemNameLower = supplier ? supplier.itemName ? supplier.itemName.toLowerCase() : "" : ""
             const supplierNameLower = supplier ? supplier.supplierName.toLowerCase() : '';
             return (itemNameLower.startsWith(searchQueryLower) || supplierNameLower.startsWith(searchQueryLower));
         });
@@ -146,8 +146,8 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
-              <td>{supplierName = suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
-              <td>{inventoryitem.itemName}</td>
+              <td>{suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
+              <td>{suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.itemName))}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
               <td>{inventoryitem.currentStock}</td>

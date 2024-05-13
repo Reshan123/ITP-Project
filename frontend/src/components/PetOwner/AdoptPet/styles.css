@@ -674,3 +674,84 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
+
+/*Request Forms*/
+.form-page .request-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 50px;
+}
+
+.form-page .request-container .text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-page .request-container .form-container {
+    background-color: #E6E6FA;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-page .request-container .form-row {
+    display: flex;
+    margin-bottom: 20px;
+
+
+}
+
+.form-page .request-container .input-container {
+    flex: 1;
+    position: relative;
+    margin: 20px;
+}
+
+.form-page .request-container .label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-page .request-container input[type="text"],
+.form-page .request-container input[type="email"],
+.form-page .request-container input[type="tel"],
+.form-page .request-container select,
+.form-page .request-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    border-bottom: 1px solid #000;
+    background-color: transparent;
+    outline: none;
+    margin: 10px;
+}
+
+.form-page .request-container textarea {
+    height: 100px;
+    resize: none;
+}
+
+.form-page .request-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+
+.form-page .request-container .submit-btn {
+    justify-content: flex-end;
+}
+
+.form-page .request-container button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-page .request-container button[type="submit"]:hover {
+    background-color: #45a049;
+}

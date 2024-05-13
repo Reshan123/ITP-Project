@@ -1,4 +1,5 @@
 const salesItem = require('../models/salesModel')
+const mongoose = require('mongoose')
 
 //get all sales
 const getAllSales = async(req,res) => {
@@ -26,12 +27,24 @@ const getSpecificSale = async(req, res) => {
 
 //add a new sale
 const addNewSale = async(req,res) => {
-    try{
-    const salesItems = await salesItem.create({itemName, itemPrice, itemQuantity, totalPurchase})
+    // try{
+    // const salesItems = await salesItem.create({itemName, itemPrice, quantity, status})
 
-    res.status(200).json(salesItems)
-    }catch(error){
-        res.status(400).json({error:error.message})
+    // res.status(200).json(salesItems)
+    // }catch(error){
+    //     res.status(400).json({error:error.message})
+    // }
+
+    const {itemName,itemPrice,quantity,status} = req.body
+    
+    try{
+
+        const sales = await salesItem.create({itemName,itemPrice,quantity,status})
+
+        res.status(200).json(sales);
+
+    }catch (error) {
+        res.status(404).json({ error: error.message });
     }
 }
 

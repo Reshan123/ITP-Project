@@ -94,7 +94,7 @@ const MedicalRecordForm = () => {
             />
             <label>Date</label>
             <input
-                type="text"
+                type="Date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
             />
@@ -110,15 +110,25 @@ const MedicalRecordForm = () => {
                 value={species}
                 onChange={(e) => setSpecies(e.target.value)}
             />
-            <label>Gender</label>
+            {/* <label>Gender</label>
             <input
                 type="text"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-            />
+            /> */}
+
+<label>Gender</label>
+<input
+    type="text"
+    value={gender}
+    onChange={(e) => setGender(e.target.value)}
+    pattern="^(Male|Female)$"
+    title="Gender must be either 'Male' or 'Female'"
+/>
+
             <label>Date of Birth</label>
             <input
-                type="text"
+                type="Date"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
             />
@@ -130,7 +140,7 @@ const MedicalRecordForm = () => {
             />
             <label>Next Vaccination</label>
             <input
-                type="text"
+                type="Date"
                 value={nextVaccination}
                 onChange={(e) => setNextVaccination(e.target.value)}
             />

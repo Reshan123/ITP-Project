@@ -32,7 +32,8 @@ export const SalesContextProvider = ({ children }) => {
         sales: null
     })
 
-    
+    console.log('sales state:', state)
+
     return(
         <SalesContext.Provider value={{...state, dispatch}}>
             {children}
