@@ -122,6 +122,7 @@ const SupplierDetails = ({ supplier }) => {
             <th>Supplier Contact</th>
             <th>Supplier Email</th>
             <th>Supplier Company</th>
+            <th>Item Name</th>
           </tr>
         </thead>
         <tbody>
@@ -131,6 +132,7 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierContact}</td>
               <td>{supplier.supplierEmail}</td>
               <td>{supplier.supplierCompany}</td>
+              <td>{supplier.itemName}</td>
               <td>
                 <center>
                   <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>

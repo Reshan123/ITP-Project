@@ -25,10 +25,10 @@ const getSupplier = async(req,res)=>
 
 //create supplier
 const createSupplier =  async(req,res) => {
-    const {supplierName, supplierContact, supplierEmail, supplierCompany} = req.body
+    const {supplierName, supplierContact, supplierEmail, supplierCompany, itemName} = req.body
 
     try{
-        const supplier = await Supplier.create({supplierName, supplierContact, supplierEmail, supplierCompany})
+        const supplier = await Supplier.create({supplierName, supplierContact, supplierEmail, supplierCompany, itemName})
         res.status(200).json(supplier)
     } catch(error){
         res.status(400).json({error: error.message})

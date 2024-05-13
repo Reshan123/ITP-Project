@@ -22,9 +22,9 @@ const InventoryItemUpdate = () => {
           if (item.supplierID) {
             setSupplierID(item.supplierID)
           }
-          if (item.itemName) {
-            setItemName(item.itemName)
-          }
+          // if (item.itemName) {
+          //   setItemName(item.itemName)
+          // }
           if (item.itemPrice) {
             setItemPrice(item.itemPrice)
           }
@@ -48,7 +48,7 @@ const InventoryItemUpdate = () => {
 
   const navigate = useNavigate()
   const [supplierID, setSupplierID] = useState('')
-  const [itemName, setItemName] = useState("")
+  // const [itemName, setItemName] = useState("")
   const [itemPrice, setItemPrice] = useState("")
   const [itemStockCount, setItemStockCount] = useState("")
   const [itemDescription, setItemDescription] = useState("")
@@ -67,7 +67,6 @@ const InventoryItemUpdate = () => {
 
     const formData = {
       supplierID,
-      itemName,
       itemPrice,
       itemStockCount,
       itemDescription,
@@ -77,7 +76,7 @@ const InventoryItemUpdate = () => {
 
     axios.put("http://localhost:4000/api/inventoryItems/" + itemID, formData)
       .then(res => {
-        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemName, itemPrice, itemStockCount, currentStock, itemDescription, itemImageURL }] })
+        intentoryItemDispatch({ type: "UPDATE", payload: [itemID, { itemPrice, itemStockCount, currentStock, itemDescription, itemImageURL }] })
         setError("")
         console.log(res)
         navigate('/admin/home/Inventoryitemdetails')
@@ -90,24 +89,25 @@ const InventoryItemUpdate = () => {
       <form className="update" onSubmit={handleUpdate}>
         <h3>Update Item</h3>
 
-        <label>Select the Supplier</label>
+        <label>Select Item</label>
         <select
           id="supplier"
           onChange={(e) => setSupplierID(e.target.value)}
           value={supplierID}
+          disabled
         >
-          <option value="">Select Supplier</option>
+          <option value="">Select Item Name</option>
           {suppliers.map(Supplier => (
-            <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
+            <option key={Supplier._id} value={Supplier._id}>{Supplier.itemName}</option>
           ))}
         </select>
 
-        <label>Name of the Item</label>
+        {/* <label>Name of the Item</label>
         <input
           type="text"
           onChange={(e) => setItemName(e.target.value)}
           value={itemName}
-        />
+        /> */}
         <label>Item Price(in LKR)</label>
         <input
           type='number'

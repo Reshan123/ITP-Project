@@ -10,12 +10,13 @@ const SupplierForm = () => {
     const [supplierContact, setSupplierContact] = useState('')
     const [supplierEmail, setSupplierEmail] = useState('')
     const [supplierCompany, setSupplierCompany] = useState('')
+    const [itemName, setItemName] = useState('')
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const supplier = { supplierName, supplierContact, supplierEmail, supplierCompany }
+        const supplier = { supplierName, supplierContact, supplierEmail, supplierCompany, itemName }
         const response = await fetch('http://localhost:4000/api/supplier', {
             method: 'POST',
             body: JSON.stringify(supplier),
@@ -34,6 +35,7 @@ const SupplierForm = () => {
             setSupplierContact('')
             setSupplierEmail('')
             setSupplierCompany('')
+            setItemName('')
             setError(null)
 
             console.log('new supplier added', json)
@@ -74,6 +76,12 @@ const SupplierForm = () => {
                 type="text"
                 onChange={(e) => setSupplierCompany(e.target.value)}
                 value={supplierCompany}
+            />
+            <label> Item Name</label>
+            <input
+                type="text"
+                onChange={(e) => setItemName(e.target.value)}
+                value={itemName}
             />
 
             <div className="add-btn-container">
