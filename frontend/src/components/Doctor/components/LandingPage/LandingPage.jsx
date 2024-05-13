@@ -14,6 +14,7 @@ const LandingPage = () => {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [eventDetails, setEventDetails] = useState(null);
 
     useEffect(() => {
         if (doctor){
@@ -34,7 +35,8 @@ const LandingPage = () => {
               const formattedEvents = eventData.map(event => ({
                   title: `${event.pet_name} - ${event.pet_species}`, 
                   start: event.start_time,
-                  end: new Date(new Date(event.start_time).getTime() + 30 * 60000), // End time is start time + 30 minutes
+                  end: new Date(new Date(event.start_time).getTime() + 30 * 60000),
+                  bookingId: event._id // End time is start time + 30 minutes
               }));
       
               setEvents(formattedEvents);
@@ -80,9 +82,25 @@ const LandingPage = () => {
         }
     }
 
-    const handleEventClick = (clickInfo) => {
+    const handleEventClick = async (clickInfo) => {
         setSelectedEvent(clickInfo.event);
-        setIsModalVisible(true);
+
+        // Fetch additional details based on the booking ID
+        const bookingId = clickInfo.event.extendedProps.bookingId;
+
+        console.log(bookingId)
+
+        try {
+            const response = await fetch(`http://localhost:4000/api/bookings/getBooking/${bookingId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch event details');
+            }
+            const eventData = await response.json();
+            setEventDetails(eventData); // Set additional event details
+            setIsModalVisible(true);
+        } catch (error) {
+            console.error('Error fetching event details:', error);
+        }
       };
     
       const handleModalCancel = () => {
@@ -114,7 +132,7 @@ const LandingPage = () => {
                     end: "today,prev,next"
                     }}
 
-                    height={"120vh"}
+                    height={"90vh"}
                     
                     events={events} // Pass events data to the FullCalendar component
 
@@ -129,11 +147,19 @@ const LandingPage = () => {
             </div>
 
             {/* Modal */}
-            <Modal title="Event Details" visible={isModalVisible} onCancel={handleModalCancel} footer={null}>
+            <Modal title="Booking Details" visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
                 {selectedEvent && (
                 <div>
-                    <p>Title: {selectedEvent.title}</p>
-                    
+                    {eventDetails && (
+                        <>
+                            <p><strong>Pet Name:</strong> {eventDetails.pet_name}</p>
+                            <p><strong>Pet Species:</strong> {eventDetails.pet_species}</p>
+                            <p><strong>Pet Breed:</strong> {eventDetails.pet_breed}</p>
+                            <p><strong>Owner Name:</strong> {eventDetails.owner_name}</p>
+                            <p><strong>Owner Contact:</strong> {eventDetails.owner_contact}</p>
+                            <p><strong>Booking Date & Time:</strong> {new Date(eventDetails.start_time).toLocaleString()}</p>
+                        </>
+                    )}
                 </div>
                 )}
             </Modal>
