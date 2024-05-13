@@ -160,7 +160,8 @@ const Profile = ({ navBarProps }) => {
         const config = {
 
             headers: {
-                'authorization': `Bearer ${user.userToken}`
+                'authorization': `Bearer ${user?.userToken ?? ''}`
+
             }
         }
 
@@ -171,12 +172,12 @@ const Profile = ({ navBarProps }) => {
 
                 if (response.ok) {
                     dispatch({ type: 'SET_FORMS', payload: json });
-                    console.log('Adoption forms fetched successfully:', json); // Add this console log
+                    console.log('Adoption forms fetched successfully:', json);
                 } else {
-                    console.log('Failed to fetch adoption forms:', json); // Log error message
+                    console.log('Failed to fetch adoption forms:', json);
                 }
             } catch (error) {
-                console.error('Error fetching adoption forms:', error); // Log fetch error
+                console.error('Error fetching adoption forms:', error);
             }
         };
 
@@ -254,7 +255,6 @@ const Profile = ({ navBarProps }) => {
 
 
     const handleApproval = async (id, status, adoptionStatus, adoptionFormID) => {
-
         const confirmation = window.confirm(`Are you sure you want to ${status === 'Approved' ? 'approve' : 'reject'} this adoption form?`);
         if (!confirmation) return;
         try {
@@ -266,10 +266,8 @@ const Profile = ({ navBarProps }) => {
                 body: JSON.stringify({ status: status })
             });
             const json = await response.json();
-            setStatus(status);
             if (response.ok) {
-
-                console.log(requestForms.status)
+                setStatus(status); // Update the status state variable
             }
 
             const res = await fetch(`http://localhost:4000/api/adoption/${adoptionFormID}`, {
@@ -280,15 +278,17 @@ const Profile = ({ navBarProps }) => {
                 body: JSON.stringify({ adoptionStatus: adoptionStatus })
             });
             const json1 = await res.json();
-            setAdoptionStatus(adoptionStatus);
-            if (response.ok) {
-
-
+            if (res.ok) {
+                setAdoptionStatus(adoptionStatus);
+                handleCancel();
+                window.location.reload();
             }
         } catch (error) {
             console.error('Error updating approval status:', error);
         }
     };
+
+
 
 
     const handleRequestDelete = async (id) => {
@@ -363,6 +363,8 @@ const Profile = ({ navBarProps }) => {
                         </div>
                     </div>
                 </div >
+
+
                 {/* adoption listings */}
                 <div className="detailsSection">
                     <div className="detailsSectionTitleContainer">
@@ -371,6 +373,7 @@ const Profile = ({ navBarProps }) => {
                     </div>
                     <hr />
                     <div className="detailsSectionCardContainer">
+
                         {adoptionForms && adoptionForms.length > 0 ? (
                             adoptionForms.map(adoptionForm => (
                                 // Check if adoptionStatus is 'Pending'
@@ -380,7 +383,19 @@ const Profile = ({ navBarProps }) => {
                                         <div className="details">
                                             <h4>{adoptionForm.name}</h4>
                                         </div>
-                                        <h3 className='approval-status' style={{ color: adoptionForm.approved === 'Approved' ? 'green' : 'red' }}>{adoptionForm.approved}</h3>
+                                        <h3
+                                            className='approval-status'
+                                            style={{
+                                                color: adoptionForm.approved === 'Approved' ? 'green' : 'red',
+                                                padding: '8px 16px',
+                                                borderRadius: '4px',
+                                                backgroundColor: 'white',
+                                                height: '40px'
+                                            }}
+                                        >
+                                            {adoptionForm.approved}
+                                        </h3>
+
                                         <button className='viewbtn1' onClick={() => handleView(adoptionForm._id)}>View Listing</button>
                                     </div>
                                 )
@@ -424,24 +439,24 @@ const Profile = ({ navBarProps }) => {
                                 title="Request Form Details"
                                 visible={visible}
                                 onCancel={handleCancel}
-                                footer={[
-                                    <Button key="update" type="primary" onClick={() => navigate(`/pet/requestform/${selectedForm._id}`)}>
-                                        Update
-                                    </Button>,
-
-                                ]}
+                                // footer={[
+                                //     <Button key="update" type="primary" onClick={() => navigate(`/pet/requestform/${selectedForm._id}`)}>
+                                //         Update
+                                //     </Button>]}
+                                footer={null}
+                                className="custom-modal"
                             >
                                 {selectedForm && (
                                     <div>
-                                        <p>Contact Name: {selectedForm.contactName}</p>
-                                        <p>Pet Name: {selectedForm.petName}</p>
-                                        <p>Contact Email: {selectedForm.contactEmail}</p>
-                                        <p>Contact Phone: {selectedForm.contactPhone}</p>
-                                        <p>Residence Type: {selectedForm.residenceType}</p>
-                                        <p>Residence Details: {selectedForm.residenceDetails}</p>
-                                        <p>Current Pets: {selectedForm.currentPets ? 'Yes' : 'No'}</p>
-                                        <p>Current Pets Details: {selectedForm.currentPetsDetails}</p>
-                                        <p>Reason for Adoption: {selectedForm.reasonForAdoption}</p>
+                                        <p> <strong>Contact Name:</strong> {selectedForm.contactName}</p>
+                                        <p><strong>Pet Name:</strong> {selectedForm.petName}</p>
+                                        <p><strong>Contact Email:</strong>  {selectedForm.contactEmail}</p>
+                                        <p><strong>Contact Phone:</strong>  {selectedForm.contactPhone}</p>
+                                        <p><strong>Residence Type: </strong> {selectedForm.residenceType}</p>
+                                        <p><strong>Residence Details:</strong>  {selectedForm.residenceDetails}</p>
+                                        <p><strong>Current Pets: </strong> {selectedForm.currentPets ? 'Yes' : 'No'}</p>
+                                        <p><strong>Current Pets Details: </strong> {selectedForm.currentPetsDetails}</p>
+                                        <p><strong>Reason for Adoption:</strong>  {selectedForm.reasonForAdoption}</p>
                                     </div>
                                 )}
                             </Modal>
@@ -456,7 +471,7 @@ const Profile = ({ navBarProps }) => {
                 {/*adoptionRequest*/}
                 <div className="detailsSection">
                     <div className="detailsSectionTitleContainer">
-                        <div className="detailsSectionTitle">My Adoption Requests</div>
+                        <div className="detailsSectionTitle">Adoption Requests For My Pets</div>
 
                     </div>
                     <hr />
@@ -484,23 +499,25 @@ const Profile = ({ navBarProps }) => {
                                                         visible={visible && selectedForm === requestForm}
                                                         onCancel={handleCancel}
                                                         footer={null}
+                                                        className="custom-modal2"
                                                     >
                                                         {selectedForm && (
                                                             <div>
-
-                                                                <p>Contact Name: {selectedForm.contactName}</p>
-                                                                <p>Pet Name: {selectedForm.petName}</p>
-                                                                <p>Contact Email: {selectedForm.contactEmail}</p>
-                                                                <p>Contact Phone: {selectedForm.contactPhone}</p>
-                                                                <p>Residence Type: {selectedForm.residenceType}</p>
-                                                                <p>Residence Details: {selectedForm.residenceDetails}</p>
-                                                                <p>Current Pets: {selectedForm.currentPets}</p>
-                                                                <p>Current Pets Details: {selectedForm.currentPetsDetails}</p>
-                                                                <p>Reason for Adoption: {selectedForm.reasonForAdoption}</p>
-                                                                <Button onClick={() => handleApproval(selectedForm._id, 'Approved', 'Adopted', selectedForm.adoptionFormID)} type='primary'>Approve</Button>
-                                                                <Button onClick={() => handleApproval(selectedForm._id, 'Rejected', 'Pending', selectedForm.adoptionFormID)} type='primary'>Reject</Button>
+                                                                <p><strong>Contact Name:</strong>  {selectedForm.contactName}</p>
+                                                                <p><strong>Pet Name:</strong> {selectedForm.petName}</p>
+                                                                <p><strong>Contact Email:</strong> {selectedForm.contactEmail}</p>
+                                                                <p><strong>Contact Phone: </strong>{selectedForm.contactPhone}</p>
+                                                                <p><strong>Residence Type: </strong>{selectedForm.residenceType}</p>
+                                                                <p><strong>Residence Details: </strong>{selectedForm.residenceDetails}</p>
+                                                                <p><strong>Current Pets: </strong>{selectedForm.currentPets}</p>
+                                                                <p><strong>Current Pets Details: </strong>{selectedForm.currentPetsDetails}</p>
+                                                                <p><strong>Reason for Adoption:</strong> {selectedForm.reasonForAdoption}</p>
                                                             </div>
                                                         )}
+                                                        <div className="action-buttons">
+                                                            <Button onClick={() => handleApproval(selectedForm._id, 'Approved', 'Adopted', selectedForm.adoptionFormID)} type='primary'>Approve</Button>
+                                                            <Button onClick={() => handleApproval(selectedForm._id, 'Rejected', 'Pending', selectedForm.adoptionFormID)} type='primary'>Reject</Button>
+                                                        </div>
                                                     </Modal>
                                                 </div>
                                             ))}
