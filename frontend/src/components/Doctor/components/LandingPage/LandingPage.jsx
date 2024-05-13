@@ -4,6 +4,7 @@ import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
+import { Modal } from 'antd';
 
 const LandingPage = () => {
 
@@ -11,6 +12,8 @@ const LandingPage = () => {
     const {doctor, dispatch} = useDoctorContext()
 
     const [events, setEvents] = useState([]);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     useEffect(() => {
         if (doctor){
@@ -77,6 +80,15 @@ const LandingPage = () => {
         }
     }
 
+    const handleEventClick = (clickInfo) => {
+        setSelectedEvent(clickInfo.event);
+        setIsModalVisible(true);
+      };
+    
+      const handleModalCancel = () => {
+        setIsModalVisible(false);
+      };
+
     return ( 
         <>
             <div style={{
@@ -111,8 +123,21 @@ const LandingPage = () => {
                         minute: '2-digit',
                         meridiem: true // Show AM/PM indicator
                     }}
+
+                    eventClick={handleEventClick} // Handle event click
                 />
             </div>
+
+            {/* Modal */}
+            <Modal title="Event Details" visible={isModalVisible} onCancel={handleModalCancel} footer={null}>
+                {selectedEvent && (
+                <div>
+                    <p>Title: {selectedEvent.title}</p>
+                    
+                </div>
+                )}
+            </Modal>
+
         </>
      );
 }
