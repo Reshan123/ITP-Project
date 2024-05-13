@@ -19,13 +19,20 @@ export const inventoryItemsReducer = (state, action) => {
         case 'UPDATE':
             const objIndex = state.inventoryitems.findIndex(obj => obj._id == action.payload[0])
             state.inventoryitems[objIndex].Supplier = action.payload[1].Supplier
-            state.inventoryitems[objIndex].itemName = action.payload[1].itemName
+            // state.inventoryitems[objIndex].itemName = action.payload[1].itemName
             state.inventoryitems[objIndex].itemPrice = action.payload[1].itemPrice
             state.inventoryitems[objIndex].itemStockCount = action.payload[1].itemStockCount
             state.inventoryitems[objIndex].currentStock = action.payload[1].currentStock
             state.inventoryitems[objIndex].itemDescription = action.payload[1].itemDescription
             state.inventoryitems[objIndex].itemImageURL = action.payload[1].itemImageURL
             return state
+        case 'UPDATE_STOCK':
+            const objIndexStock = state.inventoryitems.findIndex(obj => obj._id == action.payload[0])
+            state.inventoryitems[objIndexStock].currentStock = state.inventoryitems[objIndexStock].currentStock - action.payload[1]
+            return {
+                ...state,
+                objIndexStock:{...state[objIndexStock], currentStock: state.inventoryitems[objIndexStock].currentStock - action.payload[1]}
+            }
         default:
             return state
     }

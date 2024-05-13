@@ -9,14 +9,16 @@ import './styles.css';
 const InventoryItemForm = () => {
     const { suppliers, dispatch: supplierDispatch } = useSupplierContext();
     const navigate = useNavigate();
-    const { dispatch } = useInventoryItemsContext();
-    const [itemName, setItemName] = useState('');
+    const { inventoryitems, dispatch } = useInventoryItemsContext();
+    // const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemStockCount, setItemStockCount] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [itemImageURL, setItemImageURL] = useState('');
     const [supplierID, setSupplierID] = useState('');
     const [error, setError] = useState(null);
+
+    var itemNames = []
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +32,7 @@ const InventoryItemForm = () => {
             return;
         }
 
-        const inventoryitem = { itemName, itemPrice, itemStockCount, currentStock: itemStockCount, itemDescription, itemImageURL, supplierID };
+        const inventoryitem = { itemPrice, itemStockCount, currentStock: itemStockCount, itemDescription, itemImageURL, supplierID };
 
         const response = await fetch('http://localhost:4000/api/inventoryItems/', {
             method: 'POST',
@@ -47,7 +49,7 @@ const InventoryItemForm = () => {
         }
 
         if (response.ok) {
-            setItemName('');
+            // setItemName('');
             setItemPrice('');
             setItemStockCount('');
             setItemDescription('');
@@ -84,22 +86,27 @@ const InventoryItemForm = () => {
         <div className="create-form">
             <form className="create" onSubmit={handleSubmit}>
                 <h3>Add a New Item</h3>
-                <label>Name of the Item</label>
+                {/* <label>Name of the Item</label>
                 <input
                     type="text"
                     onChange={(e) => setItemName(e.target.value)}
                     value={itemName}
-                />
-                <label>Select the Supplier</label>
+                /> */}
+                <label>Name of the Item</label>
                 <select
                     id="supplier"
                     onChange={(e) => setSupplierID(e.target.value)}
                     value={supplierID}
                 >
-                    <option value="">Select Supplier</option>
-                    {suppliers.map(Supplier => (
-                        <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
-                    ))}
+                    <option value="">Select Item Name</option>
+                    {(inventoryitems && suppliers) && suppliers.map(Supplier => {
+                        console.log(itemNames)
+                        return inventoryitems.map(inventory => {
+                            if (inventory.supplierID != Supplier._id){
+                                itemNames.push(Supplier._id)
+                            }
+                        })
+                    })}
                 </select>
                 <label>Item Price (in LKR)</label>
                 <input

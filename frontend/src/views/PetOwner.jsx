@@ -11,6 +11,7 @@ import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionForm';
 import { usePetContext } from '../hooks/usePetContext'
 import { useUserContext } from '../hooks/userContextHook'
+import { useSupplierContext } from '../hooks/useSupplierContext';
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import LostNoticeForm from '../components/PetOwner/LostPet/LostNoticeForm';
 import LostPetUpdateForm from '../components/PetOwner/LostPet/LostPetUpdateForm';
@@ -39,6 +40,8 @@ const PetOwner = () => {
 
     const { user, dispatch: userDispatch } = useUserContext()
     const { pets, dispatch: petDispatch } = usePetContext()
+    const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
+
 
     useEffect(() => {
         const fetchPetData = async () => {
@@ -57,6 +60,17 @@ const PetOwner = () => {
                 }
                 const petDetailsJson = await petDetailsResponse.json()
                 petDispatch({ type: "LOAD", payload: petDetailsJson.message })
+
+
+                const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
+
+                if (!supplierResponse.ok) {
+                    throw Error(supplierResponse.message);
+                }
+
+                const supplierJson = await supplierResponse.json();
+
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
 
             } catch (error) {
                 console.log("pet owner page error", error)

@@ -23,6 +23,7 @@ export const suppliersReducer = (state, action) => {
                 state.suppliers[objIndex].supplierContact = action.payload[1].supplierContact
                 state.suppliers[objIndex].supplierEmail = action.payload[1].supplierEmail
                 state.suppliers[objIndex].supplierCompany = action.payload[1].supplierCompany
+                state.suppliers[objIndex].itemName = action.payload[1].itemName
                 return state
         default:
             return state
