@@ -52,7 +52,7 @@ const LostPet = ({ navBarProps }) => {
 
         <div className="noticebtn-para">
           <p>
-            Tap here to compose a detailed Lost Pet Notice and swiftly spread
+            Click the add notice to compose a detailed Lost Pet Notice and swiftly spread
             the word to our community, increasing the chances of reuniting you
             with your beloved companion.
           </p>

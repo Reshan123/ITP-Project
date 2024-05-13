@@ -230,8 +230,8 @@
     transform: translateX(-50%);/*moves the button to 50% of its own scale*/
     transition: 0.5s ease;
  }
- .lostpetdetails:hover{
-    /* background-color: rgb(62,62,62); */
+ /* .lostpetdetails:hover{
+   
     color:black;
     cursor: pointer;
     transform: scale(1.03);
@@ -239,6 +239,10 @@
      border-style: solid;
      border-width: 3px;
     border-color: #cfb897;
+ } */
+
+ .lostpetdetails:hover{
+  transform: scale(1.03);
  }
 
  .noticebtn-para p {
