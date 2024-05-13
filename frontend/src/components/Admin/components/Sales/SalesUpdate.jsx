@@ -13,10 +13,12 @@ const SalesUpdateForm = () => {
     const [itemPrice, setItemPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const[status, setSalesStatus] = useState("")
+    const [error, setError] = useState("")
 
     useEffect(() => {
         if (sales) {
-          sales.forEach(sale => {
+          sales.map(sale => {
+            console.log(sale)
             if (sale._id === id) {
               if (sale.itemName) {
                 setItemName(sale.itemName);
@@ -43,7 +45,7 @@ const SalesUpdateForm = () => {
           quantity,
           status,
         };
-        axios.put('http://localhost:4000/api/sales/'+ id, formData)
+        axios.patch('http://localhost:4000/api/sales/'+ id, formData)
           .then(res => {
             salesDispatch({ type: "UPDATE", payload: [id, { itemName, itemPrice, quantity,status }] });
             setError("");

@@ -13,6 +13,7 @@ const SupplierUpdateForm = () => {
   const [supplierContact, setSupplierContact] = useState("");
   const [supplierEmail, setSupplierEmail] = useState("");
   const [supplierCompany, setSupplierCompany] = useState("");
+  const [itemName, setItemName] = useState('')
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -31,6 +32,9 @@ const SupplierUpdateForm = () => {
           if (supplier.supplierCompany) {
             setSupplierCompany(supplier.supplierCompany);
           }
+          if (supplier.itemName) {
+            setItemName(supplier.itemName);
+          }
         }
       });
     }
@@ -39,8 +43,8 @@ const SupplierUpdateForm = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     // Validation for contact field
-    if (supplierContact.length > 10) {
-      setError("Contact number cannot be more than 10 digits.");
+    if (supplierContact.length != 10) {
+      setError("Contact number should be 10 digits");
       return;
     }
   
@@ -50,10 +54,11 @@ const SupplierUpdateForm = () => {
       supplierContact,
       supplierEmail,
       supplierCompany,
+      itemName
     };
     axios.patch('http://localhost:4000/api/supplier/'+ id, formData)
       .then(res => {
-        supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail, supplierCompany }] });
+        supplierDispatch({ type: "UPDATE", payload: [id, { supplierName, supplierContact, supplierEmail, supplierCompany, itemName }] });
         setError("");
         console.log(res);
         navigate('/admin/home/supplier');
@@ -82,7 +87,7 @@ const SupplierUpdateForm = () => {
         />
         <label>Supplier Email</label>
         <input
-          type="text"
+          type="email"
           onChange={(e) => setSupplierEmail(e.target.value)}
           value={supplierEmail}
         />
@@ -91,6 +96,12 @@ const SupplierUpdateForm = () => {
           type="text"
           onChange={(e) => setSupplierCompany(e.target.value)}
           value={supplierCompany}
+        />
+        <label>Item Name</label>
+        <input
+          type="text"
+          onChange={(e) => setItemName(e.target.value)}
+          value={itemName}
         />
         <button className='update-sup-btn'>Update</button>
         {error && <div className="error">{error}</div>}

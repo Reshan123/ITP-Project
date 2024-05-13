@@ -517,7 +517,7 @@
 .details p {
     width: 50%;
     /* Set width to occupy the second half of the card */
-    padding: 5px ;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     /* Display details in a vertical layout */
@@ -626,7 +626,7 @@
 }
 
 .detailsSectionCardContainer .adoption-form-preview .details {
-    width: 100%;
+    width: 150px;
 
     padding: 3px;
     display: flex;
@@ -637,7 +637,7 @@
 }
 
 .detailsSectionCardContainer .adoption-form-preview .details h4 {
-    font-size: 50px;
+    font-size: 30px;
     margin-bottom: 10px;
 
 }
@@ -657,7 +657,7 @@
 
 .detailsSectionCardContainer .adoption-form-preview .approval-status {
 
-    margin: 10px;
+    margin: 20px;
 }
 
 .detailsSectionCardContainer .adoption-form-preview:hover {
@@ -670,4 +670,95 @@
 
 .detailsSectionCardContainer .adoption-form-preview:hover .viewbtn1 {
     opacity: 1;
+}
+
+
+.request-forms {
+    border-radius: 10px;
+    filter: drop-shadow(0 5px 10px 0 #ffffff);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    width: 580px;
+    height: 220px;
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+    margin: 20px auto;
+    margin-left: 40px;
+    overflow: hidden;
+    transition: 0.3s ease-in;
+}
+
+.request-forms::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -15px;
+    right: -18px;
+    background: #B799D1;
+    height: 250px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+}
+
+.request-forms:hover::before {
+    transition-delay: 0.2s;
+    transform: scale(40);
+}
+
+.request-forms:hover {
+    color: #fff;
+    transform: scale(1.03);
+}
+
+.request-forms p {
+    font-family: "Poppins", sans-serif;
+    padding: 10px 0;
+}
+
+.request-forms strong {
+    font-family: "Poppins", sans-serif;
+}
+
+.request-forms span {
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    font-size: 16px;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    background: var(--delete);
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    color: #fdfdfd;
+    transition: 0.3s;
+}
+
+.request-forms span:hover {
+    background: rgb(159, 1, 1)
+}
+
+.request-forms button.view-btn1 {
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    font-size: 16px;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    background: var(--update);
+    text-decoration: none;
+    padding: 7px;
+    border-radius: 4px;
+    color: #fdfdfd;
+    transition: 0.3s;
+    border: #FFF solid 1px;
+}
+
+.request-forms button.view-btn1:hover {
+    background: #8c3fcf;
 }

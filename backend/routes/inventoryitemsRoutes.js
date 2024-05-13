@@ -4,7 +4,8 @@ const {
     getInventoryItem,
     addNewItem,
     deleteItem,
-    updateItem
+    updateItem,
+    updateItemStockCount
 }= require('../controllers/inventoryControllers')
 
 const router = express.Router()
@@ -23,5 +24,7 @@ router.delete('/:id', deleteItem)
 
 // UPDATE an item
 router.put('/:id', updateItem)
+
+router.put('/updateStockCount/:id', updateItemStockCount)
 
 module.exports = router

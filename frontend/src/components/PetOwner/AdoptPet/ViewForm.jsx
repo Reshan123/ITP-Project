@@ -36,6 +36,8 @@ const ViewForm = () => {
         fetchData()
     }, [dispatch])
 
+    const petName = adoptionForms.name
+
     return (
 
         <div className="view-listing-page">
@@ -75,17 +77,14 @@ const ViewForm = () => {
                         <div className="special-description">
                             <p><strong>Activity Level:</strong> {adoptionForms?.activityLevel || 'Not specified'}</p>
                             <p><strong>Special Needs:</strong>  {adoptionForms?.specialNeeds || 'None'}</p>
+                            <p><strong>Contact:</strong>  {adoptionForms?.ownerContact || 'None'}</p>
+
                         </div>
                     </div>
-                    <div className="contact_details">
-                        {showOwnerContact ? (
-                            <p className="owner-contact"><strong>Owner Contact:</strong>{adoptionForms?.ownerContact}</p>
-                        ) : (
-                            <button className="get-in-touch-button" onClick={() => setShowOwnerContact(true)}>
-                                Get In Touch
-                            </button>
-                        )}
-                    </div>
+
+                    <button className="get-in-touch-button" onClick={() => { navigate('/pet/adopt/adoptionrequest/' + id + '/' + petName) }}>
+                        Adopt
+                    </button>
                 </div>
             </div>
 

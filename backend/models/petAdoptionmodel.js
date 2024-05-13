@@ -59,6 +59,11 @@ const adoptionFormSchema = new Schema({
     enum: ['Approved', 'Rejected', 'Pending'],
     default: 'Pending' // Initial value is pending
   },
+  adoptionStatus: {
+    type: String,
+    enum: ['Addopted', 'Pending'],
+    default: 'Pending' // Initial value is pending
+  },
 }, { timestamps: true });
 
 const PetAdoptionForm = mongoose.model('PetAdoptionForm', adoptionFormSchema);
