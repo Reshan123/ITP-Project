@@ -34,7 +34,7 @@ const LostNoticeForm = ({navBarProps}) => {
 
   useEffect(() => {
     if (user) {
-      // setOwnerName(user?.username);
+      setOwnerName(user?.username);
       setEmail(user?.email);
       // setAge(pet?.age)
     }

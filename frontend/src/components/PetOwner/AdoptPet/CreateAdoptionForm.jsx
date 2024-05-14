@@ -70,7 +70,7 @@ const CreateAdoptionForm = ({ navBarProps }) => {
             }
         }
 
-        if (user && pets.length === 0) {
+        if (user && pets && pets.length === 0) {
             fetchPetData();
         }
     }, [user, petDispatch, history]);

@@ -117,20 +117,27 @@
 
   /*Lost pet details cards*/
 /*container wraps the whole cards*/
- .container{
-   /* display: flex;
-    justify-content: center;
-    flex-wrap: wrap;*/
-
+ /* .container{
     display: grid;
-    grid-template-columns: repeat(3, minmax(270px,1fr)); /* Automatically fit three items in a row */
-    gap: 60px; /* Add some spacing between items */
-    justify-content:center; 
+    grid-template-columns: repeat(3, minmax(270px,1fr)); 
+    gap: 60px; 
+    justify-content:center;  
     margin-left: 25%;
     margin-right: 25%;
     
     
- }
+ } */
+
+ .container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: center; /* Center items horizontally */
+  gap: 60px; /* Add some spacing between items */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px; /* Adjust the max-width as needed */
+}
+
  /*represents a single card*/
  .frame{
   background-color: #f2e8dd;
