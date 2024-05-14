@@ -38,7 +38,7 @@ const Store = ({ navBarProps }) => {
         }
     }, [error])
 
-    const handleClick = async (inventoryitem) => {
+    const handleClick = async (inventoryitem, quantity) => {
 
         try{
             console.log(inventoryitem)
@@ -125,11 +125,15 @@ const Store = ({ navBarProps }) => {
                                         <label>Select the Quantity</label>
                                         <input
                                             type='number'
-                                            onChange={(e) => setQuantity(e.target.value)}
+                                            value={inventoryitem.quantity || ''}
+                                            onChange={(e) => {
+                                                const newQuantity = parseInt(e.target.value);
+                                                inventoryitem.quantity = newQuantity;
+                                            }}
                                             
                                         />
                                     </div>
-                                    <button onClick={() => {handleClick(inventoryitem)}} className="btn">Buy Now</button>
+                                    <button onClick={() => handleClick(inventoryitem, inventoryitem.quantity)} className="btn">Buy Now</button>
                                 </div>
                             </div>
                         );
