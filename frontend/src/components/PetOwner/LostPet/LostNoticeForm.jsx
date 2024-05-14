@@ -28,13 +28,15 @@ const LostNoticeForm = ({navBarProps}) => {
     const [error, setError] = useState(null)
     const [location, setLocation] = useState('')
     const [gender, setGender] = useState('')
-    const [age, setAge] = useState(0)
+  const [age, setAge] = useState(0)
+  const [selectePetId, setSelectedPetID] = useState('')
   const [submissionStatus, setSubmissionStatus] = useState(false)
 
   useEffect(() => {
     if (user) {
-      setOwnerName(user?.username);
+      // setOwnerName(user?.username);
       setEmail(user?.email);
+      // setAge(pet?.age)
     }
   }, [user]);
   
@@ -203,7 +205,9 @@ const handleFileUpload = (e) => {
     }
 }
 
-
+  useEffect(() => {
+    pets.map(pet => pet._id + "" == selectePetId ? setAge(pet.petAge) : "" )
+  }, [selectePetId])
     
 
   return (
@@ -222,7 +226,7 @@ const handleFileUpload = (e) => {
         <label>Pet Choice:</label>
         <select
           value={petName ? petName._id : ""}
-          onChange={(e) => handlePetSelect(e.target.value)}
+          onChange={(e) => { setSelectedPetID(e.target.value); handlePetSelect(e.target.value)}}
         >
           <option value="">Select Pet</option>
           {pets?.length > 0 &&
@@ -274,7 +278,7 @@ const handleFileUpload = (e) => {
         <label>Age:</label>
         <input
           type="number"
-          onChange={(e) => setAge(e.target.value)}
+          // onChange={(e) => setAge(e.target.value)}
           value={age}
         />
 

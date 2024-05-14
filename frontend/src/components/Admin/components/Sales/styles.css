@@ -130,6 +130,21 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
+
+  /*Styles for the table footer*/
+  .saleDetails .saleTable tfoot {
+    background: var(--primaryPurple);
+    color: #fff;
+  }
+  
+  .saleDetails .saleTable tfoot td {
+    padding: 10px 35px;
+    font-size: 16px;
+  }
+  
+  .saleDetails .saleTable tfoot td[colspan="4"] {
+    text-align: end;
+  }
   
   /* Hover styles for the view button */
   .saleTable tbody td center .dlt-btn:hover{
@@ -192,7 +207,7 @@
   .create-btn {
     border: 0;
     background-color: var(--nav-bg-dark);
-    color: #fff;
+    color: #000;
     padding: 10px;
     font-size: 14px;
     text-decoration: none;

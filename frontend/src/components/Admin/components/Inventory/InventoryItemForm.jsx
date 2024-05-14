@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext";
 import { useSupplierContext } from "../../../../hooks/useSupplierContext";
 import firebase from "firebase/compat/app";
@@ -9,14 +9,15 @@ import './styles.css';
 const InventoryItemForm = () => {
     const { suppliers, dispatch: supplierDispatch } = useSupplierContext();
     const navigate = useNavigate();
-    const { dispatch } = useInventoryItemsContext();
-    const [itemName, setItemName] = useState('');
+    const { inventoryitems, dispatch } = useInventoryItemsContext();
+    // const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemStockCount, setItemStockCount] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [itemImageURL, setItemImageURL] = useState('');
     const [supplierID, setSupplierID] = useState('');
     const [error, setError] = useState(null);
+    const [optionForSelect, setOptionForSelect] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +31,7 @@ const InventoryItemForm = () => {
             return;
         }
 
-        const inventoryitem = { itemName, itemPrice, itemStockCount, currentStock: itemStockCount, itemDescription, itemImageURL, supplierID };
+        const inventoryitem = { itemPrice, itemStockCount, currentStock: itemStockCount, itemDescription, itemImageURL, supplierID };
 
         const response = await fetch('http://localhost:4000/api/inventoryItems/', {
             method: 'POST',
@@ -47,7 +48,7 @@ const InventoryItemForm = () => {
         }
 
         if (response.ok) {
-            setItemName('');
+            // setItemName('');
             setItemPrice('');
             setItemStockCount('');
             setItemDescription('');
@@ -80,27 +81,61 @@ const InventoryItemForm = () => {
         }
     };
 
+    function findUniqueElements(list1, list2) {
+        const uniqueElements = [];
+    
+        // Combine both lists into one array of all supplierIDs
+        const allSupplierIDs = [...new Set([...list1.map(obj => obj.supplierID), ...list2.map(obj => obj._id)])];
+    
+        // Check each supplierID to find unique elements
+        allSupplierIDs.forEach(supplierID => {
+            const foundInList1 = list1.some(obj => obj.supplierID === supplierID);
+            const foundInList2 = list2.some(obj => obj._id === supplierID);
+            
+            if (foundInList1 && !foundInList2) {
+                uniqueElements.push(list1.find(obj => obj.supplierID === supplierID));
+            } else if (!foundInList1 && foundInList2) {
+                uniqueElements.push(list2.find(obj => obj._id === supplierID));
+            }
+        });
+    
+        return uniqueElements
+    }
+
+    useEffect(() => {
+        if(inventoryitems && suppliers){
+            setOptionForSelect(findUniqueElements(inventoryitems, suppliers))
+        }
+    }, [inventoryitems, suppliers])
+    // console.log( inventoryitems[0])
+
     return (
         <div className="create-form">
             <form className="create" onSubmit={handleSubmit}>
                 <h3>Add a New Item</h3>
-                <label>Name of the Item</label>
+                {/* <label>Name of the Item</label>
                 <input
                     type="text"
                     onChange={(e) => setItemName(e.target.value)}
                     value={itemName}
-                />
-                <label>Select the Supplier</label>
-                <select
-                    id="supplier"
-                    onChange={(e) => setSupplierID(e.target.value)}
-                    value={supplierID}
-                >
-                    <option value="">Select Supplier</option>
-                    {suppliers.map(Supplier => (
-                        <option key={Supplier._id} value={Supplier._id}>{Supplier.supplierName}</option>
-                    ))}
-                </select>
+                /> */}
+                <label>Name of the Item</label>    
+                    {optionForSelect.length > 0 && (
+                        <select
+                            id="supplier"
+                            onChange={(e) => setSupplierID(e.target.value)}
+                            value={supplierID}
+                        >
+                            <option value="">Select Item Name</option>
+                            {optionForSelect.map(option => <option value={option._id} key={option._id}>{option.itemName}</option>)}
+                        </select>
+                    )}
+                    {optionForSelect.length == 0 && (
+                        <select disabled>
+                            <option>No items available</option>
+                        </select>
+                    )}
+                
                 <label>Item Price (in LKR)</label>
                 <input
                     type='number'

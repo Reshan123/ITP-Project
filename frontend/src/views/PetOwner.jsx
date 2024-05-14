@@ -9,8 +9,6 @@ import { useEffect, useState } from 'react';
 import Store from '../components/PetOwner/Store/Store';
 import AdoptPet from '../components/PetOwner/AdoptPet/AdoptPet';
 import CreateAdoptionForm from '../components/PetOwner/AdoptPet/CreateAdoptionForm';
-import { usePetContext } from '../hooks/usePetContext'
-import { useUserContext } from '../hooks/userContextHook'
 import LostPet from '../components/PetOwner/LostPet/LostPet';
 import LostNoticeForm from '../components/PetOwner/LostPet/LostNoticeForm';
 import LostPetUpdateForm from '../components/PetOwner/LostPet/LostPetUpdateForm';
@@ -36,38 +34,7 @@ const PetOwner = () => {
         setNavBarColor(textColor)
         setFooterBackground(footerBackground)
     }
-
-    const { user, dispatch: userDispatch } = useUserContext()
-    const { pets, dispatch: petDispatch } = usePetContext()
-
-    useEffect(() => {
-        const fetchPetData = async () => {
-
-            const config = {
-                headers: {
-                    "Authorization": `Bearer ${user.userToken}`
-                }
-            }
-
-            try {
-                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets", config)
-
-                if (!petDetailsResponse.ok) {
-                    throw Error("Invalid Token")
-                }
-                const petDetailsJson = await petDetailsResponse.json()
-                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
-
-            } catch (error) {
-                console.log("pet owner page error", error)
-            }
-        }
-
-        if (user) {
-            fetchPetData()
-        }
-
-    }, [user])
+    
 
     return (
         <>
