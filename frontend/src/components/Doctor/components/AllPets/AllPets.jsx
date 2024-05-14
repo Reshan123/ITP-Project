@@ -154,7 +154,7 @@ const AllPets = () => {
                                     <td>{petOwners.map(owner => ((pet.ownerID == owner._id) && owner.name))}</td>
                                     <td>
                                         <center>
-                                            <button className='table-view-btn' >Medical Record</button>
+                                            {/* <button className='table-view-btn' >Medical Record</button> */}
                                             <button onClick={() => navigate(`/doctor/home/updatepet/${pet._id}`)} className='table-view-btn' >Update</button>
                                             <button onClick={() => deletePet(pet._id)} className='table-view-btn' >Delete</button>
                                         </center>
