@@ -89,6 +89,29 @@ const Profile = ({ navBarProps }) => {
         }
     }, [user])
 
+    useEffect(() => {
+        const fetchPets = async () => {
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${user.userToken}`
+                }
+            }
+            try{
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets", config)
+
+                if (!petDetailsResponse.ok) {
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+
+        fetchPets()
+    }, [user])
+
     //lostPets 
     useEffect(() => {
 

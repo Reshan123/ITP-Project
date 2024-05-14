@@ -55,7 +55,7 @@ const AddPetForm = ({ navBarProps }) => {
             const response = await fetch("http://localhost:4000/api/pet/createPet", config)
 
             const json = await response.json()
-
+            console.log(json.message)
             if(!response.ok){
                 throw Error(json.message)
             }
