@@ -28,8 +28,9 @@
 }
 
 /* Styles for the employee table */
-.booking-table{
-    width: 1140px;
+.supplier-table{
+  margin-left: 180px;
+    width: 900px;
     align-content: center;
     margin-top: 30px;
     background-color: #f3f3f3;
@@ -123,9 +124,9 @@
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;  
   }
-  
-  /* Styles for the view button */
-  .supplier-table-style tbody td center .table-view-btn{
+
+   /* Styles for the view button */
+  .supplier-table-style tbody td center .supplier-update-btn{
     width: 80px;
     height:30px;
     background-color: #9453ce;
@@ -139,64 +140,19 @@
   }
   
   /* Hover styles for the view button */
-  .booking-table-style tbody td center .table-view-btn:hover{
+  .supplier-table-style tbody td center .supplier-update-btn:hover{
     background-color: #8737ce;
-  }
-  
-  /* responsive table - w3school*/
-  @media screen and (max-width: 600px) {
-    .booking-table-style caption { background-image: none; }
-    .booking-table-style thead { display: none; }
-    .booking-table-style tbody td { 
-      display: block; 
-      padding: .6rem; 
-    }
-    .booking-table-style tbody tr td:first-child { 
-      background: #666; 
-      color: #fff; 
-    }
-    .booking-table-style tbody td:before { 
-      content: attr(data-th); 
-      font-weight: bold;
-      display: inline-block;
-      width: 6rem;  
-    }
-  }
-
-
-   /* Styles for the delete button */
-   .dlt-btn{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 100px;
-    height:30px;
-    background-color: rgb(255, 0, 0);
-    font-size: 16px;
-    font-weight: bold;
-    color: #FFF;
-    border: 0;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  /* Hover styles for the delete button */
-  .dlt-btn:hover{
-    background-color: rgb(175, 0, 0);
   }
 
   /* Styles for the view button */
-  .update-sup-btn{
-    position: absolute;
-    top: 70px;
-    right: 16px;
-    width: 100px;
+  .supplier-table-style tbody td center .supplier-dlt-btn{
+    width: 80px;
     height:30px;
-    background-color: #9453ce;
-    font-size: 16px;
+    background-color: #f10000;
+    font-size: 14px;
     font-weight: bold;
     border: 0;
+    margin-left: 10px;
     color: #FFF;
     border-radius: 25px;
     cursor: pointer;
@@ -204,13 +160,7 @@
   }
   
   /* Hover styles for the view button */
-  .update-sup-btn:hover{
-    background-color: #8737ce;
-  }
-  
-  
-  .dlt-btn a, .table-update-sup-btn a{
-    color: #fff;
-    text-decoration: none;
+  .supplier-table-style tbody td center .supplier-dlt-btn:hover{
+    background-color: #bc0000;
   }
 

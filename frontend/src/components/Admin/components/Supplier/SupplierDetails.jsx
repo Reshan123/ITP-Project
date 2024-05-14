@@ -135,6 +135,7 @@ const SupplierDetails = ({ supplier }) => {
               <th width="10%">Contact</th>
               <th width="10%">Company</th>
               <th width="9%">Items Name</th>
+              <th width="20%">Operations</th>
             </tr>
           </thead>
           <tbody>
@@ -149,10 +150,10 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierCompany}</td>
               <td>{supplier.itemName}</td>
               <td>
-                
-                  <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
-                  <button className='dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
-                
+                <center>
+                  <button className='supplier-update-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
+                  <button className='supplier-dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
+                </center>
               </td>
             </tr>
           ))}
