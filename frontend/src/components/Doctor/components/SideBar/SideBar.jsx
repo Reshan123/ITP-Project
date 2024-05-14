@@ -29,6 +29,10 @@ const SideBar = () => {
                 <NavLink to='/doctor/home/bookings' className='doctorSideBarLink'>
                     <div className="linkText">Appointment Bookings</div>
                 </NavLink>
+                <br/>
+                <NavLink to='/doctor/home/MedicalRecord' className='doctorSideBarLink' exact="true">
+                    <div className='linkText'>Medical Record</div>
+                </NavLink>
             </div>
         </div>
      );
