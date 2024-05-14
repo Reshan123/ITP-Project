@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInventoryItemsContext } from "../../../../hooks/useInventoryItemsContext";
 import { useSupplierContext } from "../../../../hooks/useSupplierContext";
 import firebase from "firebase/compat/app";
@@ -17,8 +17,7 @@ const InventoryItemForm = () => {
     const [itemImageURL, setItemImageURL] = useState('');
     const [supplierID, setSupplierID] = useState('');
     const [error, setError] = useState(null);
-
-    var itemNames = []
+    const [optionForSelect, setOptionForSelect] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -82,6 +81,34 @@ const InventoryItemForm = () => {
         }
     };
 
+    function findUniqueElements(list1, list2) {
+        const uniqueElements = [];
+    
+        // Combine both lists into one array of all supplierIDs
+        const allSupplierIDs = [...new Set([...list1.map(obj => obj.supplierID), ...list2.map(obj => obj._id)])];
+    
+        // Check each supplierID to find unique elements
+        allSupplierIDs.forEach(supplierID => {
+            const foundInList1 = list1.some(obj => obj.supplierID === supplierID);
+            const foundInList2 = list2.some(obj => obj._id === supplierID);
+            
+            if (foundInList1 && !foundInList2) {
+                uniqueElements.push(list1.find(obj => obj.supplierID === supplierID));
+            } else if (!foundInList1 && foundInList2) {
+                uniqueElements.push(list2.find(obj => obj._id === supplierID));
+            }
+        });
+    
+        return uniqueElements
+    }
+
+    useEffect(() => {
+        if(inventoryitems && suppliers){
+            setOptionForSelect(findUniqueElements(inventoryitems, suppliers))
+        }
+    }, [inventoryitems, suppliers])
+    // console.log( inventoryitems[0])
+
     return (
         <div className="create-form">
             <form className="create" onSubmit={handleSubmit}>
@@ -92,22 +119,23 @@ const InventoryItemForm = () => {
                     onChange={(e) => setItemName(e.target.value)}
                     value={itemName}
                 /> */}
-                <label>Name of the Item</label>
-                <select
-                    id="supplier"
-                    onChange={(e) => setSupplierID(e.target.value)}
-                    value={supplierID}
-                >
-                    <option value="">Select Item Name</option>
-                    {(inventoryitems && suppliers) && suppliers.map(Supplier => {
-                        console.log(itemNames)
-                        return inventoryitems.map(inventory => {
-                            if (inventory.supplierID != Supplier._id){
-                                itemNames.push(Supplier._id)
-                            }
-                        })
-                    })}
-                </select>
+                <label>Name of the Item</label>    
+                    {optionForSelect.length > 0 && (
+                        <select
+                            id="supplier"
+                            onChange={(e) => setSupplierID(e.target.value)}
+                            value={supplierID}
+                        >
+                            <option value="">Select Item Name</option>
+                            {optionForSelect.map(option => <option value={option._id} key={option._id}>{option.itemName}</option>)}
+                        </select>
+                    )}
+                    {optionForSelect.length == 0 && (
+                        <select disabled>
+                            <option>No items available</option>
+                        </select>
+                    )}
+                
                 <label>Item Price (in LKR)</label>
                 <input
                     type='number'
