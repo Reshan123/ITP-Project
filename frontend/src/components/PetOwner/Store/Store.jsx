@@ -30,6 +30,16 @@ const Store = ({ navBarProps }) => {
                 }
                 const json = await response.json();
                 dispatch({ type: 'SET_ITEMS', payload: json });
+
+                const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
+
+                if (!supplierResponse.ok) {
+                    throw Error(supplierResponse.message);
+                }
+
+                const supplierJson = await supplierResponse.json();
+
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
             } catch (error) {
                 console.error(error);
             }
