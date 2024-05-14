@@ -46,6 +46,8 @@ const SupplierDetails = ({ supplier }) => {
       { header: 'Supplier Contact', dataKey: 'supplierContact' },
       { header: 'Supplier Email', dataKey: 'supplierEmail' },
       { header: 'Supplier Company', dataKey: 'supplierCompany' },
+      { header: 'Item name', dataKey: 'supplierItem' }
+
 
     ];
     const filteredList = suppliers.filter(supplier => {
@@ -57,6 +59,7 @@ const SupplierDetails = ({ supplier }) => {
       supplierContact: supplier.supplierContact,
       supplierEmail: supplier.supplierEmail,
       supplierCompany: supplier.supplierCompany,
+      supplierItem: supplier.itemName
 
     }));
     // Add the table to the PDF

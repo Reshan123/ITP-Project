@@ -126,9 +126,11 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
 
 
     return (
-        <div className="adoption-form-details">
-            <h4>Pet Choice: {formData.petChoice}</h4>
-            <form onSubmit={handleSubmit}>
+        <div className="update-form-page">
+
+
+            <form className="adoption-form-details" onSubmit={handleSubmit}>
+                <h4>Pet Choice: {formData.petChoice}</h4>
                 <label>
                     Name:
                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
@@ -204,6 +206,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                     <button className="delete" onClick={handleClick}>Delete</button>
                 </div>
             </form>
+
         </div>
 
     );

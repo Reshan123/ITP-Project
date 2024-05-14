@@ -37,8 +37,17 @@ const SalesUpdateForm = () => {
         }
       }, [id, sales]);
 
-      const updateSale = (e) => {
+      const updateSale = async (e) => {
         e.preventDefault()
+
+        if(!status){
+          setError('Please select a status!')
+          return;
+        }
+
+        const confirmUpdate = confirm(`Are you sure you want to update this sale?`)
+        
+        if(confirmUpdate){
         const formData = {
           itemName,
           itemPrice,
@@ -54,6 +63,7 @@ const SalesUpdateForm = () => {
           })
           .catch(err => setError(err.response.data));
       }
+    }
 
       return (
         <div className="update-sale">

@@ -11,7 +11,7 @@ export const salesReducer = (state, action) => {
 
         case 'DELETE_SALE':
             return{
-                sales: state.workouts.filter((w) => w._id !== action.payload._id )
+                sales: state.sales.filter((w) => w._id !== action.payload._id )
             }
           
         case 'UPDATE':

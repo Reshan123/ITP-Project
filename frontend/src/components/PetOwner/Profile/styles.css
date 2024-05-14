@@ -762,3 +762,135 @@
 .request-forms button.view-btn1:hover {
     background: #8c3fcf;
 }
+
+
+/*Modale css */
+
+/*Requests*/
+/* Modal container */
+.custom-modal {
+    font-family: Arial, sans-serif;
+    width: 500px;
+}
+
+
+.custom-modal .ant-modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.custom-modal .ant-modal-header {
+
+    color: #FFF;
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+}
+
+
+.custom-modal .ant-modal-title {
+    font-size: 18px;
+}
+
+
+.custom-modal .ant-modal-body {
+    padding: 20px;
+}
+
+
+.custom-modal .form-details p {
+    margin-bottom: 0px;
+}
+
+
+
+.custom-modal .action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-modal .action-buttons button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-modal .action-buttons button:hover {
+    background-color: #E2929D;
+    color: #FFF;
+}
+
+
+
+
+
+.custom-modal2 {
+    font-family: Arial, sans-serif;
+}
+
+
+.custom-modal2 .ant-modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.custom-modal2 .ant-modal-header {
+
+    color: #FFF;
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+}
+
+
+.custom-modal2 .ant-modal-title {
+    font-size: 18px;
+}
+
+
+.custom-modal2 .ant-modal-body {
+    padding: 20px;
+}
+
+
+.custom-modal2 .form-details p {
+    margin-bottom: 10px;
+
+}
+
+
+.custom-modal2 .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+}
+
+.custom-modal2 .action-buttons button {
+    margin-left: 10px;
+    background-color: pink;
+    color: black;
+    border: 2px solid white;
+
+    cursor: pointer;
+    border-radius: 5px;
+
+    transition: background-color 0.3s;
+}
+
+.custom-modal2 .action-buttons button:hover {
+    background-color: white;
+    color: pink;
+    border: 1px solid black;
+}
+
+/* Style for the close button */
+.custom-modal2 .ant-modal-close-x {
+    color: #FFF;
+}
+
+.custom-modal2 .ant-modal-close-x:hover {
+    color: #FFF;
+}
