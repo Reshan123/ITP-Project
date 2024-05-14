@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import LostPetDetails from "./LostPetDetails"
 import { useLostPetsContext } from "../../../hooks/useLostPetsContext"
-import storeImage from './images/lostpetbanner5.png'
+import storeImage from './images/lostpetbanner6.png'
 
 const LostPet = ({ navBarProps }) => {
     
