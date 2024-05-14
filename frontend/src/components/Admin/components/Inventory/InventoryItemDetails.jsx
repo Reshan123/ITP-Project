@@ -36,8 +36,8 @@ const InventoryItemDetails = () => {
 }, [searchQuery, inventoryitems, suppliers]);
 
 
-  const handleClick = async (id, itemName) => {
-    const confrimDelte = confirm(`Are you sure you want to delete "${itemName}"?`)
+  const handleClick = async (id) => {
+    const confrimDelte = confirm("Are you sure you want to delete the item ?")
     if (confrimDelte) {
       const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
         method: 'DELETE'
@@ -156,7 +156,7 @@ const InventoryItemDetails = () => {
               <td>
                 <center>
                   <button className='update-view-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
-                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id, inventoryitem.itemName)}>Delete</button>
+                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id)}>Delete</button>
                 </center>
               </td>
             </tr>
