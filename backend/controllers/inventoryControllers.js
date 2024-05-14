@@ -101,6 +101,8 @@ const updateItemStockCount = async (req, res) => {
         if (item.currentStock < req.body.orderQuantity){
             throw Error('Can not place order! Invalid Order Quantity')
         }
+
+        // console.log( req.body)
     
         const inventoryitems = await inventoryItem.findOneAndUpdate({ _id: id }, {
             currentStock: parseInt(item.currentStock) - parseInt(req.body.orderQuantity)

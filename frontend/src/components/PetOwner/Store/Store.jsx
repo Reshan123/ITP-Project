@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Storestyles.css';
 import { useInventoryItemsContext } from '../../../hooks/useInventoryItemsContext';
 import { useSupplierContext } from '../../../hooks/useSupplierContext';
@@ -7,6 +7,12 @@ const Store = ({ navBarProps }) => {
 
     const [quantity, setQuantity] = useState();
     const [error, setError] = useState("")
+
+    const inputItem = useRef()
+
+    useEffect(() => {
+        console.log(quantity)
+    }, [quantity])
 
     navBarProps("#FFF", "#B799D1", "#B799D1");
 
@@ -38,14 +44,16 @@ const Store = ({ navBarProps }) => {
         }
     }, [error])
 
-    const handleClick = async (inventoryitem) => {
+    const handleClick = async (inventoryitem, stockQuantity) => {
 
+        const item = suppliers.find(Supplier =>  Supplier._id == inventoryitem.supplierID)
+        // console.log(itemName)
         try{
             console.log(inventoryitem)
             const updateStockCount = await fetch('http://localhost:4000/api/inventoryItems/updateStockCount/' + inventoryitem._id, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ orderQuantity: quantity })
+                body: JSON.stringify({ orderQuantity: stockQuantity })
             })
             const updateStockCountJson = await updateStockCount.json()
 
@@ -55,15 +63,15 @@ const Store = ({ navBarProps }) => {
 
             setError('')
             console.log(updateStockCountJson)
-            dispatch({type: "UPDATE_STOCK", payload: [inventoryitem._id, quantity]})
+            dispatch({type: "UPDATE_STOCK", payload: [inventoryitem._id, stockQuantity]})
 
 
 
             const formData = {
-                itemName: inventoryitem.itemName,
+                itemName: item.itemName,
                 itemPrice: inventoryitem.itemPrice,
                 quantity: quantity,
-                status: 'sold'
+                status: 'Sold'
             }
             console.log(formData)
     
@@ -76,7 +84,9 @@ const Store = ({ navBarProps }) => {
             const createSaleJson = await createSale.json()
             console.log(createSaleJson)
 
-            setQuantity('')
+            setQuantity(0)
+            // inputItem.current.value = 0
+            alert('item booked')
 
         } catch (error){
             setError(error.message)
@@ -127,10 +137,10 @@ const Store = ({ navBarProps }) => {
                                         <input
                                             type='number'
                                             onChange={(e) => setQuantity(e.target.value)}
-                                            value={quantity}
+                                            ref={inputItem}
                                         />
                                     </div>
-                                    <button onClick={() => {handleClick(inventoryitem)}} className="btn">Buy Now</button>
+                                    <button onClick={() => {handleClick(inventoryitem, quantity)}} className="btn">Buy Now</button>
                                 </div>
                             </div>
                         );
