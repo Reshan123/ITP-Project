@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Storestyles.css';
 import { useInventoryItemsContext } from '../../../hooks/useInventoryItemsContext';
 import { useSupplierContext } from '../../../hooks/useSupplierContext';
@@ -7,12 +7,6 @@ const Store = ({ navBarProps }) => {
 
     const [quantity, setQuantity] = useState();
     const [error, setError] = useState("")
-
-    const inputItem = useRef()
-
-    useEffect(() => {
-        console.log(quantity)
-    }, [quantity])
 
     navBarProps("#FFF", "#B799D1", "#B799D1");
 
@@ -30,13 +24,33 @@ const Store = ({ navBarProps }) => {
                 }
                 const json = await response.json();
                 dispatch({ type: 'SET_ITEMS', payload: json });
+
+                const supplierResponse = await fetch('http://localhost:4000/api/doctor/getAllDocs/');
+                if (!supplierResponse.ok) {
+                    throw new Error('Failed to fetch supplier');
+                }
+                const supplierJSON = await supplierResponse.json();
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJSON });
             } catch (error) {
                 console.error(error);
             }
         };
 
         fetchInventoryItems();
-    }, [dispatch]);
+    }, []);
+
+
+    // useEffect(() => {
+    //     const fetchSupplier = async () => {
+    //         try {
+                
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+
+    //     fetchSupplier();
+    // }, []);
 
     useEffect(() => {
         if (!error == ""){
@@ -44,16 +58,14 @@ const Store = ({ navBarProps }) => {
         }
     }, [error])
 
-    const handleClick = async (inventoryitem, stockQuantity) => {
+    const handleClick = async (inventoryitem) => {
 
-        const item = suppliers.find(Supplier =>  Supplier._id == inventoryitem.supplierID)
-        // console.log(itemName)
         try{
             console.log(inventoryitem)
             const updateStockCount = await fetch('http://localhost:4000/api/inventoryItems/updateStockCount/' + inventoryitem._id, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ orderQuantity: stockQuantity })
+                body: JSON.stringify({ orderQuantity: quantity })
             })
             const updateStockCountJson = await updateStockCount.json()
 
@@ -63,15 +75,15 @@ const Store = ({ navBarProps }) => {
 
             setError('')
             console.log(updateStockCountJson)
-            dispatch({type: "UPDATE_STOCK", payload: [inventoryitem._id, stockQuantity]})
+            dispatch({type: "UPDATE_STOCK", payload: [inventoryitem._id, quantity]})
 
 
 
             const formData = {
-                itemName: item.itemName,
+                itemName: inventoryitem.itemName,
                 itemPrice: inventoryitem.itemPrice,
                 quantity: quantity,
-                status: 'Sold'
+                status: 'sold'
             }
             console.log(formData)
     
@@ -84,9 +96,7 @@ const Store = ({ navBarProps }) => {
             const createSaleJson = await createSale.json()
             console.log(createSaleJson)
 
-            setQuantity(0)
-            // inputItem.current.value = 0
-            alert('item booked')
+            setQuantity('')
 
         } catch (error){
             setError(error.message)
@@ -137,10 +147,10 @@ const Store = ({ navBarProps }) => {
                                         <input
                                             type='number'
                                             onChange={(e) => setQuantity(e.target.value)}
-                                            ref={inputItem}
+                                            value={quantity}
                                         />
                                     </div>
-                                    <button onClick={() => {handleClick(inventoryitem, quantity)}} className="btn">Buy Now</button>
+                                    <button onClick={() => {handleClick(inventoryitem)}} className="btn">Buy Now</button>
                                 </div>
                             </div>
                         );
