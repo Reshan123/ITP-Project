@@ -25,8 +25,25 @@ const Store = ({ navBarProps }) => {
         fetchInventoryItems();
     }, [dispatch]);
 
-    const handleClick = async () => {
-        // Raveesha's Code
+    const handleClick = async (inventoryitem) => {
+
+       
+        const formData = {
+            itemName: inventoryitem.itemName,
+            itemPrice: inventoryitem.itemPrice,
+            quantity: quantity,
+            status: 'Sold'
+        }
+        console.log(formData)
+
+        const createSale = await fetch('http://localhost:4000/api/sales/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+        })
+
+        const json = await createSale.json()
+        console.log(json)
 
     };
 

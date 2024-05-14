@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 //get all sales
 const getAllSales = async(req,res) => {
-    const salesItems = await salesItem.find({}).sort({CreatedAt: -1})
+    const salesItems = await salesItem.find({}).sort({createdAt: -1})
     res.status(200).json(salesItems)
 }
 
