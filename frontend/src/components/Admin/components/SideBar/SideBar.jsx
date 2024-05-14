@@ -68,9 +68,9 @@ const SideBar = () => {
                 </NavLink>
                 <br />
 
-                <NavLink to='/admin/home/MedicalRecord' className='adminSideBarLink' exact="true">
+                {/* <NavLink to='/admin/home/MedicalRecord' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Medical Record</div>
-                </NavLink>
+                </NavLink> */}
             </div>
         </div>
     );

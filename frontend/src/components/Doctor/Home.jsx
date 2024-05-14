@@ -15,12 +15,18 @@ import CreatePet from './components/AllPets/CreatePet';
 import { Booking } from './components/Booking/Booking';
 import { useBookingContext } from '../../hooks/useBookingContext';
 
+import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
+import MedicalRecord from '../Doctor/components/MedicalRecord/MedicalR'
+import MedicalUpdate from '../Doctor/components/MedicalRecord/MedicalUpdate'
+import MedicalRecordForm from '../Doctor/components/MedicalRecord/MedicalRecordForm'
+
 const Home = () => {
 
     const {doctor, dispatch} = useDoctorContext()
     const {pets, dispatch: allPetsDispatch} = useAllPetsContext()
     const {petOwners, dispatch: allPetOwnersDispatch} = useAllPetOwnerContext() 
     const { bookings, dispatch: bookingDispatch } = useBookingContext()
+    const { medicalRec, dispatch: medicalDispatch } = useMedicalRecordContext()
     const navigate = useNavigate()
 
     useEffect(()=> {
@@ -90,6 +96,15 @@ const Home = () => {
                 }
                 allPetOwnersDispatch({type:"LOAD", payload: allPetOwnersJson})
 
+                //medicalRecord
+                const MedicalResponse = await fetch('http://localhost:4000/api/medicalRec/')
+                const MedicalJson = await MedicalResponse.json()
+
+                if (MedicalResponse.ok) {
+
+                    medicalDispatch({ type: 'SET_MEDICAL_RECORD', payload: MedicalJson })
+                }
+
             } catch (error){
                 console.log(error.message)
             }
@@ -114,6 +129,9 @@ const Home = () => {
                         <Route path='/createpet' element={<CreatePet />} />
                         <Route path='/updatepet/:petID' element={<UpdatePet />} />
                         <Route path='/bookings' element={<Booking />} />
+                        <Route path='/MedicalRecord' element={<MedicalRecord />} />
+                        <Route path='/MedicalRecord/update/:id' element={<MedicalUpdate />} />
+                        <Route path='/MedicalRecord/add' element={<MedicalRecordForm />} />
                     </Routes>
                 </div>
             </div>
