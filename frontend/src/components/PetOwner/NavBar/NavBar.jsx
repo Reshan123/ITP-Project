@@ -49,7 +49,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
               to="/pet/home#bookAppointments"
               style={{
                 color: navBarColor,
-                border: `${navBarColor} 4px solid`,
+                // border: `${navBarColor} 4px solid`,
               }}
               className="buttonHoverAnimation"
               end
@@ -91,7 +91,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
               onClick={scrollToTop}
               style={{
                 color: navBarColor,
-                border: `${navBarColor} 4px solid`,
+                // border: `${navBarColor} 4px solid`,
               }}
               end
             >
@@ -124,7 +124,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
               to="/pet/home#bookAppointments"
               style={{
                 color: navBarColor,
-                border: `${navBarColor} 4px solid`,
+                // border: `${navBarColor} 4px solid`,
               }}
               className="buttonHoverAnimation"
               end
@@ -166,7 +166,7 @@ const NavBar = ({ navBarColor, navBarBackgroundColor }) => {
               onClick={scrollToTop}
               style={{
                 color: navBarColor,
-                border: `${navBarColor} 4px solid`,
+                // border: `${navBarColor} 4px solid`,
               }}
               end
             >

@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import firebase from "firebase/compat/app"
 import "firebase/compat/storage"
+import * as yup from 'yup'
 
 const AdoptionFormDetails = ({ adoptionForm }) => {
 
     const { dispatch } = useAdoptionContext()
     const [formData, setFormData] = useState(adoptionForm);
     const [imageUrl, setImageUrl] = useState('');
+    const [errors, setErrors] = useState('');
 
     const handleClick = async () => {
         const response = await fetch('http://localhost:4000/api/adoption/' + adoptionForm._id, {
@@ -38,6 +40,20 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
         });
     };
 
+    const validationSchema = yup.object().shape({
+        name: yup.string().required('Enter name'),
+        age: yup.number().required('Enter age').positive('Age must be a positive number'),
+        species: yup.string().required('Enter species'),
+        breed: yup.string().required('Enter breed'),
+        gender: yup.string().required('Select gender'),
+        ownerContact: yup.string()
+            .required('Enter owner contact')
+            .matches(/^\d{10}$/, 'Owner contact must be a valid 10-digit phone number'),
+        activityLevel: yup.string().required('Select activity level'),
+        specialNeeds: yup.string(),
+        smallDescription: yup.string().required('Enter small description')
+    });
+
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,6 +66,8 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
 
         // Submit the updated form data to the backend API
         try {
+
+            await validationSchema.validate(formData, { abortEarly: false })
             const response = await fetch(`http://localhost:4000/api/adoption/${adoptionForm._id}`, {
                 method: 'PATCH',
                 headers: {
@@ -63,8 +81,16 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                 dispatch({ type: 'SET_FORMS', payload: updatedData });
                 navigate('/pet/profile')
             }
-        } catch (error) {
-            console.error('Error updating form:', error);
+        } catch (errors) {
+            console.log(errors.inner)
+
+            const newErrors = {};
+            if (errors && errors.inner) {
+                errors.inner.forEach(err => {
+                    newErrors[err.path] = err.message;
+                });
+            }
+            setErrors(newErrors)
         }
     };
 
@@ -100,25 +126,31 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
 
 
     return (
-        <div className="adoption-form-details">
-            <h4>Pet Choice: {formData.petChoice}</h4>
-            <form onSubmit={handleSubmit}>
+        <div className="update-form-page">
+
+
+            <form className="adoption-form-details" onSubmit={handleSubmit}>
+                <h4>Pet Choice: {formData.petChoice}</h4>
                 <label>
                     Name:
                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
                 </label>
+                {errors.name && <div className="error">{errors.name}</div>}
                 <label>
                     Age:
                     <input type="text" name="age" value={formData.age} onChange={handleInputChange} />
                 </label>
+                {errors.age && <div className="error">{errors.age}</div>}
                 <label>
                     Species:
                     <input type="text" name="species" value={formData.species} onChange={handleInputChange} />
                 </label>
+                {errors.species && <div className="error">{errors.species}</div>}
                 <label>
                     Breed:
                     <input type="text" name="breed" value={formData.breed} onChange={handleInputChange} />
                 </label>
+                {errors.breed && <div className="error">{errors.breed}</div>}
                 <label>
                     Gender:
                     <select name="gender" value={formData.gender} onChange={handleInputChange}>
@@ -126,6 +158,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                         <option value="female">Female</option>
                     </select>
                 </label>
+                {errors.gender && <div className="error">{errors.gender}</div>}
                 <label>
                     Image
                     <input
@@ -136,6 +169,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                         }}
                     />
                 </label>
+                {errors.imageUrl && <div className="error">{errors.imageUrl}</div>}
                 {formData.imageUrl && ( // Render the image only if the imageUrl is provided
                     <div>
                         <h5>Preview:</h5>
@@ -146,6 +180,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                     Owner Contact:
                     <input type="text" name="ownerContact" value={formData.ownerContact} onChange={handleInputChange} />
                 </label>
+                {errors.ownerContact && <div className="error">{errors.ownerContact}</div>}
                 <label>
                     Activity Level:
                     <select name="activityLevel" value={formData.activityLevel} onChange={handleInputChange}>
@@ -155,14 +190,17 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
                         <option value="Low (30min-1h daily)">Low (30min-1h daily)</option>
                     </select>
                 </label>
+                {errors.activityLevel && <div className="error">{errors.activityLevel}</div>}
                 <label>
                     Special Needs:
                     <textarea type="text" name="specialNeeds" value={formData.specialNeeds} onChange={handleInputChange} />
                 </label>
+                {errors.specialNeeds && <div className="error">{errors.specialNeeds}</div>}
                 <label>
                     Description:
                     <textarea type="text" name="smallDescription" value={formData.smallDescription} onChange={handleInputChange} />
                 </label>
+                {errors.smallDescription && <div className="error">{errors.smallDescription}</div>}
                 <div className="buttons">
                     <button type="submit">Update</button>
                     <button className="delete" onClick={handleClick}>Delete</button>
@@ -170,6 +208,7 @@ const AdoptionFormDetails = ({ adoptionForm }) => {
             </form>
 
         </div>
+
     );
 
 }

@@ -14,7 +14,6 @@ const InventoryItemDetails = () => {
   const [currentlyDisplayedItem, setCurrentlyDisplayedItems] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate();
-  var supplierName
 
 
   useEffect(() => {
@@ -22,22 +21,23 @@ const InventoryItemDetails = () => {
   }, [inventoryitems])
 
 
+
   useEffect(() => {
     if (inventoryitems) {
-        const filteredList = inventoryitems.filter(inventoryitem => {
-            const searchQueryLower = searchQuery.toLowerCase();
-            const itemNameLower = inventoryitem.itemName.toLowerCase();
-            const supplier = suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id);
-            const supplierNameLower = supplier ? supplier.supplierName.toLowerCase() : '';
-            return (itemNameLower.startsWith(searchQueryLower) || supplierNameLower.startsWith(searchQueryLower));
-        });
-        setCurrentlyDisplayedItems(filteredList);
+      const filteredList = inventoryitems.filter(inventoryitem => {
+        const searchQueryLower = searchQuery.toLowerCase();
+        const supplier = suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id);
+        const itemNameLower = supplier ? supplier.itemName ? supplier.itemName.toLowerCase() : "" : ""
+        const supplierNameLower = supplier ? supplier.supplierName.toLowerCase() : '';
+        return (itemNameLower.startsWith(searchQueryLower) || supplierNameLower.startsWith(searchQueryLower));
+      });
+      setCurrentlyDisplayedItems(filteredList);
     }
-}, [searchQuery, inventoryitems, suppliers]);
+  }, [searchQuery, inventoryitems, suppliers]);
 
 
-  const handleClick = async (id, itemName) => {
-    const confrimDelte = confirm(`Are you sure you want to delete "${itemName}"?`)
+  const handleClick = async (id) => {
+    const confrimDelte = confirm("Are you sure you want to delete the item ?")
     if (confrimDelte) {
       const response = await fetch('http://localhost:4000/api/inventoryItems/' + id, {
         method: 'DELETE'
@@ -62,58 +62,58 @@ const InventoryItemDetails = () => {
 
     // Define the columns and rows for the table
     const columns = [
-        { header: 'Supplier Name', dataKey: 'supplierName' },
-        { header: 'Item Name', dataKey: 'itemName' },
-        { header: 'Price', dataKey: 'itemPrice' },
-        { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
-        { header: 'Current Stock Count', dataKey: 'currentStock' },
-        { header: 'Item Description', dataKey: 'itemDescription' },
+      { header: 'Supplier Name', dataKey: 'supplierName' },
+      { header: 'Item Name', dataKey: 'itemName' },
+      { header: 'Price', dataKey: 'itemPrice' },
+      { header: 'Initial Stock Count', dataKey: 'itemStockCount' },
+      { header: 'Current Stock Count', dataKey: 'currentStock' },
+      { header: 'Item Description', dataKey: 'itemDescription' },
     ];
 
     const rows = currentlyDisplayedItem.map((inventoryitem) => ({
-        supplierName: suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id)?.supplierName || '',
-        itemName: inventoryitem.itemName,
-        itemPrice: inventoryitem.itemPrice,
-        itemStockCount: inventoryitem.itemStockCount,
-        currentStock: inventoryitem.currentStock,
-        itemDescription: inventoryitem.itemDescription,
+      supplierName: suppliers.find(Supplier => inventoryitem.supplierID === Supplier._id)?.supplierName || '',
+      itemName: inventoryitem.itemName,
+      itemPrice: inventoryitem.itemPrice,
+      itemStockCount: inventoryitem.itemStockCount,
+      currentStock: inventoryitem.currentStock,
+      itemDescription: inventoryitem.itemDescription,
     }));
 
     // Add the table to the PDF
     doc.autoTable({
-        columns,
-        body: rows,
-        startY: 20,
-        styles: {
-            // Styles applied to the table
-            cellPadding: 2,
-            fontSize: 10,
-            valign: 'middle',
-            halign: 'center',
-            cellWidth: 'auto', // Auto column width
-        },
-        columnStyles: {
-            // Custom styles for specific columns
-            itemName: { fontStyle: 'bold' },
-            itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
-        },
-        headerStyles: {
-            fillColor: [100, 100, 100], // Header background color
-            textColor: [255, 255, 255], // Header text color
-            fontStyle: 'bold', // Bold font for header
-        },
-        bodyStyles: {
-            textColor: [50, 50, 50], // Body text color
-        },
-        alternateRowStyles: {
-            fillColor: [245, 245, 245], // Alternate row background color
-        },
+      columns,
+      body: rows,
+      startY: 20,
+      styles: {
+        // Styles applied to the table
+        cellPadding: 2,
+        fontSize: 10,
+        valign: 'middle',
+        halign: 'center',
+        cellWidth: 'auto', // Auto column width
+      },
+      columnStyles: {
+        // Custom styles for specific columns
+        itemName: { fontStyle: 'bold' },
+        itemDescription: { overflow: 'linebreak' }, // Allow description to wrap
+      },
+      headerStyles: {
+        fillColor: [100, 100, 100], // Header background color
+        textColor: [255, 255, 255], // Header text color
+        fontStyle: 'bold', // Bold font for header
+      },
+      bodyStyles: {
+        textColor: [50, 50, 50], // Body text color
+      },
+      alternateRowStyles: {
+        fillColor: [245, 245, 245], // Alternate row background color
+      },
     });
 
     // Save the PDF with a unique name
     const filename = 'inventoryReport.pdf';
     doc.save(filename);
-};
+  };
 
 
 
@@ -131,6 +131,7 @@ const InventoryItemDetails = () => {
         </div>
       </div>
 
+      <hr />
       <table className="inventoryItemsTable">
         <thead>
           <tr>
@@ -146,8 +147,8 @@ const InventoryItemDetails = () => {
         <tbody>
           {currentlyDisplayedItem && currentlyDisplayedItem.map(inventoryitem => (
             <tr key={inventoryitem._id}>
-              <td>{supplierName = suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
-              <td>{inventoryitem.itemName}</td>
+              <td>{suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.supplierName))}</td>
+              <td>{suppliers.map(Supplier => ((inventoryitem.supplierID == Supplier._id) && Supplier.itemName))}</td>
               <td>{inventoryitem.itemPrice}</td>
               <td>{inventoryitem.itemStockCount}</td>
               <td>{inventoryitem.currentStock}</td>
@@ -156,7 +157,7 @@ const InventoryItemDetails = () => {
               <td>
                 <center>
                   <button className='update-view-btn' onClick={() => navigate(`/admin/home/InventoryItemUpdate/${inventoryitem._id}`)} >Update</button>
-                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id, inventoryitem.itemName)}>Delete</button>
+                  <button className='dlt-btn' onClick={() => handleClick(inventoryitem._id)}>Delete</button>
                 </center>
               </td>
             </tr>

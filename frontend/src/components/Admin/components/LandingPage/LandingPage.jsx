@@ -19,7 +19,7 @@ const LandingPage = () => {
                     <div className="inventoryManagement" key={inventoryitem._id}>
                         <div className="inventoryManagement-notifi">
                             <p style={{ color: 'red' }}>
-                                The item {inventoryitem.itemName} needs restocking. Please contact the seller{' '}
+                                {supplier.itemName} item needs restocking. Please contact the seller{' '}
                                 {supplier.supplierName}.
                                 <br />
                                 <a href={`mailto:${supplier.supplierEmail} ` } target="_blank">

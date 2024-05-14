@@ -9,10 +9,10 @@ import { usePetContext } from '../../../hooks/usePetContext';
 import form_img from './images/adoptionform.jpg'
 import upload from './images/photo_upload.png'
 
-const CreateAdoptionForm = () => {
+const CreateAdoptionForm = ({ navBarProps }) => {
 
 
-
+    navBarProps("#E2929D", "#FFF", "#B799D1")
     const navigate = useNavigate();
     const { dispatch } = useAdoptionContext()
     const { user, dispatch: userDispatch } = useUserContext()
@@ -70,7 +70,7 @@ const CreateAdoptionForm = () => {
             }
         }
 
-        if (user && pets.length === 0) {
+        if (user && pets && pets.length === 0) {
             fetchPetData();
         }
     }, [user, petDispatch, history]);
@@ -200,12 +200,7 @@ const CreateAdoptionForm = () => {
     return (
         <div className="form-page">
             <form className="adoption-form">
-                <div className='left-container'>
 
-                    <div className='puppy'>
-                        <img src={form_img} />
-                    </div>
-                </div>
                 <div className='right-container'>
                     <h3>Submit a Pet Adoption Form</h3>
                     <div className='set'>

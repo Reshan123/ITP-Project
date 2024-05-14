@@ -13,10 +13,12 @@ const SalesUpdateForm = () => {
     const [itemPrice, setItemPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const[status, setSalesStatus] = useState("")
+    const [error, setError] = useState("")
 
     useEffect(() => {
         if (sales) {
-          sales.forEach(sale => {
+          sales.map(sale => {
+            console.log(sale)
             if (sale._id === id) {
               if (sale.itemName) {
                 setItemName(sale.itemName);
@@ -35,15 +37,24 @@ const SalesUpdateForm = () => {
         }
       }, [id, sales]);
 
-      const updateSale = (e) => {
+      const updateSale = async (e) => {
         e.preventDefault()
+
+        if(!status){
+          setError('Please select a status!')
+          return;
+        }
+
+        const confirmUpdate = confirm(`Are you sure you want to update this sale?`)
+        
+        if(confirmUpdate){
         const formData = {
           itemName,
           itemPrice,
           quantity,
           status,
         };
-        axios.put('http://localhost:4000/api/sales/'+ id, formData)
+        axios.patch('http://localhost:4000/api/sales/'+ id, formData)
           .then(res => {
             salesDispatch({ type: "UPDATE", payload: [id, { itemName, itemPrice, quantity,status }] });
             setError("");
@@ -52,6 +63,7 @@ const SalesUpdateForm = () => {
           })
           .catch(err => setError(err.response.data));
       }
+    }
 
       return (
         <div className="update-sale">

@@ -4,10 +4,24 @@ import "./styles.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+import {  Button, Modal } from "antd";
+
 const LostPet = () => {
   const { lostNotice, dispatch } = useLostPetsContext();
   const [filter, setFilter] = useState("");
   const [filteredNotices, setFilteredNotices] = useState([]);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalRecord, setModalRecord] = useState(null);
+
+  const showModal = (record) => {
+    setModalRecord(record);
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchNotices = async () => {
@@ -208,6 +222,7 @@ const LostPet = () => {
           <button onClick={downloadReport}>Download Report</button>
         </div>
       </div>
+      <hr />
       <div className="lostpet-table" id="lostpet-table">
         <table className="lostpet-table-style">
           <thead>
@@ -332,7 +347,13 @@ const LostPet = () => {
                   </td>
                   <td>
                     <center>
-                      <button className="table-view-btn">View Image</button>
+                      <button
+                        className="table-view-btn"
+                        onClick={() => showModal(notice)}
+                      >
+                        View Image
+                      </button>
+
                       <button
                         onClick={() => acceptPost(notice._id)}
                         className="table-view-btn"
@@ -352,6 +373,27 @@ const LostPet = () => {
           </tbody>
         </table>
       </div>
+
+      <Modal
+        title="Pet Image"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            Close
+          </Button>,
+        ]}
+      >
+        {modalRecord && (
+          <div>
+            <img
+              src={modalRecord.image}
+              alt="Pet"
+              style={{ maxWidth: "100%" }}
+            />
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

@@ -3,6 +3,7 @@
 
 }
 
+
 .image-text-1,
 .image-text-2 {
     position: absolute;
@@ -74,21 +75,18 @@
 }
 
 .form-page {
-    background-color: #FFDAB9;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/test-6ab3a.appspot.com/o/bg%20images%2F3867351.jpg?alt=media&token=34d203e9-d048-4ca6-bb45-11b3367208bc');
+    background-size: cover;
+
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
     min-height: 100vh;
-
     margin: 0;
-
     padding: 0;
-
 }
+
 
 
 .right-container {
@@ -96,8 +94,9 @@
     grid-template-areas: "." ".";
     width: 500px;
     padding: 20px;
-    background-color: #E6E6FA;
+    background-color: rgba(226, 146, 157, 0.9);
     transition: box-shadow 0.3s;
+
     /* Add transition for smoother effect */
 }
 
@@ -186,7 +185,7 @@
 
 .section-1 {
     width: 100%;
-    background-color: #FFDAB9;
+    background-color: #f2e8dd;
 
 
 }
@@ -209,8 +208,8 @@
 
 
 .adoptPetButton {
-    background-color: pink;
-    border: 2px solid pink;
+    background-color: rgb(206, 149, 206);
+    border: 2px solid white;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 20px;
@@ -218,12 +217,13 @@
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 20px;
+    transition: 0.3s;
 
 }
 
 .adoptPetButton:hover {
     background-color: white;
-    color: pink;
+    color: rgb(206, 149, 206);
 }
 
 .adoptbutton-container {
@@ -242,8 +242,16 @@
 
 /*update form */
 
+.update-form-page {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/test-6ab3a.appspot.com/o/bg%20images%2F5486687.jpg?alt=media&token=643c28f5-473f-49a4-9e78-436475fe1124');
+    background-size: cover;
+    min-height: 100vh;
+
+}
+
 .adoption-form-details {
     max-width: 600px;
+    height: auto;
     margin: 0 auto;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -260,7 +268,7 @@
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
-    /* Center align heading */
+
 }
 
 .adoption-form-details form {
@@ -391,7 +399,7 @@
 
 .card__content {
     line-height: 1.5;
-    background: #ededed;
+    background: white;
     padding: 1.5em 2rem;
     color: #222;
     font-family: 'Lato', sans-serif;
@@ -466,6 +474,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-size: cover;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/test-6ab3a.appspot.com/o/bg%20images%2Fcute-white-little-puppy-isolated-blue.jpg?alt=media&token=417c4d54-7ee5-45d1-aff3-77e58df58e88');
 
 }
 
@@ -499,12 +509,15 @@
     width: 500px;
     margin-right: 20px;
 
+
 }
 
 .view-listing-page .adoption-image img {
-    width: 100%;
+    width: 400px;
     display: flex;
-    height: 100%;
+    height: 400px;
+    margin-top: 100px;
+    margin-left: 50px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -523,7 +536,7 @@
     display: flex;
     padding-left: 10px;
     margin-left: 5px;
-    justify-content: space-between;
+
     margin-top: 60px;
 }
 
@@ -673,4 +686,96 @@
     background-color: #9453ce;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+
+/*Request Forms*/
+.form-page .request-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 40px;
+}
+
+.form-page .request-container .text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-page .request-container .form-container {
+    background-color: #E6E6FA;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-page .request-container .form-row {
+    display: flex;
+
+
+
+}
+
+.form-page .request-container .input-container {
+    flex: 1;
+    position: relative;
+    margin: 20px;
+}
+
+.form-page .request-container .label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-page .request-container input[type="text"],
+.form-page .request-container input[type="email"],
+.form-page .request-container input[type="tel"],
+.form-page .request-container select,
+.form-page .request-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    border-bottom: 1px solid #000;
+    background-color: transparent;
+    outline: none;
+    margin: 10px;
+}
+
+.form-page .request-container textarea {
+    height: 100px;
+    resize: none;
+}
+
+.form-page .request-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+
+.form-page .request-container .submit-btn {
+    justify-content: flex-end;
+}
+
+.form-page .request-container button[type="submit"] {
+    padding: 10px 20px;
+    background-color: pink;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-page .request-container button[type="submit"]:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.search-pagination-container {
+    display: flex;
+    align-items: center;
+}
+
+.paginationAdopt {
+    margin-left: 1250px;
 }

@@ -11,7 +11,7 @@ import PetOwners from './components/PetOwners/PetOwners';
 import { useAllDocContext } from '../../hooks/useAllDoctorContext'
 import { useAllPetOwnerContext } from '../../hooks/useAllPetOwnerContext';
 import { useAdoptionContext } from '../../hooks/useAdoptionContext';
-
+import { useAdoptionRequestContext } from '../../hooks/useAdoptionRequestContext';
 import InventoryItemDetails from './components/Inventory/InventoryItemDetails';
 import InventoryItemForm from './components/Inventory/InventoryItemForm';
 import InventoryItemUpdate from './components/Inventory/InventoryItemUpdate';
@@ -20,6 +20,8 @@ import UpdateDoctor from './components/Doctor/UpdateDoctor';
 import AllForms from './components/Adoption/AllForms';
 import { useInventoryItemsContext } from "../../hooks/useInventoryItemsContext"
 import ViewAdoptionForm from './components/Adoption/ViewAdoptionForm';
+
+import { useSalesContext } from "../../hooks/useSalesContext"
 import './styles.css'
 import LostPet from './components/LostPet/LostPet';
 import Booking from './components/Booking/Booking';
@@ -36,11 +38,13 @@ import MedicalRecord from './components/MedicalRecord/MedicalR';
 import { useMedicalRecordContext } from '../../hooks/useMedicalRecordContext';
 import MedicalUpdate from './components/MedicalRecord/MedicalUpdate';
 import MedicalRecordForm from './components/MedicalRecord/MedicalRecordForm';
+import AllRequestForms from './components/AdoptionRequests/AllRequestForms';
 
 const Home = () => {
 
     const navigate = useNavigate()
 
+    const { sales, dispatch: salesDispatch } = useSalesContext()
 
     const { inventoryitems, dispatch: inventoryDispatch } = useInventoryItemsContext()
     const { doctors, dispatch: allDocDispatch } = useAllDocContext()
@@ -52,6 +56,9 @@ const Home = () => {
     const { bookings, dispatch: bookingDispatch } = useBookingContext()
     const { medicalRec, dispatch: medicalDispatch } = useMedicalRecordContext()
 
+    const { requestForms, dispatch: requestDispatch } = useAdoptionRequestContext()
+
+
     useEffect(() => {
         if (!localStorage.getItem('adminUser')) {
             navigate('/admin/login')
@@ -61,27 +68,27 @@ const Home = () => {
 
     useEffect(() => {
         const fetchInventoryItems = async () => {
-          try{
-            
-          } catch (error){
-            console.log(error.message)
-          }
+            try {
+
+            } catch (error) {
+                console.log(error.message)
+            }
         }
-    
+
         fetchInventoryItems()
-      }, [])
+    }, [])
 
-      useEffect(() =>{
-        const fetchMedicalRecord = async() => {
-            try{
+    useEffect(() => {
+        const fetchMedicalRecord = async () => {
+            try {
 
-            }catch(error){
+            } catch (error) {
                 console.log(error.message)
             }
         }
 
         fetchMedicalRecord()
-      }, [])
+    }, [])
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -90,25 +97,25 @@ const Home = () => {
                 //bookings
 
                 const bookingResponse = await fetch("http://localhost:4000/api/bookings/");
-      
+
                 if (!bookingResponse.ok) {
                     throw Error(bookingResponse.message);
                 }
-        
+
                 const bookingJson = await bookingResponse.json();
-        
+
                 bookingDispatch({ type: 'SET_BOOKINGS', payload: bookingJson });
 
                 //supplier
 
                 const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
-      
+
                 if (!supplierResponse.ok) {
                     throw Error(supplierResponse.message);
                 }
-        
+
                 const supplierJson = await supplierResponse.json();
-        
+
                 supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
 
                 //allDocData
@@ -133,7 +140,7 @@ const Home = () => {
                 //inventory
                 const inventoryResponse = await fetch('http://localhost:4000/api/inventoryItems/')
                 const inventoryJson = await inventoryResponse.json()
-            
+
                 if (inventoryResponse.ok) {
                     inventoryDispatch({ type: 'SET_ITEMS', payload: inventoryJson })
                 }
@@ -142,9 +149,9 @@ const Home = () => {
                 const MedicalResponse = await fetch('http://localhost:4000/api/medicalRec/')
                 const MedicalJson = await MedicalResponse.json()
 
-                if(MedicalResponse.ok){
+                if (MedicalResponse.ok) {
 
-                    medicalDispatch({type: 'SET_MEDICAL_RECORD', payload: MedicalJson})
+                    medicalDispatch({ type: 'SET_MEDICAL_RECORD', payload: MedicalJson })
                 }
 
                 //getAllAdoptionForms
@@ -154,6 +161,23 @@ const Home = () => {
                 if (adoptionResponse.ok) {
                     adoptionDispatch({ type: 'SET_FORMS', payload: adoptionJson })
                 }
+
+                //getAllRequestForms
+                const requestResponse = await fetch('http://localhost:4000/api/adoptionRequest/getall')
+                const requestJson = await requestResponse.json()
+
+                if (requestResponse.ok) {
+                    requestDispatch({ type: 'SET_FORMS', payload: requestJson })
+                }
+
+                //sales 
+                const salesResponse = await fetch("http://localhost:4000/api/sales")
+                const salesJson = await salesResponse.json()
+
+                if (salesResponse.ok) {
+                    salesDispatch({ type: 'SET_SALES', payload: salesJson })
+                }
+
 
 
             } catch (error) {
@@ -165,13 +189,13 @@ const Home = () => {
 
         // const fetchBookings = async () => {
         //     try {
-              
-      
+
+
         //     } catch (error) {
         //       console.log("Error fetching bookings:", error);
         //     }
         //   };
-      
+
         // fetchBookings();
     }, [])
 
@@ -193,6 +217,7 @@ const Home = () => {
                         <Route path='/updatedoctor/:docID' element={<UpdateDoctor />} />
                         <Route path='/adoption-forms' element={<AllForms />} />
                         <Route path='/adoption-forms/view-form/:id' element={<ViewAdoptionForm />} />
+                        <Route path='/adoptionRequests' element={<AllRequestForms />} />
                         <Route path='/LostPet' element={<LostPet />} />
                         <Route path='/Booking' element={<Booking />} />
                         <Route path='/Booking/update/:id' element={<BookingUpdate />} />
@@ -201,9 +226,10 @@ const Home = () => {
                         <Route path='/supplierUpdate/:id' element={<SupplierUpdateForm />} />
                         <Route path='/SalesHome' element={<SalesHome />} />
                         <Route path='/SalesUpdate/:id' element={<SalesUpdateForm />} />
-                        <Route path='/MedicalRecord' element={ <MedicalRecord />} />
-                        <Route path='/MedicalRecord/update/:id' element={ <MedicalUpdate/>}/>
-                        <Route path='/MedicalRecord/add' element={ <MedicalRecordForm/>}/>
+                        <Route path='/MedicalRecord' element={<MedicalRecord />} />
+                        <Route path='/MedicalRecord/update/:id' element={<MedicalUpdate />} />
+                        <Route path='/MedicalRecord/add' element={<MedicalRecordForm />} />
+
                     </Routes>
                 </div>
             </div>

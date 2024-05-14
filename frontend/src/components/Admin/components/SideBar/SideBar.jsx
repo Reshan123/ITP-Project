@@ -16,7 +16,7 @@ const SideBar = () => {
             <div className="adminSideBarProfile">
                 <IoPaw />
                 <div className="adminSideBarUsername">{username && username.username}</div>
-                
+
             </div>
             <div className="adminSideBarLinksContainer">
                 <NavLink to="/admin/home/LandingPage" className='adminSideBarLink' exact="true">
@@ -43,12 +43,16 @@ const SideBar = () => {
                     <div className='linkText'>Adoption Forms</div>
                 </NavLink>
                 <br />
+                <NavLink to='/admin/home/adoptionRequests' className='adminSideBarLink' exact="true">
+                    <div className='linkText'>Adoption Requests</div>
+                </NavLink>
+                <br />
 
                 <NavLink to='/admin/home/LostPet' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Lost Pet Notices</div>
                 </NavLink>
                 <br />
-                
+
                 <NavLink to='/admin/home/Booking' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Appointment Bookings</div>
                 </NavLink>
@@ -62,10 +66,11 @@ const SideBar = () => {
                 <NavLink to='/admin/home/SalesHome' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Sales</div>
                 </NavLink>
+                <br />
 
-                <NavLink to='/admin/home/MedicalRecord' className='adminSideBarLink' exact="true">
+                {/* <NavLink to='/admin/home/MedicalRecord' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Medical Record</div>
-                </NavLink>
+                </NavLink> */}
             </div>
         </div>
     );

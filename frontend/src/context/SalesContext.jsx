@@ -11,7 +11,7 @@ export const salesReducer = (state, action) => {
 
         case 'DELETE_SALE':
             return{
-                sales: state.workouts.filter((w) => w._id !== action.payload._id )
+                sales: state.sales.filter((w) => w._id !== action.payload._id )
             }
           
         case 'UPDATE':
@@ -32,7 +32,8 @@ export const SalesContextProvider = ({ children }) => {
         sales: null
     })
 
-    
+    console.log('sales state:', state)
+
     return(
         <SalesContext.Provider value={{...state, dispatch}}>
             {children}
