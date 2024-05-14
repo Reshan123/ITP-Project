@@ -62,7 +62,6 @@ const SalesHome = () => {
           return (
             sale.itemName.toLowerCase().startsWith(searchQueryLower) ||
             saleDate.startsWith(searchQueryLower)
-
           );
         });
         setCurrentlyDisplayedSale(filteredList);
