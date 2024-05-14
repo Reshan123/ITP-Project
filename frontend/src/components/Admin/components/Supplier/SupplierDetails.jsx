@@ -107,28 +107,40 @@ const SupplierDetails = ({ supplier }) => {
 
 
   return (
-    <div className="supplierDetails">
+    <div className="supplier-content">
 
       <div className="supplierHeader">
         <p>Supplier Details</p>
         <div>
-          <input type="text" placeholder="Search Text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+          <input type="text" placeholder="Search Supplier" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           <button className='add-btn' onClick={() => navigate(`/admin/home/SupplierForm/`)} >Add a new Supplier</button>
           <button onClick={generatePDF}>Download Report</button>
         </div>
       </div>
+      <hr />
+      {/* <div className="pagination">
+          <Pagination
+            current={currentPage}
+            total={totalItems}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
+      </div> */}
+      <div className="supplier-table">
+      <table className="supplier-table-style">
+          <thead>
+            <tr>
+              <th width="10%">Supplier Name</th>
+              <th width="17%">Email</th>
+              <th width="10%">Contact</th>
+              <th width="10%">Company</th>
+              <th width="9%">Items Name</th>
+            </tr>
+          </thead>
+          <tbody>
+      
+      
 
-      <table className="supplierTable">
-        <thead>
-          <tr>
-            <th>Supplier Name</th>
-            <th>Supplier Contact</th>
-            <th>Supplier Email</th>
-            <th>Supplier Company</th>
-            <th>Item Name</th>
-          </tr>
-        </thead>
-        <tbody>
           {currentlyDisplayedSupplier && currentlyDisplayedSupplier.map(supplier => (
             <tr key={supplier._id}>
               <td>{supplier.supplierName}</td>
@@ -137,16 +149,17 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierCompany}</td>
               <td>{supplier.itemName}</td>
               <td>
-                <center>
+                
                   <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
                   <button className='dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
-                </center>
+                
               </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+  </div>
 
 
   )
