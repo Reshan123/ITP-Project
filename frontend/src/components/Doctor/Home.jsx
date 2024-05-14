@@ -100,9 +100,10 @@ const Home = () => {
 
     }, [doctor])
 
+
     return ( 
         <>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="doctorPageMainContainer">
                 <SideBar />
                 <div className='doctorPages'>

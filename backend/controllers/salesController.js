@@ -36,7 +36,7 @@ const addNewSale = async(req,res) => {
     // }
 
     const {itemName,itemPrice,quantity,status} = req.body
-
+    
     try{
 
         const sales = await salesItem.create({itemName,itemPrice,quantity,status})

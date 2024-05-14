@@ -46,6 +46,8 @@ const SupplierDetails = ({ supplier }) => {
       { header: 'Supplier Contact', dataKey: 'supplierContact' },
       { header: 'Supplier Email', dataKey: 'supplierEmail' },
       { header: 'Supplier Company', dataKey: 'supplierCompany' },
+      { header: 'Item name', dataKey: 'supplierItem' }
+
 
     ];
     const filteredList = suppliers.filter(supplier => {
@@ -57,6 +59,7 @@ const SupplierDetails = ({ supplier }) => {
       supplierContact: supplier.supplierContact,
       supplierEmail: supplier.supplierEmail,
       supplierCompany: supplier.supplierCompany,
+      supplierItem: supplier.itemName
 
     }));
     // Add the table to the PDF
@@ -122,6 +125,7 @@ const SupplierDetails = ({ supplier }) => {
             <th>Supplier Contact</th>
             <th>Supplier Email</th>
             <th>Supplier Company</th>
+            <th>Item Name</th>
           </tr>
         </thead>
         <tbody>
@@ -131,9 +135,10 @@ const SupplierDetails = ({ supplier }) => {
               <td>{supplier.supplierContact}</td>
               <td>{supplier.supplierEmail}</td>
               <td>{supplier.supplierCompany}</td>
+              <td>{supplier.itemName}</td>
               <td>
                 <center>
-                  <button className='update-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
+                  <button className='update-sup-btn' onClick={() => navigate(`/admin/home/supplierUpdate/${supplier._id}`)} >Update</button>
                   <button className='dlt-btn' onClick={() => handleClick(supplier._id, supplier.supplierName)}>Delete</button>
                 </center>
               </td>

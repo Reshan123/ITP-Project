@@ -10,12 +10,13 @@ const SupplierForm = () => {
     const [supplierContact, setSupplierContact] = useState('')
     const [supplierEmail, setSupplierEmail] = useState('')
     const [supplierCompany, setSupplierCompany] = useState('')
+    const [itemName, setItemName] = useState('')
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const supplier = { supplierName, supplierContact, supplierEmail, supplierCompany }
+        const supplier = { supplierName, supplierContact, supplierEmail, supplierCompany, itemName }
         const response = await fetch('http://localhost:4000/api/supplier', {
             method: 'POST',
             body: JSON.stringify(supplier),
@@ -34,6 +35,7 @@ const SupplierForm = () => {
             setSupplierContact('')
             setSupplierEmail('')
             setSupplierCompany('')
+            setItemName('')
             setError(null)
 
             console.log('new supplier added', json)
@@ -41,6 +43,12 @@ const SupplierForm = () => {
             navigate('/admin/home/supplier')
         }
     }
+    const handleContactChange = (e) => {
+        const value = e.target.value;
+        if (value.length <= 10) {
+            setSupplierContact(value);
+        }
+    };
 
     return (
         <form className="create" onSubmit={handleSubmit}>
@@ -54,12 +62,12 @@ const SupplierForm = () => {
             <label> Supplier Contact</label>
             <input
                 type="text"
-                onChange={(e) => setSupplierContact(e.target.value)}
+                onChange={handleContactChange}
                 value={supplierContact}
             />
             <label> Supplier Email</label>
             <input
-                type="text"
+                type="email"
                 onChange={(e) => setSupplierEmail(e.target.value)}
                 value={supplierEmail}
             />
@@ -69,10 +77,16 @@ const SupplierForm = () => {
                 onChange={(e) => setSupplierCompany(e.target.value)}
                 value={supplierCompany}
             />
+            <label> Item Name</label>
+            <input
+                type="text"
+                onChange={(e) => setItemName(e.target.value)}
+                value={itemName}
+            />
 
             <div className="add-btn-container">
 
-                < button className='create-btn'>Add Supplier</button>
+                < button className='create-sup-btn'>Add Supplier</button>
             </div>
 
             {error && <div className="error">{error}</div>}

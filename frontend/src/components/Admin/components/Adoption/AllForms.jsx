@@ -170,6 +170,17 @@ const AllForms = () => {
             ],
             filteredValue: filteredInfo.approved || null,
             onFilter: (value, record) => record.approved === value,
+        }, {
+            title: 'Adoption Status',
+            dataIndex: 'adoptionStatus',
+            key: 'adoptionStatus',
+            filters: [
+                { text: 'Pending', value: 'Pending' },
+                { text: 'Adopted', value: 'Adopted' },
+
+            ],
+            filteredValue: filteredInfo.adoptionStatus || null,
+            onFilter: (value, record) => record.adoptionStatus === value,
         },
         {
             title: 'Action',

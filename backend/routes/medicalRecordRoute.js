@@ -18,7 +18,7 @@ router.post('/', createMedicalRecord);
 router.get('/', getAllMedicalRecords);
 
 // Route for getting a single medical record by id
-router.get('/:id', getMedicalRecordById);
+router.get('/getMedicalRecordById/:id', getMedicalRecordById);
 
 // Route for updating a medical record
 router.put('/:id', updateMedicalRecord);

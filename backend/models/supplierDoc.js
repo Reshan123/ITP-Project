@@ -28,5 +28,9 @@ const supplierSchema = new Schema({
         type: String,
         required: true
     },
+    itemName :{
+        type: String,
+        required: true
+    }
 })
 module.exports = mongoose.model('Supplier', supplierSchema)

@@ -7,11 +7,34 @@
     bottom: 0;
     left: 0; */
     padding-block: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.doctorPageSideBar .doctorSideBarLogo{
+    position: sticky;
+    top: 50px;
+    align-self: center;
+}
+
+.doctorPageSideBar .doctorSideBarLogo svg{
+    font-size: 3rem;
+}
+
+.doctorPageSideBar .doctorProfile{
+    position: sticky;
+    top: 100px;
+    align-self: center;
+}
+
+.doctorPageSideBar .doctorProfile .doctorSideBarUsername{
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 .doctorPageSideBar .doctorSideBarLinksContainer{
     position: sticky;
-    top: 120px;
+    top: 170px;
     margin: 0;
     padding: 0;
 
