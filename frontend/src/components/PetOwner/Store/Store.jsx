@@ -106,10 +106,11 @@ const Store = ({ navBarProps }) => {
 
             <div className="shopItems">
                 {(inventoryitems && suppliers) && inventoryitems.map((inventoryitem, iterator) => {
+                    
                     if (inventoryitem.currentStock >= 5) {
                         // Define a range of quantities (e.g., from 1 to 10)
-                        const quantityOptions = Array.from({ length: Math.min(inventoryitem.currentStock, 3) }, (_, index) => index + 1);
-            
+                        // const quantityOptions = Array.from({ length: Math.min(inventoryitem.currentStock, 3) }, (_, index) => index + 1);
+                        
                         return (
                             <div className="card" key={iterator}>
                                 <div className="image">
@@ -126,7 +127,7 @@ const Store = ({ navBarProps }) => {
                                         <input
                                             type='number'
                                             onChange={(e) => setQuantity(e.target.value)}
-                                            
+                                            value={quantity}
                                         />
                                     </div>
                                     <button onClick={() => {handleClick(inventoryitem)}} className="btn">Buy Now</button>
