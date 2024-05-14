@@ -134,8 +134,8 @@ const SupplierDetails = ({ supplier }) => {
               <th width="17%">Email</th>
               <th width="10%">Contact</th>
               <th width="10%">Company</th>
-              <th width="9%">Items Name</th>
-              <th width="20%">Operations</th>
+              <th width="15%">Items Name</th>
+              <th width="30%">Operations</th>
             </tr>
           </thead>
           <tbody>

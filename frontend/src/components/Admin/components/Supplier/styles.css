@@ -143,6 +143,23 @@
   .supplier-table-style tbody td center .supplier-update-btn:hover{
     background-color: #8737ce;
   }
+  .create-sup-btn{
+    width: 110px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .create-sup-btn:hover{
+    background-color: #8737ce;
+  }
 
   /* Styles for the view button */
   .supplier-table-style tbody td center .supplier-dlt-btn{
@@ -162,5 +179,25 @@
   /* Hover styles for the view button */
   .supplier-table-style tbody td center .supplier-dlt-btn:hover{
     background-color: #bc0000;
+  }
+
+  /* Styles for the view button */
+  .update-supplier .update .update-sup-btn{
+    width: 80px;
+    height:30px;
+    background-color: #9453ce;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    margin-left: 10px;
+    color: #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Hover styles for the view button */
+  .update-supplier .update .update-sup-btn:hover{
+    background-color: #8737ce;
   }
 
