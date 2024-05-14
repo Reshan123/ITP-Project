@@ -175,7 +175,6 @@ const Home = () => {
                 const salesJson = await salesResponse.json()
 
                 if (salesResponse.ok) {
-                    console.log(salesJson)
                     salesDispatch({ type: 'SET_SALES', payload: salesJson })
                 }
 

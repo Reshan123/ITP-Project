@@ -9,7 +9,7 @@ import { Modal } from 'antd';
 const LandingPage = () => {
 
     const [doctorAvailability, setDoctorAvailability] = useState(false)
-    const {doctor, dispatch} = useDoctorContext()
+    const { doctor, dispatch } = useDoctorContext()
 
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -17,35 +17,35 @@ const LandingPage = () => {
     const [eventDetails, setEventDetails] = useState(null);
 
     useEffect(() => {
-        if (doctor){
+        if (doctor) {
             setDoctorAvailability(doctor.availability)
         }
 
         const fetchEvents = async () => {
-            
+
             try {
-              const response = await fetch(`http://localhost:4000/api/bookings/getDoctorBookings/${doctor && doctor.username}`);
-      
-              if (!response.ok) {
-                throw new Error('Failed to fetch events');
-              }
-              
-              const eventData = await response.json();
-      
-              const formattedEvents = eventData.map(event => ({
-                  title: `${event.pet_name} - ${event.pet_species}`, 
-                  start: event.start_time,
-                  end: new Date(new Date(event.start_time).getTime() + 30 * 60000),
-                  bookingId: event._id // End time is start time + 30 minutes
-              }));
-      
-              setEvents(formattedEvents);
-      
+                const response = await fetch(`http://localhost:4000/api/bookings/getDoctorBookings/${doctor && doctor.username}`);
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch events');
+                }
+
+                const eventData = await response.json();
+
+                const formattedEvents = eventData.map(event => ({
+                    title: `${event.pet_name} - ${event.pet_species}`,
+                    start: event.start_time,
+                    end: new Date(new Date(event.start_time).getTime() + 30 * 60000),
+                    bookingId: event._id // End time is start time + 30 minutes
+                }));
+
+                setEvents(formattedEvents);
+
             } catch (error) {
-              console.error('Error fetching events:', error);
+                console.error('Error fetching events:', error);
             }
-          };
-      
+        };
+
         fetchEvents();
 
     }, [doctor])
@@ -53,7 +53,7 @@ const LandingPage = () => {
 
     const changeAvailability = async () => {
 
-        if(doctorAvailability){
+        if (doctorAvailability) {
             setDoctorAvailability(false)
         } else {
             setDoctorAvailability(true)
@@ -66,18 +66,18 @@ const LandingPage = () => {
                 'authorization': `Bearer ${doctor.userToken}`
             }
         }
-        try{
+        try {
             const response = await fetch("http://localhost:4000/api/doctor/updateDoctorDetailsFromToken", config);
             const json = await response.json()
 
-            if(!response.ok){
+            if (!response.ok) {
                 throw Error(json.error)
             }
 
             // console.log(json)
-            dispatch({type:"UPDATE AVAILABILITY", payload:doctorAvailability})
+            dispatch({ type: "UPDATE AVAILABILITY", payload: doctorAvailability })
 
-        } catch (error){
+        } catch (error) {
             console.log(error.message)
         }
     }
@@ -101,24 +101,51 @@ const LandingPage = () => {
         } catch (error) {
             console.error('Error fetching event details:', error);
         }
-      };
-    
-      const handleModalCancel = () => {
-        setIsModalVisible(false);
-      };
+    };
 
-    return ( 
+    const handleModalCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const logOutUser = () => {
+        localStorage.removeItem('doctor')
+        dispatch({ type: "LOGOUT" })
+        navigate('/doctor/login')
+    }
+
+    return (
         <>
             <div style={{
-                fontWeight: 600,
-                fontSize: '1.5rem',
-                margin: '50px 0px 0px 50px'
-            }}>Availability :  <button style={{
-                padding: '10px 17px',
-                border: '1px solid #00000045',
-                borderRadius: '8px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                margin: '50px 50px 0px 50px'
+            }}>
+                <div style={{
+                    fontWeight: 600,
+                    fontSize: '1.5rem',
+                }}>Availability :  <button style={{
+                    padding: '10px 17px',
+                    border: '1px solid #00000045',
+                    borderRadius: '8px',
 
-            }} onClick={() => changeAvailability()}>{doctorAvailability ? "Available" : "Unavailable"}</button></div>
+                }} onClick={() => changeAvailability()}>{doctorAvailability ? "Available" : "Unavailable"}</button></div>
+
+                <div style={{
+                    fontWeight: 600,
+                    fontSize: '1.5rem',
+                }}>
+                    <button style={{
+                    padding: '10px 17px',
+                    border: '1px solid #00000045',
+                    borderRadius: '8px',
+
+                }} onClick={logOutUser}>Log Out</button>
+                </div>
+            </div>
+
+            <hr style={{
+                margin: '10px 50px 0px 50px'
+            }} />
 
             <div className="calendar-container">
                 <Fullcalendar
@@ -127,13 +154,13 @@ const LandingPage = () => {
                     initialView={"dayGridMonth"}
 
                     headerToolbar={{
-                    start: "dayGridMonth,timeGridWeek,timeGridDay",
-                    center: "title",
-                    end: "today,prev,next"
+                        start: "dayGridMonth,timeGridWeek,timeGridDay",
+                        center: "title",
+                        end: "today,prev,next"
                     }}
 
                     height={"90vh"}
-                    
+
                     events={events} // Pass events data to the FullCalendar component
 
                     eventTimeFormat={{ // Specify the time format for events
@@ -149,23 +176,23 @@ const LandingPage = () => {
             {/* Modal */}
             <Modal title="Booking Details" visible={isModalVisible} onCancel={handleModalCancel} footer={null} centered>
                 {selectedEvent && (
-                <div>
-                    {eventDetails && (
-                        <>
-                            <p><strong>Pet Name:</strong> {eventDetails.pet_name}</p>
-                            <p><strong>Pet Species:</strong> {eventDetails.pet_species}</p>
-                            <p><strong>Pet Breed:</strong> {eventDetails.pet_breed}</p>
-                            <p><strong>Owner Name:</strong> {eventDetails.owner_name}</p>
-                            <p><strong>Owner Contact:</strong> {eventDetails.owner_contact}</p>
-                            <p><strong>Booking Date & Time:</strong> {new Date(eventDetails.start_time).toLocaleString()}</p>
-                        </>
-                    )}
-                </div>
+                    <div>
+                        {eventDetails && (
+                            <>
+                                <p><strong>Pet Name:</strong> {eventDetails.pet_name}</p>
+                                <p><strong>Pet Species:</strong> {eventDetails.pet_species}</p>
+                                <p><strong>Pet Breed:</strong> {eventDetails.pet_breed}</p>
+                                <p><strong>Owner Name:</strong> {eventDetails.owner_name}</p>
+                                <p><strong>Owner Contact:</strong> {eventDetails.owner_contact}</p>
+                                <p><strong>Booking Date & Time:</strong> {new Date(eventDetails.start_time).toLocaleString()}</p>
+                            </>
+                        )}
+                    </div>
                 )}
             </Modal>
 
         </>
-     );
+    );
 }
- 
+
 export default LandingPage;

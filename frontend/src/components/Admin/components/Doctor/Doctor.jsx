@@ -58,7 +58,7 @@ const Doctor = () => {
         // Get the current date
         const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        doc.text(`Appointment Booking Report - ${currentDate}`, 14, 12);
+        doc.text(`Enrolled Doctor Report - ${currentDate}`, 14, 12);
 
         // Define the columns and rows for the table
         const columns = [
