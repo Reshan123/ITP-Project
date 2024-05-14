@@ -73,7 +73,8 @@
   border-collapse: collapse;
   font-family: Agenda-Light, sans-serif;
   font-weight: 100; 
-  background: var(--primaryPurple); color: #fff;
+  background: black; 
+  color: #fefefe;
   text-rendering: optimizeLegibility;
   border-radius: 5px; 
 }
@@ -199,7 +200,7 @@
 .update-view-btn,
 .create-view-btn {
   border: 0;
-  background-color: var(--primaryPurple);
+  background-color: #8737ce;
   color: #fff;
   padding: 10px;
   font-size: 14px;
