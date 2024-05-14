@@ -3,6 +3,8 @@ import WhoAreWeImage from './Images/whoarewe.png'
 import ourServices from './Images/ourservices.png'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../../../hooks/userContextHook'
+import { useSupplierContext } from '../../../hooks/useSupplierContext'
+import { useBookingContext } from '../../../hooks/useBookingContext'
 import { usePetContext } from '../../../hooks/usePetContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,6 +35,9 @@ const Home = ({ navBarProps }) => {
     //doctor use states
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { suppliers, dispatch: supplierDispatch } = useSupplierContext()
+    const { bookings, dispatch: bookingDispatch} = useBookingContext()
 
     useEffect(()=> {
         const checkUserValid = async () => {
@@ -77,6 +82,25 @@ const Home = ({ navBarProps }) => {
 
                 bookingDispatch({ type: 'SET_BOOKINGS', payload: json.message })
 
+                const petDetailsResponse = await fetch("http://localhost:4000/api/pet/getOneOwnerPets", config)
+
+                if (!petDetailsResponse.ok) {
+                    throw Error("Invalid Token")
+                }
+                const petDetailsJson = await petDetailsResponse.json()
+                petDispatch({ type: "LOAD", payload: petDetailsJson.message })
+
+
+                const supplierResponse = await fetch("http://localhost:4000/api/supplier/");
+
+                if (!supplierResponse.ok) {
+                    throw Error(supplierResponse.message);
+                }
+
+                const supplierJson = await supplierResponse.json();
+
+                supplierDispatch({ type: 'SET_SUPPLIERS', payload: supplierJson });
+
             } catch (error) {
 
                 console.log("pet owner page error", error)
@@ -84,8 +108,8 @@ const Home = ({ navBarProps }) => {
         }
 
         if (user){
-            checkUserValid()
             fetchBookings()
+            checkUserValid()
         }
     }, [user])
 

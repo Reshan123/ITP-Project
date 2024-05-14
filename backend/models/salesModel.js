@@ -23,7 +23,7 @@ const salesItemSchema = new schema({
         required: true
       }
 
-}, {timeStamp: true})
+}, {timestamps: true})
 
 module.exports = mongoose.model('salesItem',salesItemSchema)
 
