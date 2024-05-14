@@ -96,7 +96,7 @@ const Store = ({ navBarProps }) => {
 
             setQuantity(0)
             // inputItem.current.value = 0
-            alert('item booked')
+            alert('Item booked Successfully')
 
         } catch (error){
             setError(error.message)
