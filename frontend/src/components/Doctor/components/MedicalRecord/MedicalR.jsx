@@ -106,7 +106,7 @@ const MedicalRecord = () => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/doctor/home/MedicalRecord/update/${id}`);
+    navigate(`/admin/home/MedicalRecord/update/${id}`);
   };
 
   const generatePDF = async () => {

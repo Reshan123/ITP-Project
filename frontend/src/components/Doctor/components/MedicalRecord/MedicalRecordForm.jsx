@@ -349,7 +349,7 @@ const MedicalRecordForm = () => {
                 onChange={(e) => setGender(e.target.value)}
             /> */}
 
-            <label>Gender</label>
+            {/* <label>Gender</label>
             <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
@@ -358,7 +358,63 @@ const MedicalRecordForm = () => {
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-            </select>
+            </select> */}
+
+            {/* //<div> */}
+    {/* <label>Gender</label>
+    <div>
+        <input
+            type="radio"
+            id="male"
+            className="gender"
+            value="Male"
+            checked={gender === "Male"}
+            onChange={(e) => setGender(e.target.value)}
+            required
+        />
+        <label htmlFor="male">Male</label>
+    </div>
+    <div >
+        <input
+            type="radio"
+            id="female"
+            name="gender"
+
+            value="Female"
+            checked={gender === "Female"}
+            onChange={(e) => setGender(e.target.value)}
+            required
+        />
+        <label htmlFor="female">Female</label>
+    </div>
+</div> */}
+<label>Gender</label>
+<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+    <input
+        type="radio"
+        id="male"
+        value="Male"
+        checked={gender === "Male"}
+        onChange={(e) => setGender(e.target.value)}
+        required
+    />
+    <label htmlFor="male" style={{ fontSize: "20px", marginLeft: "5px" }}>Male</label>
+</div>
+<div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+    <input
+        type="radio"
+        id="female"
+        name="gender"
+        value="Female"
+        checked={gender === "Female"}
+        onChange={(e) => setGender(e.target.value)}
+        required
+    />
+    <label htmlFor="female" style={{ fontSize: "20px", marginLeft: "0px" }}>Female</label>
+</div>
+
+
+
 
             <label>Date of Birth</label>
             <input

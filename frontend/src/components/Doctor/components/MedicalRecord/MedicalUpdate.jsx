@@ -793,29 +793,51 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BookingContext } from '../../../../context/BookingContext';
 import md5 from 'crypto-js/md5';
+import { useMedicalRecordContext } from '../../../../hooks/useMedicalRecordContext';
 
 const MedicalRecordForm = () => {
-    const { bookings } = useContext(BookingContext);
     const [doctors, setDoctors] = useState([]);
+    const { bookings } = useContext(BookingContext);
+    const [record, setRecord] = useState(null)
+
     const [selectedBooking, setSelectedBooking] = useState('');
     const [loading, setLoading] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [validationError, setValidationError] = useState('');
     const [shortBookingID, setShortBookingID] = useState('');
-    const [vetName, setVetName] = useState('');
-    const [date, setDate] = useState('');
-    const [petName, setPetName] = useState('');
-    const [species, setSpecies] = useState('');
-    const [gender, setGender] = useState('');
-    const [dob, setDob] = useState('');
-    const [vaccination, setVaccination] = useState('');
-    const [nextVaccination, setNextVaccination] = useState('');
-    const [remarks, setRemarks] = useState('');
-    const [symptoms, setSymptoms] = useState('');
-    const [allergies, setAllergies] = useState('');
-    const [surgicalHistory, setSurgicalHistory] = useState('');
+
+    // const [vetName, setVetName] = useState('');
+    // const [date, setDate] = useState('');
+    // const [petName, setPetName] = useState('');
+    // const [species, setSpecies] = useState('');
+    // const [gender, setGender] = useState('');
+    // const [dob, setDob] = useState('');
+    // const [vaccination, setVaccination] = useState('');
+    // const [nextVaccination, setNextVaccination] = useState('');
+    // const [remarks, setRemarks] = useState('');
+    // const [symptoms, setSymptoms] = useState('');
+    // const [allergies, setAllergies] = useState('');
+    // const [surgicalHistory, setSurgicalHistory] = useState('');
+
+    const [vetID, setVetID] = useState(record?.vetID);
+    const [vetName, setVetName] = useState(record?.vetName);
+    const [bookingID, setBookingID] = useState(record?.bookingID);
+    const [date, setDate] = useState(record?.date);
+    const [petName, setPetName] = useState(record?.petName);
+    const [species, setSpecies] = useState(record?.species);
+    const [gender, setGender] = useState(record?.gender);
+    const [dob, setDob] = useState(record?.dob);
+    const [vaccination, setVaccination] = useState(record?.vaccination);
+    const [nextVaccination, setNextVaccination] = useState(record?.nextVaccination);
+    const [remarks, setRemarks] = useState(record?.remarks);
+    const [symptoms, setSymptoms] = useState(record?.symptoms);
+    const [allergies, setAllergies] = useState(record?.allergies);
+    const [surgicalHistory, setSurgicalHistory] = useState(record?.surgicalHistory);
     const navigate = useNavigate();
+
     const { id } = useParams();
+
+    const { medicalRec, dispatch: medicalDispatch } = useMedicalRecordContext();
 
     useEffect(() => {
         const fetchDoctors = async () => {
@@ -869,6 +891,24 @@ const MedicalRecordForm = () => {
             }
         }
     };
+
+    useEffect(() => {
+
+        const fetchRecord = async() => {
+          try {
+            const response = await fetch('http://localhost:4000/api/medicalRec/getMedicalRecordById/' + id);
+            const json = await response.json();
+    
+            if (response.ok) {
+              setRecord(json);
+            }
+          } catch (error) {
+            console.error('Error fetching medical record:', error);
+          }
+        }
+    
+        fetchRecord()
+      }, [id])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

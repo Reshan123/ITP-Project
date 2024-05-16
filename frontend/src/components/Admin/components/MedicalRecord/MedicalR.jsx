@@ -121,7 +121,7 @@ const MedicalRecord = () => {
   };
 
   const handleUpdate = async (id) => {
-    navigate(`/admin/home/MedicalRecord/update/${id}`)
+    navigate(`/doctor/home/MedicalRecord/update/${id}`)
   }
 
   //Download Report Content

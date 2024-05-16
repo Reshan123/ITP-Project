@@ -67,7 +67,7 @@ const MedicalUpdate = () => {
         if(response.ok){
             setError(null)
             console.log('New Update Added', json)
-            navigate('/admin/home/MedicalRecord')
+            navigate('/doctor/home/MedicalRecord')
         }
   };
 
