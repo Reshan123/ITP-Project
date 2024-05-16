@@ -66,7 +66,7 @@ const SideBar = () => {
                 <NavLink to='/admin/home/SalesHome' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Sales</div>
                 </NavLink>
-
+                <br />
                 <NavLink to='/admin/home/MedicalRecord' className='adminSideBarLink' exact="true">
                     <div className='linkText'>Medical Record</div>
                 </NavLink>
